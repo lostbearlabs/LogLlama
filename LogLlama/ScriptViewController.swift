@@ -10,6 +10,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(onFileLoaded(_:)), name: .FileLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onSaveFile(_:)), name: .SaveFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onNewFile(_:)), name: .NewFile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onRunClicked(_:)), name: .RunClicked, object: nil)
     }
     
     
@@ -58,4 +59,15 @@ class ScriptViewController: NSViewController, NSTextViewDelegate {
         print("cleared text for new file")
         self.scriptText.string = ""
     }
+    
+    @objc private func onRunClicked(_ notification: Notification) {
+        print("RUNNNING SCRIPT")
+
+        let scriptProcessingUpdate = ScriptProcessingUpdate()
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: scriptProcessingUpdate)
+        
+        let logLinesUpdate = LogLinesUpdate()
+        NotificationCenter.default.post(name: .LogLinesUpdated, object: logLinesUpdate)
+    }
+    
 }

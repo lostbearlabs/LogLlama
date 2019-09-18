@@ -117,5 +117,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    @IBAction func onRunClicked(_ sender: Any) {
+        NotificationCenter.default.post(name: .RunClicked, object: nil)
+    }
 }
 
