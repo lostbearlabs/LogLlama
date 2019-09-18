@@ -1,13 +1,17 @@
-//
-//  ScriptProcessingUpdate.swift
-//  LogLlama
-//
-//  Created by Eric Johnson on 9/18/19.
-//  Copyright © 2019 Lost Bear Labs. All rights reserved.
-//
-
 import Foundation
 
 class ScriptProcessingUpdate {
+    var clear : Bool
+    var text : String
+    
+    init(clear : Bool) {
+        self.clear = clear
+        self.text = ""
+    }
+    
+    init(text : String) {
+        self.clear = false
+        self.text = text
+    }
     
 }

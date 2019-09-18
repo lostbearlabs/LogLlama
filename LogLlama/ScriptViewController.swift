@@ -63,9 +63,11 @@ class ScriptViewController: NSViewController, NSTextViewDelegate {
     @objc private func onRunClicked(_ notification: Notification) {
         print("RUNNNING SCRIPT")
 
-        let scriptProcessingUpdate = ScriptProcessingUpdate()
-        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: scriptProcessingUpdate)
-        
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: "this is line one"))
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: "now there are two lines"))
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: "third line is the last one"))
+
         let logLinesUpdate = LogLinesUpdate()
         NotificationCenter.default.post(name: .LogLinesUpdated, object: logLinesUpdate)
     }

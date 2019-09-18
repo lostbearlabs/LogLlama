@@ -15,7 +15,7 @@
 		AE437F2423306D4C001CD09D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2223306D4C001CD09D /* Main.storyboard */; };
 		AE437F3023306D4D001CD09D /* LogLlamaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F2F23306D4D001CD09D /* LogLlamaTests.swift */; };
 		AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3C233150B1001CD09D /* ScriptViewController.swift */; };
-		AE437F3F23315E25001CD09D /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* FilterViewController.swift */; };
+		AE437F3F23315E25001CD09D /* ScriptUpdateDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* ScriptUpdateDisplayController.swift */; };
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +43,7 @@
 		AE437F2F23306D4D001CD09D /* LogLlamaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLlamaTests.swift; sourceTree = "<group>"; };
 		AE437F3123306D4D001CD09D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE437F3C233150B1001CD09D /* ScriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptViewController.swift; sourceTree = "<group>"; };
-		AE437F3E23315E25001CD09D /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		AE437F3E23315E25001CD09D /* ScriptUpdateDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptUpdateDisplayController.swift; sourceTree = "<group>"; };
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,7 +92,7 @@
 				AE437F2523306D4C001CD09D /* Info.plist */,
 				AE437F2623306D4C001CD09D /* LogLlama.entitlements */,
 				AE437F3C233150B1001CD09D /* ScriptViewController.swift */,
-				AE437F3E23315E25001CD09D /* FilterViewController.swift */,
+				AE437F3E23315E25001CD09D /* ScriptUpdateDisplayController.swift */,
 				AE437F4023315F32001CD09D /* Notifications.swift */,
 				AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */,
 				AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */,
@@ -214,7 +214,7 @@
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,
-				AE437F3F23315E25001CD09D /* FilterViewController.swift in Sources */,
+				AE437F3F23315E25001CD09D /* ScriptUpdateDisplayController.swift in Sources */,
 				AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */,
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
 			);
