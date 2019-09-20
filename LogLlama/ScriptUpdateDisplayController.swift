@@ -9,11 +9,12 @@
 import Cocoa
 
 class ScriptUpdateDisplayController: NSViewController {
-
+    
     fileprivate enum CellIdentifiers {
         static let TextCell = "TextCellID"
     }
     
+    @IBOutlet weak var textCell: NSTextFieldCell!
     @IBOutlet weak var tableView: NSTableView!
     var lines: [String] = []
 
@@ -25,7 +26,20 @@ class ScriptUpdateDisplayController: NSViewController {
         self.tableView.columnAutoresizingStyle = NSTableView.ColumnAutoresizingStyle.firstColumnOnlyAutoresizingStyle
         
         NotificationCenter.default.addObserver(self, selector: #selector(onScriptProcessingUpdate(_:)), name: .ScriptProcessingUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
     }
+    
+    @objc private func onFontSizeUpdated(_ notification: Notification) {
+        if let update = notification.object as? FontSizeUpdate
+        {
+            if let origFont = self.textCell?.font {
+                let newFont = NSFont(descriptor: origFont.fontDescriptor, size: CGFloat(update.size))
+                self.textCell?.font = newFont
+                self.tableView.rowHeight = CGFloat(update.size + 2)
+                self.tableView.noteNumberOfRowsChanged()
+        }
+    }
+}
     
     @objc private func onScriptProcessingUpdate(_ notification: Notification) {
         if let update = notification.object as? ScriptProcessingUpdate

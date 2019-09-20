@@ -12,8 +12,19 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         NotificationCenter.default.addObserver(self, selector: #selector(onSaveFile(_:)), name: .SaveFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onNewFile(_:)), name: .NewFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunClicked(_:)), name: .RunClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
     }
-    
+
+    @objc private func onFontSizeUpdated(_ notification: Notification) {
+        if let update = notification.object as? FontSizeUpdate
+        {
+            if let origFont = self.scriptText.font {
+                let newFont = NSFont(descriptor: origFont.fontDescriptor, size: CGFloat(update.size))
+                self.scriptText.font = newFont
+            }
+        }
+    }
+
     
     @objc private func onFileLoaded(_ notification: Notification) {
         if let path = notification.object as? String

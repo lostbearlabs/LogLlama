@@ -13,10 +13,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var currentFile : String?
     var textChanged = false
+    var fontSize = 14
+    
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTextChanged(_:)), name: .TextChanged, object: nil)
+        self.sendFontSizeUpdate()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -118,5 +121,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func onRunClicked(_ sender: Any) {
         NotificationCenter.default.post(name: .RunClicked, object: nil)
     }
+    
+    func sendFontSizeUpdate() {
+        NotificationCenter.default.post(name: .FontSizeUpdated, object: FontSizeUpdate(size: self.fontSize))
+    }
+    
+    @IBAction func onFontBigger(_ sender: Any) {
+        self.fontSize += 1
+        sendFontSizeUpdate()
+    }
+    
+    @IBAction func onFontSmaller(_ sender: Any) {
+        self.fontSize -= 1
+        sendFontSizeUpdate()
+    }
+    
 }
 

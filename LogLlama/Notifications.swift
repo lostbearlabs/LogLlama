@@ -18,4 +18,5 @@ extension Notification.Name {
     static let RunClicked = Notification.Name("RunClicked")     // payload null
     static let ScriptProcessingUpdate = Notification.Name("ScriptProcessingUpdate") // payload ScriptProcessingUpdate
     static let LogLinesUpdated = Notification.Name("LogLinesUpdated")    // payload LogLinesUpdate
+    static let FontSizeUpdated = Notification.Name("FontSizeUpdated")    // payload FontSizeUpdate
 }
