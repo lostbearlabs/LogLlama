@@ -35,7 +35,7 @@ class ScriptUpdateDisplayController: NSViewController {
             if let origFont = self.textCell?.font {
                 let newFont = NSFont(descriptor: origFont.fontDescriptor, size: CGFloat(update.size))
                 self.textCell?.font = newFont
-                self.tableView.rowHeight = CGFloat(update.size + 2)
+                self.tableView.rowHeight = CGFloat(update.size + 4)
                 self.tableView.noteNumberOfRowsChanged()
         }
     }
