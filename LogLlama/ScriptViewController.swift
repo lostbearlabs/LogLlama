@@ -4,6 +4,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     
 
     @IBOutlet var scriptText: NSTextView!
+    var running = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,20 +66,34 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     }
     
     @objc private func onRunClicked(_ notification: Notification) {
-        let engine = ScriptEngine(callback: self)
-        engine.run(script: self.scriptText.string)
+        if( !running ) {
+            running = true
+            let dispatchQueue = DispatchQueue(label: "ScriptEngine", qos: .background)
+            let script = self.scriptText.string
+            dispatchQueue.async{
+                let engine = ScriptEngine(callback: self)
+                engine.run(script: script)
+            }
+        }
     }
     
     func scriptStarted() {
-        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
+        }
     }
     
     func scriptUpdate(text: String) {
-        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: text))
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: text))
+        }
     }
     
     func scriptDone(logLines: [LogLine]) {
-        NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: logLines))
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: logLines))
+            self.running = false
+        }
     }
 
     

@@ -498,7 +498,7 @@
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="RC1-mk-6SB">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" size="13" name="CourierNewPSMT"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -626,7 +626,6 @@
                     <connections>
                         <outlet property="tableView" destination="Y5C-sl-PwT" id="agR-m8-hMG"/>
                         <outlet property="textCell" destination="F6Y-kg-71g" id="Vkk-Hs-6dh"/>
-                        <outlet property="textColumn" destination="kMA-vv-fxf" id="va5-ji-Ckj"/>
                     </connections>
                 </viewController>
                 <customObject id="kzM-7C-l53" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
