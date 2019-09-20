@@ -17,6 +17,13 @@
 		AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3C233150B1001CD09D /* ScriptViewController.swift */; };
 		AE437F3F23315E25001CD09D /* ScriptUpdateDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* ScriptUpdateDisplayController.swift */; };
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
+		AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600D233316B7002B1684 /* ScriptCallback.swift */; };
+		AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600F23331704002B1684 /* ScriptEngine.swift */; };
+		AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C223341917006FF1A8 /* ScriptCommand.swift */; };
+		AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */; };
+		AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */; };
+		AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C8233428F6006FF1A8 /* LogLine.swift */; };
+		AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11CA23346632006FF1A8 /* FilterCommand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +52,13 @@
 		AE437F3C233150B1001CD09D /* ScriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptViewController.swift; sourceTree = "<group>"; };
 		AE437F3E23315E25001CD09D /* ScriptUpdateDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptUpdateDisplayController.swift; sourceTree = "<group>"; };
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		AEAF600D233316B7002B1684 /* ScriptCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallback.swift; sourceTree = "<group>"; };
+		AEAF600F23331704002B1684 /* ScriptEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEngine.swift; sourceTree = "<group>"; };
+		AEDE11C223341917006FF1A8 /* ScriptCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCommand.swift; sourceTree = "<group>"; };
+		AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFileCommand.swift; sourceTree = "<group>"; };
+		AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParser.swift; sourceTree = "<group>"; };
+		AEDE11C8233428F6006FF1A8 /* LogLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLine.swift; sourceTree = "<group>"; };
+		AEDE11CA23346632006FF1A8 /* FilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCommand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +82,7 @@
 		AE437F1023306D4B001CD09D = {
 			isa = PBXGroup;
 			children = (
+				AEAF600C2333167D002B1684 /* Script */,
 				AE437F1B23306D4B001CD09D /* LogLlama */,
 				AE437F2E23306D4D001CD09D /* LogLlamaTests */,
 				AE437F1A23306D4B001CD09D /* Products */,
@@ -108,6 +123,20 @@
 				AE437F3123306D4D001CD09D /* Info.plist */,
 			);
 			path = LogLlamaTests;
+			sourceTree = "<group>";
+		};
+		AEAF600C2333167D002B1684 /* Script */ = {
+			isa = PBXGroup;
+			children = (
+				AEAF600D233316B7002B1684 /* ScriptCallback.swift */,
+				AEAF600F23331704002B1684 /* ScriptEngine.swift */,
+				AEDE11C223341917006FF1A8 /* ScriptCommand.swift */,
+				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
+				AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */,
+				AEDE11C8233428F6006FF1A8 /* LogLine.swift */,
+				AEDE11CA23346632006FF1A8 /* FilterCommand.swift */,
+			);
+			path = Script;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,12 +240,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE437F4123315F32001CD09D /* Notifications.swift in Sources */,
+				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
+				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,
 				AE437F3F23315E25001CD09D /* ScriptUpdateDisplayController.swift in Sources */,
+				AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */,
+				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,
+				AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */,
+				AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */,
 				AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */,
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
+				AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

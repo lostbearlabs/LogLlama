@@ -1,6 +1,7 @@
 import Cocoa
 
-class ScriptViewController: NSViewController, NSTextViewDelegate {
+class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback {
+    
 
     @IBOutlet var scriptText: NSTextView!
     
@@ -17,18 +18,13 @@ class ScriptViewController: NSViewController, NSTextViewDelegate {
     @objc private func onFileLoaded(_ notification: Notification) {
         if let path = notification.object as? String
         {
-            NSLog(path)
-            
             do {
                 let data = try NSString(contentsOfFile: path,
                                         encoding: String.Encoding.utf8.rawValue)
                 
-                // If a value was returned, print it.
-                print(data)
-                
                 self.scriptText.string = data as String
                 
-                print("loaded script from \(data)")
+                NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
 
             } catch {}
         }
@@ -37,14 +33,11 @@ class ScriptViewController: NSViewController, NSTextViewDelegate {
     @objc private func onSaveFile(_ notification: Notification) {
         if let path = notification.object as? String
         {
-            NSLog(path)
-            
             do {
                 let data = self.scriptText.string
                 let url = URL( fileURLWithPath: path)
                 try data.write(to: url, atomically: true, encoding:
                 String.Encoding.utf8 )
-                print("saved script to \(url)")
             } catch {
                 print("Unexpected error saving file: \(error).")
             }
@@ -56,20 +49,26 @@ class ScriptViewController: NSViewController, NSTextViewDelegate {
     }
 
     @objc private func onNewFile(_ notification: Notification) {
-        print("cleared text for new file")
         self.scriptText.string = ""
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
     }
     
     @objc private func onRunClicked(_ notification: Notification) {
-        print("RUNNNING SCRIPT")
-
-        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
-        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: "this is line one"))
-        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: "now there are two lines"))
-        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: "third line is the last one"))
-
-        let logLinesUpdate = LogLinesUpdate()
-        NotificationCenter.default.post(name: .LogLinesUpdated, object: logLinesUpdate)
+        let engine = ScriptEngine(callback: self)
+        engine.run(script: self.scriptText.string)
     }
+    
+    func scriptStarted() {
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
+    }
+    
+    func scriptUpdate(text: String) {
+        NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(text: text))
+    }
+    
+    func scriptDone(logLines: [LogLine]) {
+        NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: logLines))
+    }
+
     
 }

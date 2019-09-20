@@ -31,10 +31,8 @@ class ScriptUpdateDisplayController: NSViewController {
         if let update = notification.object as? ScriptProcessingUpdate
         {
             if (update.clear) {
-                print("CLEAR")
                 lines.removeAll()
             } else {
-                print("APPEND \(update.text)")
                 lines.append(update.text)
             }
             

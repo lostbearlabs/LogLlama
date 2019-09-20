@@ -24,7 +24,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func openFile(_ sender: Any) {
-        NSLog("open file??")
         
         let dialog = NSOpenPanel();
         
@@ -104,7 +103,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc private func onTextChanged(_ notification: Notification) {
         if( !self.textChanged ) {
-            print("TextChanged -> TRUE")
             self.textChanged = true
         }
     }
