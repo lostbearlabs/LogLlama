@@ -25,6 +25,8 @@
 		AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */; };
 		AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C8233428F6006FF1A8 /* LogLine.swift */; };
 		AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11CA23346632006FF1A8 /* FilterCommand.swift */; };
+		AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */; };
+		AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5D23357CAF00DC53D6 /* RunState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParser.swift; sourceTree = "<group>"; };
 		AEDE11C8233428F6006FF1A8 /* LogLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLine.swift; sourceTree = "<group>"; };
 		AEDE11CA23346632006FF1A8 /* FilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCommand.swift; sourceTree = "<group>"; };
+		AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCommand.swift; sourceTree = "<group>"; };
+		AEED0F5D23357CAF00DC53D6 /* RunState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 				AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */,
 				AEDE11C8233428F6006FF1A8 /* LogLine.swift */,
 				AEDE11CA23346632006FF1A8 /* FilterCommand.swift */,
+				AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */,
+				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -253,6 +259,8 @@
 				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,
 				AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */,
 				AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */,
+				AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */,
+				AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */,
 				AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */,
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
 				AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */,

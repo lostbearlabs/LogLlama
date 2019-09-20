@@ -17,7 +17,7 @@ class ReadFileCommand : ScriptCommand {
         return true
     }
     
-    func run(logLines : inout [LogLine]) -> Bool {
+    func run(logLines : inout [LogLine], runState _ : inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "reading file \(self.file)")
 
         do {

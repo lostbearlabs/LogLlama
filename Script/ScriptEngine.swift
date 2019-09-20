@@ -22,6 +22,8 @@ class ScriptEngine {
             return
         }
 
+        var runState = RunState()
+        
         for cmd in cmds {
             if( !cmd.validate()) {
                 return
@@ -30,7 +32,7 @@ class ScriptEngine {
 
         var logLines : [LogLine] = []
         for cmd in cmds {
-            if( !cmd.run(logLines: &logLines)) {
+            if( !cmd.run(logLines: &logLines, runState: &runState)) {
                 return
             }
         }

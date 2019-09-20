@@ -17,7 +17,8 @@ class ScriptParser {
 
             if !parseComment(line: trimmedLine, commands: &commands) &&
                 !parseReadFile(line: trimmedLine, commands: &commands) &&
-                !parseFilter(line: trimmedLine, commands: &commands)
+                !parseFilter(line: trimmedLine, commands: &commands) &&
+                !parseColor(line: trimmedLine, commands: &commands)
             {
              
                 self.callback.scriptUpdate(text: "UNKNOWN DIRECTIVE: \(line)")
@@ -70,6 +71,17 @@ class ScriptParser {
             return true
         }
 
+        return false
+    }
+
+    func parseColor(line: String, commands : inout [ScriptCommand]) -> Bool {
+        let ar = line.split(separator: " ")
+        if ar.count==2 && ar[0]==":" {
+            let cmd = ColorCommand(callback: self.callback, text: String(ar[1]))
+            commands.append(cmd)
+            return true
+        }
+        
         return false
     }
 

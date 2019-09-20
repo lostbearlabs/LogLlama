@@ -33,7 +33,7 @@ class FilterCommand : ScriptCommand {
         }
     }
     
-    func run(logLines: inout [LogLine]) -> Bool {
+    func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
 
         self.callback.scriptUpdate(text: "applying regular expression: \(self.pattern)")
         
@@ -48,8 +48,7 @@ class FilterCommand : ScriptCommand {
                 n += 1
                 
                 let _ = results.map {
-                    let color = NSColor.green
-                    line.attributed.addAttribute(.backgroundColor, value: color, range: $0.range)
+                    line.attributed.addAttribute(.backgroundColor, value: runState.color, range: $0.range)
                 }
                 
             }
