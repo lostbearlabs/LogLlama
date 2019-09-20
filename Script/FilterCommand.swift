@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 
 class FilterCommand : ScriptCommand {
 
@@ -12,6 +13,7 @@ class FilterCommand : ScriptCommand {
     var callback : ScriptCallback
     var filterType : FilterType
     var pattern : String
+    var regex : NSRegularExpression?
     
     init(callback: ScriptCallback, pattern: String, filterType : FilterType) {
         self.callback = callback
@@ -23,7 +25,7 @@ class FilterCommand : ScriptCommand {
     
     func validate() -> Bool {
         do {
-            try _ = NSRegularExpression(pattern: self.pattern, options: [])
+            try self.regex = NSRegularExpression(pattern: self.pattern, options: [])
             return true
         } catch {
             self.callback.scriptUpdate(text: "invalid regular expression: \(self.pattern)")
@@ -37,9 +39,19 @@ class FilterCommand : ScriptCommand {
         
         var n = 0
         for line in logLines {
-            let match = line.text.range(of: self.pattern, options: .regularExpression) != nil
-            if match {
+            let results = regex!.matches(in: line.text,
+                                        range: NSRange(line.text.startIndex..., in: line.text))
+
+            var match = false
+            if results.count > 0 {
+                match = true
                 n += 1
+                
+                let _ = results.map {
+                    let color = NSColor.green
+                    line.attributed.addAttribute(.backgroundColor, value: color, range: $0.range)
+                }
+                
             }
             
             switch( self.filterType ) {
