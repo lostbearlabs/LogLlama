@@ -38,7 +38,9 @@ class FilterCommand : ScriptCommand {
         self.callback.scriptUpdate(text: "applying regular expression: \(self.pattern)")
         
         var n = 0
-        for line in logLines {
+        DispatchQueue.concurrentPerform(iterations: logLines.count) { (index) in
+            
+            let line = logLines[index]
             let results = regex!.matches(in: line.text,
                                         range: NSRange(line.text.startIndex..., in: line.text))
 

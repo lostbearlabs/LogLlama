@@ -6,7 +6,8 @@ class ResultsViewController: NSViewController {
     @IBOutlet weak var textCell: NSTextFieldCell!
     
     var lines : [NSMutableAttributedString] = []
-    
+    var text : [String] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,9 +24,11 @@ class ResultsViewController: NSViewController {
         if let update = notification.object as? LogLinesUpdate
         {
             self.lines = []
+            self.text = []
             for line in update.lines {
                 if line.visible {
                     self.lines.append(line.getAttributedString())
+                    self.text.append(line.text)
                 }
             }
             self.tableView.noteNumberOfRowsChanged()
@@ -45,6 +48,20 @@ class ResultsViewController: NSViewController {
         }
     }
     
+    @objc func copy(_ sender: AnyObject?){
+
+        var text = ""
+        for (_,idx) in (tableView?.selectedRowIndexes.enumerated())! {
+            if( text != "" ) {
+                text = text + "\n"
+            }
+            text = text + self.text[idx]
+        }
+
+        let pasteBoard = NSPasteboard.general
+        pasteBoard.clearContents()
+        pasteBoard.setString(text, forType:NSPasteboard.PasteboardType.string)
+    }
 }
 
 extension ResultsViewController: NSTableViewDataSource {
