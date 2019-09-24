@@ -32,10 +32,17 @@ class ScriptEngine {
 
         var logLines : [LogLine] = []
         for cmd in cmds {
+            let start = DispatchTime.now()
+            
             if( !cmd.run(logLines: &logLines, runState: &runState)) {
                 return
             }
-            // TODO: report timing?
+            
+            let end = DispatchTime.now()
+            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = round( 1_000 * Double(nanoTime) / 1_000_000_000) / 1000
+
+            self.callback.scriptUpdate(text: "... (\(timeInterval) seconds)")
         }
         
         var n = 0
