@@ -23,6 +23,7 @@
 		AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA753B2233A9B77000C70FB /* WindowController.swift */; };
 		AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600D233316B7002B1684 /* ScriptCallback.swift */; };
 		AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600F23331704002B1684 /* ScriptEngine.swift */; };
+		AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED76E0B233AC16D00E58243 /* DemoCommand.swift */; };
 		AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C223341917006FF1A8 /* ScriptCommand.swift */; };
 		AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */; };
 		AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */; };
@@ -64,6 +65,7 @@
 		AEA753B2233A9B77000C70FB /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		AEAF600D233316B7002B1684 /* ScriptCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallback.swift; sourceTree = "<group>"; };
 		AEAF600F23331704002B1684 /* ScriptEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEngine.swift; sourceTree = "<group>"; };
+		AED76E0B233AC16D00E58243 /* DemoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCommand.swift; sourceTree = "<group>"; };
 		AEDE11C223341917006FF1A8 /* ScriptCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCommand.swift; sourceTree = "<group>"; };
 		AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFileCommand.swift; sourceTree = "<group>"; };
 		AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParser.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
 				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
 				AE79EE2B233A779A00799BB7 /* ChopCommand.swift */,
+				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
 				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
+				AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */,
 				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,

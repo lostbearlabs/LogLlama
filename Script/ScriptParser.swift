@@ -14,6 +14,7 @@ class ScriptParser {
         
         *** ADDING LOG LINES ***
         < filename          -- input log lines from (filename)
+        demo                -- generate sample log lines programmatically
         
         *** FILTERING/HILIGHTING LOG LINES ***
         : color             -- hilight following matches with (color)
@@ -44,7 +45,8 @@ class ScriptParser {
                 !parseFilter(line: trimmedLine, commands: &commands) &&
                 !parseColor(line: trimmedLine, commands: &commands) &&
                 !parseDetectDuplicates(line: trimmedLine, commands: &commands) &&
-                !parseChop(line: trimmedLine, commands: &commands)
+                !parseChop(line: trimmedLine, commands: &commands) &&
+                !parseDemo(line: trimmedLine, commands: &commands)
             {
                 
                 self.callback.scriptUpdate(text: "UNKNOWN DIRECTIVE: \(line)")
@@ -142,6 +144,18 @@ class ScriptParser {
         
         return false
     }
+    
+    func parseDemo(line: String, commands : inout [ScriptCommand]) -> Bool {
+        let ar = line.split(separator: " ")
+        if ar.count==1 && ar[0]=="demo" {
+            let cmd = DemoCommand(callback: self.callback)
+            commands.append(cmd)
+            return true
+        }
+        
+        return false
+    }
+
     
     
 }
