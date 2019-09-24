@@ -19,7 +19,8 @@ class ScriptParser {
                 !parseReadFile(line: trimmedLine, commands: &commands) &&
                 !parseFilter(line: trimmedLine, commands: &commands) &&
                 !parseColor(line: trimmedLine, commands: &commands) &&
-                !parseDetectDuplicates(line: trimmedLine, commands: &commands)
+                !parseDetectDuplicates(line: trimmedLine, commands: &commands) &&
+                !parseChop(line: trimmedLine, commands: &commands)
             {
              
                 self.callback.scriptUpdate(text: "UNKNOWN DIRECTIVE: \(line)")
@@ -104,6 +105,17 @@ class ScriptParser {
             return true
         }
         
+        return false
+    }
+
+    func parseChop(line: String, commands : inout [ScriptCommand]) -> Bool {
+        let ar = line.split(separator: " ")
+        if ar.count==1 && ar[0]=="chop" {
+            let cmd = ChopCommand(callback: self.callback)
+            commands.append(cmd)
+            return true
+        }
+
         return false
     }
 
