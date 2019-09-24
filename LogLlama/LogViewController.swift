@@ -1,19 +1,12 @@
-//
-//  FilterViewController.swift
-//  LogLlama
-//
-//  Created by Eric Johnson on 9/17/19.
-//  Copyright © 2019 Lost Bear Labs. All rights reserved.
-//
-
 import Cocoa
 
-class ScriptUpdateDisplayController: NSViewController {
+class LogViewController: NSViewController {
     
     fileprivate enum CellIdentifiers {
         static let TextCell = "TextCellID"
     }
     
+    @IBOutlet weak var referenceCell: NSTextFieldCell!
     @IBOutlet weak var textCell: NSTextFieldCell!
     @IBOutlet weak var tableView: NSTableView!
     var lines: [String] = []
@@ -27,8 +20,10 @@ class ScriptUpdateDisplayController: NSViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onScriptProcessingUpdate(_:)), name: .ScriptProcessingUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
+        
+        self.referenceCell.stringValue = ScriptParser.getReferenceText()
     }
-    
+   
     @objc private func onFontSizeUpdated(_ notification: Notification) {
         if let update = notification.object as? FontSizeUpdate
         {
@@ -37,7 +32,8 @@ class ScriptUpdateDisplayController: NSViewController {
                 self.textCell?.font = newFont
                 self.tableView.rowHeight = CGFloat(update.size + 4)
                 self.tableView.noteNumberOfRowsChanged()
-        }
+                self.referenceCell?.font = newFont
+            }
     }
 }
     
@@ -56,7 +52,7 @@ class ScriptUpdateDisplayController: NSViewController {
     
 }
 
-extension ScriptUpdateDisplayController: NSTableViewDataSource {
+extension LogViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return lines.count

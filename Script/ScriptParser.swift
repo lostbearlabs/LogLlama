@@ -7,6 +7,30 @@ class ScriptParser {
         self.callback = callback
     }
     
+    static func getReferenceText() -> String {
+        return """
+        *** COMMENTS ***
+        # comment           -- ignore the contents of any line starting with #
+        
+        *** ADDING LOG LINES ***
+        < filename          -- input log lines from (filename)
+        
+        *** FILTERING/HILIGHTING LOG LINES ***
+        : color             -- hilight following matches with (color)
+        = regex             -- hide all lines not matching regex
+        + regex             -- unhide all lines matching regex
+        - regex             -- hide all lines matching regex
+        ~ regex             -- hilight regex without changing which lines are hidden
+
+        *** REMOVING LOG LINES ***
+        chop                -- remove all hidden lines
+        
+        *** ANALYSIS ***
+        d                   -- analyze lines for duplicates
+        
+        """
+    }
+    
     func parse(script : String) -> (Bool, [ScriptCommand]) {
         var commands : [ScriptCommand] = []
         
@@ -14,7 +38,7 @@ class ScriptParser {
         
         for line in ar {
             let trimmedLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
-
+            
             if !parseComment(line: trimmedLine, commands: &commands) &&
                 !parseReadFile(line: trimmedLine, commands: &commands) &&
                 !parseFilter(line: trimmedLine, commands: &commands) &&
@@ -22,19 +46,19 @@ class ScriptParser {
                 !parseDetectDuplicates(line: trimmedLine, commands: &commands) &&
                 !parseChop(line: trimmedLine, commands: &commands)
             {
-             
+                
                 self.callback.scriptUpdate(text: "UNKNOWN DIRECTIVE: \(line)")
                 return (false, [])
             }
         }
-
+        
         return (true, commands)
     }
     
     func parseComment(line: String, commands : inout [ScriptCommand]) -> Bool {
         return line.starts(with: "#") || line=="";
     }
-
+    
     func parseFilter(line: String, commands : inout [ScriptCommand]) -> Bool {
         if line=="" {
             return false
@@ -55,20 +79,20 @@ class ScriptParser {
             commands.append(FilterCommand(callback: self.callback, pattern: rest, filterType: FilterCommand.FilterType.Add))
             return true
         }
-        if line.starts(with: "+") {
+        if line.starts(with: "~") {
             commands.append(FilterCommand(callback: self.callback, pattern: rest, filterType: FilterCommand.FilterType.Highlight))
             return true
         }
-
+        
         return false
         
     }
     
     func parseDetectDuplicates(line: String, commands : inout [ScriptCommand]) -> Bool {
-         if line=="" {
-             return false
-         }
-
+        if line=="" {
+            return false
+        }
+        
         let ar = line.split(separator: " ")
         if ar.count==2 {
             let n = Int(ar[1]) ?? 100
@@ -79,12 +103,12 @@ class ScriptParser {
             }
             // TODO: d- or something for filtering?
         }
-
-
-         return false
-         
-     }
-
+        
+        
+        return false
+        
+    }
+    
     
     func parseReadFile(line: String, commands : inout [ScriptCommand]) -> Bool {
         let ar = line.split(separator: " ")
@@ -93,10 +117,10 @@ class ScriptParser {
             commands.append(cmd)
             return true
         }
-
+        
         return false
     }
-
+    
     func parseColor(line: String, commands : inout [ScriptCommand]) -> Bool {
         let ar = line.split(separator: " ")
         if ar.count==2 && ar[0]==":" {
@@ -107,7 +131,7 @@ class ScriptParser {
         
         return false
     }
-
+    
     func parseChop(line: String, commands : inout [ScriptCommand]) -> Bool {
         let ar = line.split(separator: " ")
         if ar.count==1 && ar[0]=="chop" {
@@ -115,9 +139,9 @@ class ScriptParser {
             commands.append(cmd)
             return true
         }
-
+        
         return false
     }
-
+    
     
 }
