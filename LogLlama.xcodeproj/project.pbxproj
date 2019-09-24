@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */; };
 		AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */; };
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
 		AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB932332C9880027E390 /* ResultsViewController.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectDuplicatesCommand.swift; sourceTree = "<group>"; };
 		AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLinesUpdate.swift; sourceTree = "<group>"; };
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
 		AE37EB932332C9880027E390 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				AEDE11CA23346632006FF1A8 /* FilterCommand.swift */,
 				AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */,
 				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
+				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			files = (
 				AE437F4123315F32001CD09D /* Notifications.swift in Sources */,
 				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
+				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
 				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,

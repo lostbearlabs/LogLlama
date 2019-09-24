@@ -18,7 +18,8 @@ class ScriptParser {
             if !parseComment(line: trimmedLine, commands: &commands) &&
                 !parseReadFile(line: trimmedLine, commands: &commands) &&
                 !parseFilter(line: trimmedLine, commands: &commands) &&
-                !parseColor(line: trimmedLine, commands: &commands)
+                !parseColor(line: trimmedLine, commands: &commands) &&
+                !parseDetectDuplicates(line: trimmedLine, commands: &commands)
             {
              
                 self.callback.scriptUpdate(text: "UNKNOWN DIRECTIVE: \(line)")
@@ -61,6 +62,27 @@ class ScriptParser {
         return false
         
     }
+    
+    func parseDetectDuplicates(line: String, commands : inout [ScriptCommand]) -> Bool {
+         if line=="" {
+             return false
+         }
+
+        let ar = line.split(separator: " ")
+        if ar.count==2 {
+            let n = Int(ar[1]) ?? 100
+            if (ar[0] == "d") {
+                let cmd = DetectDuplicatesCommand(callback: self.callback, threshold: n)
+                commands.append(cmd)
+                return true
+            }
+            // TODO: d- or something for filtering?
+        }
+
+
+         return false
+         
+     }
 
     
     func parseReadFile(line: String, commands : inout [ScriptCommand]) -> Bool {

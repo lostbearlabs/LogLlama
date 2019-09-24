@@ -35,6 +35,7 @@ class ScriptEngine {
             if( !cmd.run(logLines: &logLines, runState: &runState)) {
                 return
             }
+            // TODO: report timing?
         }
         
         var n = 0

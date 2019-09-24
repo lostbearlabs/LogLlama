@@ -75,7 +75,6 @@ extension ResultsViewController: NSTableViewDataSource {
     }
     
     func tableView(_: NSTableView, shouldEdit: NSTableColumn?, row: Int) -> Bool {
-        // TODO: this is not being honored/checked and I don't know why.
         return false
     }
 }
