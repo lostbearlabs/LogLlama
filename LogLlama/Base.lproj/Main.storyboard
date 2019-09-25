@@ -381,7 +381,7 @@
                                     <items>
                                         <menuItem title="LogLlama Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
+                                                <action selector="onHelpClicked:" target="Voe-Tx-rLC" id="kQc-Py-Ug3"/>
                                             </connections>
                                         </menuItem>
                                     </items>

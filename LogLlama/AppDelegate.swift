@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  LogLlama
-//
-//  Created by Eric Johnson on 9/16/19.
-//  Copyright © 2019 Lost Bear Labs. All rights reserved.
-//
-
 import Cocoa
 
 @NSApplicationMain
@@ -135,6 +127,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.fontSize -= 1
         sendFontSizeUpdate()
     }
+    
+    @IBAction func onHelpClicked(_ sender: Any) {
+        if let url = URL(string: "https://github.com/lostbearlabs/LogLlama") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
     
 }
 
