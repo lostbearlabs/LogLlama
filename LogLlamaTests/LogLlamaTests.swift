@@ -1,11 +1,3 @@
-//
-//  LogLlamaTests.swift
-//  LogLlamaTests
-//
-//  Created by Eric Johnson on 9/16/19.
-//  Copyright © 2019 Lost Bear Labs. All rights reserved.
-//
-
 import XCTest
 @testable import LogLlama
 
