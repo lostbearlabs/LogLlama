@@ -30,7 +30,7 @@ Here is a sample script.  It reads the log of an automobile race and performs so
 
 Here is what the screen looks like after running this script:
 
-![Example1][https://raw.githubusercontent.com/lostbearlabs/LogLlama/master/documentation/example1.png]
+![Example1](https://raw.githubusercontent.com/lostbearlabs/LogLlama/master/documentation/example1.png)
 
 ## Script Documentation
 
