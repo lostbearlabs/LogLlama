@@ -9,11 +9,12 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onFileLoaded(_:)), name: .FileLoaded, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onSaveFile(_:)), name: .SaveFile, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onNewFile(_:)), name: .NewFile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onFileLoaded(_:)), name: .OpenScriptFile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onSaveFile(_:)), name: .SaveScriptFile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onNewFile(_:)), name: .NewScriptFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunClicked(_:)), name: .RunClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onShouldAnalyzeLogFile(_:)), name: .AnalyzeLogFile, object: nil)
     }
 
     @objc private func onFontSizeUpdated(_ notification: Notification) {
@@ -42,6 +43,16 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         }
     }
 
+    @objc private func onShouldAnalyzeLogFile(_ notification: Notification) {
+        if let path = notification.object as? String
+        {
+            // create a new script file that references the specified log file
+            self.scriptText.string = "< \(path)\n"
+            NotificationCenter.default.post(name: .ScriptTextChanged, object: nil)
+        }
+    }
+
+    
     @objc private func onSaveFile(_ notification: Notification) {
         if let path = notification.object as? String
         {
@@ -57,7 +68,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     }
     
     func textDidChange(_ notification: Notification) {
-        NotificationCenter.default.post(name: .TextChanged, object: nil)
+        NotificationCenter.default.post(name: .ScriptTextChanged, object: nil)
     }
 
     @objc private func onNewFile(_ notification: Notification) {

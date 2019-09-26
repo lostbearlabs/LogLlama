@@ -6,16 +6,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var currentFile : String?
     var textChanged = false
     var fontSize = 14
+    var logFileToAnalyze : String?
+    var loaded = false
     
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onTextChanged(_:)), name: .TextChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onTextChanged(_:)), name: .ScriptTextChanged, object: nil)
         self.sendFontSizeUpdate()
+        
+        if( self.logFileToAnalyze != nil ) {
+            NotificationCenter.default.post(name: .AnalyzeLogFile, object: self.logFileToAnalyze)
+            NotificationCenter.default.post(name: .RunClicked, object: nil)
+        }
+        
+        self.loaded = true
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
     }
 
     @IBAction func openFile(_ sender: Any) {
@@ -35,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             if (result != nil) {
                 let path = result!.path
-                NotificationCenter.default.post(name: .FileLoaded, object: path)
+                NotificationCenter.default.post(name: .OpenScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
                 currentFile = path
             }
@@ -47,29 +55,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-        NotificationCenter.default.post(name: .FileLoaded, object: filename)
-        self.currentFile = filename
-        self.textChanged = false
+        if( self.loaded ) {
+            NotificationCenter.default.post(name: .OpenScriptFile, object: filename)
+            // the user has clicked the open-recent menu to open a script
+        } else {
+            // the user has opened a log file via finder; we'll construct a script to process it later once
+            // we are loading
+            self.logFileToAnalyze = filename
+        }
         return true
     }
 
     @IBAction func newFile(_ sender: Any) {
         if( self.checkSave() ) {
-            NotificationCenter.default.post(name: .NewFile, object: nil)
+            NotificationCenter.default.post(name: .NewScriptFile, object: nil)
+            NotificationCenter.default.post(name: .LogLinesUpdated, object: nil)
             self.textChanged = false
             self.currentFile = nil
         }
     }
     
     @IBAction func closeFile(_ sender: Any) {
-        
     }
     
     @IBAction func saveFile(_ sender: Any) {
         if( self.currentFile == nil ) {
             self.saveFileAs(sender)
         } else {
-            NotificationCenter.default.post(name: .SaveFile, object: self.currentFile)
+            NotificationCenter.default.post(name: .SaveScriptFile, object: self.currentFile)
         }
     }
     
@@ -87,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             if (result != nil) {
                 let path = result!.path
-                NotificationCenter.default.post(name: .SaveFile, object: path)
+                NotificationCenter.default.post(name: .SaveScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
                 self.currentFile = path
                 self.textChanged = false

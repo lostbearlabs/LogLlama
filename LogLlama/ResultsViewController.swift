@@ -21,19 +21,20 @@ class ResultsViewController: NSViewController {
     
     @objc private func onLogLinesUpdated(_ notification: Notification) {
         
+        self.lines = []
+        self.text = []
+
         if let update = notification.object as? LogLinesUpdate
         {
-            self.lines = []
-            self.text = []
             for line in update.lines {
                 if line.visible {
                     self.lines.append(line.getAttributedString())
                     self.text.append(line.text)
                 }
             }
-            self.tableView.noteNumberOfRowsChanged()
         }
         
+        self.tableView.noteNumberOfRowsChanged()
     }
     
     @objc private func onFontSizeUpdated(_ notification: Notification) {
