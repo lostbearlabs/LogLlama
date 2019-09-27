@@ -93,9 +93,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE1E4A74233E9A0400E75745 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AEDE11C8233428F6006FF1A8 /* LogLine.swift */,
+				AE437F4023315F32001CD09D /* Notifications.swift */,
+				AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */,
+				AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */,
+				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
+				AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		AE437F1023306D4B001CD09D = {
 			isa = PBXGroup;
 			children = (
+				AE1E4A74233E9A0400E75745 /* Data */,
 				AEAF600C2333167D002B1684 /* Script */,
 				AE437F1B23306D4B001CD09D /* LogLlama */,
 				AE437F2E23306D4D001CD09D /* LogLlamaTests */,
@@ -122,11 +136,7 @@
 				AE437F2623306D4C001CD09D /* LogLlama.entitlements */,
 				AE437F3C233150B1001CD09D /* ScriptViewController.swift */,
 				AE437F3E23315E25001CD09D /* LogViewController.swift */,
-				AE437F4023315F32001CD09D /* Notifications.swift */,
-				AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */,
-				AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */,
 				AE37EB932332C9880027E390 /* ResultsViewController.swift */,
-				AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */,
 				AEA753B2233A9B77000C70FB /* WindowController.swift */,
 			);
 			path = LogLlama;
@@ -149,10 +159,8 @@
 				AEDE11C223341917006FF1A8 /* ScriptCommand.swift */,
 				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
 				AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */,
-				AEDE11C8233428F6006FF1A8 /* LogLine.swift */,
 				AEDE11CA23346632006FF1A8 /* FilterCommand.swift */,
 				AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */,
-				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
 				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
 				AE79EE2B233A779A00799BB7 /* ChopCommand.swift */,
 				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
