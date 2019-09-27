@@ -5,9 +5,14 @@ import Foundation
  */
 class ScriptEngine {
     var callback : ScriptCallback
+    var initialLines : [LogLine] = []
     
     init(callback : ScriptCallback) {
         self.callback = callback
+    }
+    
+    func setInitialLines( lines : [LogLine] ) {
+        self.initialLines = lines;
     }
     
     func run(script : String) {
@@ -36,7 +41,7 @@ class ScriptEngine {
             }
         }
         
-        var logLines : [LogLine] = []
+        var logLines = self.initialLines;
         for cmd in cmds {
             let start = DispatchTime.now()
             

@@ -97,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				AEDE11C8233428F6006FF1A8 /* LogLine.swift */,
-				AE437F4023315F32001CD09D /* Notifications.swift */,
 				AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */,
 				AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */,
 				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
@@ -129,6 +128,7 @@
 		AE437F1B23306D4B001CD09D /* LogLlama */ = {
 			isa = PBXGroup;
 			children = (
+				AE437F4023315F32001CD09D /* Notifications.swift */,
 				AE437F1C23306D4B001CD09D /* AppDelegate.swift */,
 				AE437F2023306D4C001CD09D /* Assets.xcassets */,
 				AE437F2223306D4C001CD09D /* Main.storyboard */,

@@ -8,6 +8,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
 
     @IBOutlet var scriptText: NSTextView!
     var running = false
+    var lastResults : [LogLine] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,13 +83,33 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     @objc private func onRunClicked(_ notification: Notification) {
         if( !running ) {
             running = true
+            
+            let (script, selection) = self.getTextToRun();
+            if( !selection ) {
+                self.lastResults = []
+            }
+            
             let dispatchQueue = DispatchQueue(label: "ScriptEngine", qos: .background)
-            let script = self.scriptText.string
             dispatchQueue.async{
                 let engine = ScriptEngine(callback: self)
+                engine.setInitialLines(lines: self.lastResults)
                 engine.run(script: script)
             }
         }
+    }
+    
+    private func getTextToRun() -> (String, Bool) {
+        let ranges = scriptText.selectedRanges
+        if( ranges.count==0 ) {
+            return (self.scriptText.string, false)
+        }
+        let text = self.scriptText.string as NSString?
+        let range = ranges[0] as! NSRange
+        if (range.length==0 ) {
+            return (self.scriptText.string, false)
+        }
+        let substr = (text?.substring(with: range))!
+        return (substr, true)
     }
     
     func scriptStarted() {
@@ -105,6 +126,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     
     func scriptDone(logLines: [LogLine]) {
         DispatchQueue.main.async {
+            self.lastResults = logLines
             NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: logLines))
             self.running = false
         }

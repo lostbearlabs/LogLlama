@@ -1,9 +1,7 @@
 import Foundation
 
-import Foundation
-
 /**
- Messages send among the controllers.
+ Messages sent among the controllers.
  */
 extension Notification.Name {
     static let OpenScriptFile = Notification.Name("OpenScriptFile")     // payload = script file path (String)
