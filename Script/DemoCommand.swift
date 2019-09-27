@@ -13,7 +13,7 @@ class DemoCommand : ScriptCommand {
       }
 
     func validate() -> Bool {
-        return true
+        true
     }
 
     enum State {

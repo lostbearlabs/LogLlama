@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Parses script text into an executable list of ScriptComands.
+ Parses script text into an executable list of ScriptCommands.
  */
 class ScriptParser {
     var callback : ScriptCallback
@@ -11,7 +11,7 @@ class ScriptParser {
     }
     
     static func getReferenceText() -> String {
-        return """
+        """
         *** COMMENTS ***
         # comment           -- ignore the contents of any line starting with #
         
@@ -28,7 +28,8 @@ class ScriptParser {
 
         *** REMOVING LOG LINES ***
         chop                -- remove all hidden lines
-        
+        clear               -- remove ALL lines 
+
         *** ANALYSIS ***
         d                   -- analyze lines for duplicates
         
@@ -49,6 +50,7 @@ class ScriptParser {
                 !parseColor(line: trimmedLine, commands: &commands) &&
                 !parseDetectDuplicates(line: trimmedLine, commands: &commands) &&
                 !parseChop(line: trimmedLine, commands: &commands) &&
+                !parseClear(line: trimmedLine, commands: &commands) &&
                 !parseDemo(line: trimmedLine, commands: &commands)
             {
                 
@@ -61,7 +63,7 @@ class ScriptParser {
     }
     
     func parseComment(line: String, commands : inout [ScriptCommand]) -> Bool {
-        return line.starts(with: "#") || line=="";
+        line.starts(with: "#") || line=="";
     }
     
     func parseFilter(line: String, commands : inout [ScriptCommand]) -> Bool {
@@ -159,6 +161,15 @@ class ScriptParser {
         return false
     }
 
-    
-    
+    func parseClear(line: String, commands : inout [ScriptCommand]) -> Bool {
+        let ar = line.split(separator: " ")
+        if ar.count==1 && ar[0]=="clear" {
+            let cmd = ClearCommand(callback: self.callback)
+            commands.append(cmd)
+            return true
+        }
+
+        return false
+    }
+
 }

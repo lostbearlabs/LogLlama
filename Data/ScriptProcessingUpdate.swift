@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- Sent from the ScriptViewController as scripts run and used by the LogViewController to upate its display.
+ Sent from the ScriptViewController as scripts run and used by the LogViewController to update its display.
  */
 class ScriptProcessingUpdate {
     var clear : Bool

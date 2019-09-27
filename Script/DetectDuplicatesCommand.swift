@@ -16,7 +16,7 @@ class DetectDuplicatesCommand : ScriptCommand {
     }
     
     func validate() -> Bool {
-        return true
+        true
     }
     
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {

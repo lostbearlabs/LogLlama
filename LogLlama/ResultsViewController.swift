@@ -71,14 +71,14 @@ class ResultsViewController: NSViewController {
 extension ResultsViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return lines.count
+        lines.count
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return lines[row]
+        lines[row]
     }
     
     func tableView(_: NSTableView, shouldEdit: NSTableColumn?, row: Int) -> Bool {
-        return false
+        false
     }
 }

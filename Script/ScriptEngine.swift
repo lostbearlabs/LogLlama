@@ -19,14 +19,14 @@ class ScriptEngine {
         self.callback.scriptStarted()
         
         let parser = ScriptParser(callback: self.callback)
-        let (rc, cmds) = parser.parse(script: script)
+        let (rc, commands) = parser.parse(script: script)
         if( !rc ) {
             self.callback.scriptUpdate(text: "PARSING FAILED")
             self.callback.scriptDone(logLines: [])
             return
         }
         
-        if cmds.count==0 {
+        if commands.count==0 {
             self.callback.scriptUpdate(text: "NO COMMANDS IN SCRIPT")
             self.callback.scriptDone(logLines: [])
             return
@@ -34,7 +34,7 @@ class ScriptEngine {
         
         var runState = RunState()
         
-        for cmd in cmds {
+        for cmd in commands {
             if( !cmd.validate()) {
                 self.callback.scriptDone(logLines: [])
                 return
@@ -42,7 +42,7 @@ class ScriptEngine {
         }
         
         var logLines = self.initialLines;
-        for cmd in cmds {
+        for cmd in commands {
             let start = DispatchTime.now()
             
             if( !cmd.run(logLines: &logLines, runState: &runState)) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F0786846702DCD3CB79C /* ClearCommand.swift */; };
 		AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */; };
 		AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */; };
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
 		AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectDuplicatesCommand.swift; sourceTree = "<group>"; };
 		AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLinesUpdate.swift; sourceTree = "<group>"; };
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
 				AE79EE2B233A779A00799BB7 /* ChopCommand.swift */,
 				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
+				34A5F0786846702DCD3CB79C /* ClearCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
 				AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */,
 				AE3A3A5D23351AA10035A811 /* FontSizeUpdate.swift in Sources */,
+				34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

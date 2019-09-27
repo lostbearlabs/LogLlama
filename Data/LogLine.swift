@@ -26,7 +26,7 @@ class LogLine {
     }
     
     func getAttributedString() -> NSMutableAttributedString {
-        return self.attributed
+        self.attributed
     }
     
     func getAnonymousString() -> String {
