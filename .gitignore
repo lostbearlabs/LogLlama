@@ -28,3 +28,6 @@ DerivedData/
 ## OSX
 .DS_Store
 
+## AppCode
+.idea
+
