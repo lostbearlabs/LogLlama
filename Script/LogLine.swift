@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ A log line, read from a file (or generated internally as demo data) and then updated by ScriptCommands.
+ */
 class LogLine {
     var text : String
     var visible  = true

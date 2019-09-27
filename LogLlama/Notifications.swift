@@ -2,6 +2,9 @@ import Foundation
 
 import Foundation
 
+/**
+ Messages send among the controllers.
+ */
 extension Notification.Name {
     static let OpenScriptFile = Notification.Name("OpenScriptFile")     // payload = script file path (String)
     static let AnalyzeLogFile = Notification.Name("AnalyzeLogFile")     // payload = log file path (String)

@@ -1,6 +1,11 @@
 import Foundation
 import AppKit
 
+/**
+ Applies a regular expression to LogLines, coloring and filtering them depending whether they match.
+ 
+ This command implements all 4 of our filtering operations.
+ */
 class FilterCommand : ScriptCommand {
 
     enum FilterType {

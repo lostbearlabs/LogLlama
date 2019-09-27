@@ -1,5 +1,9 @@
 import Foundation
 
+/**
+ This command removes all hidden lines from the list of log lines.  This will speed up subsequent processing, but it means those lines are no longer available
+ to be restored by a "+" filter or analyzed by other commands.
+ */
 class ChopCommand : ScriptCommand {
     var callback : ScriptCallback
 

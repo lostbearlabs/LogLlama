@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ This engine executes script text, using a ScriptParser to parse the text and then invoking the resulting list of commands in order.
+ */
 class ScriptEngine {
     var callback : ScriptCallback
     

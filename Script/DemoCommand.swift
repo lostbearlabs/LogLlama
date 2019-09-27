@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ Generates the demo log file used in examples.
+ */
 class DemoCommand : ScriptCommand {
     var callback : ScriptCallback
     var logDate = Date()

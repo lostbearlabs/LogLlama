@@ -1,6 +1,9 @@
 import Foundation
 import AppKit
 
+/**
+ Sets the color to be used for the next filtering commands.
+ */
 class ColorCommand: ScriptCommand {
     var text : String
     var color : NSColor?

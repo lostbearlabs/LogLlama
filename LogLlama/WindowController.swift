@@ -1,5 +1,8 @@
 import Cocoa
 
+/**
+ This controller manages the top-level application window.
+ */
 class WindowController: NSWindowController {
     
     override func windowDidLoad() {

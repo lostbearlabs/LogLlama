@@ -1,5 +1,8 @@
 import Cocoa
 
+/**
+ The app delegate -- this classs launches the application and handles top-level menu commands.
+ */
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 

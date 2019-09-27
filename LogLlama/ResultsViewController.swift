@@ -1,5 +1,8 @@
 import Cocoa
 
+/**
+ This controller manages the panel that shows (filtered, colored) log lines produced by script execution.
+ */
 class ResultsViewController: NSViewController {
 
     @IBOutlet weak var tableView: NSTableView!

@@ -1,5 +1,10 @@
 import Foundation
 
+/**
+ Processes log lines looking for duplicates and produces a summary by adding ersatz log lines at the top of the list.
+ 
+ When looking for matches, we replace phrases of the form "=value" and phrases the look like digits with placeholders, so that similar lines will match even if their details differ.
+ */
 class DetectDuplicatesCommand : ScriptCommand {
     
     var callback : ScriptCallback

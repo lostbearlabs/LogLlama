@@ -1,5 +1,8 @@
 import Cocoa
 
+/**
+ This controller manages the panel with the script in it.  The controller is responsible for loading and saving script text and for executing script.
+ */
 class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback {
     
 

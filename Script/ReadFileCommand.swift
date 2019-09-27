@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ Inputs log lines from a log file.
+ */
 class ReadFileCommand : ScriptCommand {
     var callback : ScriptCallback
     var file : String

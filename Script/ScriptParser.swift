@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ Parses script text into an executable list of ScriptComands.
+ */
 class ScriptParser {
     var callback : ScriptCallback
     
