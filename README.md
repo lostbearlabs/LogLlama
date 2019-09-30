@@ -46,3 +46,5 @@ For a list of available commands, see the "Reference" pane within the applicatio
 ## Contributing
 
 GitHub issues and pull requests are both welcome.
+
+This project uses [cocoapods](https://cocoapods.org/) so you will have to install that and then run `pod install` before you will be able to build with XCode.

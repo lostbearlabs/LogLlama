@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F0786846702DCD3CB79C /* ClearCommand.swift */; };
+		6096E6358A936F662437D8D9 /* libPods-LogLlamaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */; };
 		AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */; };
 		AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */; };
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
@@ -16,7 +17,6 @@
 		AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F1C23306D4B001CD09D /* AppDelegate.swift */; };
 		AE437F2123306D4C001CD09D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2023306D4C001CD09D /* Assets.xcassets */; };
 		AE437F2423306D4C001CD09D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2223306D4C001CD09D /* Main.storyboard */; };
-		AE437F3023306D4D001CD09D /* LogLlamaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F2F23306D4D001CD09D /* LogLlamaTests.swift */; };
 		AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3C233150B1001CD09D /* ScriptViewController.swift */; };
 		AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* LogViewController.swift */; };
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
@@ -30,8 +30,11 @@
 		AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */; };
 		AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C8233428F6006FF1A8 /* LogLine.swift */; };
 		AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11CA23346632006FF1A8 /* FilterCommand.swift */; };
+		AEE7D2B523428F210086E544 /* ScriptParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE7D2B423428F210086E544 /* ScriptParserTest.swift */; };
+		AEE7D2B723428F680086E544 /* ScriptCallbackStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */; };
 		AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */; };
 		AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5D23357CAF00DC53D6 /* RunState.swift */; };
+		FFFFAF4E144AC129B85F7F46 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1BADD9AF7AE997E5590DEE11 /* Pods-LogLlamaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlamaTests.release.xcconfig"; path = "Target Support Files/Pods-LogLlamaTests/Pods-LogLlamaTests.release.xcconfig"; sourceTree = "<group>"; };
+		2CB7C88549244CA7D8D0696B /* Pods-LogLlamaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlamaTests.debug.xcconfig"; path = "Target Support Files/Pods-LogLlamaTests/Pods-LogLlamaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
+		5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.debug.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.debug.xcconfig"; sourceTree = "<group>"; };
+		69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectDuplicatesCommand.swift; sourceTree = "<group>"; };
 		AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLinesUpdate.swift; sourceTree = "<group>"; };
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
@@ -58,7 +65,6 @@
 		AE437F2523306D4C001CD09D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE437F2623306D4C001CD09D /* LogLlama.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LogLlama.entitlements; sourceTree = "<group>"; };
 		AE437F2B23306D4D001CD09D /* LogLlamaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogLlamaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE437F2F23306D4D001CD09D /* LogLlamaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLlamaTests.swift; sourceTree = "<group>"; };
 		AE437F3123306D4D001CD09D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE437F3C233150B1001CD09D /* ScriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptViewController.swift; sourceTree = "<group>"; };
 		AE437F3E23315E25001CD09D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
@@ -73,8 +79,12 @@
 		AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParser.swift; sourceTree = "<group>"; };
 		AEDE11C8233428F6006FF1A8 /* LogLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLine.swift; sourceTree = "<group>"; };
 		AEDE11CA23346632006FF1A8 /* FilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCommand.swift; sourceTree = "<group>"; };
+		AEE7D2B423428F210086E544 /* ScriptParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParserTest.swift; sourceTree = "<group>"; };
+		AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallbackStub.swift; sourceTree = "<group>"; };
 		AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCommand.swift; sourceTree = "<group>"; };
 		AEED0F5D23357CAF00DC53D6 /* RunState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunState.swift; sourceTree = "<group>"; };
+		B0538BDF5FF7A300DDACA00D /* Pods-LogLlama.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.release.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.release.xcconfig"; sourceTree = "<group>"; };
+		C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlamaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFFFAF4E144AC129B85F7F46 /* libPods-LogLlama.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,12 +100,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6096E6358A936F662437D8D9 /* libPods-LogLlamaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2621FC22CD272EB76B260474 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */,
+				B0538BDF5FF7A300DDACA00D /* Pods-LogLlama.release.xcconfig */,
+				2CB7C88549244CA7D8D0696B /* Pods-LogLlamaTests.debug.xcconfig */,
+				1BADD9AF7AE997E5590DEE11 /* Pods-LogLlamaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		50780732BFFC4DF2037EDAE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */,
+				C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AE1E4A74233E9A0400E75745 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +147,8 @@
 				AE437F1B23306D4B001CD09D /* LogLlama */,
 				AE437F2E23306D4D001CD09D /* LogLlamaTests */,
 				AE437F1A23306D4B001CD09D /* Products */,
+				2621FC22CD272EB76B260474 /* Pods */,
+				50780732BFFC4DF2037EDAE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,8 +181,9 @@
 		AE437F2E23306D4D001CD09D /* LogLlamaTests */ = {
 			isa = PBXGroup;
 			children = (
-				AE437F2F23306D4D001CD09D /* LogLlamaTests.swift */,
 				AE437F3123306D4D001CD09D /* Info.plist */,
+				AEE7D2B423428F210086E544 /* ScriptParserTest.swift */,
+				AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */,
 			);
 			path = LogLlamaTests;
 			sourceTree = "<group>";
@@ -178,6 +213,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE437F3423306D4D001CD09D /* Build configuration list for PBXNativeTarget "LogLlama" */;
 			buildPhases = (
+				8EA71674DD7E40963E97AD62 /* [CP] Check Pods Manifest.lock */,
 				AE437F1523306D4B001CD09D /* Sources */,
 				AE437F1623306D4B001CD09D /* Frameworks */,
 				AE437F1723306D4B001CD09D /* Resources */,
@@ -195,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE437F3723306D4D001CD09D /* Build configuration list for PBXNativeTarget "LogLlamaTests" */;
 			buildPhases = (
+				BC2266CF6AEFECE6DE00256C /* [CP] Check Pods Manifest.lock */,
 				AE437F2723306D4D001CD09D /* Sources */,
 				AE437F2823306D4D001CD09D /* Frameworks */,
 				AE437F2923306D4D001CD09D /* Resources */,
@@ -266,6 +303,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8EA71674DD7E40963E97AD62 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LogLlama-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC2266CF6AEFECE6DE00256C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LogLlamaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AE437F1523306D4B001CD09D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -300,7 +384,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE437F3023306D4D001CD09D /* LogLlamaTests.swift in Sources */,
+				AEE7D2B723428F680086E544 /* ScriptCallbackStub.swift in Sources */,
+				AEE7D2B523428F210086E544 /* ScriptParserTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +528,7 @@
 		};
 		AE437F3523306D4D001CD09D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -461,6 +547,7 @@
 		};
 		AE437F3623306D4D001CD09D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0538BDF5FF7A300DDACA00D /* Pods-LogLlama.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -479,6 +566,7 @@
 		};
 		AE437F3823306D4D001CD09D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CB7C88549244CA7D8D0696B /* Pods-LogLlamaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -499,6 +587,7 @@
 		};
 		AE437F3923306D4D001CD09D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BADD9AF7AE997E5590DEE11 /* Pods-LogLlamaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

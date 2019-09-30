@@ -1,0 +1,16 @@
+PODS:
+  - SwiftHamcrest (2.2.1)
+
+DEPENDENCIES:
+  - SwiftHamcrest (~> 2.2.1)
+
+SPEC REPOS:
+  trunk:
+    - SwiftHamcrest
+
+SPEC CHECKSUMS:
+  SwiftHamcrest: 67454f9c4c7fae8d7a0f82dfd42f8a54a79095b1
+
+PODFILE CHECKSUM: 4a73358a91680bbfe3e3b5c80059570dbbf19a77
+
+COCOAPODS: 1.8.1

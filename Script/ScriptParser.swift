@@ -25,13 +25,13 @@ class ScriptParser {
         + regex             -- unhide all lines matching regex
         - regex             -- hide all lines matching regex
         ~ regex             -- hilight regex without changing which lines are hidden
-
+        
         *** REMOVING LOG LINES ***
         chop                -- remove all hidden lines
         clear               -- remove ALL lines 
-
+        
         *** ANALYSIS ***
-        d                   -- analyze lines for duplicates
+        d N                 -- identify lines duplicated more than N times
         
         """
     }
@@ -53,8 +53,7 @@ class ScriptParser {
                 !parseClear(line: trimmedLine, commands: &commands) &&
                 !parseDemo(line: trimmedLine, commands: &commands)
             {
-                
-                self.callback.scriptUpdate(text: "UNKNOWN DIRECTIVE: \(line)")
+                self.callback.scriptUpdate(text: "FAILED TO PARSE DIRECTIVE: \(line)")
                 return (false, [])
             }
         }
@@ -71,6 +70,9 @@ class ScriptParser {
             return false
         }
         
+        // TODO: just assuming here that everything after the directive is the regular
+        // expression.  Would it be better to have a lexer that recognizes quotes strings
+        // and then just have this be a regular 2-part command?
         let rest = String(line.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines)
         
         
@@ -95,31 +97,36 @@ class ScriptParser {
         
     }
     
-    func parseDetectDuplicates(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if line=="" {
-            return false
-        }
-        
+    func detectDirective(line : String, directive: String, expectedNumArgs: Int) -> [String]? {
         let ar = line.split(separator: " ")
-        if ar.count==2 {
-            let n = Int(ar[1]) ?? 100
-            if (ar[0] == "d") {
-                let cmd = DetectDuplicatesCommand(callback: self.callback, threshold: n)
-                commands.append(cmd)
-                return true
-            }
-            // TODO: d- or something for filtering?
+        if( ar[0] != directive ) {
+            return nil
         }
         
+        if( ar.count != expectedNumArgs+1 ) {
+            self.callback.scriptUpdate(text: "DIRECTIVE \(ar[0]) REQUIRES \(expectedNumArgs) ARGUMENT(S)")
+            return nil
+        }
+        
+        return ar.map( {String($0)} )
+    }
+    
+    func parseDetectDuplicates(line: String, commands : inout [ScriptCommand]) -> Bool {
+        
+        if let ar = detectDirective(line: line, directive: "d", expectedNumArgs: 1) {
+            let n = Int(ar[1]) ?? 100
+            let cmd = DetectDuplicatesCommand(callback: self.callback, threshold: n)
+            commands.append(cmd)
+            return true
+        }
+        // TODO: an alternative verison with d- or something to do filtering as well as detection?
         
         return false
-        
     }
     
     
     func parseReadFile(line: String, commands : inout [ScriptCommand]) -> Bool {
-        let ar = line.split(separator: " ")
-        if ar.count==2 && ar[0]=="<" {
+        if let ar = detectDirective(line: line, directive: "<", expectedNumArgs: 1) {
             let cmd = ReadFileCommand(callback: self.callback, file: String(ar[1]))
             commands.append(cmd)
             return true
@@ -129,8 +136,7 @@ class ScriptParser {
     }
     
     func parseColor(line: String, commands : inout [ScriptCommand]) -> Bool {
-        let ar = line.split(separator: " ")
-        if ar.count==2 && ar[0]==":" {
+        if let ar = detectDirective(line: line, directive: ":", expectedNumArgs: 1) {
             let cmd = ColorCommand(callback: self.callback, text: String(ar[1]))
             commands.append(cmd)
             return true
@@ -140,8 +146,7 @@ class ScriptParser {
     }
     
     func parseChop(line: String, commands : inout [ScriptCommand]) -> Bool {
-        let ar = line.split(separator: " ")
-        if ar.count==1 && ar[0]=="chop" {
+        if let _ = detectDirective(line: line, directive: "chop", expectedNumArgs: 0) {
             let cmd = ChopCommand(callback: self.callback)
             commands.append(cmd)
             return true
@@ -151,8 +156,7 @@ class ScriptParser {
     }
     
     func parseDemo(line: String, commands : inout [ScriptCommand]) -> Bool {
-        let ar = line.split(separator: " ")
-        if ar.count==1 && ar[0]=="demo" {
+        if let _ = detectDirective(line: line, directive: "demo", expectedNumArgs: 0) {
             let cmd = DemoCommand(callback: self.callback)
             commands.append(cmd)
             return true
@@ -160,16 +164,15 @@ class ScriptParser {
         
         return false
     }
-
+    
     func parseClear(line: String, commands : inout [ScriptCommand]) -> Bool {
-        let ar = line.split(separator: " ")
-        if ar.count==1 && ar[0]=="clear" {
+        if let _ = detectDirective(line: line, directive: "clear", expectedNumArgs: 0) {
             let cmd = ClearCommand(callback: self.callback)
             commands.append(cmd)
             return true
         }
-
+        
         return false
     }
-
+    
 }
