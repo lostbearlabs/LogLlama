@@ -20,6 +20,7 @@
 		AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3C233150B1001CD09D /* ScriptViewController.swift */; };
 		AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* LogViewController.swift */; };
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
+		AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE62F03B23453AB2002EDC76 /* DocumentState.swift */; };
 		AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE79EE2B233A779A00799BB7 /* ChopCommand.swift */; };
 		AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA753B2233A9B77000C70FB /* WindowController.swift */; };
 		AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600D233316B7002B1684 /* ScriptCallback.swift */; };
@@ -69,6 +70,7 @@
 		AE437F3C233150B1001CD09D /* ScriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptViewController.swift; sourceTree = "<group>"; };
 		AE437F3E23315E25001CD09D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		AE62F03B23453AB2002EDC76 /* DocumentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentState.swift; sourceTree = "<group>"; };
 		AE79EE2B233A779A00799BB7 /* ChopCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChopCommand.swift; sourceTree = "<group>"; };
 		AEA753B2233A9B77000C70FB /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		AEAF600D233316B7002B1684 /* ScriptCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallback.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				AE437F3E23315E25001CD09D /* LogViewController.swift */,
 				AE37EB932332C9880027E390 /* ResultsViewController.swift */,
 				AEA753B2233A9B77000C70FB /* WindowController.swift */,
+				AE62F03B23453AB2002EDC76 /* DocumentState.swift */,
 			);
 			path = LogLlama;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
 				AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */,
 				AE3A3A5D23351AA10035A811 /* FontSizeUpdate.swift in Sources */,
+				AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */,
 				34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

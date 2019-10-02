@@ -6,12 +6,10 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var currentFile : String?
-    var textChanged = false
     var fontSize = 14
     var logFileToAnalyze : String?
-    var loaded = false
-    
+    let documentState = DocumentState()
+
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -22,8 +20,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationCenter.default.post(name: .AnalyzeLogFile, object: self.logFileToAnalyze)
             NotificationCenter.default.post(name: .RunClicked, object: nil)
         }
-        
-        self.loaded = true
+
+        self.documentState.onApplicationLoaded()
+    }
+
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        if( self.documentState.canDiscardText(action: "exit")) {
+            return NSApplication.TerminateReply.terminateNow;
+        }
+        return NSApplication.TerminateReply.terminateCancel;
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -48,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let path = result!.path
                 NotificationCenter.default.post(name: .OpenScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
-                currentFile = path
+                self.documentState.onFileOpened(file: path)
             }
         } else {
             // User clicked on "Cancel"
@@ -58,23 +63,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-        if( self.loaded ) {
-            NotificationCenter.default.post(name: .OpenScriptFile, object: filename)
-            // the user has clicked the open-recent menu to open a script
+        if( self.documentState.isApplicationLoaded() ) {
+            if( self.documentState.canDiscardText(action: "load file")) {
+                // the user has clicked the open-recent menu to open a script
+                NotificationCenter.default.post(name: .OpenScriptFile, object: filename)
+                self.documentState.onFileOpened(file: filename)
+            }
         } else {
             // the user has opened a log file via finder; we'll construct a script to process it later once
             // we are loading
             self.logFileToAnalyze = filename
+            self.documentState.onApplicationLoaded()
+            self.documentState.onTextChanged()
         }
         return true
     }
 
     @IBAction func newFile(_ sender: Any) {
-        if( self.checkSave() ) {
+        if( self.documentState.canDiscardText(action: "create a new file") ) {
             NotificationCenter.default.post(name: .NewScriptFile, object: nil)
             NotificationCenter.default.post(name: .LogLinesUpdated, object: nil)
-            self.textChanged = false
-            self.currentFile = nil
+            self.documentState.onNewFile()
         }
     }
     
@@ -82,10 +91,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func saveFile(_ sender: Any) {
-        if( self.currentFile == nil ) {
+        if( !self.documentState.isFileLoaded() ) {
             self.saveFileAs(sender)
         } else {
-            NotificationCenter.default.post(name: .SaveScriptFile, object: self.currentFile)
+            NotificationCenter.default.post(name: .SaveScriptFile, object: self.documentState.getCurrentFile())
+            self.documentState.onFileSaved()
         }
     }
     
@@ -105,27 +115,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let path = result!.path
                 NotificationCenter.default.post(name: .SaveScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
-                self.currentFile = path
-                self.textChanged = false
+                self.documentState.onFileSaved(file: path)
             }
         }
     }
- 
+
     
     @objc private func onTextChanged(_ notification: Notification) {
-        if( !self.textChanged ) {
-            self.textChanged = true
-        }
+        self.documentState.onTextChanged()
     }
     
-    func checkSave() -> Bool {
-        if( self.textChanged ) {
-            // TODO: how to prompt for save?
-        }
-        
-        return true
-    }
-    
+
     @IBAction func onRunClicked(_ sender: Any) {
         NotificationCenter.default.post(name: .RunClicked, object: nil)
     }
