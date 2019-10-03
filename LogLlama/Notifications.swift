@@ -13,4 +13,6 @@ extension Notification.Name {
     static let ScriptProcessingUpdate = Notification.Name("ScriptProcessingUpdate") // payload ScriptProcessingUpdate
     static let LogLinesUpdated = Notification.Name("LogLinesUpdated")    // payload LogLinesUpdate
     static let FontSizeUpdated = Notification.Name("FontSizeUpdated")    // payload FontSizeUpdate
+    static let CanUndoUpdated = Notification.Name("CanUndoUpdated")    // payload Bool
+    static let UndoClicked = Notification.Name("UndoClicked")    // payload null
 }

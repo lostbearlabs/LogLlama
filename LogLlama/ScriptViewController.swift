@@ -9,6 +9,8 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     @IBOutlet var scriptText: NSTextView!
     var running = false
     var lastResults : [LogLine] = []
+    let maxUndo = 5
+    var undoResults : [LogLinesUpdate] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +19,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         NotificationCenter.default.addObserver(self, selector: #selector(onSaveFile(_:)), name: .SaveScriptFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onNewFile(_:)), name: .NewScriptFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunClicked(_:)), name: .RunClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onUndoClicked(_:)), name: .UndoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onShouldAnalyzeLogFile(_:)), name: .AnalyzeLogFile, object: nil)
 
@@ -33,7 +36,6 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         }
     }
 
-    
     @objc private func onFileLoaded(_ notification: Notification) {
         if let path = notification.object as? String
         {
@@ -44,6 +46,9 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
                 self.scriptText.string = data as String
                 
                 NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
+
+                self.undoResults.removeAll()
+                self.sendUndoState()
 
             } catch {}
         }
@@ -66,7 +71,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
                 let data = self.scriptText.string
                 let url = URL( fileURLWithPath: path)
                 try data.write(to: url, atomically: true, encoding:
-                String.Encoding.utf8 )
+                    String.Encoding.utf8 )
             } catch {
                 print("Unexpected error saving file: \(error).")
             }
@@ -80,6 +85,8 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     @objc private func onNewFile(_ notification: Notification) {
         self.scriptText.string = ""
         NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
+        self.undoResults.removeAll()
+        self.sendUndoState()
     }
     
     @objc private func onRunClicked(_ notification: Notification) {
@@ -129,10 +136,36 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     func scriptDone(logLines: [LogLine]) {
         DispatchQueue.main.async {
             self.lastResults = logLines
-            NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: logLines))
+            let update = LogLinesUpdate(lines: logLines)
+            NotificationCenter.default.post(name: .LogLinesUpdated, object: update)
             self.running = false
+
+
+            while self.undoResults.count > self.maxUndo {
+                self.undoResults.remove(at: 0)
+            }
+            self.undoResults.append(update)
+            self.sendUndoState()
         }
     }
 
-    
+    @objc private func onUndoClicked(_ notification: Notification) {
+        if let _ = self.undoResults.popLast() {
+            if let update = self.undoResults.last {
+                NotificationCenter.default.post(name: .LogLinesUpdated, object: update)
+
+                self.lastResults.removeAll()
+                for line in update.lines {
+                    self.lastResults.append(line)
+                }
+            }
+        }
+        self.sendUndoState()
+    }
+
+    func sendUndoState() {
+        let enabled = self.undoResults.count > 0
+        NotificationCenter.default.post(name: .CanUndoUpdated, object: enabled)
+        print("undoCount = \(self.undoResults.count), undoEnabled=\(enabled)")
+    }
 }

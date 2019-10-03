@@ -7,6 +7,11 @@ class LogLinesUpdate {
     var lines : [LogLine]
     
     init(lines : [LogLine]) {
-        self.lines = lines
+        self.lines = []
+        for line in lines {
+            // clone each line so that the original owner (the ScriptView) can continue to update its state
+            // without affecting the display or undo data
+            self.lines.append(line.clone())
+        }
     }
 }

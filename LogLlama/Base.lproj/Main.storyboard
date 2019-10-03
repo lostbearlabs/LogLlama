@@ -159,11 +159,16 @@
                             </menuItem>
                             <menuItem title="Script" id="H8h-7b-M4v">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Script" id="HyV-fh-RgO">
+                                <menu key="submenu" title="Script" autoenablesItems="NO" id="HyV-fh-RgO">
                                     <items>
                                         <menuItem title="Execute" keyEquivalent="r" id="snW-S8-Cw5">
                                             <connections>
                                                 <action selector="onRunClicked:" target="Voe-Tx-rLC" id="ez8-kB-jKQ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Undo" keyEquivalent="u" id="pY5-tN-MWd">
+                                            <connections>
+                                                <action selector="onClickUndo:" target="Voe-Tx-rLC" id="FGR-SV-J7I"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -212,7 +217,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LogLlama" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LogLlama" customModuleProvider="target">
+                    <connections>
+                        <outlet property="mnuUndo" destination="pY5-tN-MWd" id="DcI-ps-W0Z"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -364,15 +373,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="7Oh-0N-xBK">
-                                    <rect key="frame" x="0.0" y="0.0" width="435" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView ambiguous="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" smartInsertDelete="YES" id="cVo-aN-Peh">
-                                            <rect key="frame" x="0.0" y="0.0" width="435" height="300"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="435" height="300"/>
+                                            <size key="minSize" width="450" height="300"/>
                                             <size key="maxSize" width="450" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
@@ -383,7 +392,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="W8J-wD-mWS">
-                                    <rect key="frame" x="435" y="0.0" width="15" height="300"/>
+                                    <rect key="frame" x="434" y="0.0" width="16" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>

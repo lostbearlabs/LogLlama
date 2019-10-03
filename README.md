@@ -39,9 +39,10 @@ For a list of available commands, see the "Reference" pane within the applicatio
 ## Tips and Tricks
 
 * All the actions you can perform are listed in the main menu.  These include loading and saving script files, running the script, and changing the font size.
-* All script commands are listed in the "Reference" pane.
-* If you have script text selected in the editor, then the "Run" command will run only the selected text instead of the entire script.  This makes it easy to interactively explore your log file.  
-* During interactive exploration, the `clear` command can be used to reset your output.
+* All script commands are listed in the `Reference` pane.
+* If you have script text selected in the editor, then the `Run` menu command will run only the selected text instead of the entire script.  This makes it easy to interactively explore your log file.  
+* During interactive exploration, a script line that just says `clear` can be used to reset your output.
+* During interactive exploration, the `Undo` menu command can be used to undo whatever line(s) of script you just ran.
 
 ## Contributing
 

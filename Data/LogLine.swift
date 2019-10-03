@@ -46,6 +46,12 @@ class LogLine {
 
         return st
     }
-    
+
+    func clone() -> LogLine {
+        let copy = LogLine(text: self.text)
+        copy.visible = self.visible
+        copy.attributed = NSMutableAttributedString(attributedString: self.attributed.copy() as! NSAttributedString)
+        return copy
+    }
     
 }

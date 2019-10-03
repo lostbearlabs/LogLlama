@@ -10,10 +10,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var logFileToAnalyze : String?
     let documentState = DocumentState()
 
-    
+    @IBOutlet weak var mnuUndo: NSMenuItem!
+
+    @IBAction func onClickUndo(_ sender: Any) {
+        NotificationCenter.default.post(name: .UndoClicked, object: nil)
+    }
+
+    @objc private func onCanUndoUpdated(_ notification: Notification) {
+        let enabled = notification.object as! Bool
+        self.mnuUndo.isEnabled = enabled
+    }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTextChanged(_:)), name: .ScriptTextChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onCanUndoUpdated(_:)), name: .CanUndoUpdated, object: nil)
+
         self.sendFontSizeUpdate()
         
         if( self.logFileToAnalyze != nil ) {
