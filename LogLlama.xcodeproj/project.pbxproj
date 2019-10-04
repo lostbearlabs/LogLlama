@@ -25,6 +25,7 @@
 		AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA753B2233A9B77000C70FB /* WindowController.swift */; };
 		AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600D233316B7002B1684 /* ScriptCallback.swift */; };
 		AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600F23331704002B1684 /* ScriptEngine.swift */; };
+		AED000532347D79200D505E8 /* file.icns in Resources */ = {isa = PBXBuildFile; fileRef = AED000522347D79200D505E8 /* file.icns */; };
 		AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED76E0B233AC16D00E58243 /* DemoCommand.swift */; };
 		AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C223341917006FF1A8 /* ScriptCommand.swift */; };
 		AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */; };
@@ -75,6 +76,7 @@
 		AEA753B2233A9B77000C70FB /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		AEAF600D233316B7002B1684 /* ScriptCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallback.swift; sourceTree = "<group>"; };
 		AEAF600F23331704002B1684 /* ScriptEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEngine.swift; sourceTree = "<group>"; };
+		AED000522347D79200D505E8 /* file.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = file.icns; sourceTree = "<group>"; };
 		AED76E0B233AC16D00E58243 /* DemoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCommand.swift; sourceTree = "<group>"; };
 		AEDE11C223341917006FF1A8 /* ScriptCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCommand.swift; sourceTree = "<group>"; };
 		AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFileCommand.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		AE437F1B23306D4B001CD09D /* LogLlama */ = {
 			isa = PBXGroup;
 			children = (
+				AED000522347D79200D505E8 /* file.icns */,
 				AE437F4023315F32001CD09D /* Notifications.swift */,
 				AE437F1C23306D4B001CD09D /* AppDelegate.swift */,
 				AE437F2023306D4C001CD09D /* Assets.xcassets */,
@@ -292,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED000532347D79200D505E8 /* file.icns in Resources */,
 				AE437F2123306D4C001CD09D /* Assets.xcassets in Resources */,
 				AE437F2423306D4C001CD09D /* Main.storyboard in Resources */,
 			);
