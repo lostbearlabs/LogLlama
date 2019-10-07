@@ -7,7 +7,8 @@ class ResultsViewController: NSViewController {
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var textCell: NSTextFieldCell!
-    
+    @IBOutlet weak var textColumn: NSTableColumn!
+
     var lines : [NSMutableAttributedString] = []
     var text : [String] = []
 
@@ -37,7 +38,21 @@ class ResultsViewController: NSViewController {
             }
         }
         
+        self.resizeColumn()
         self.tableView.noteNumberOfRowsChanged()
+    }
+
+    func resizeColumn() {
+        var longest:CGFloat = 0
+        for line in self.lines {
+            let width = line.size().width
+            if (longest < width) {
+                longest = width
+            }
+        }
+
+        self.textColumn.width = longest
+        self.textColumn.minWidth = longest
     }
     
     @objc private func onFontSizeUpdated(_ notification: Notification) {
