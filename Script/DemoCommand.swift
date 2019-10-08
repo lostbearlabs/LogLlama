@@ -8,9 +8,9 @@ class DemoCommand : ScriptCommand {
     var logDate = Date()
     var linesAdded = 0
 
-      init(callback: ScriptCallback) {
-          self.callback = callback
-      }
+    init(callback: ScriptCallback) {
+        self.callback = callback
+    }
 
     func validate() -> Bool {
         true
@@ -31,7 +31,7 @@ class DemoCommand : ScriptCommand {
         var cars = Array(1...numCars)
         var state : [Int:State] = [:]
         var lap : [Int:Int] = [:]
-
+        
         for car in cars {
             state[car] = State.READY
         }

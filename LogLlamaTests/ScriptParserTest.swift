@@ -113,6 +113,29 @@ class ScriptParserTest: XCTestCase {
         assertThat(cmd.pattern, equalTo("FNORD"))
     }
 
+    func test_parse_truncate_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "truncate 512"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(TruncateCommand.self))
+
+        let cmd = commands[0] as! TruncateCommand
+        assertThat(cmd.maxLength, equalTo(512))
+    }
+
+    func test_parse_requireHilight_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "=="
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(RequireHilightCommand.self))
+    }
+
 
     
     

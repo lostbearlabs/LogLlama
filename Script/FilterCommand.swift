@@ -64,14 +64,17 @@ class FilterCommand : ScriptCommand {
                 
             case .Required:
                 line.visible = match
+                line.matched = line.matched || match
             case .Add:
                 line.visible = line.visible || match
+                line.matched = line.matched || match
             case .Remove:
                 line.visible = line.visible && !match
+                line.matched = line.matched && !match
             case .Highlight:
-                ()
+                line.matched = line.matched || match
             }
-            
+
         }
 
         self.callback.scriptUpdate(text: "... \(n) line(s) matched")

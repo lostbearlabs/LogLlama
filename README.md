@@ -43,6 +43,7 @@ For a list of available commands, see the "Reference" pane within the applicatio
 * If you have script text selected in the editor, then the `Run` menu command will run only the selected text instead of the entire script.  This makes it easy to interactively explore your log file.  
 * During interactive exploration, a script line that just says `clear` can be used to reset your output.
 * During interactive exploration, the `Undo` menu command can be used to undo whatever line(s) of script you just ran.
+* During interactive exploration, use the script command `==` to distil your display down to only hilighted lines and then the menu command `Undo` to revert.
 
 ## Contributing
 

@@ -22,6 +22,7 @@
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
 		AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE62F03B23453AB2002EDC76 /* DocumentState.swift */; };
 		AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE79EE2B233A779A00799BB7 /* ChopCommand.swift */; };
+		AE9A333F234D27F6001107C8 /* RequireHilightCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */; };
 		AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA753B2233A9B77000C70FB /* WindowController.swift */; };
 		AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600D233316B7002B1684 /* ScriptCallback.swift */; };
 		AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600F23331704002B1684 /* ScriptEngine.swift */; };
@@ -32,6 +33,7 @@
 		AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */; };
 		AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C8233428F6006FF1A8 /* LogLine.swift */; };
 		AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11CA23346632006FF1A8 /* FilterCommand.swift */; };
+		AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE53010234D206F00BF3824 /* TruncateCommand.swift */; };
 		AEE7D2B523428F210086E544 /* ScriptParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE7D2B423428F210086E544 /* ScriptParserTest.swift */; };
 		AEE7D2B723428F680086E544 /* ScriptCallbackStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */; };
 		AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */; };
@@ -73,6 +75,7 @@
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		AE62F03B23453AB2002EDC76 /* DocumentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentState.swift; sourceTree = "<group>"; };
 		AE79EE2B233A779A00799BB7 /* ChopCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChopCommand.swift; sourceTree = "<group>"; };
+		AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHilightCommand.swift; sourceTree = "<group>"; };
 		AEA753B2233A9B77000C70FB /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		AEAF600D233316B7002B1684 /* ScriptCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallback.swift; sourceTree = "<group>"; };
 		AEAF600F23331704002B1684 /* ScriptEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptEngine.swift; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 		AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParser.swift; sourceTree = "<group>"; };
 		AEDE11C8233428F6006FF1A8 /* LogLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLine.swift; sourceTree = "<group>"; };
 		AEDE11CA23346632006FF1A8 /* FilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCommand.swift; sourceTree = "<group>"; };
+		AEE53010234D206F00BF3824 /* TruncateCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruncateCommand.swift; sourceTree = "<group>"; };
 		AEE7D2B423428F210086E544 /* ScriptParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParserTest.swift; sourceTree = "<group>"; };
 		AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallbackStub.swift; sourceTree = "<group>"; };
 		AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCommand.swift; sourceTree = "<group>"; };
@@ -208,6 +212,8 @@
 				AE79EE2B233A779A00799BB7 /* ChopCommand.swift */,
 				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
 				34A5F0786846702DCD3CB79C /* ClearCommand.swift */,
+				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
+				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 				AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */,
 				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
 				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
+				AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
 				AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */,
 				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
@@ -384,6 +391,7 @@
 				AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */,
 				AE3A3A5D23351AA10035A811 /* FontSizeUpdate.swift in Sources */,
 				AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */,
+				AE9A333F234D27F6001107C8 /* RequireHilightCommand.swift in Sources */,
 				34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +588,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks\n",
+				);
 				INFOPLIST_FILE = LogLlamaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -601,6 +614,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
+					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks\n",
+				);
 				INFOPLIST_FILE = LogLlamaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

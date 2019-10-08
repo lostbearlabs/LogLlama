@@ -4,11 +4,12 @@ import Foundation
  A log line, read from a file (or generated internally as demo data) and then updated by ScriptCommands.
  */
 class LogLine {
-    var text : String
+    var text : String = ""
     var visible  = true
-    var attributed : NSMutableAttributedString
+    var attributed : NSMutableAttributedString = NSMutableAttributedString(string: "")
     static var rxNumber:NSRegularExpression? = nil
     static var rxValue:NSRegularExpression? = nil
+    var matched = false
 
     init(text : String) {
         
@@ -21,10 +22,23 @@ class LogLine {
             }
         }
         
+        self.initFromText(text: text)
+    }
+
+    func truncate(maxLength : Int) -> Bool {
+        if( self.text.count <= maxLength ) {
+            return false
+        }
+
+        self.initFromText(text: String(self.text.prefix(maxLength)))
+        return true
+    }
+
+    private func initFromText(text: String) {
         self.text = text
         self.attributed = NSMutableAttributedString(string: self.text)
     }
-    
+
     func getAttributedString() -> NSMutableAttributedString {
         self.attributed
     }
@@ -50,6 +64,7 @@ class LogLine {
     func clone() -> LogLine {
         let copy = LogLine(text: self.text)
         copy.visible = self.visible
+        copy.matched = self.matched
         copy.attributed = NSMutableAttributedString(attributedString: self.attributed.copy() as! NSAttributedString)
         return copy
     }

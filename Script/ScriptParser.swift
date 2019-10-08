@@ -25,11 +25,15 @@ class ScriptParser {
         + regex             -- unhide all lines matching regex
         - regex             -- hide all lines matching regex
         ~ regex             -- hilight regex without changing which lines are hidden
+        ==                  -- hide all lines not already hilighted
         
         *** REMOVING LOG LINES ***
         chop                -- remove all hidden lines
-        clear               -- remove ALL lines 
-        
+        clear               -- remove ALL lines
+
+        *** ADJUSTING LOG LINES ***
+        truncate N          -- truncate lines with > N characters
+
         *** ANALYSIS ***
         d N                 -- identify lines duplicated more than N times
         
@@ -46,12 +50,14 @@ class ScriptParser {
             
             if !parseComment(line: trimmedLine, commands: &commands) &&
                 !parseReadFile(line: trimmedLine, commands: &commands) &&
+                !parseRequireHilight(line: trimmedLine, commands: &commands) &&
                 !parseFilter(line: trimmedLine, commands: &commands) &&
                 !parseColor(line: trimmedLine, commands: &commands) &&
                 !parseDetectDuplicates(line: trimmedLine, commands: &commands) &&
                 !parseChop(line: trimmedLine, commands: &commands) &&
                 !parseClear(line: trimmedLine, commands: &commands) &&
-                !parseDemo(line: trimmedLine, commands: &commands)
+                !parseDemo(line: trimmedLine, commands: &commands) &&
+                !parseTruncate(line: trimmedLine, commands: &commands)
             {
                 self.callback.scriptUpdate(text: "FAILED TO PARSE DIRECTIVE: \(line)")
                 return (false, [])
@@ -75,7 +81,7 @@ class ScriptParser {
         // and then just have this be a regular 2-part command?
         let rest = String(line.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines)
         
-        
+
         if line.starts(with: "=") {
             commands.append(FilterCommand(callback: self.callback, pattern: rest, filterType: FilterCommand.FilterType.Required))
             return true
@@ -154,7 +160,18 @@ class ScriptParser {
         
         return false
     }
-    
+
+    func parseRequireHilight(line: String, commands : inout [ScriptCommand]) -> Bool {
+        if let _ = detectDirective(line: line, directive: "==", expectedNumArgs: 0) {
+            let cmd = RequireHilightCommand(callback: self.callback)
+            commands.append(cmd)
+            return true
+        }
+
+        return false
+    }
+
+
     func parseDemo(line: String, commands : inout [ScriptCommand]) -> Bool {
         if let _ = detectDirective(line: line, directive: "demo", expectedNumArgs: 0) {
             let cmd = DemoCommand(callback: self.callback)
@@ -174,5 +191,15 @@ class ScriptParser {
         
         return false
     }
-    
+
+    func parseTruncate(line: String, commands : inout [ScriptCommand]) -> Bool {
+        if let ar = detectDirective(line: line, directive: "truncate", expectedNumArgs: 1) {
+            let cmd = TruncateCommand(callback: self.callback, maxLength: Int(ar[1])!)
+            commands.append(cmd)
+            return true
+        }
+
+        return false
+    }
+
 }
