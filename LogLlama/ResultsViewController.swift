@@ -67,8 +67,26 @@ class ResultsViewController: NSViewController {
         }
     }
     
+    @IBAction func onDoubleClick(_ sender: Any) {
+        let viewController = self.storyboard?.instantiateController(withIdentifier: "LogDetail") as! LineDetailViewController
+        let text = self.getSelectedText();
+        if( text.count > 0 ) {
+            viewController.setText(text: text)
+            viewController.setFont(font: self.textCell!.font!)
+            self.presentAsModalWindow(viewController)
+        }
+    }
+
     @objc func copy(_ sender: AnyObject?){
 
+        let text = self.getSelectedText()
+
+        let pasteBoard = NSPasteboard.general
+        pasteBoard.clearContents()
+        pasteBoard.setString(text, forType:NSPasteboard.PasteboardType.string)
+    }
+
+    func getSelectedText() -> String {
         var text = ""
         for (_,idx) in (tableView?.selectedRowIndexes.enumerated())! {
             if( text != "" ) {
@@ -77,10 +95,9 @@ class ResultsViewController: NSViewController {
             text = text + self.text[idx]
         }
 
-        let pasteBoard = NSPasteboard.general
-        pasteBoard.clearContents()
-        pasteBoard.setString(text, forType:NSPasteboard.PasteboardType.string)
+        return text
     }
+
 }
 
 extension ResultsViewController: NSTableViewDataSource {

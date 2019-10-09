@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -273,6 +273,47 @@
             </objects>
             <point key="canvasLocation" x="74" y="793"/>
         </scene>
+        <!--Line Detail View Controller-->
+        <scene sceneID="QPn-XC-VUR">
+            <objects>
+                <viewController storyboardIdentifier="LogDetail" id="Qaz-Hi-f3y" customClass="LineDetailViewController" customModule="LogLlama" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="FBu-7Q-IX9">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2kK-VT-wf8">
+                                <rect key="frame" x="190" y="13" width="72" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rSX-kQ-fE9">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onDoneClicked:" target="Qaz-Hi-f3y" id="Yyu-BA-Q4y"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-9n-muH">
+                                <rect key="frame" x="20" y="49" width="410" height="231"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="nng-76-WcJ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="xUa-9n-muH" id="hd0-oB-Tm5"/>
+                    </connections>
+                </viewController>
+                <customObject id="gJZ-yZ-zBG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="754" y="132"/>
+        </scene>
         <!--Split View Controller-->
         <scene sceneID="0r0-lL-UO6">
             <objects>
@@ -336,6 +377,7 @@
                                             </tableColumns>
                                             <connections>
                                                 <action selector="copy:" target="l0E-cZ-LFi" id="OsM-0w-q1y"/>
+                                                <action trigger="doubleAction" selector="onDoubleClick:" target="y4w-e0-Jsq" id="hZU-aA-8ba"/>
                                                 <outlet property="delegate" destination="y4w-e0-Jsq" id="K6f-NU-3K5"/>
                                             </connections>
                                         </tableView>

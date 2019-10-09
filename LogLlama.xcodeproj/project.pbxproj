@@ -38,6 +38,7 @@
 		AEE7D2B723428F680086E544 /* ScriptCallbackStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */; };
 		AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */; };
 		AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5D23357CAF00DC53D6 /* RunState.swift */; };
+		AEEED562234D425B00D75D6D /* LineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEED561234D425B00D75D6D /* LineDetailViewController.swift */; };
 		FFFFAF4E144AC129B85F7F46 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallbackStub.swift; sourceTree = "<group>"; };
 		AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCommand.swift; sourceTree = "<group>"; };
 		AEED0F5D23357CAF00DC53D6 /* RunState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunState.swift; sourceTree = "<group>"; };
+		AEEED561234D425B00D75D6D /* LineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDetailViewController.swift; sourceTree = "<group>"; };
 		B0538BDF5FF7A300DDACA00D /* Pods-LogLlama.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.release.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.release.xcconfig"; sourceTree = "<group>"; };
 		C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlamaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -184,6 +186,7 @@
 				AE37EB932332C9880027E390 /* ResultsViewController.swift */,
 				AEA753B2233A9B77000C70FB /* WindowController.swift */,
 				AE62F03B23453AB2002EDC76 /* DocumentState.swift */,
+				AEEED561234D425B00D75D6D /* LineDetailViewController.swift */,
 			);
 			path = LogLlama;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */,
 				AE9A333F234D27F6001107C8 /* RequireHilightCommand.swift in Sources */,
 				34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */,
+				AEEED562234D425B00D75D6D /* LineDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
