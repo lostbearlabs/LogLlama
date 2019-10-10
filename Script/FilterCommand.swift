@@ -63,7 +63,7 @@ class FilterCommand : ScriptCommand {
             switch( self.filterType ) {
                 
             case .Required:
-                line.visible = match
+                line.visible = line.visible && match
                 line.matched = line.matched || match
             case .Add:
                 line.visible = line.visible || match
