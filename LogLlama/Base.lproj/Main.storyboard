@@ -278,36 +278,22 @@
             <objects>
                 <viewController title="Log Line Detail" storyboardIdentifier="LogDetail" id="Qaz-Hi-f3y" customClass="LineDetailViewController" customModule="LogLlama" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="FBu-7Q-IX9">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="302"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2kK-VT-wf8">
-                                <rect key="frame" x="190" y="13" width="72" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rSX-kQ-fE9">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="onDoneClicked:" target="Qaz-Hi-f3y" id="Yyu-BA-Q4y"/>
-                                </connections>
-                            </button>
                             <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsE-KH-qZG">
-                                <rect key="frame" x="20" y="61" width="410" height="219"/>
+                                <rect key="frame" x="20" y="38" width="410" height="244"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="Kfz-wp-K6L">
-                                    <rect key="frame" x="0.0" y="0.0" width="395" height="219"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="244"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView ambiguous="YES" editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" smartInsertDelete="YES" id="tUJ-2U-THN">
-                                            <rect key="frame" x="0.0" y="0.0" width="395" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="395" height="244"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="395" height="219"/>
+                                            <size key="minSize" width="395" height="244"/>
                                             <size key="maxSize" width="404" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
@@ -318,10 +304,24 @@ Gw
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="MjU-WC-Nfe">
-                                    <rect key="frame" x="395" y="0.0" width="15" height="219"/>
+                                    <rect key="frame" x="395" y="0.0" width="15" height="244"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2kK-VT-wf8">
+                                <rect key="frame" x="188" y="1" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rSX-kQ-fE9">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onDoneClicked:" target="Qaz-Hi-f3y" id="Yyu-BA-Q4y"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -330,7 +330,7 @@ Gw
                 </viewController>
                 <customObject id="gJZ-yZ-zBG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754" y="132"/>
+            <point key="canvasLocation" x="754" y="133"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="0r0-lL-UO6">

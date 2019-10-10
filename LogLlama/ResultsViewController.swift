@@ -69,6 +69,7 @@ class ResultsViewController: NSViewController {
     
     @IBAction func onDoubleClick(_ sender: Any) {
         let viewController = self.storyboard?.instantiateController(withIdentifier: "LogDetail") as! LineDetailViewController
+
         let text = self.getSelectedText();
         if( text.count > 0 ) {
             viewController.setText(text: text)
