@@ -26,6 +26,7 @@ class ScriptParser {
         - regex             -- hide all lines matching regex
         ~ regex             -- hilight regex without changing which lines are hidden
         ==                  -- hide all lines not already hilighted
+        today               -- hide all lines that don't contain today's date
         
         *** REMOVING LOG LINES ***
         chop                -- remove all hidden lines
@@ -50,6 +51,7 @@ class ScriptParser {
             
             if !parseComment(line: trimmedLine, commands: &commands) &&
                 !parseReadFile(line: trimmedLine, commands: &commands) &&
+                !parseToday(line: trimmedLine, commands: &commands) &&
                 !parseRequireHilight(line: trimmedLine, commands: &commands) &&
                 !parseFilter(line: trimmedLine, commands: &commands) &&
                 !parseColor(line: trimmedLine, commands: &commands) &&
@@ -202,4 +204,13 @@ class ScriptParser {
         return false
     }
 
+    func parseToday(line: String, commands : inout [ScriptCommand]) -> Bool {
+          if let _ = detectDirective(line: line, directive: "today", expectedNumArgs: 0) {
+              let cmd = TodayCommand(callback: self.callback)
+              commands.append(cmd)
+              return true
+          }
+
+          return false
+      }
 }

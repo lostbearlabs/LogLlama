@@ -22,6 +22,7 @@
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
 		AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE62F03B23453AB2002EDC76 /* DocumentState.swift */; };
 		AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE79EE2B233A779A00799BB7 /* ChopCommand.swift */; };
+		AE956B46234F89F30041ADBA /* TodayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE956B45234F89F30041ADBA /* TodayCommand.swift */; };
 		AE9A333F234D27F6001107C8 /* RequireHilightCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */; };
 		AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA753B2233A9B77000C70FB /* WindowController.swift */; };
 		AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF600D233316B7002B1684 /* ScriptCallback.swift */; };
@@ -76,6 +77,7 @@
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		AE62F03B23453AB2002EDC76 /* DocumentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentState.swift; sourceTree = "<group>"; };
 		AE79EE2B233A779A00799BB7 /* ChopCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChopCommand.swift; sourceTree = "<group>"; };
+		AE956B45234F89F30041ADBA /* TodayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCommand.swift; sourceTree = "<group>"; };
 		AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHilightCommand.swift; sourceTree = "<group>"; };
 		AEA753B2233A9B77000C70FB /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		AEAF600D233316B7002B1684 /* ScriptCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallback.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				34A5F0786846702DCD3CB79C /* ClearCommand.swift */,
 				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
 				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
+				AE956B45234F89F30041ADBA /* TodayCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */,
 				AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */,
 				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,
+				AE956B46234F89F30041ADBA /* TodayCommand.swift in Sources */,
 				AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */,
 				AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */,
 				AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */,

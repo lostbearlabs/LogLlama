@@ -136,6 +136,16 @@ class ScriptParserTest: XCTestCase {
         assertThat(commands[0], instanceOf(RequireHilightCommand.self))
     }
 
+    func test_parse_today_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "today"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(TodayCommand.self))
+    }
+
 
     
     
