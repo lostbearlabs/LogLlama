@@ -50,6 +50,7 @@ class LogViewController: NSViewController {
             }
             
             self.tableView.noteNumberOfRowsChanged()
+            self.tableView.scrollRowToVisible(tableView.numberOfRows-1)
         }
     }
     
