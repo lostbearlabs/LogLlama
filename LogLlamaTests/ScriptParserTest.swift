@@ -101,7 +101,7 @@ class ScriptParserTest: XCTestCase {
 
     func test_parse_filter_recognizesIt() {
         let sut = givenScriptParser()
-        let script = "~ FNORD"
+        let script = "~ FNORD FJORD"
         let (result, commands) = sut.parse(script: script)
         
         assertThat(result, equalTo(true))
@@ -110,7 +110,7 @@ class ScriptParserTest: XCTestCase {
         
         let cmd = commands[0] as! FilterCommand
         _ = cmd.validate()
-        assertThat(cmd.pattern, equalTo("FNORD"))
+        assertThat(cmd.pattern, equalTo("FNORD FJORD"))
     }
 
     func test_parse_truncate_recognizesIt() {

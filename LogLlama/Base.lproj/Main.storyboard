@@ -377,14 +377,14 @@ Gw
                                     <action selector="onSearchTextChanged:" target="y4w-e0-Jsq" id="tVT-Ez-CTx"/>
                                 </connections>
                             </searchField>
-                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8N0-lq-mta">
+                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8N0-lq-mta">
                                 <rect key="frame" x="0.0" y="30" width="450" height="270"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="A81-bm-Jb3">
                                     <rect key="frame" x="1" y="1" width="448" height="268"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" columnReordering="NO" columnSelection="YES" columnResizing="NO" autosaveColumns="NO" rowHeight="22" rowSizeStyle="automatic" viewBased="YES" id="pmy-4G-VIA">
+                                        <tableView verticalHuggingPriority="750" columnReordering="NO" columnSelection="YES" columnResizing="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="pmy-4G-VIA">
                                             <rect key="frame" x="0.0" y="0.0" width="448" height="268"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -406,7 +406,6 @@ Gw
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <action selector="copy:" target="l0E-cZ-LFi" id="OsM-0w-q1y"/>
                                                 <action trigger="doubleAction" selector="onDoubleClick:" target="y4w-e0-Jsq" id="hZU-aA-8ba"/>
                                                 <outlet property="delegate" destination="y4w-e0-Jsq" id="K6f-NU-3K5"/>
                                             </connections>

@@ -5,6 +5,25 @@ import Foundation
  */
 class ScriptParser {
     var callback : ScriptCallback
+
+    var rest_recognizers : [(String, (String,  ScriptCallback) -> ScriptCommand)] = [
+        ("<", { rest, callback in return ReadFileCommand(callback: callback, file: rest)}),
+        ("=", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Required)}),
+        ("+", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Add)}),
+        ("-", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Remove)}),
+        ("~", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Highlight)}),
+    ]
+
+    var token_recognizers : [(String, Int, ([String], ScriptCallback) -> ScriptCommand)] = [
+        ("demo", 0, { tokens, callback in return DemoCommand(callback: callback)}),
+        (":", 1, { tokens, callback in return ColorCommand(callback: callback, text: tokens[1])}),
+        ("==", 0, { tokens, callback in return RequireHilightCommand(callback: callback)}),
+        ("today", 0, { tokens, callback in return TodayCommand(callback: callback)}),
+        ("chop", 0, { tokens, callback in return ChopCommand(callback: callback)}),
+        ("clear", 0, { tokens, callback in return ClearCommand(callback: callback)}),
+        ("truncate", 1, { tokens, callback in return TruncateCommand(callback: callback, maxLength: Int(tokens[1]) ?? 256 )}),
+        ("d", 1, { tokens, callback in return DetectDuplicatesCommand(callback: callback, threshold: Int(tokens[1]) ?? 20 )}),
+    ]
     
     init(callback : ScriptCallback) {
         self.callback = callback
@@ -45,22 +64,49 @@ class ScriptParser {
         var commands : [ScriptCommand] = []
         
         let ar = script.split(separator: "\n")
-        
+
         for line in ar {
             let trimmedLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            if !parseComment(line: trimmedLine, commands: &commands) &&
-                !parseReadFile(line: trimmedLine, commands: &commands) &&
-                !parseToday(line: trimmedLine, commands: &commands) &&
-                !parseRequireHilight(line: trimmedLine, commands: &commands) &&
-                !parseFilter(line: trimmedLine, commands: &commands) &&
-                !parseColor(line: trimmedLine, commands: &commands) &&
-                !parseDetectDuplicates(line: trimmedLine, commands: &commands) &&
-                !parseChop(line: trimmedLine, commands: &commands) &&
-                !parseClear(line: trimmedLine, commands: &commands) &&
-                !parseDemo(line: trimmedLine, commands: &commands) &&
-                !parseTruncate(line: trimmedLine, commands: &commands)
-            {
+
+            // ignore comments
+            if( trimmedLine.starts(with: "#") || trimmedLine=="" ) {
+                continue;
+            }
+
+            // split lines into tokens
+            let tokens = line.split(separator: " ").map( { String($0) } )
+            var rest = ""
+            if( tokens.count > 1 ) {
+                let offset = tokens[0].count + 1
+                if offset < trimmedLine.count {
+                    let start = trimmedLine.index(trimmedLine.startIndex, offsetBy: offset)
+                    rest = String(trimmedLine[start...])
+                }
+            }
+
+            var cmd : ScriptCommand? = nil
+
+            // any matching directives that take the rest of the line as their argument?
+            for r in self.rest_recognizers {
+                if tokens[0]==r.0 {
+                    cmd = r.1(rest, self.callback)
+                }
+            }
+
+            // any matching directives that take space-separated arguments?
+            for r in self.token_recognizers {
+                if tokens[0]==r.0 {
+                    if r.1 == tokens.count-1 {
+                        cmd = r.2(tokens, self.callback)
+                    } else {
+                        self.callback.scriptUpdate(text: "DIRECTIVE \(tokens[0]) REQUIRES \(r.1) ARGUMENT(S)")
+                    }
+                }
+            }
+
+            if cmd != nil {
+                commands.append(cmd!)
+            } else {
                 self.callback.scriptUpdate(text: "FAILED TO PARSE DIRECTIVE: \(line)")
                 return (false, [])
             }
@@ -68,149 +114,5 @@ class ScriptParser {
         
         return (true, commands)
     }
-    
-    func parseComment(line: String, commands : inout [ScriptCommand]) -> Bool {
-        line.starts(with: "#") || line=="";
-    }
-    
-    func parseFilter(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if line=="" {
-            return false
-        }
-        
-        // TODO: just assuming here that everything after the directive is the regular
-        // expression.  Would it be better to have a lexer that recognizes quotes strings
-        // and then just have this be a regular 2-part command?
-        let rest = String(line.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines)
-        
 
-        if line.starts(with: "=") {
-            commands.append(FilterCommand(callback: self.callback, pattern: rest, filterType: FilterCommand.FilterType.Required))
-            return true
-        }
-        if line.starts(with: "-") {
-            commands.append(FilterCommand(callback: self.callback, pattern: rest, filterType: FilterCommand.FilterType.Remove))
-            return true
-        }
-        if line.starts(with: "+") {
-            commands.append(FilterCommand(callback: self.callback, pattern: rest, filterType: FilterCommand.FilterType.Add))
-            return true
-        }
-        if line.starts(with: "~") {
-            commands.append(FilterCommand(callback: self.callback, pattern: rest, filterType: FilterCommand.FilterType.Highlight))
-            return true
-        }
-        
-        return false
-        
-    }
-    
-    func detectDirective(line : String, directive: String, expectedNumArgs: Int) -> [String]? {
-        let ar = line.split(separator: " ")
-        if( ar[0] != directive ) {
-            return nil
-        }
-        
-        if( ar.count != expectedNumArgs+1 ) {
-            self.callback.scriptUpdate(text: "DIRECTIVE \(ar[0]) REQUIRES \(expectedNumArgs) ARGUMENT(S)")
-            return nil
-        }
-        
-        return ar.map( {String($0)} )
-    }
-    
-    func parseDetectDuplicates(line: String, commands : inout [ScriptCommand]) -> Bool {
-        
-        if let ar = detectDirective(line: line, directive: "d", expectedNumArgs: 1) {
-            let n = Int(ar[1]) ?? 100
-            let cmd = DetectDuplicatesCommand(callback: self.callback, threshold: n)
-            commands.append(cmd)
-            return true
-        }
-        // TODO: an alternative verison with d- or something to do filtering as well as detection?
-        
-        return false
-    }
-    
-    
-    func parseReadFile(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if let ar = detectDirective(line: line, directive: "<", expectedNumArgs: 1) {
-            let cmd = ReadFileCommand(callback: self.callback, file: String(ar[1]))
-            commands.append(cmd)
-            return true
-        }
-        
-        return false
-    }
-    
-    func parseColor(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if let ar = detectDirective(line: line, directive: ":", expectedNumArgs: 1) {
-            let cmd = ColorCommand(callback: self.callback, text: String(ar[1]))
-            commands.append(cmd)
-            return true
-        }
-        
-        return false
-    }
-    
-    func parseChop(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if let _ = detectDirective(line: line, directive: "chop", expectedNumArgs: 0) {
-            let cmd = ChopCommand(callback: self.callback)
-            commands.append(cmd)
-            return true
-        }
-        
-        return false
-    }
-
-    func parseRequireHilight(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if let _ = detectDirective(line: line, directive: "==", expectedNumArgs: 0) {
-            let cmd = RequireHilightCommand(callback: self.callback)
-            commands.append(cmd)
-            return true
-        }
-
-        return false
-    }
-
-
-    func parseDemo(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if let _ = detectDirective(line: line, directive: "demo", expectedNumArgs: 0) {
-            let cmd = DemoCommand(callback: self.callback)
-            commands.append(cmd)
-            return true
-        }
-        
-        return false
-    }
-    
-    func parseClear(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if let _ = detectDirective(line: line, directive: "clear", expectedNumArgs: 0) {
-            let cmd = ClearCommand(callback: self.callback)
-            commands.append(cmd)
-            return true
-        }
-        
-        return false
-    }
-
-    func parseTruncate(line: String, commands : inout [ScriptCommand]) -> Bool {
-        if let ar = detectDirective(line: line, directive: "truncate", expectedNumArgs: 1) {
-            let cmd = TruncateCommand(callback: self.callback, maxLength: Int(ar[1])!)
-            commands.append(cmd)
-            return true
-        }
-
-        return false
-    }
-
-    func parseToday(line: String, commands : inout [ScriptCommand]) -> Bool {
-          if let _ = detectDirective(line: line, directive: "today", expectedNumArgs: 0) {
-              let cmd = TodayCommand(callback: self.callback)
-              commands.append(cmd)
-              return true
-          }
-
-          return false
-      }
 }
