@@ -25,7 +25,7 @@ class ColorCommand: ScriptCommand {
     }
     
     func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
-        self.callback.scriptUpdate(text: "filter color is now: \(self.text)")
+        self.callback.scriptUpdate(text: "Filter color is now: \(self.text)")
 
         runState.color = color!
         return true

@@ -16,7 +16,7 @@ class ChopCommand : ScriptCommand {
     }
     
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
-        self.callback.scriptUpdate(text: "removing hidden lines")
+        self.callback.scriptUpdate(text: "Removing hidden lines")
         let initialCount = logLines.count
         logLines.removeAll( where: {!$0.visible})
         let removedCount = initialCount - logLines.count

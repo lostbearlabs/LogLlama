@@ -21,7 +21,7 @@ class ReadFileCommand : ScriptCommand {
     }
     
     func run(logLines : inout [LogLine], runState _ : inout RunState) -> Bool {
-        self.callback.scriptUpdate(text: "reading file \(self.file)")
+        self.callback.scriptUpdate(text: "Reading file \(self.file)")
 
         do {
             let data = try String(contentsOfFile: self.file, encoding: .utf8)

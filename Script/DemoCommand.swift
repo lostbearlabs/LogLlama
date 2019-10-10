@@ -24,7 +24,7 @@ class DemoCommand : ScriptCommand {
     }
     
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
-        self.callback.scriptUpdate(text: "generating demo data")
+        self.callback.scriptUpdate(text: "Generating demo data")
         
         let numCars = 10
         let numLaps = 5

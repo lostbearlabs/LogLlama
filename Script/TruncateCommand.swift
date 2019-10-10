@@ -15,6 +15,8 @@ class TruncateCommand : ScriptCommand {
     }
 
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+        self.callback.scriptUpdate(text: "Truncating lines to \(self.maxLength) characters")
+
         var n = 0
         for line in logLines {
             if line.truncate(maxLength: self.maxLength) {
@@ -22,7 +24,7 @@ class TruncateCommand : ScriptCommand {
             }
         }
 
-        self.callback.scriptUpdate(text: "... truncated \(n) of \(logLines.count) lines to \(self.maxLength) characters")
+        self.callback.scriptUpdate(text: "... truncated \(n) of \(logLines.count) lines")
         return true
     }
 

@@ -40,7 +40,7 @@ class FilterCommand : ScriptCommand {
     
     func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
 
-        self.callback.scriptUpdate(text: "applying regular expression: \(self.pattern)")
+        self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
         
         var n = 0
         DispatchQueue.concurrentPerform(iterations: logLines.count) { (index) in
