@@ -2,14 +2,14 @@ import Cocoa
 
 class LineDetailViewController: NSViewController {
 
-    @IBOutlet weak var textField: NSTextField!
+    @IBOutlet var textView: NSTextView!
     var text = ""
     var font : NSFont? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.textField.stringValue = self.text
-        self.textField.font = self.font
+        self.textView.string = self.text
+        self.textView.font = self.font
     }
 
     func setText(text: String) {
