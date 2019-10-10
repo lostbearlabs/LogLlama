@@ -8,7 +8,8 @@ class ResultsViewController: NSViewController {
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var textCell: NSTextFieldCell!
     @IBOutlet weak var textColumn: NSTableColumn!
-
+    @IBOutlet weak var searchField: NSSearchField!
+    
     var lines : [NSMutableAttributedString] = []
     var text : [String] = []
 
@@ -98,6 +99,49 @@ class ResultsViewController: NSViewController {
 
         return text
     }
+
+    func getSelectedRow() -> Int {
+        for (_,idx) in (tableView?.selectedRowIndexes.enumerated())! {
+            return idx
+        }
+        return -1
+    }
+
+    @IBAction func onSearchTextChanged(_ sender: Any) {
+        let sel = self.getSelectedRow() + 1
+        self.doFind(searchText: self.searchField.stringValue, startPos: sel, incr: 1)
+    }
+
+    @IBAction func onClickedNext(_ sender: Any) {
+        let sel = self.getSelectedRow() + 1
+        self.doFind(searchText: self.searchField.stringValue, startPos: sel, incr: 1)
+    }
+
+    @IBAction func onClickedPrev(_ sender: Any) {
+        var sel = getSelectedRow()
+        if( sel<0 ) {
+            sel = self.lines.count
+        }
+        self.doFind(searchText: self.searchField.stringValue, startPos: sel - 1, incr: -1)
+    }
+
+
+    func doFind(searchText: String, startPos: Int, incr: Int) {
+        if( searchText == "" ) {
+            return
+        }
+
+        for i in 0...self.lines.count {
+            let x = (startPos + i*incr + self.lines.count) % self.lines.count
+            if self.text[x].lowercased().contains(searchText.lowercased()) {
+                let indexSet = IndexSet(integer: x)
+                tableView.selectRowIndexes(indexSet, byExtendingSelection: false)
+                self.tableView?.scrollRowToVisible(x)
+                return
+            }
+        }
+    }
+    
 
 }
 
