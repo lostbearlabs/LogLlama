@@ -64,4 +64,13 @@ class DocumentState {
         return rc == NSApplication.ModalResponse.alertFirstButtonReturn
     }
 
+    func getWindowTitle() -> String {
+        if (self.currentFile == nil ) {
+            return "LogLlama"
+        } else {
+            let name = NSString(string: self.currentFile!).lastPathComponent
+            return "LogLlama - \(name)"
+        }
+    }
+
 }

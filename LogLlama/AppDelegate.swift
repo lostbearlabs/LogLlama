@@ -34,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         self.documentState.onApplicationLoaded()
+        self.updateWindowTitle()
     }
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
@@ -66,6 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 NotificationCenter.default.post(name: .OpenScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
                 self.documentState.onFileOpened(file: path)
+                self.updateWindowTitle()
             }
         } else {
             // User clicked on "Cancel"
@@ -80,6 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 // the user has clicked the open-recent menu to open a script
                 NotificationCenter.default.post(name: .OpenScriptFile, object: filename)
                 self.documentState.onFileOpened(file: filename)
+                self.updateWindowTitle()
             }
         } else {
             // the user has opened a log file via finder; we'll construct a script to process it later once
@@ -87,6 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.logFileToAnalyze = filename
             self.documentState.onApplicationLoaded()
             self.documentState.onTextChanged()
+            self.updateWindowTitle()
         }
         return true
     }
@@ -96,6 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationCenter.default.post(name: .NewScriptFile, object: nil)
             NotificationCenter.default.post(name: .LogLinesUpdated, object: nil)
             self.documentState.onNewFile()
+            self.updateWindowTitle()
         }
     }
     
@@ -108,6 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             NotificationCenter.default.post(name: .SaveScriptFile, object: self.documentState.getCurrentFile())
             self.documentState.onFileSaved()
+            self.updateWindowTitle()
         }
     }
     
@@ -128,6 +134,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 NotificationCenter.default.post(name: .SaveScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
                 self.documentState.onFileSaved(file: path)
+                self.updateWindowTitle()
             }
         }
     }
@@ -135,6 +142,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc private func onTextChanged(_ notification: Notification) {
         self.documentState.onTextChanged()
+        self.updateWindowTitle()
     }
     
 
@@ -160,6 +168,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let url = URL(string: "https://github.com/lostbearlabs/LogLlama") {
             NSWorkspace.shared.open(url)
         }
+    }
+
+    private func updateWindowTitle() {
+        let title = self.documentState.getWindowTitle()
+        NSApplication.shared.windows.first!.title = title
     }
     
     
