@@ -1,42 +1,66 @@
 import Foundation
+import PathKit
 
 /**
- Inputs log lines from a log file.
+ Inputs log lines one or more log files as specified by glob pattern.
  */
 class ReadFileCommand : ScriptCommand {
     var callback : ScriptCallback
-    var file : String
+    var pattern : String
+    var files : [Path] = []
     
-    init(callback: ScriptCallback, file: String) {
+    init(callback: ScriptCallback, pattern: String) {
         self.callback = callback
-        self.file = file
+        self.pattern = pattern
     }
     
     func validate() -> Bool {
-        if( !FileManager.default.fileExists(atPath: self.file)) {
-            self.callback.scriptUpdate(text: "file does not exist: \(self.file)")
+        self.files = Path.glob(pattern)
+        if self.files.count == 0 {
+            self.callback.scriptUpdate(text: "no file(s) found that look like: \(self.pattern)")
             return false
         }
         return true
     }
     
     func run(logLines : inout [LogLine], runState _ : inout RunState) -> Bool {
-        self.callback.scriptUpdate(text: "Reading file \(self.file)")
+        let sortedPaths = self.sortFilesByCreationDate()
 
-        do {
-            let data = try String(contentsOfFile: self.file, encoding: .utf8)
-            let ar = data.components(separatedBy: .newlines)
-            for line in ar {
-                logLines.append( LogLine(text: line))
+        for file in sortedPaths {
+            self.callback.scriptUpdate(text: "Reading file \(file.string)")
+
+            do {
+                let data = try String(contentsOfFile: file.string, encoding: .utf8)
+                let ar = data.components(separatedBy: .newlines)
+                for line in ar {
+                    logLines.append( LogLine(text: line))
+                }
+                self.callback.scriptUpdate(text: "... read \(ar.count) lines")
+            } catch {
+                self.callback.scriptUpdate(text: "... error reading file: \(error)")
+                return false
             }
-            self.callback.scriptUpdate(text: "... read \(ar.count) lines")
-            return true
-        } catch {
-            self.callback.scriptUpdate(text: "... error reading file: \(error)")
-            return false
         }
-        
+        return true
     }
-    
-    
+
+    func sortFilesByCreationDate() -> [Path] {
+        return self.files.sorted(by: compareCreationDate)
+    }
+
+    func compareCreationDate(x: Path, y:Path) -> Bool {
+        let dX = getCreationDate(path: x)
+        let dY = getCreationDate(path: y)
+        return dX.compare(dY) == ComparisonResult.orderedAscending
+    }
+
+    func getCreationDate(path: Path) -> Date {
+        do {
+            let attrs = try FileManager.default.attributesOfItem(atPath: path.string) as NSDictionary
+            return attrs.fileCreationDate() ?? Date()
+        } catch {
+            return Date()
+        }
+    }
+
 }

@@ -1,16 +1,20 @@
 PODS:
+  - PathKit (1.0.0)
   - SwiftHamcrest (2.2.1)
 
 DEPENDENCIES:
+  - PathKit (~> 1.0.0)
   - SwiftHamcrest (~> 2.2.1)
 
 SPEC REPOS:
   trunk:
+    - PathKit
     - SwiftHamcrest
 
 SPEC CHECKSUMS:
+  PathKit: 364e0de7fb5adb142aecab4e112187e5548fc4b6
   SwiftHamcrest: 67454f9c4c7fae8d7a0f82dfd42f8a54a79095b1
 
-PODFILE CHECKSUM: 4a73358a91680bbfe3e3b5c80059570dbbf19a77
+PODFILE CHECKSUM: a2b9adf35e45aa2041232ccf16177420dca34ad7
 
 COCOAPODS: 1.8.1

@@ -7,7 +7,7 @@ class ScriptParser {
     var callback : ScriptCallback
 
     var rest_recognizers : [(String, (String,  ScriptCallback) -> ScriptCommand)] = [
-        ("<", { rest, callback in return ReadFileCommand(callback: callback, file: rest)}),
+        ("<", { rest, callback in return ReadFileCommand(callback: callback, pattern: rest)}),
         ("=", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Required)}),
         ("+", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Add)}),
         ("-", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Remove)}),
@@ -35,7 +35,7 @@ class ScriptParser {
         # comment           -- ignore the contents of any line starting with #
         
         *** ADDING LOG LINES ***
-        < filename          -- input log lines from (filename)
+        < file name/pattern -- input log lines from matching files in order created
         demo                -- generate sample log lines programmatically
         
         *** FILTERING/HILIGHTING LOG LINES ***
