@@ -23,7 +23,7 @@ class ReadFileCommand : ScriptCommand {
         return true
     }
     
-    func run(logLines : inout [LogLine], runState _ : inout RunState) -> Bool {
+    func run(logLines : inout [LogLine], runState : inout RunState) -> Bool {
         let sortedPaths = self.sortFilesByCreationDate()
 
         for file in sortedPaths {
@@ -32,16 +32,47 @@ class ReadFileCommand : ScriptCommand {
             do {
                 let data = try String(contentsOfFile: file.string, encoding: .utf8)
                 let ar = data.components(separatedBy: .newlines)
+                var numIncluded = 0
+                var numExcluded = 0
                 for line in ar {
-                    logLines.append( LogLine(text: line))
+                    if( self.lineWanted(line: line, runState: runState)) {
+                        logLines.append( LogLine(text: line))
+                        numIncluded += 1
+                    } else {
+                        numExcluded += 1
+                    }
                 }
-                self.callback.scriptUpdate(text: "... read \(ar.count) lines")
+                self.callback.scriptUpdate(text: "... read \(ar.count) lines, kept \(numIncluded), discarded \(numExcluded)")
             } catch {
                 self.callback.scriptUpdate(text: "... error reading file: \(error)")
                 return false
             }
         }
         return true
+    }
+
+    func lineWanted(line : String, runState: RunState) -> Bool {
+
+        for regex in runState.filterRequired {
+            if !self.doesMatch(line: line, regex: regex) {
+                return false
+            }
+        }
+
+        for regex in runState.filterExcluded {
+            if self.doesMatch(line: line, regex: regex) {
+                return false
+            }
+        }
+
+        return true
+    }
+
+    func doesMatch(line: String, regex: NSRegularExpression) -> Bool {
+        let results = regex.matches(in: line,
+                                            range: NSRange(line.startIndex..., in: line))
+
+        return results.count > 0
     }
 
     func sortFilesByCreationDate() -> [Path] {

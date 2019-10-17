@@ -20,6 +20,7 @@
 		AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3C233150B1001CD09D /* ScriptViewController.swift */; };
 		AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* LogViewController.swift */; };
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
+		AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */; };
 		AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE62F03B23453AB2002EDC76 /* DocumentState.swift */; };
 		AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE79EE2B233A779A00799BB7 /* ChopCommand.swift */; };
 		AE956B46234F89F30041ADBA /* TodayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE956B45234F89F30041ADBA /* TodayCommand.swift */; };
@@ -75,6 +76,7 @@
 		AE437F3C233150B1001CD09D /* ScriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptViewController.swift; sourceTree = "<group>"; };
 		AE437F3E23315E25001CD09D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFilterCommand.swift; sourceTree = "<group>"; };
 		AE62F03B23453AB2002EDC76 /* DocumentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentState.swift; sourceTree = "<group>"; };
 		AE79EE2B233A779A00799BB7 /* ChopCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChopCommand.swift; sourceTree = "<group>"; };
 		AE956B45234F89F30041ADBA /* TodayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCommand.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
 				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
 				AE956B45234F89F30041ADBA /* TodayCommand.swift */,
+				AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
 				AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
+				AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */,
 				AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */,
 				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,

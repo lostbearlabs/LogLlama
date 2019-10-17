@@ -12,6 +12,10 @@ class ScriptParser {
         ("+", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Add)}),
         ("-", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Remove)}),
         ("~", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Highlight)}),
+        ("require", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Required)}),
+        ("exclude", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Excluded)}),
+        ("clearFilters", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Clear)}),
+        ("requireToday", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.RequireToday)}),
     ]
 
     var token_recognizers : [(String, Int, ([String], ScriptCallback) -> ScriptCommand)] = [
@@ -35,7 +39,10 @@ class ScriptParser {
         # comment           -- ignore the contents of any line starting with #
         
         *** ADDING LOG LINES ***
-        < file name/pattern -- input log lines from matching files in order created
+        require regex            -- when loading lines, filter out any that don't match regex
+        exclude regex            -- when loading lines, filter out any that do match regex
+        clearFilters             -- clear any line loading filters
+        < file name/pattern -- load log lines from matching files in order created
         demo                -- generate sample log lines programmatically
         
         *** FILTERING/HILIGHTING LOG LINES ***
