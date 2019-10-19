@@ -25,7 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTextChanged(_:)), name: .ScriptTextChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onCanUndoUpdated(_:)), name: .CanUndoUpdated, object: nil)
-
+        
+        self.loadFontSize()
         self.sendFontSizeUpdate()
         
         if( self.logFileToAnalyze != nil ) {
@@ -156,12 +157,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func onFontBigger(_ sender: Any) {
         self.fontSize += 1
+        self.saveFontSize()
         sendFontSizeUpdate()
     }
     
     @IBAction func onFontSmaller(_ sender: Any) {
         self.fontSize -= 1
+        self.saveFontSize()
         sendFontSizeUpdate()
+    }
+    
+    private func loadFontSize() {
+        let fontSize = UserDefaults.standard.integer(forKey: "FontSize")
+        if fontSize > 0 {
+            self.fontSize = fontSize
+        }
+    }
+    
+    private func saveFontSize() {
+        UserDefaults.standard.set(self.fontSize, forKey: "FontSize")
     }
     
     @IBAction func onHelpClicked(_ sender: Any) {
