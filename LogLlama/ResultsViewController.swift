@@ -12,6 +12,7 @@ class ResultsViewController: NSViewController {
     
     var lines : [NSMutableAttributedString] = []
     var text : [String] = []
+    var longestLineLength = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,29 +32,31 @@ class ResultsViewController: NSViewController {
 
         if let update = notification.object as? LogLinesUpdate
         {
+            self.longestLineLength = 1
             for line in update.lines {
                 if line.visible {
                     self.lines.append(line.getAttributedString())
                     self.text.append(line.text)
+                    self.longestLineLength = max(self.longestLineLength, line.text.count)
                 }
             }
         }
         
         self.resizeColumn()
-        self.tableView.noteNumberOfRowsChanged()
     }
 
     func resizeColumn() {
-        var longest:CGFloat = 0
-        for line in self.lines {
-            let width = line.size().width
-            if (longest < width) {
-                longest = width
-            }
-        }
-
-        self.textColumn.width = longest
-        self.textColumn.minWidth = longest
+        // It would be inefficient to go through every line, apply the current font, and then check
+        // its width to find the maximum.  Instead, just use a wide character (W) and multiply its
+        // width by the length of the longest line.
+        let stringWithAttribute = NSAttributedString(string: "W",
+                                                     attributes: [NSAttributedString.Key.font: self.textCell.font!])
+        let width = CGFloat(self.longestLineLength) * stringWithAttribute.size().width
+        
+        self.textColumn.width = width
+        self.textColumn.minWidth = width
+        
+        self.tableView.noteNumberOfRowsChanged()
     }
     
     @objc private func onFontSizeUpdated(_ notification: Notification) {
@@ -63,7 +66,7 @@ class ResultsViewController: NSViewController {
                 let newFont = NSFont(descriptor: origFont.fontDescriptor, size: CGFloat(update.size))
                 self.textCell?.font = newFont
                 self.tableView.rowHeight = CGFloat(update.size + 4)
-                self.tableView.noteNumberOfRowsChanged()
+                self.resizeColumn()
             }
         }
     }
