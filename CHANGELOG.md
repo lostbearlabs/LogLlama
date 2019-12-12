@@ -3,7 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased] 
+
+## [Unreleased] - 2019-12-12
+- Add "Show Line Detail" menu command to surface action previously only discoverable via double-click.
+
+## [1.1.0] - 2019-10-19 
 - Show current script file name in window title
 - Add support for glob patterns when loading log files with `<`
 - Add `require`, `exclude`, `requireToday`, and `clearFilter` commands to pre-filter lines as they are loaded.

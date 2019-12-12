@@ -23,8 +23,13 @@ class ResultsViewController: NSViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onLogLinesUpdated(_:)), name: .LogLinesUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onShowLineDetailClicked(_:)), name: .ShowLineDetailClicked, object: nil)
     }
-    
+
+    @objc private func onShowLineDetailClicked(_ notification: Notification) {
+        self.onDoubleClick(self)
+    }
+
     @objc private func onLogLinesUpdated(_ notification: Notification) {
         
         self.lines = []

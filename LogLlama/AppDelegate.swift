@@ -189,6 +189,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.windows.first!.title = title
     }
     
-    
+    @IBAction func onShowLineDetailClicked(_ sender: Any) {
+        NotificationCenter.default.post(name: .ShowLineDetailClicked, object: nil)
+    }
+
 }
 
