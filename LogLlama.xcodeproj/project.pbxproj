@@ -14,6 +14,7 @@
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
 		AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB932332C9880027E390 /* ResultsViewController.swift */; };
 		AE3A3A5D23351AA10035A811 /* FontSizeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */; };
+		AE41B50223A40E7B004B47BE /* DateFormatCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */; };
 		AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F1C23306D4B001CD09D /* AppDelegate.swift */; };
 		AE437F2123306D4C001CD09D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2023306D4C001CD09D /* Assets.xcassets */; };
 		AE437F2423306D4C001CD09D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2223306D4C001CD09D /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
 		AE37EB932332C9880027E390 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSizeUpdate.swift; sourceTree = "<group>"; };
+		AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatCommand.swift; sourceTree = "<group>"; };
 		AE437F1923306D4B001CD09D /* LogLlama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LogLlama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE437F1C23306D4B001CD09D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE437F2023306D4C001CD09D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		AEAF600C2333167D002B1684 /* Script */ = {
 			isa = PBXGroup;
 			children = (
+				AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */,
 				AEAF600D233316B7002B1684 /* ScriptCallback.swift */,
 				AEAF600F23331704002B1684 /* ScriptEngine.swift */,
 				AEDE11C223341917006FF1A8 /* ScriptCommand.swift */,
@@ -389,6 +392,7 @@
 				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,
+				AE41B50223A40E7B004B47BE /* DateFormatCommand.swift in Sources */,
 				AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */,
 				AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */,
 				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,

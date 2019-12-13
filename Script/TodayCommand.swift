@@ -5,13 +5,32 @@ import Foundation
  */
 class TodayCommand : FilterCommand {
     init(callback: ScriptCallback) {
-        let now = Date()
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM\\.dd\\.yy"
-
-        let pattern = formatter.string(from: now)
-
-        super.init(callback: callback, pattern: pattern, filterType: FilterType.Required)
+        super.init(callback: callback, pattern: "date-format-replaced-at-runtime-with-current-date", filterType: FilterType.Required)
     }
+
+    override func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+
+        // We have to set this up now, not at validation time, so it gets the most recent dateFormat value
+        if( !self.setupToday(runState: runState)) {
+            return false
+        }
+
+        return super.run(logLines: &logLines, runState: &runState)
+    }
+
+    func setupToday(runState : RunState) -> Bool {
+        let now = Date()
+          let formatter = DateFormatter()
+          formatter.dateFormat = runState.dateFormat
+          self.pattern = formatter.string(from: now)
+
+          do {
+            try self.regex = NSRegularExpression(pattern: self.pattern, options: [])
+            return true
+          } catch {
+            self.callback.scriptUpdate(text: "invalid regular expression: \(self.pattern)")
+            return false
+          }
+    }
+
 }
