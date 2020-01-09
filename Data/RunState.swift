@@ -9,4 +9,6 @@ class RunState {
     var filterRequired : [NSRegularExpression] = []
     var filterExcluded : [NSRegularExpression] = []
     var dateFormat = "MM\\.dd\\.yy"
+    var fieldDataSql : FieldDataSql?
 }
+

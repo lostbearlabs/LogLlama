@@ -36,6 +36,11 @@ class LoadFilterCommand: ScriptCommand {
         }
     }
 
+    func changesData() -> Bool {
+        false
+    }
+
+
     func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
         switch( self.loadFilterType ) {
 

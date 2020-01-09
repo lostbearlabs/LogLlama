@@ -16,6 +16,7 @@ class ScriptParser {
         ("exclude", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Excluded)}),
         ("clearFilters", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Clear)}),
         ("requireToday", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.RequireToday)}),
+        ("sql", { rest, callback in return SqlCommand(callback: callback, sql: rest)}),
     ]
 
     var token_recognizers : [(String, Int, ([String], ScriptCallback) -> ScriptCommand)] = [
@@ -66,7 +67,7 @@ class ScriptParser {
 
         *** ANALYSIS ***
         d N                 -- identify lines duplicated more than N times
-        
+        sql ...             -- run specified SQL command against extracted fields
         """
     }
     

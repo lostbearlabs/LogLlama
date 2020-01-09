@@ -23,6 +23,11 @@ class ColorCommand: ScriptCommand {
         self.color = NSColor(hexString: hex!)
         return true
     }
+
+    func changesData() -> Bool {
+        false
+    }
+
     
     func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Filter color is now: \(self.text)")

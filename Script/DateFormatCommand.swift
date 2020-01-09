@@ -16,6 +16,10 @@ class DateFormatCommand : ScriptCommand {
         return true
     }
 
+    func changesData() -> Bool {
+        false
+    }
+
     func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
         runState.dateFormat = self.text
         self.callback.scriptUpdate(text: "Date format is now: \(runState.dateFormat)")

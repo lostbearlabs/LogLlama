@@ -46,11 +46,16 @@ class FilterCommand : ScriptCommand {
             return false
         }
     }
+
+    func changesData() -> Bool {
+        true
+    }
+
     
     func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
 
         self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
-        self.callback.scriptUpdate(text: "... tags: \(self.groupNames!)")
+        self.callback.scriptUpdate(text: "... field names: \(self.groupNames!.sorted())")
 
         
         var n = 0

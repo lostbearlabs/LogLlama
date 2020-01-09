@@ -26,7 +26,7 @@ class LogViewController: NSViewController {
         
         self.referenceCell.stringValue = ScriptParser.getReferenceText()
     }
-   
+
     @objc private func onFontSizeUpdated(_ notification: Notification) {
         if let update = notification.object as? FontSizeUpdate
         {
@@ -37,8 +37,8 @@ class LogViewController: NSViewController {
                 self.tableView.noteNumberOfRowsChanged()
                 self.referenceCell?.font = newFont
             }
+        }
     }
-}
     
     @objc private func onScriptProcessingUpdate(_ notification: Notification) {
         if let update = notification.object as? ScriptProcessingUpdate
@@ -53,7 +53,30 @@ class LogViewController: NSViewController {
             self.tableView.scrollRowToVisible(tableView.numberOfRows-1)
         }
     }
-    
+
+    @IBAction func onDoubleClick(_ sender: Any) {
+           let viewController = self.storyboard?.instantiateController(withIdentifier: "LogDetail") as! LineDetailViewController
+
+           let text = self.getSelectedText();
+           if( text.count > 0 ) {
+               viewController.setText(text: text)
+               viewController.setFont(font: self.textCell!.font!)
+               self.presentAsModalWindow(viewController)
+           }
+       }
+
+    func getSelectedText() -> String {
+        var text = ""
+        for (_,idx) in (tableView?.selectedRowIndexes.enumerated())! {
+            if( text != "" ) {
+                text = text + "\n"
+            }
+            text = text + self.lines[idx]
+        }
+
+        return text
+    }
+
 }
 
 extension LogViewController: NSTableViewDataSource {
