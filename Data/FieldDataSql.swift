@@ -10,7 +10,7 @@ class FieldDataSql {
     var log:Table
 
     init(data:FieldDataMap) throws {
-        self.db = try Connection(":memory")
+        self.db = try Connection(":memory:")
         var stringCols:[String:Expression<String?>] = [:]
         var intCols:[String:Expression<Int64?>] = [:]
 

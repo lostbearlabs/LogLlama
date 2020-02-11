@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F0786846702DCD3CB79C /* ClearCommand.swift */; };
 		6096E6358A936F662437D8D9 /* libPods-LogLlamaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */; };
+		AE29FE1B23F3639D00AAF6E6 /* libPathKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE29FE1923F3639D00AAF6E6 /* libPathKit.a */; };
+		AE29FE1C23F3639D00AAF6E6 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
+		AE29FE1D23F3639D00AAF6E6 /* libSQLite.swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */; };
 		AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */; };
 		AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */; };
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
@@ -45,7 +48,6 @@
 		AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */; };
 		AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5D23357CAF00DC53D6 /* RunState.swift */; };
 		AEEED562234D425B00D75D6D /* LineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEED561234D425B00D75D6D /* LineDetailViewController.swift */; };
-		FFFFAF4E144AC129B85F7F46 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
 		5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.debug.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.debug.xcconfig"; sourceTree = "<group>"; };
 		69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE29FE1923F3639D00AAF6E6 /* libPathKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPathKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSQLite.swift.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectDuplicatesCommand.swift; sourceTree = "<group>"; };
 		AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLinesUpdate.swift; sourceTree = "<group>"; };
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
@@ -114,7 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFFFAF4E144AC129B85F7F46 /* libPods-LogLlama.a in Frameworks */,
+				AE29FE1C23F3639D00AAF6E6 /* libPods-LogLlama.a in Frameworks */,
+				AE29FE1D23F3639D00AAF6E6 /* libSQLite.swift.a in Frameworks */,
+				AE29FE1B23F3639D00AAF6E6 /* libPathKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +149,8 @@
 		50780732BFFC4DF2037EDAE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE29FE1923F3639D00AAF6E6 /* libPathKit.a */,
+				AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */,
 				69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */,
 				C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */,
 			);
@@ -490,6 +498,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6E3JQU6925;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -551,6 +560,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6E3JQU6925;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
