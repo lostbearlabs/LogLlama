@@ -8,10 +8,20 @@ class ReadFileCommand : ScriptCommand {
     var callback : ScriptCallback
     var pattern : String
     var files : [Path] = []
+    var fieldNames = Set<String>()
+    var nameValueRegex:NSRegularExpression?
     
     init(callback: ScriptCallback, pattern: String) {
         self.callback = callback
         self.pattern = pattern
+
+        do {
+            // parse the regex for efficient use later
+            let nameValuePattern="(\\w+)=(\\w+)"
+            try self.nameValueRegex = NSRegularExpression(pattern: nameValuePattern, options: [])
+        } catch {
+            print("ERROR IN CANNED REGEX \(error)")
+        }
     }
     
     func validate() -> Bool {
@@ -22,6 +32,11 @@ class ReadFileCommand : ScriptCommand {
         }
         return true
     }
+
+    func changesData() -> Bool {
+        true
+    }
+
     
     func run(logLines : inout [LogLine], runState : inout RunState) -> Bool {
         let sortedPaths = self.sortFilesByCreationDate()
@@ -36,7 +51,9 @@ class ReadFileCommand : ScriptCommand {
                 var numExcluded = 0
                 for line in ar {
                     if( self.lineWanted(line: line, runState: runState)) {
-                        logLines.append( LogLine(text: line))
+                        let logLine = LogLine(text: line)
+                        logLines.append( logLine )
+                        self.findNameValueFields(logLine: logLine)
                         numIncluded += 1
                     } else {
                         numExcluded += 1
@@ -48,7 +65,25 @@ class ReadFileCommand : ScriptCommand {
                 return false
             }
         }
+        self.callback.scriptUpdate(text: "... field names: \(self.fieldNames.sorted())")
         return true
+    }
+
+    func findNameValueFields(logLine:LogLine) {
+        if( self.nameValueRegex != nil ) {
+            let text = logLine.text
+            let matches : [NSTextCheckingResult] = self.nameValueRegex!.matches(in: text, options: [], range: NSMakeRange(0, text.count))
+            for match in matches {
+                let nameRange = Range(match.range(at: 1), in: text)!
+                let name = String(text[nameRange])
+
+                let valRange = Range(match.range(at: 2), in: text)!
+                let val = String(text[valRange])
+
+                logLine.namedFieldValues[name] = val
+                self.fieldNames.insert(name)
+            }
+        }
     }
 
     func lineWanted(line : String, runState: RunState) -> Bool {
@@ -70,7 +105,7 @@ class ReadFileCommand : ScriptCommand {
 
     func doesMatch(line: String, regex: NSRegularExpression) -> Bool {
         let results = regex.matches(in: line,
-                                            range: NSRange(line.startIndex..., in: line))
+                                    range: NSRange(line.startIndex..., in: line))
 
         return results.count > 0
     }

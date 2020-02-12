@@ -18,6 +18,11 @@ class DetectDuplicatesCommand : ScriptCommand {
     func validate() -> Bool {
         true
     }
+
+    func changesData() -> Bool {
+        false
+    }
+
     
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
         var counts : [String: Int] = [:]

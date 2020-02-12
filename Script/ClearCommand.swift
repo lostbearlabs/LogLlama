@@ -15,6 +15,11 @@ class ClearCommand : ScriptCommand {
         true
     }
 
+    func changesData() -> Bool {
+        true
+    }
+
+
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
         logLines.removeAll()
         self.callback.scriptUpdate(text: "Cleared all lines")

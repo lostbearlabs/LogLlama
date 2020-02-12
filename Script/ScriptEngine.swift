@@ -6,6 +6,7 @@ import Foundation
 class ScriptEngine {
     var callback : ScriptCallback
     var initialLines : [LogLine] = []
+    var runState = RunState()
     
     init(callback : ScriptCallback) {
         self.callback = callback
@@ -13,6 +14,10 @@ class ScriptEngine {
     
     func setInitialLines( lines : [LogLine] ) {
         self.initialLines = lines;
+    }
+
+    func setRunState( runState : RunState ) {
+        self.runState = runState
     }
     
     func run(script : String) {
@@ -32,8 +37,6 @@ class ScriptEngine {
             return
         }
         
-        var runState = RunState()
-        
         for cmd in commands {
             if( !cmd.validate()) {
                 self.callback.scriptDone(logLines: [])
@@ -42,10 +45,19 @@ class ScriptEngine {
         }
         
         var logLines = self.initialLines;
+        var anyChanges = false
         for cmd in commands {
+
+            // If this is a command that changes the log lines on screen, then clear our
+            // SQL data;  it will need to be rebuilt for the next query
+            if cmd.changesData() {
+                anyChanges = true
+                self.runState.fieldDataSql = nil
+            }
+
             let start = DispatchTime.now()
             
-            if( !cmd.run(logLines: &logLines, runState: &runState)) {
+            if( !cmd.run(logLines: &logLines, runState: &self.runState)) {
                 self.callback.scriptDone(logLines: logLines)
                 return
             }
@@ -63,8 +75,10 @@ class ScriptEngine {
                 n += 1
             }
         }
-        
-        self.callback.scriptUpdate(text: "Found \(n) lines to display")
+
+        if( anyChanges ) {
+            self.callback.scriptUpdate(text: "Found \(n) lines to display")
+        }
         self.callback.scriptDone(logLines: logLines)
     }
     

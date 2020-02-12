@@ -8,4 +8,7 @@ class RunState {
     var color = NSColor.green
     var filterRequired : [NSRegularExpression] = []
     var filterExcluded : [NSRegularExpression] = []
+    var dateFormat = "MM\\.dd\\.yy"
+    var fieldDataSql : FieldDataSql?
 }
+

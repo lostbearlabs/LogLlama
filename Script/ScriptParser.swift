@@ -16,6 +16,7 @@ class ScriptParser {
         ("exclude", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Excluded)}),
         ("clearFilters", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Clear)}),
         ("requireToday", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.RequireToday)}),
+        ("sql", { rest, callback in return SqlCommand(callback: callback, sql: rest)}),
     ]
 
     var token_recognizers : [(String, Int, ([String], ScriptCallback) -> ScriptCommand)] = [
@@ -27,6 +28,7 @@ class ScriptParser {
         ("clear", 0, { tokens, callback in return ClearCommand(callback: callback)}),
         ("truncate", 1, { tokens, callback in return TruncateCommand(callback: callback, maxLength: Int(tokens[1]) ?? 256 )}),
         ("d", 1, { tokens, callback in return DetectDuplicatesCommand(callback: callback, threshold: Int(tokens[1]) ?? 20 )}),
+        ("dateFormat", 1, { tokens, callback in return DateFormatCommand(callback: callback, text: tokens[1])}),
     ]
     
     init(callback : ScriptCallback) {
@@ -41,6 +43,7 @@ class ScriptParser {
         *** ADDING LOG LINES ***
         require regex            -- when loading lines, filter out any that don't match regex
         exclude regex            -- when loading lines, filter out any that do match regex
+        requireToday             -- when loading lines, filter out any that don't contain the current date
         clearFilters             -- clear any line loading filters
         < file name/pattern -- load log lines from matching files in order created
         demo                -- generate sample log lines programmatically
@@ -53,7 +56,8 @@ class ScriptParser {
         ~ regex             -- hilight regex without changing which lines are hidden
         ==                  -- hide all lines not already hilighted
         today               -- hide all lines that don't contain today's date
-        
+        dateFormat          -- set the date format for subsequent "today" and "requireToday" lines
+
         *** REMOVING LOG LINES ***
         chop                -- remove all hidden lines
         clear               -- remove ALL lines
@@ -63,7 +67,7 @@ class ScriptParser {
 
         *** ANALYSIS ***
         d N                 -- identify lines duplicated more than N times
-        
+        sql ...             -- run specified SQL command against extracted fields
         """
     }
     

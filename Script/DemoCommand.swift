@@ -16,6 +16,11 @@ class DemoCommand : ScriptCommand {
         true
     }
 
+    func changesData() -> Bool {
+        true
+    }
+
+
     enum State {
         case READY
         case RACING

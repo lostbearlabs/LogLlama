@@ -201,7 +201,20 @@ class ScriptParserTest: XCTestCase {
         assertThat(cmd.loadFilterType, equalTo(LoadFilterCommand.LoadFilterType.RequireToday))
     }
 
-    
+    func test_parse_sql_recognizesIt() {
+         let sut = givenScriptParser()
+        let sql = "SELECT A,B FROM C WHERE D;  SELECT X FROM Y;"
+         let script = "sql \(sql)"
+         let (result, commands) = sut.parse(script: script)
+
+         assertThat(result, equalTo(true))
+         assertThat(commands.count, equalTo(1))
+         assertThat(commands[0], instanceOf(SqlCommand.self))
+
+         let cmd = commands[0] as! SqlCommand
+         assertThat(cmd.sql, equalTo(sql))
+     }
+
     
     func givenScriptParser() -> ScriptParser {
         let callback = ScriptCallbackStub()

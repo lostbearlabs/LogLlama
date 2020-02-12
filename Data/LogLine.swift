@@ -10,6 +10,7 @@ class LogLine {
     static var rxNumber:NSRegularExpression? = nil
     static var rxValue:NSRegularExpression? = nil
     var matched = false
+    var namedFieldValues:[String: String] = [:]
 
     init(text : String) {
         

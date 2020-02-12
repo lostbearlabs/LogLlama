@@ -14,6 +14,10 @@ class RequireHilightCommand : ScriptCommand {
         true
     }
 
+    func changesData() -> Bool {
+        true
+    }
+
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Hiding non-hilighed lines")
         var n = 0

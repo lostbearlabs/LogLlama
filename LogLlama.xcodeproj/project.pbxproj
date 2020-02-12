@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F0786846702DCD3CB79C /* ClearCommand.swift */; };
 		6096E6358A936F662437D8D9 /* libPods-LogLlamaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */; };
+		AE29FE1B23F3639D00AAF6E6 /* libPathKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE29FE1923F3639D00AAF6E6 /* libPathKit.a */; };
+		AE29FE1C23F3639D00AAF6E6 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
+		AE29FE1D23F3639D00AAF6E6 /* libSQLite.swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */; };
 		AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */; };
 		AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */; };
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
 		AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB932332C9880027E390 /* ResultsViewController.swift */; };
 		AE3A3A5D23351AA10035A811 /* FontSizeUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */; };
+		AE41B50223A40E7B004B47BE /* DateFormatCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */; };
 		AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F1C23306D4B001CD09D /* AppDelegate.swift */; };
 		AE437F2123306D4C001CD09D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2023306D4C001CD09D /* Assets.xcassets */; };
 		AE437F2423306D4C001CD09D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2223306D4C001CD09D /* Main.storyboard */; };
@@ -22,6 +26,9 @@
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
 		AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */; };
 		AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE62F03B23453AB2002EDC76 /* DocumentState.swift */; };
+		AE6D8CA223C7886600CF67D8 /* SqlCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6D8CA123C7886600CF67D8 /* SqlCommand.swift */; };
+		AE6D8CA423C78BD300CF67D8 /* FieldDataMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6D8CA323C78BD300CF67D8 /* FieldDataMap.swift */; };
+		AE6D8CA623C78FC800CF67D8 /* FieldDataSql.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6D8CA523C78FC800CF67D8 /* FieldDataSql.swift */; };
 		AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE79EE2B233A779A00799BB7 /* ChopCommand.swift */; };
 		AE956B46234F89F30041ADBA /* TodayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE956B45234F89F30041ADBA /* TodayCommand.swift */; };
 		AE9A333F234D27F6001107C8 /* RequireHilightCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */; };
@@ -41,7 +48,6 @@
 		AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */; };
 		AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED0F5D23357CAF00DC53D6 /* RunState.swift */; };
 		AEEED562234D425B00D75D6D /* LineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEED561234D425B00D75D6D /* LineDetailViewController.swift */; };
-		FFFFAF4E144AC129B85F7F46 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,11 +66,14 @@
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
 		5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.debug.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.debug.xcconfig"; sourceTree = "<group>"; };
 		69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE29FE1923F3639D00AAF6E6 /* libPathKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPathKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSQLite.swift.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectDuplicatesCommand.swift; sourceTree = "<group>"; };
 		AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLinesUpdate.swift; sourceTree = "<group>"; };
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
 		AE37EB932332C9880027E390 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSizeUpdate.swift; sourceTree = "<group>"; };
+		AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatCommand.swift; sourceTree = "<group>"; };
 		AE437F1923306D4B001CD09D /* LogLlama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LogLlama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE437F1C23306D4B001CD09D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE437F2023306D4C001CD09D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +87,9 @@
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFilterCommand.swift; sourceTree = "<group>"; };
 		AE62F03B23453AB2002EDC76 /* DocumentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentState.swift; sourceTree = "<group>"; };
+		AE6D8CA123C7886600CF67D8 /* SqlCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlCommand.swift; sourceTree = "<group>"; };
+		AE6D8CA323C78BD300CF67D8 /* FieldDataMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldDataMap.swift; sourceTree = "<group>"; };
+		AE6D8CA523C78FC800CF67D8 /* FieldDataSql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldDataSql.swift; sourceTree = "<group>"; };
 		AE79EE2B233A779A00799BB7 /* ChopCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChopCommand.swift; sourceTree = "<group>"; };
 		AE956B45234F89F30041ADBA /* TodayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCommand.swift; sourceTree = "<group>"; };
 		AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireHilightCommand.swift; sourceTree = "<group>"; };
@@ -106,7 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFFFAF4E144AC129B85F7F46 /* libPods-LogLlama.a in Frameworks */,
+				AE29FE1C23F3639D00AAF6E6 /* libPods-LogLlama.a in Frameworks */,
+				AE29FE1D23F3639D00AAF6E6 /* libSQLite.swift.a in Frameworks */,
+				AE29FE1B23F3639D00AAF6E6 /* libPathKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +149,8 @@
 		50780732BFFC4DF2037EDAE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE29FE1923F3639D00AAF6E6 /* libPathKit.a */,
+				AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */,
 				69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */,
 				C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */,
 			);
@@ -149,6 +165,8 @@
 				AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */,
 				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
 				AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */,
+				AE6D8CA323C78BD300CF67D8 /* FieldDataMap.swift */,
+				AE6D8CA523C78FC800CF67D8 /* FieldDataSql.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -208,21 +226,23 @@
 		AEAF600C2333167D002B1684 /* Script */ = {
 			isa = PBXGroup;
 			children = (
-				AEAF600D233316B7002B1684 /* ScriptCallback.swift */,
-				AEAF600F23331704002B1684 /* ScriptEngine.swift */,
-				AEDE11C223341917006FF1A8 /* ScriptCommand.swift */,
-				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
-				AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */,
-				AEDE11CA23346632006FF1A8 /* FilterCommand.swift */,
-				AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */,
-				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
 				AE79EE2B233A779A00799BB7 /* ChopCommand.swift */,
-				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
 				34A5F0786846702DCD3CB79C /* ClearCommand.swift */,
-				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
-				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
-				AE956B45234F89F30041ADBA /* TodayCommand.swift */,
+				AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */,
+				AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */,
+				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
+				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
+				AEDE11CA23346632006FF1A8 /* FilterCommand.swift */,
 				AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */,
+				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
+				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
+				AEAF600D233316B7002B1684 /* ScriptCallback.swift */,
+				AEDE11C223341917006FF1A8 /* ScriptCommand.swift */,
+				AEAF600F23331704002B1684 /* ScriptEngine.swift */,
+				AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */,
+				AE6D8CA123C7886600CF67D8 /* SqlCommand.swift */,
+				AE956B45234F89F30041ADBA /* TodayCommand.swift */,
+				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -389,11 +409,14 @@
 				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,
+				AE41B50223A40E7B004B47BE /* DateFormatCommand.swift in Sources */,
 				AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */,
 				AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */,
 				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,
 				AE956B46234F89F30041ADBA /* TodayCommand.swift in Sources */,
 				AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */,
+				AE6D8CA223C7886600CF67D8 /* SqlCommand.swift in Sources */,
+				AE6D8CA423C78BD300CF67D8 /* FieldDataMap.swift in Sources */,
 				AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */,
 				AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */,
 				AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */,
@@ -401,6 +424,7 @@
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
 				AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */,
 				AE3A3A5D23351AA10035A811 /* FontSizeUpdate.swift in Sources */,
+				AE6D8CA623C78FC800CF67D8 /* FieldDataSql.swift in Sources */,
 				AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */,
 				AE9A333F234D27F6001107C8 /* RequireHilightCommand.swift in Sources */,
 				34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */,
@@ -474,6 +498,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6E3JQU6925;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -535,6 +560,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6E3JQU6925;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

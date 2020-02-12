@@ -11,6 +11,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     var lastResults : [LogLine] = []
     let maxUndo = 5
     var undoResults : [LogLinesUpdate] = []
+    var runState = RunState()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +103,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             dispatchQueue.async{
                 let engine = ScriptEngine(callback: self)
                 engine.setInitialLines(lines: self.lastResults)
+                engine.setRunState(runState: self.runState)
                 engine.run(script: script)
             }
         }

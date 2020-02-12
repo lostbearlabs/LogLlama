@@ -15,4 +15,5 @@ extension Notification.Name {
     static let FontSizeUpdated = Notification.Name("FontSizeUpdated")    // payload FontSizeUpdate
     static let CanUndoUpdated = Notification.Name("CanUndoUpdated")    // payload Bool
     static let UndoClicked = Notification.Name("UndoClicked")    // payload null
+    static let ShowLineDetailClicked = Notification.Name("ShowLineDetailClicked")    // payload null
 }

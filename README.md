@@ -46,6 +46,32 @@ For a list of available commands, see the "Reference" pane within the applicatio
 * During interactive exploration, use the script command `==` to distil your display down to only hilighted lines and then the menu command `Undo` to revert.
 * If a log line is annoyingly long, double click to display it in a resizable popup that wraps text.
 
+## Filtering by Today's date
+
+You can always filter lines by the current date with an explicit filter, for example `= 2019-08-17`.
+
+To avoid modifying your script every day, use the commands `today` and `requireToday` instead.  These commands dynamically create a filter based on the current date.
+
+By default, the format used is `MM.dd.YY`.  You can replace this with another format using the `dateFormat` command, for example `dateFormat YYYY-MM-dd`.
+
+## SQL Queries
+
+LogLlama can convert log lines with field/value pairs to a SQL table, allowing you to perform any legal SQLite query against the data.
+
+Any log text matching the regular expression `(\w+)=(\w+)` is treated as a field/value pair.  Field names discovered this way are listed in the output from the `<` command that reads the log file.
+
+The SQL table that receives the data is named `log`.
+
+In addition, you can create your own field value pairs by using named groups in your pattern maching expressions.  Here is an example with the canned demo data:
+
+```
+demo
+
+~ car (?<num>\d+) STARTED
+
+sql select min(num), max(num),avg(num) from log where num is not null
+```
+
 ## Contributing
 
 GitHub issues and pull requests are both welcome.
