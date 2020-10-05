@@ -8,4 +8,6 @@ target 'LogLlama' do
     pod 'SwiftHamcrest', '~> 2.2.1'
   end
 
+  platform :osx, '10.10'
+
 end
