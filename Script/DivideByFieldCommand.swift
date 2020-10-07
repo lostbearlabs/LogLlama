@@ -20,8 +20,21 @@ class DivideByFieldCommand : ScriptCommand {
 
 
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
-        logLines.removeAll()
-        self.callback.scriptUpdate(text: "Cleared all lines")
+        var prev : String? = nil
+
+        var numLines = 0
+        var numSections = 0
+        for line in logLines {
+            numLines += 1
+            var val = line.namedFieldValues[self.field]
+            if val != prev {
+                numSections += 1
+                line.setBeginSection()
+            }
+            prev = val
+        }
+
+        self.callback.scriptUpdate(text: "Found \(numSections) section boundaries where value of \(self.field) changes")
         return true
     }
 

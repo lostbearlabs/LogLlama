@@ -18,7 +18,7 @@ class ScriptParser {
         ("clearFilters", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Clear)}),
         ("requireToday", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.RequireToday)}),
         ("sql", { rest, callback in return SqlCommand(callback: callback, sql: rest)}),
-        ("/r", { rest, callback in return DivideByRegexCommand(callback: callback, regex: rest)}),
+        ("/r", { rest, callback in return DivideByRegexCommand(callback: callback, pattern: rest)}),
         ("/=", { rest, callback in return FilterStoryCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Required)}),
         ("/-", { rest, callback in return FilterStoryCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)}),
     ]

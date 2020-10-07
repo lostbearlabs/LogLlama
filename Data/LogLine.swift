@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 
 /**
  A log line, read from a file (or generated internally as demo data) and then updated by ScriptCommands.
@@ -11,6 +12,7 @@ class LogLine {
     static var rxValue:NSRegularExpression? = nil
     var matched = false
     var namedFieldValues:[String: String] = [:]
+    var beginSection = false
 
     init(text : String) {
         
@@ -24,6 +26,13 @@ class LogLine {
         }
         
         self.initFromText(text: text)
+    }
+
+    func setBeginSection() {
+        self.beginSection = true
+
+        self.attributed.addAttribute(.backgroundColor, value: NSColor.lightGray,
+                range: NSRange(location: 0, length: self.attributed.length))
     }
 
     func truncate(maxLength : Int) -> Bool {

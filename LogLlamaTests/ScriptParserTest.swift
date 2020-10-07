@@ -284,7 +284,7 @@ class ScriptParserTest: XCTestCase {
 
         let cmd = commands[0] as! DivideByRegexCommand
         _ = cmd.validate()
-        assertThat(cmd.regex, equalTo("a b"))
+        assertThat(cmd.pattern, equalTo("a b"))
     }
 
     func test_parse_filterByStory_recognizesIt() {

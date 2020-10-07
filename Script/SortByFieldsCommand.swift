@@ -5,7 +5,7 @@ class SortByFieldsCommand : ScriptCommand {
     var callback : ScriptCallback
     var fields : [String]
 
-    // TODO: allow muptiple fields
+    // TODO: allow multiple fields
     init(callback: ScriptCallback, fields:[String] ) {
         self.callback = callback
         self.fields = fields
@@ -37,7 +37,7 @@ class SortByFieldsCommand : ScriptCommand {
                     } else {
                         if val2==nil {
                             // only val1 is set;  line1 comes first
-                            return false
+                            return true
                         } else {
                             // val1 and val2 are set; compare them
                             return val1! < val2!
