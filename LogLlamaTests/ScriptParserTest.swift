@@ -294,9 +294,9 @@ class ScriptParserTest: XCTestCase {
 
         assertThat(result, equalTo(true))
         assertThat(commands.count, equalTo(1))
-        assertThat(commands[0], instanceOf(FilterStoryCommand.self))
+        assertThat(commands[0], instanceOf(FilterSectionCommand.self))
 
-        let cmd = commands[0] as! FilterStoryCommand
+        let cmd = commands[0] as! FilterSectionCommand
         _ = cmd.validate()
         assertThat(cmd.pattern, equalTo("FNORD FJORD"))
     }

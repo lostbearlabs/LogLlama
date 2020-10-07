@@ -18,7 +18,7 @@
 		AE368DB4252BC5150000B333 /* SortByFieldsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */; };
 		AE368DB8252BC5510000B333 /* DivideByFieldCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DB7252BC5510000B333 /* DivideByFieldCommand.swift */; };
 		AE368DBC252BC56B0000B333 /* DivideByRegexCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DBB252BC56B0000B333 /* DivideByRegexCommand.swift */; };
-		AE368DC0252BC59A0000B333 /* FilterStoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DBF252BC59A0000B333 /* FilterStoryCommand.swift */; };
+		AE368DC0252BC59A0000B333 /* FilterSectionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DBF252BC59A0000B333 /* FilterSectionCommand.swift */; };
 		AE368DC6252D00630000B333 /* ReplaceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DC5252D00630000B333 /* ReplaceCommand.swift */; };
 		AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */; };
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
@@ -81,7 +81,7 @@
 		AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortByFieldsCommand.swift; sourceTree = "<group>"; };
 		AE368DB7252BC5510000B333 /* DivideByFieldCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivideByFieldCommand.swift; sourceTree = "<group>"; };
 		AE368DBB252BC56B0000B333 /* DivideByRegexCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivideByRegexCommand.swift; sourceTree = "<group>"; };
-		AE368DBF252BC59A0000B333 /* FilterStoryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoryCommand.swift; sourceTree = "<group>"; };
+		AE368DBF252BC59A0000B333 /* FilterSectionCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSectionCommand.swift; sourceTree = "<group>"; };
 		AE368DC5252D00630000B333 /* ReplaceCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceCommand.swift; sourceTree = "<group>"; };
 		AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLinesUpdate.swift; sourceTree = "<group>"; };
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 				AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */,
 				AE368DB7252BC5510000B333 /* DivideByFieldCommand.swift */,
 				AE368DBB252BC56B0000B333 /* DivideByRegexCommand.swift */,
-				AE368DBF252BC59A0000B333 /* FilterStoryCommand.swift */,
+				AE368DBF252BC59A0000B333 /* FilterSectionCommand.swift */,
 				AE368DC5252D00630000B333 /* ReplaceCommand.swift */,
 			);
 			path = Script;
@@ -431,7 +431,7 @@
 				AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */,
 				AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */,
 				AEDE11CB23346632006FF1A8 /* FilterLineCommand.swift in Sources */,
-				AE368DC0252BC59A0000B333 /* FilterStoryCommand.swift in Sources */,
+				AE368DC0252BC59A0000B333 /* FilterSectionCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,
 				AE368DC6252D00630000B333 /* ReplaceCommand.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,

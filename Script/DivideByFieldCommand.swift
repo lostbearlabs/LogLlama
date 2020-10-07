@@ -26,7 +26,7 @@ class DivideByFieldCommand : ScriptCommand {
         var numSections = 0
         for line in logLines {
             numLines += 1
-            var val = line.namedFieldValues[self.field]
+            let val = line.namedFieldValues[self.field]
             if val != prev {
                 numSections += 1
                 line.setBeginSection()

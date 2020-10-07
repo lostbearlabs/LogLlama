@@ -9,7 +9,8 @@ class ResultsViewController: NSViewController {
     @IBOutlet weak var textCell: NSTextFieldCell!
     @IBOutlet weak var textColumn: NSTableColumn!
     @IBOutlet weak var searchField: NSSearchField!
-    
+
+    // TODO: why not just keep [LogLine] here?
     var lines : [NSMutableAttributedString] = []
     var text : [String] = []
     var namedFieldValues : [ [String:String]] = []
