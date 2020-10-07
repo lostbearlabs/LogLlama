@@ -103,9 +103,9 @@ class ScriptParserTest: XCTestCase {
         
         assertThat(result, equalTo(true))
         assertThat(commands.count, equalTo(1))
-        assertThat(commands[0], instanceOf(FilterCommand.self))
+        assertThat(commands[0], instanceOf(FilterLineCommand.self))
         
-        let cmd = commands[0] as! FilterCommand
+        let cmd = commands[0] as! FilterLineCommand
         _ = cmd.validate()
         assertThat(cmd.pattern, equalTo("FNORD FJORD"))
     }
@@ -201,6 +201,21 @@ class ScriptParserTest: XCTestCase {
         assertThat(cmd.loadFilterType, equalTo(LoadFilterCommand.LoadFilterType.RequireToday))
     }
 
+    func test_parse_limit_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "limit 1234"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(LimitCommand.self))
+
+        let cmd = commands[0] as! LimitCommand
+        _ = cmd.validate()
+        assertThat(cmd.limit, equalTo(1234))
+    }
+
+
     func test_parse_sql_recognizesIt() {
          let sut = givenScriptParser()
         let sql = "SELECT A,B FROM C WHERE D;  SELECT X FROM Y;"
@@ -215,7 +230,77 @@ class ScriptParserTest: XCTestCase {
          assertThat(cmd.sql, equalTo(sql))
      }
 
-    
+    func test_parse_sortByFieldsCommand_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "sort fnord"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(SortByFieldsCommand.self))
+
+        let cmd = commands[0] as! SortByFieldsCommand
+        _ = cmd.validate()
+        assertThat(cmd.fields, equalTo(["fnord"]))
+    }
+
+    func test_parse_addFieldCommand_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "@ a b"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(AddFieldCommand.self))
+
+        let cmd = commands[0] as! AddFieldCommand
+        _ = cmd.validate()
+        assertThat(cmd.fieldToAdd, equalTo("a"))
+        assertThat(cmd.fieldToMatch, equalTo("b"))
+    }
+
+    func test_parse_divideByFieldCommand_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "/f a"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(DivideByFieldCommand.self))
+
+        let cmd = commands[0] as! DivideByFieldCommand
+        _ = cmd.validate()
+        assertThat(cmd.field, equalTo("a"))
+    }
+
+    func test_parse_divideByRegexCommand_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "/r a b"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(DivideByRegexCommand.self))
+
+        let cmd = commands[0] as! DivideByRegexCommand
+        _ = cmd.validate()
+        assertThat(cmd.regex, equalTo("a b"))
+    }
+
+    func test_parse_filterByStory_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "/= FNORD FJORD"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(FilterStoryCommand.self))
+
+        let cmd = commands[0] as! FilterStoryCommand
+        _ = cmd.validate()
+        assertThat(cmd.pattern, equalTo("FNORD FJORD"))
+    }
+
     func givenScriptParser() -> ScriptParser {
         let callback = ScriptCallbackStub()
         return ScriptParser(callback: callback)

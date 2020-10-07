@@ -3,7 +3,7 @@ import Foundation
 /**
  Applies an = filter with today's date
  */
-class TodayCommand : FilterCommand {
+class TodayCommand : FilterLineCommand {
     init(callback: ScriptCallback) {
         super.init(callback: callback, pattern: "date-format-replaced-at-runtime-with-current-date", filterType: FilterType.Required)
     }

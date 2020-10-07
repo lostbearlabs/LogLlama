@@ -6,19 +6,24 @@ import Foundation
 class ScriptParser {
     var callback : ScriptCallback
 
+    // These are commands that take "the rest of the line" as their argument
     var rest_recognizers : [(String, (String,  ScriptCallback) -> ScriptCommand)] = [
         ("<", { rest, callback in return ReadFileCommand(callback: callback, pattern: rest)}),
-        ("=", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Required)}),
-        ("+", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Add)}),
-        ("-", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Remove)}),
-        ("~", { rest, callback in return FilterCommand(callback: callback, pattern: rest, filterType: FilterCommand.FilterType.Highlight)}),
+        ("=", { rest, callback in return FilterLineCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Required)}),
+        ("+", { rest, callback in return FilterLineCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Add)}),
+        ("-", { rest, callback in return FilterLineCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)}),
+        ("~", { rest, callback in return FilterLineCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Highlight)}),
         ("require", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Required)}),
         ("exclude", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Excluded)}),
         ("clearFilters", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Clear)}),
         ("requireToday", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.RequireToday)}),
         ("sql", { rest, callback in return SqlCommand(callback: callback, sql: rest)}),
+        ("/r", { rest, callback in return DivideByRegexCommand(callback: callback, regex: rest)}),
+        ("/=", { rest, callback in return FilterStoryCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Required)}),
+        ("/-", { rest, callback in return FilterStoryCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)}),
     ]
 
+    // These are commands that take individual tokenized elements from the line as their argument(s)
     var token_recognizers : [(String, Int, ([String], ScriptCallback) -> ScriptCommand)] = [
         ("demo", 0, { tokens, callback in return DemoCommand(callback: callback)}),
         (":", 1, { tokens, callback in return ColorCommand(callback: callback, text: tokens[1])}),
@@ -27,8 +32,14 @@ class ScriptParser {
         ("chop", 0, { tokens, callback in return ChopCommand(callback: callback)}),
         ("clear", 0, { tokens, callback in return ClearCommand(callback: callback)}),
         ("truncate", 1, { tokens, callback in return TruncateCommand(callback: callback, maxLength: Int(tokens[1]) ?? 256 )}),
+        ("limit", 1, { tokens, callback in return LimitCommand(callback: callback, limit: Int(tokens[1]) ?? 1000000 )}),
         ("d", 1, { tokens, callback in return DetectDuplicatesCommand(callback: callback, threshold: Int(tokens[1]) ?? 20 )}),
         ("dateFormat", 1, { tokens, callback in return DateFormatCommand(callback: callback, text: tokens[1])}),
+        ("@", 2, {tokens, callback in return AddFieldCommand(callback: callback, fieldToAdd: tokens[1], fieldToMatch: tokens[2])}),
+        ("sort", 1, {tokens, callback in return SortByFieldsCommand(callback: callback, fields: [tokens[1]])}),
+        ("/f", 1, {tokens, callback in return DivideByFieldCommand(callback: callback, field: tokens[1])}),
+        ("replace", 2, {tokens, callback in return ReplaceCommand(callback: callback, oldText: tokens[1], newText: tokens[2])}),
+
     ]
     
     init(callback : ScriptCallback) {
@@ -41,12 +52,13 @@ class ScriptParser {
         # comment           -- ignore the contents of any line starting with #
         
         *** ADDING LOG LINES ***
-        require regex            -- when loading lines, filter out any that don't match regex
-        exclude regex            -- when loading lines, filter out any that do match regex
-        requireToday             -- when loading lines, filter out any that don't contain the current date
-        clearFilters             -- clear any line loading filters
+        require regex       -- when loading lines, filter out any that don't match regex
+        exclude regex       -- when loading lines, filter out any that do match regex
+        requireToday        -- when loading lines, filter out any that don't contain the current date
+        clearFilters        -- clear any line loading filters
         < file name/pattern -- load log lines from matching files in order created
         demo                -- generate sample log lines programmatically
+        limit N             -- truncate files with > N lines
         
         *** FILTERING/HILIGHTING LOG LINES ***
         : color             -- hilight following matches with (color)
@@ -68,6 +80,10 @@ class ScriptParser {
         *** ANALYSIS ***
         d N                 -- identify lines duplicated more than N times
         sql ...             -- run specified SQL command against extracted fields
+
+        *** STORIES ***
+        @/ field            -- create stories with distinct values of field
+
         """
     }
     

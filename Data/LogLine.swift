@@ -67,6 +67,9 @@ class LogLine {
         copy.visible = self.visible
         copy.matched = self.matched
         copy.attributed = NSMutableAttributedString(attributedString: self.attributed.copy() as! NSAttributedString)
+        for it in self.namedFieldValues {
+            copy.namedFieldValues.updateValue(it.value, forKey: it.key)
+        }
         return copy
     }
     

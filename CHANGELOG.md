@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.3.0] - forthcoming
+- Add "limit N" command to restrict the number of file lines read
+
 ## [1.2.0] - 2020-02-11
 - Add "Show Line Detail" menu command to surface action previously only discoverable via double-click.
 - Add "dateFormat" command to specify the date format used by "today" and "requireToday"

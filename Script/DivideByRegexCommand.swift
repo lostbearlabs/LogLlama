@@ -1,14 +1,13 @@
-import Foundation
-
 /**
- This command removes ALL lines from the list of log lines.  It is useful when running interactively to reset
- your state.
+ This command adds story headers to the log whenever the specified regex is matched
  */
-class ClearCommand : ScriptCommand {
+class DivideByRegexCommand : ScriptCommand {
     var callback : ScriptCallback
+    var regex : String
 
-    init(callback: ScriptCallback) {
+    init(callback: ScriptCallback, regex: String) {
         self.callback = callback
+        self.regex = regex
     }
 
     func validate() -> Bool {

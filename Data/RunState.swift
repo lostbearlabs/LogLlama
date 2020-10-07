@@ -10,5 +10,7 @@ class RunState {
     var filterExcluded : [NSRegularExpression] = []
     var dateFormat = "MM\\.dd\\.yy"
     var fieldDataSql : FieldDataSql?
+    var limit = 0
+    var replace : [String:String] = [:]
 }
 

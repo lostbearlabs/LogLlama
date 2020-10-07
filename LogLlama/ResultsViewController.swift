@@ -12,6 +12,7 @@ class ResultsViewController: NSViewController {
     
     var lines : [NSMutableAttributedString] = []
     var text : [String] = []
+    var namedFieldValues : [ [String:String]] = []
     var longestLineLength = 1
 
     override func viewDidLoad() {
@@ -34,6 +35,7 @@ class ResultsViewController: NSViewController {
         
         self.lines = []
         self.text = []
+        self.namedFieldValues = []
 
         if let update = notification.object as? LogLinesUpdate
         {
@@ -43,6 +45,7 @@ class ResultsViewController: NSViewController {
                     self.lines.append(line.getAttributedString())
                     self.text.append(line.text)
                     self.longestLineLength = max(self.longestLineLength, line.text.count)
+                    self.namedFieldValues.append(line.namedFieldValues)
                 }
             }
         }
@@ -103,8 +106,22 @@ class ResultsViewController: NSViewController {
                 text = text + "\n"
             }
             text = text + self.text[idx]
+
+            text = text + "\n-----------  \n"
+            text = text + self.formatFieldListForLine(namedFieldValues: self.namedFieldValues[idx])
+            text = text + "-----------  \n"
         }
 
+        return text
+    }
+
+    func formatFieldListForLine(namedFieldValues: [String:String]) -> String {
+        var text = ""
+        let keys = namedFieldValues.keys.sorted()
+        for key in keys {
+            let val = namedFieldValues[key]!
+            text = text + "\(key) = \(val)\n"
+        }
         return text
     }
 

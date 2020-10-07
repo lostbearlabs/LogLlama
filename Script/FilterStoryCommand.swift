@@ -1,14 +1,15 @@
-import Foundation
-
 /**
- This command removes ALL lines from the list of log lines.  It is useful when running interactively to reset
- your state.
+ This command displays or hides stories if any line in them matches the specified regex.
  */
-class ClearCommand : ScriptCommand {
+class FilterStoryCommand : ScriptCommand {
     var callback : ScriptCallback
+    var pattern : String
+    var filterType : FilterLineCommand.FilterType
 
-    init(callback: ScriptCallback) {
+    init(callback: ScriptCallback, pattern: String, filterType: FilterLineCommand.FilterType) {
         self.callback = callback
+        self.pattern = pattern
+        self.filterType = filterType
     }
 
     func validate() -> Bool {

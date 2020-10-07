@@ -49,14 +49,24 @@ class ReadFileCommand : ScriptCommand {
                 let ar = data.components(separatedBy: .newlines)
                 var numIncluded = 0
                 var numExcluded = 0
-                for line in ar {
+                var numRead = 0
+                for ln in ar {
+                    var line = ln
                     if( self.lineWanted(line: line, runState: runState)) {
+                        for it in runState.replace {
+                            line = line.replacingOccurrences(of: it.key, with: it.value)
+                        }
                         let logLine = LogLine(text: line)
                         logLines.append( logLine )
                         self.findNameValueFields(logLine: logLine)
                         numIncluded += 1
                     } else {
                         numExcluded += 1
+                    }
+                    numRead += 1
+                    if( runState.limit>0 && numRead >= runState.limit) {
+                        self.callback.scriptUpdate(text: "... reached file limit of  \(runState.limit) lines")
+                        break
                     }
                 }
                 self.callback.scriptUpdate(text: "... read \(ar.count) lines, kept \(numIncluded), discarded \(numExcluded)")

@@ -13,6 +13,13 @@
 		AE29FE1C23F3639D00AAF6E6 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
 		AE29FE1D23F3639D00AAF6E6 /* libSQLite.swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */; };
 		AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */; };
+		AE368DA5252B7B270000B333 /* LimitCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DA4252B7B270000B333 /* LimitCommand.swift */; };
+		AE368DB0252BC4470000B333 /* AddFieldCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DAF252BC4470000B333 /* AddFieldCommand.swift */; };
+		AE368DB4252BC5150000B333 /* SortByFieldsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */; };
+		AE368DB8252BC5510000B333 /* DivideByFieldCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DB7252BC5510000B333 /* DivideByFieldCommand.swift */; };
+		AE368DBC252BC56B0000B333 /* DivideByRegexCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DBB252BC56B0000B333 /* DivideByRegexCommand.swift */; };
+		AE368DC0252BC59A0000B333 /* FilterStoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DBF252BC59A0000B333 /* FilterStoryCommand.swift */; };
+		AE368DC6252D00630000B333 /* ReplaceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DC5252D00630000B333 /* ReplaceCommand.swift */; };
 		AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */; };
 		AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */; };
 		AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE37EB932332C9880027E390 /* ResultsViewController.swift */; };
@@ -41,7 +48,7 @@
 		AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */; };
 		AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */; };
 		AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11C8233428F6006FF1A8 /* LogLine.swift */; };
-		AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11CA23346632006FF1A8 /* FilterCommand.swift */; };
+		AEDE11CB23346632006FF1A8 /* FilterLineCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE11CA23346632006FF1A8 /* FilterLineCommand.swift */; };
 		AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE53010234D206F00BF3824 /* TruncateCommand.swift */; };
 		AEE7D2B523428F210086E544 /* ScriptParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE7D2B423428F210086E544 /* ScriptParserTest.swift */; };
 		AEE7D2B723428F680086E544 /* ScriptCallbackStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */; };
@@ -69,6 +76,13 @@
 		AE29FE1923F3639D00AAF6E6 /* libPathKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPathKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSQLite.swift.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectDuplicatesCommand.swift; sourceTree = "<group>"; };
+		AE368DA4252B7B270000B333 /* LimitCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitCommand.swift; sourceTree = "<group>"; };
+		AE368DAF252BC4470000B333 /* AddFieldCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFieldCommand.swift; sourceTree = "<group>"; };
+		AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortByFieldsCommand.swift; sourceTree = "<group>"; };
+		AE368DB7252BC5510000B333 /* DivideByFieldCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivideByFieldCommand.swift; sourceTree = "<group>"; };
+		AE368DBB252BC56B0000B333 /* DivideByRegexCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivideByRegexCommand.swift; sourceTree = "<group>"; };
+		AE368DBF252BC59A0000B333 /* FilterStoryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoryCommand.swift; sourceTree = "<group>"; };
+		AE368DC5252D00630000B333 /* ReplaceCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceCommand.swift; sourceTree = "<group>"; };
 		AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLinesUpdate.swift; sourceTree = "<group>"; };
 		AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptProcessingUpdate.swift; sourceTree = "<group>"; };
 		AE37EB932332C9880027E390 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
@@ -102,7 +116,7 @@
 		AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadFileCommand.swift; sourceTree = "<group>"; };
 		AEDE11C6233419ED006FF1A8 /* ScriptParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParser.swift; sourceTree = "<group>"; };
 		AEDE11C8233428F6006FF1A8 /* LogLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLine.swift; sourceTree = "<group>"; };
-		AEDE11CA23346632006FF1A8 /* FilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCommand.swift; sourceTree = "<group>"; };
+		AEDE11CA23346632006FF1A8 /* FilterLineCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterLineCommand.swift; sourceTree = "<group>"; };
 		AEE53010234D206F00BF3824 /* TruncateCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruncateCommand.swift; sourceTree = "<group>"; };
 		AEE7D2B423428F210086E544 /* ScriptParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptParserTest.swift; sourceTree = "<group>"; };
 		AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCallbackStub.swift; sourceTree = "<group>"; };
@@ -232,7 +246,7 @@
 				AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */,
 				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
 				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
-				AEDE11CA23346632006FF1A8 /* FilterCommand.swift */,
+				AEDE11CA23346632006FF1A8 /* FilterLineCommand.swift */,
 				AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */,
 				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
 				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
@@ -243,6 +257,13 @@
 				AE6D8CA123C7886600CF67D8 /* SqlCommand.swift */,
 				AE956B45234F89F30041ADBA /* TodayCommand.swift */,
 				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
+				AE368DA4252B7B270000B333 /* LimitCommand.swift */,
+				AE368DAF252BC4470000B333 /* AddFieldCommand.swift */,
+				AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */,
+				AE368DB7252BC5510000B333 /* DivideByFieldCommand.swift */,
+				AE368DBB252BC56B0000B333 /* DivideByRegexCommand.swift */,
+				AE368DBF252BC59A0000B333 /* FilterStoryCommand.swift */,
+				AE368DC5252D00630000B333 /* ReplaceCommand.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -397,17 +418,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE368DBC252BC56B0000B333 /* DivideByRegexCommand.swift in Sources */,
 				AE437F4123315F32001CD09D /* Notifications.swift in Sources */,
 				AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */,
 				AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */,
 				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
 				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
 				AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */,
+				AE368DA5252B7B270000B333 /* LimitCommand.swift in Sources */,
+				AE368DB4252BC5150000B333 /* SortByFieldsCommand.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
 				AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */,
 				AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */,
-				AEDE11CB23346632006FF1A8 /* FilterCommand.swift in Sources */,
+				AEDE11CB23346632006FF1A8 /* FilterLineCommand.swift in Sources */,
+				AE368DC0252BC59A0000B333 /* FilterStoryCommand.swift in Sources */,
 				AE437F1D23306D4B001CD09D /* AppDelegate.swift in Sources */,
+				AE368DC6252D00630000B333 /* ReplaceCommand.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,
 				AE41B50223A40E7B004B47BE /* DateFormatCommand.swift in Sources */,
 				AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */,
@@ -415,6 +441,7 @@
 				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,
 				AE956B46234F89F30041ADBA /* TodayCommand.swift in Sources */,
 				AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */,
+				AE368DB8252BC5510000B333 /* DivideByFieldCommand.swift in Sources */,
 				AE6D8CA223C7886600CF67D8 /* SqlCommand.swift in Sources */,
 				AE6D8CA423C78BD300CF67D8 /* FieldDataMap.swift in Sources */,
 				AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */,
@@ -422,6 +449,7 @@
 				AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */,
 				AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */,
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
+				AE368DB0252BC4470000B333 /* AddFieldCommand.swift in Sources */,
 				AEDE11C7233419ED006FF1A8 /* ScriptParser.swift in Sources */,
 				AE3A3A5D23351AA10035A811 /* FontSizeUpdate.swift in Sources */,
 				AE6D8CA623C78FC800CF67D8 /* FieldDataSql.swift in Sources */,

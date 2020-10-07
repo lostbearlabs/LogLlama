@@ -1,14 +1,13 @@
-import Foundation
-
 /**
- This command removes ALL lines from the list of log lines.  It is useful when running interactively to reset
- your state.
+ This command adds story headers into the log whenever the specified field changes value.  This probably only makes sense to use if the log is sorted by the field.
  */
-class ClearCommand : ScriptCommand {
+class DivideByFieldCommand : ScriptCommand {
     var callback : ScriptCallback
+    var field : String
 
-    init(callback: ScriptCallback) {
+    init(callback: ScriptCallback, field: String) {
         self.callback = callback
+        self.field = field
     }
 
     func validate() -> Bool {

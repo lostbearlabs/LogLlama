@@ -6,7 +6,7 @@ import AppKit
  
  This command implements all 4 of our filtering operations.
  */
-class FilterCommand : ScriptCommand {
+class FilterLineCommand : ScriptCommand {
 
     enum FilterType {
         case Required
