@@ -1,5 +1,9 @@
 import Foundation
 
+// TODO: add in-app doc for new commands
+// TODO: add README doc for new commands
+// TODO: add parser test coverage for new commands
+
 /**
  Parses script text into an executable list of ScriptCommands.
  */
@@ -21,6 +25,7 @@ class ScriptParser {
         ("/r", { rest, callback in return DivideByRegexCommand(callback: callback, pattern: rest)}),
         ("/=", { rest, callback in return FilterSectionCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Required)}),
         ("/-", { rest, callback in return FilterSectionCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)}),
+        ("sort", {rest, callback in return SortByFieldsCommand(callback: callback, fieldsString: rest)}),
     ]
 
     // These are commands that take individual tokenized elements from the line as their argument(s)
@@ -36,7 +41,6 @@ class ScriptParser {
         ("d", 1, { tokens, callback in return DetectDuplicatesCommand(callback: callback, threshold: Int(tokens[1]) ?? 20 )}),
         ("dateFormat", 1, { tokens, callback in return DateFormatCommand(callback: callback, text: tokens[1])}),
         ("@", 2, {tokens, callback in return AddFieldCommand(callback: callback, fieldToAdd: tokens[1], fieldToMatch: tokens[2])}),
-        ("sort", 1, {tokens, callback in return SortByFieldsCommand(callback: callback, fields: [tokens[1]])}),
         ("/f", 1, {tokens, callback in return DivideByFieldCommand(callback: callback, field: tokens[1])}),
         ("replace", 2, {tokens, callback in return ReplaceCommand(callback: callback, oldText: tokens[1], newText: tokens[2])}),
 

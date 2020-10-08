@@ -232,7 +232,7 @@ class ScriptParserTest: XCTestCase {
 
     func test_parse_sortByFieldsCommand_recognizesIt() {
         let sut = givenScriptParser()
-        let script = "sort fnord"
+        let script = "sort fnord apple"
         let (result, commands) = sut.parse(script: script)
 
         assertThat(result, equalTo(true))
@@ -241,7 +241,7 @@ class ScriptParserTest: XCTestCase {
 
         let cmd = commands[0] as! SortByFieldsCommand
         _ = cmd.validate()
-        assertThat(cmd.fields, equalTo(["fnord"]))
+        assertThat(cmd.fields, equalTo(["fnord", "apple"]))
     }
 
     func test_parse_addFieldCommand_recognizesIt() {
@@ -287,7 +287,7 @@ class ScriptParserTest: XCTestCase {
         assertThat(cmd.pattern, equalTo("a b"))
     }
 
-    func test_parse_filterByStory_recognizesIt() {
+    func test_parse_filterBySection_recognizesIt() {
         let sut = givenScriptParser()
         let script = "/= FNORD FJORD"
         let (result, commands) = sut.parse(script: script)

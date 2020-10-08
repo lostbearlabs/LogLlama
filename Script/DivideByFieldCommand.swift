@@ -1,5 +1,5 @@
 /**
- This command adds story headers into the log whenever the specified field changes value.  This probably only makes sense to use if the log is sorted by the field.
+ This command adds section headers into the log whenever the specified field changes value.  This probably only makes sense to use if the log is sorted by the field.
  */
 class DivideByFieldCommand : ScriptCommand {
     var callback : ScriptCallback

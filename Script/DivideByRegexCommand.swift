@@ -1,7 +1,7 @@
 import Foundation
 
 /**
- This command adds story headers to the log whenever the specified regex is matched
+ This command adds section headers to the log whenever the specified regex is matched
  */
 class DivideByRegexCommand: ScriptCommand {
     var callback: ScriptCallback

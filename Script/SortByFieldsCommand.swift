@@ -1,14 +1,15 @@
 /**
  This command re-sorts the log lines in order of the field(s) specified.
+
+ If all fields match (or none are specified) then it defaults to sorting by the line text.
  */
 class SortByFieldsCommand : ScriptCommand {
     var callback : ScriptCallback
     var fields : [String]
 
-    // TODO: allow multiple fields
-    init(callback: ScriptCallback, fields:[String] ) {
+    init(callback: ScriptCallback, fieldsString:String ) {
         self.callback = callback
-        self.fields = fields
+        self.fields = fieldsString.split(separator: " ").map( { String($0) } )
     }
 
     func validate() -> Bool {
@@ -18,7 +19,6 @@ class SortByFieldsCommand : ScriptCommand {
     func changesData() -> Bool {
         true
     }
-
 
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
         logLines.sort(by: {

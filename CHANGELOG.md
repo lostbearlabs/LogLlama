@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [1.3.0] - forthcoming
 - Add "limit N" command to restrict the number of file lines read
+- Add "sort field" command to sort lines by a specific field
+- Add "@" command to copy fields from lines to linked lines
+- Add "/r" and "/f" commands to create sections
+- Add "/-" and "/=" commands to hide sections
 
 ## [1.2.0] - 2020-02-11
 - Add "Show Line Detail" menu command to surface action previously only discoverable via double-click.
