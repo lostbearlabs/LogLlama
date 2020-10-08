@@ -16,16 +16,16 @@ Here is a sample script.  It reads the log of an automobile race and performs so
 < /tmp/race.txt
 
 : yellow
-~ LAP 2
+~ LAP=2
 
-# : lightgreen
-# = STARTED
+: lightgreen
+= STARTED
 
-# : lightblue
-# + FINISHED
+: lightblue
++ FINISHED
 
-# : red
-# + CRASHED
+: red
++ CRASHED
 ```
 
 Here is what the screen looks like after running this script:
@@ -71,6 +71,29 @@ demo
 
 sql select min(num), max(num),avg(num) from log where num is not null
 ```
+
+## Sections
+
+LogLama can divide log lines into sections and selectively hide sections.  For example:
+
+```
+demo
+
+# populate each line with the car number
+~ car (?<num>\d+)
+
+# sort according to car number
+sort num
+
+# create one section each time the car number changes
+/f num
+
+# only show sections that include a crash
+/= CRASHED
+
+
+```
+
 
 ## Contributing
 

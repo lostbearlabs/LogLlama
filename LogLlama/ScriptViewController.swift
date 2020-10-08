@@ -167,6 +167,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
 
     func sendUndoState() {
         let enabled = self.undoResults.count > 0
+        print("undoResults.count=\(undoResults.count), undo enabled=\(enabled)")
         NotificationCenter.default.post(name: .CanUndoUpdated, object: enabled)
     }
 }

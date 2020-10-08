@@ -1,7 +1,5 @@
 import Foundation
 
-// TODO: UNDO does not work after this command
-
 /**
  This command displays or hides sections if any line in them matches the specified regex.
  */

@@ -47,6 +47,8 @@ class ReadFileCommand : ScriptCommand {
             do {
                 let data = try String(contentsOfFile: file.string, encoding: .utf8)
                 let ar = data.components(separatedBy: .newlines)
+                self.callback.scriptUpdate(text: "... processing \(ar.count) lines")
+
                 var numIncluded = 0
                 var numExcluded = 0
                 var numRead = 0
@@ -67,6 +69,9 @@ class ReadFileCommand : ScriptCommand {
                     if( runState.limit>0 && numRead >= runState.limit) {
                         self.callback.scriptUpdate(text: "... reached file limit of  \(runState.limit) lines")
                         break
+                    }
+                    if( numRead%10000 == 0) {
+                        self.callback.scriptUpdate(text: "... \(numRead)")
                     }
                 }
                 self.callback.scriptUpdate(text: "... read \(ar.count) lines, kept \(numIncluded), discarded \(numExcluded)")

@@ -1,7 +1,5 @@
 import Foundation
 
-// TODO: add in-app doc for new commands
-// TODO: add README doc for new commands
 // TODO: add parser test coverage for new commands
 
 /**
@@ -63,7 +61,9 @@ class ScriptParser {
         < file name/pattern -- load log lines from matching files in order created
         demo                -- generate sample log lines programmatically
         limit N             -- truncate files with > N lines
-        
+        replace a b         -- when importing lines, replace any occurence of a with b
+        sort field1 field2  -- sort lines according to field list, with text comparison as the last condition
+
         *** FILTERING/HILIGHTING LOG LINES ***
         : color             -- hilight following matches with (color)
         = regex             -- hide all lines not matching regex
@@ -80,13 +80,17 @@ class ScriptParser {
 
         *** ADJUSTING LOG LINES ***
         truncate N          -- truncate lines with > N characters
+        @ field1 field2     -- populate lines that have field2 but not field1 with the value from another line that has field1 and the same value of field2
 
         *** ANALYSIS ***
         d N                 -- identify lines duplicated more than N times
         sql ...             -- run specified SQL command against extracted fields
 
-        *** STORIES ***
-        @/ field            -- create stories with distinct values of field
+        *** SECTIONS ***
+        /r regex            -- mark lines that match regex as section headers
+        /f field            -- mark lines where the value of field changes as section headers
+        /= regex            -- hide any sections that don't have a line matching regex
+        /- regex            -- hide any sections that do have a line matching reges
 
         """
     }
