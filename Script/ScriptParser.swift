@@ -1,7 +1,5 @@
 import Foundation
 
-// TODO: add parser test coverage for new commands
-
 /**
  Parses script text into an executable list of ScriptCommands.
  */

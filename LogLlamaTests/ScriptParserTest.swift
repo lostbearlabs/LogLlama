@@ -244,6 +244,21 @@ class ScriptParserTest: XCTestCase {
         assertThat(cmd.fields, equalTo(["fnord", "apple"]))
     }
 
+    func test_parse_replaceCommand_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "replace fnord apple"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(ReplaceCommand.self))
+
+        let cmd = commands[0] as! ReplaceCommand
+        _ = cmd.validate()
+        assertThat(cmd.oldText, equalTo("fnord"))
+        assertThat(cmd.newText, equalTo("apple"))
+    }
+
     func test_parse_addFieldCommand_recognizesIt() {
         let sut = givenScriptParser()
         let script = "@ a b"
