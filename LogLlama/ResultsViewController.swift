@@ -10,10 +10,7 @@ class ResultsViewController: NSViewController {
     @IBOutlet weak var textColumn: NSTableColumn!
     @IBOutlet weak var searchField: NSSearchField!
 
-    // TODO: why not just keep [LogLine] here?
-    var lines : [NSMutableAttributedString] = []
-    var text : [String] = []
-    var namedFieldValues : [ [String:String]] = []
+    var logLines : [LogLine] = []
     var longestLineLength = 1
 
     override func viewDidLoad() {
@@ -33,20 +30,16 @@ class ResultsViewController: NSViewController {
     }
 
     @objc private func onLogLinesUpdated(_ notification: Notification) {
-        
-        self.lines = []
-        self.text = []
-        self.namedFieldValues = []
+
+        self.logLines = []
 
         if let update = notification.object as? LogLinesUpdate
         {
             self.longestLineLength = 1
             for line in update.lines {
                 if line.visible {
-                    self.lines.append(line.getAttributedString())
-                    self.text.append(line.text)
+                    self.logLines.append(line)
                     self.longestLineLength = max(self.longestLineLength, line.text.count)
-                    self.namedFieldValues.append(line.namedFieldValues)
                 }
             }
         }
@@ -106,10 +99,10 @@ class ResultsViewController: NSViewController {
             if( text != "" ) {
                 text = text + "\n"
             }
-            text = text + self.text[idx]
+            text = text + self.logLines[idx].text
 
             text = text + "\n-----------  \n"
-            text = text + self.formatFieldListForLine(namedFieldValues: self.namedFieldValues[idx])
+            text = text + self.formatFieldListForLine(namedFieldValues: self.logLines[idx].namedFieldValues)
             text = text + "-----------  \n"
         }
 
@@ -146,7 +139,7 @@ class ResultsViewController: NSViewController {
     @IBAction func onClickedPrev(_ sender: Any) {
         var sel = getSelectedRow()
         if( sel<0 ) {
-            sel = self.lines.count
+            sel = self.logLines.count
         }
         self.doFind(searchText: self.searchField.stringValue, startPos: sel - 1, incr: -1)
     }
@@ -157,9 +150,9 @@ class ResultsViewController: NSViewController {
             return
         }
 
-        for i in 0...self.lines.count {
-            let x = (startPos + i*incr + self.lines.count) % self.lines.count
-            if self.text[x].lowercased().contains(searchText.lowercased()) {
+        for i in 0...self.logLines.count {
+            let x = (startPos + i*incr + self.logLines.count) % self.logLines.count
+            if self.logLines[x].text.lowercased().contains(searchText.lowercased()) {
                 let indexSet = IndexSet(integer: x)
                 tableView.selectRowIndexes(indexSet, byExtendingSelection: false)
                 self.tableView?.scrollRowToVisible(x)
@@ -174,11 +167,11 @@ class ResultsViewController: NSViewController {
 extension ResultsViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        lines.count
+        logLines.count
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        lines[row]
+        logLines[row].getAttributedString()
     }
     
     func tableView(_: NSTableView, shouldEdit: NSTableColumn?, row: Int) -> Bool {
