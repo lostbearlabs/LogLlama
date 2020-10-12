@@ -35,7 +35,7 @@ class DivideByRegexCommand: ScriptCommand {
                     range: NSRange(line.text.startIndex..., in: line.text))
             if (results.count > 0) {
                 numFound += 1
-                line.setBeginSection()
+                line.setBeginSection(color: runState.color)
             }
         }
         self.callback.scriptUpdate(text: "Found \(numFound) section boundaries where lines match regex \(self.pattern)")

@@ -71,7 +71,7 @@ class DemoCommand : ScriptCommand {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateString = dateFormatter.string(from: self.logDate)
         
-        logLines.append( LogLine(text: "[\(dateString)] \(text)") )
+        logLines.append( LogLine(text: "[\(dateString)] \(text)", lineNumber: logLines.count) )
         
         let seconds = Int.random(in: 30...90)
         self.logDate = Calendar.current.date(byAdding: .second, value: seconds, to: logDate)!

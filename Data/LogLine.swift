@@ -13,8 +13,9 @@ class LogLine {
     var matched = false
     var namedFieldValues:[String: String] = [:]
     var beginSection = false
+    var lineNumber = 0
 
-    init(text : String) {
+    init(text : String, lineNumber : Int) {
         
         if( LogLine.rxNumber == nil || LogLine.rxValue == nil ) {
             do {
@@ -26,13 +27,16 @@ class LogLine {
         }
         
         self.initFromText(text: text)
+        self.lineNumber = lineNumber
     }
 
-    func setBeginSection() {
-        self.beginSection = true
+    func setBeginSection(color: NSColor) {
+        if( !self.beginSection ) {
+            self.beginSection = true
 
-        self.attributed.addAttribute(.backgroundColor, value: NSColor.lightGray,
-                range: NSRange(location: 0, length: self.attributed.length))
+            self.attributed.addAttribute(.backgroundColor, value: color,
+                    range: NSRange(location: 0, length: self.attributed.length))
+        }
     }
 
     func truncate(maxLength : Int) -> Bool {
@@ -72,7 +76,7 @@ class LogLine {
     }
 
     func clone() -> LogLine {
-        let copy = LogLine(text: self.text)
+        let copy = LogLine(text: self.text, lineNumber: self.lineNumber)
         copy.visible = self.visible
         copy.matched = self.matched
         copy.attributed = NSMutableAttributedString(attributedString: self.attributed.copy() as! NSAttributedString)

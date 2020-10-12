@@ -1,7 +1,8 @@
 /**
  This command re-sorts the log lines in order of the field(s) specified.
 
- If all fields match (or none are specified) then it defaults to sorting by the line text.
+ If all fields match (or none are specified) then it defaults to sorting by the original line numbers.
+ (TODO: this breaks down if there are lines from multiple files; maybe also include date or file name?)
  */
 class SortByFieldsCommand : ScriptCommand {
     var callback : ScriptCallback
@@ -46,8 +47,8 @@ class SortByFieldsCommand : ScriptCommand {
                 }
             }
 
-            // as a last resort, compare the text of the lines
-            return line1.text < line2.text
+            // as a last resort, compare the line numbers of the lines
+            return line1.lineNumber < line2.lineNumber
         })
         self.callback.scriptUpdate(text: "Sorted \(logLines.count) log lines")
         return true

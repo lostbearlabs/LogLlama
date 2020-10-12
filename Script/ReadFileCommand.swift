@@ -58,7 +58,7 @@ class ReadFileCommand : ScriptCommand {
                         for it in runState.replace {
                             line = line.replacingOccurrences(of: it.key, with: it.value)
                         }
-                        let logLine = LogLine(text: line)
+                        let logLine = LogLine(text: line, lineNumber: numRead)
                         logLines.append( logLine )
                         self.findNameValueFields(logLine: logLine)
                         numIncluded += 1

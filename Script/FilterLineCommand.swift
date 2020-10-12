@@ -98,8 +98,10 @@ class FilterLineCommand : ScriptCommand {
                 line.visible = line.visible || match
                 line.matched = line.matched || match
             case .Remove:
-                line.visible = line.visible && !match
-                line.matched = line.matched && !match
+                if( !line.beginSection) { // it's confusing if we hide section headers
+                    line.visible = line.visible && !match
+                    line.matched = line.matched && !match
+                }
             case .Highlight:
                 line.matched = line.matched || match
             }

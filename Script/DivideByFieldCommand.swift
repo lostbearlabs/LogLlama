@@ -29,7 +29,7 @@ class DivideByFieldCommand : ScriptCommand {
             let val = line.namedFieldValues[self.field]
             if val != prev {
                 numSections += 1
-                line.setBeginSection()
+                line.setBeginSection(color: runState.color)
             }
             prev = val
         }
