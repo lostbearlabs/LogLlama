@@ -76,7 +76,7 @@ class ResultsViewController: NSViewController {
     @IBAction func onDoubleClick(_ sender: Any) {
         let viewController = self.storyboard?.instantiateController(withIdentifier: "LogDetail") as! LineDetailViewController
 
-        let text = self.getSelectedText();
+        let text = self.getSelectedText(includeFields: true);
         if( text.count > 0 ) {
             viewController.setText(text: text)
             viewController.setFont(font: self.textCell!.font!)
@@ -86,14 +86,14 @@ class ResultsViewController: NSViewController {
 
     @objc func copy(_ sender: AnyObject?){
 
-        let text = self.getSelectedText()
+        let text = self.getSelectedText(includeFields: false)
 
         let pasteBoard = NSPasteboard.general
         pasteBoard.clearContents()
         pasteBoard.setString(text, forType:NSPasteboard.PasteboardType.string)
     }
 
-    func getSelectedText() -> String {
+    func getSelectedText(includeFields: Bool) -> String {
         var text = ""
         for (_,idx) in (tableView?.selectedRowIndexes.enumerated())! {
             if( text != "" ) {
@@ -101,9 +101,11 @@ class ResultsViewController: NSViewController {
             }
             text = text + self.logLines[idx].text
 
-            text = text + "\n-----------  \n"
-            text = text + self.formatFieldListForLine(namedFieldValues: self.logLines[idx].namedFieldValues)
-            text = text + "-----------  \n"
+            if( includeFields ) {
+                text = text + "\n-----------  \n"
+                text = text + self.formatFieldListForLine(namedFieldValues: self.logLines[idx].namedFieldValues)
+                text = text + "-----------  \n"
+            }
         }
 
         return text
