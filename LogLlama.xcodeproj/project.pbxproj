@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34A5F77824703DD1A8A7C457 /* AddFieldCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */; };
 		34A5FBCA0D4F56C680E00F25 /* ChopCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */; };
 		34A5FC7E9F66A71A34E86EEC /* CommandTestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */; };
 		34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F0786846702DCD3CB79C /* ClearCommand.swift */; };
@@ -75,6 +76,7 @@
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
 		34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChopCommandTest.swift; sourceTree = "<group>"; };
 		34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTestContext.swift; sourceTree = "<group>"; };
+		34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFieldCommandTest.swift; sourceTree = "<group>"; };
 		5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.debug.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.debug.xcconfig"; sourceTree = "<group>"; };
 		69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE29FE1923F3639D00AAF6E6 /* libPathKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPathKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +241,7 @@
 				AEE7D2B623428F680086E544 /* ScriptCallbackStub.swift */,
 				34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */,
 				34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */,
+				34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */,
 			);
 			path = LogLlamaTests;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				AEE7D2B523428F210086E544 /* ScriptParserTest.swift in Sources */,
 				34A5FBCA0D4F56C680E00F25 /* ChopCommandTest.swift in Sources */,
 				34A5FC7E9F66A71A34E86EEC /* CommandTestContext.swift in Sources */,
+				34A5F77824703DD1A8A7C457 /* AddFieldCommandTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
