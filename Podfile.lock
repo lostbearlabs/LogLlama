@@ -3,7 +3,7 @@ PODS:
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
-  - SwiftHamcrest (2.2.1)
+  - SwiftHamcrest (2.2.2)
 
 DEPENDENCIES:
   - PathKit (~> 1.0.0)
@@ -19,8 +19,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   PathKit: 364e0de7fb5adb142aecab4e112187e5548fc4b6
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  SwiftHamcrest: 67454f9c4c7fae8d7a0f82dfd42f8a54a79095b1
+  SwiftHamcrest: 940c3dae2a31f92da433f5a0b13d42103247051b
 
 PODFILE CHECKSUM: c6d0b46487b4afe6e4e55cc45f53644a15e34b50
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
