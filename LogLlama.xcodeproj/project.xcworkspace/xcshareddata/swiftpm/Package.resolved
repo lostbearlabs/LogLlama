@@ -1,0 +1,42 @@
+{
+  "originHash" : "08bba0d794e54239f1f480a171c9617ff3cb1c69a986ec66b1d89fc9c12c3b12",
+  "pins" : [
+    {
+      "identity" : "pathkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kylef/PathKit",
+      "state" : {
+        "revision" : "3bfd2737b700b9a36565a8c94f4ad2b050a5e574",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "spectre",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kylef/Spectre.git",
+      "state" : {
+        "revision" : "26cc5e9ae0947092c7139ef7ba612e34646086c7",
+        "version" : "0.10.1"
+      }
+    },
+    {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift.git",
+      "state" : {
+        "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
+        "version" : "0.15.3"
+      }
+    },
+    {
+      "identity" : "swifthamcrest",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nschum/SwiftHamcrest.git",
+      "state" : {
+        "revision" : "8c679c859fd5e12b83aea68a51045b0a11dfddef",
+        "version" : "2.2.4"
+      }
+    }
+  ],
+  "version" : 3
+}

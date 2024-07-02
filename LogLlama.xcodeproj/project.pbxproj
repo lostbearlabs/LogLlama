@@ -3,18 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		077018952C3463C200B1D040 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 077018942C3463C200B1D040 /* PathKit */; };
+		077018972C3463C600B1D040 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 077018962C3463C600B1D040 /* SQLite */; };
+		077018992C3464BB00B1D040 /* SwiftHamcrest in Frameworks */ = {isa = PBXBuildFile; productRef = 077018982C3464BB00B1D040 /* SwiftHamcrest */; };
 		34A5F77824703DD1A8A7C457 /* AddFieldCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */; };
 		34A5FBCA0D4F56C680E00F25 /* ChopCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */; };
 		34A5FC7E9F66A71A34E86EEC /* CommandTestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */; };
 		34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F0786846702DCD3CB79C /* ClearCommand.swift */; };
-		6096E6358A936F662437D8D9 /* libPods-LogLlamaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */; };
-		AE29FE1B23F3639D00AAF6E6 /* libPathKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE29FE1923F3639D00AAF6E6 /* libPathKit.a */; };
-		AE29FE1C23F3639D00AAF6E6 /* libPods-LogLlama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */; };
-		AE29FE1D23F3639D00AAF6E6 /* libSQLite.swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */; };
 		AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */; };
 		AE368DA5252B7B270000B333 /* LimitCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DA4252B7B270000B333 /* LimitCommand.swift */; };
 		AE368DB0252BC4470000B333 /* AddFieldCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE368DAF252BC4470000B333 /* AddFieldCommand.swift */; };
@@ -71,14 +70,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1BADD9AF7AE997E5590DEE11 /* Pods-LogLlamaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlamaTests.release.xcconfig"; path = "Target Support Files/Pods-LogLlamaTests/Pods-LogLlamaTests.release.xcconfig"; sourceTree = "<group>"; };
-		2CB7C88549244CA7D8D0696B /* Pods-LogLlamaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlamaTests.debug.xcconfig"; path = "Target Support Files/Pods-LogLlamaTests/Pods-LogLlamaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
 		34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChopCommandTest.swift; sourceTree = "<group>"; };
 		34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTestContext.swift; sourceTree = "<group>"; };
 		34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFieldCommandTest.swift; sourceTree = "<group>"; };
-		5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.debug.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.debug.xcconfig"; sourceTree = "<group>"; };
-		69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE29FE1923F3639D00AAF6E6 /* libPathKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPathKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSQLite.swift.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectDuplicatesCommand.swift; sourceTree = "<group>"; };
@@ -129,8 +124,6 @@
 		AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCommand.swift; sourceTree = "<group>"; };
 		AEED0F5D23357CAF00DC53D6 /* RunState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunState.swift; sourceTree = "<group>"; };
 		AEEED561234D425B00D75D6D /* LineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDetailViewController.swift; sourceTree = "<group>"; };
-		B0538BDF5FF7A300DDACA00D /* Pods-LogLlama.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogLlama.release.xcconfig"; path = "Target Support Files/Pods-LogLlama/Pods-LogLlama.release.xcconfig"; sourceTree = "<group>"; };
-		C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogLlamaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +131,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE29FE1C23F3639D00AAF6E6 /* libPods-LogLlama.a in Frameworks */,
-				AE29FE1D23F3639D00AAF6E6 /* libSQLite.swift.a in Frameworks */,
-				AE29FE1B23F3639D00AAF6E6 /* libPathKit.a in Frameworks */,
+				077018972C3463C600B1D040 /* SQLite in Frameworks */,
+				077018952C3463C200B1D040 /* PathKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,31 +140,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6096E6358A936F662437D8D9 /* libPods-LogLlamaTests.a in Frameworks */,
+				077018992C3464BB00B1D040 /* SwiftHamcrest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2621FC22CD272EB76B260474 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */,
-				B0538BDF5FF7A300DDACA00D /* Pods-LogLlama.release.xcconfig */,
-				2CB7C88549244CA7D8D0696B /* Pods-LogLlamaTests.debug.xcconfig */,
-				1BADD9AF7AE997E5590DEE11 /* Pods-LogLlamaTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		50780732BFFC4DF2037EDAE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				AE29FE1923F3639D00AAF6E6 /* libPathKit.a */,
 				AE29FE1A23F3639D00AAF6E6 /* libSQLite.swift.a */,
-				69868B3F0F7573CBB3AA2306 /* libPods-LogLlama.a */,
-				C084EAAB3C8FF25DD084D7D0 /* libPods-LogLlamaTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,7 +178,6 @@
 				AE437F1B23306D4B001CD09D /* LogLlama */,
 				AE437F2E23306D4D001CD09D /* LogLlamaTests */,
 				AE437F1A23306D4B001CD09D /* Products */,
-				2621FC22CD272EB76B260474 /* Pods */,
 				50780732BFFC4DF2037EDAE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -284,7 +262,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE437F3423306D4D001CD09D /* Build configuration list for PBXNativeTarget "LogLlama" */;
 			buildPhases = (
-				8EA71674DD7E40963E97AD62 /* [CP] Check Pods Manifest.lock */,
 				AE437F1523306D4B001CD09D /* Sources */,
 				AE437F1623306D4B001CD09D /* Frameworks */,
 				AE437F1723306D4B001CD09D /* Resources */,
@@ -294,6 +271,10 @@
 			dependencies = (
 			);
 			name = LogLlama;
+			packageProductDependencies = (
+				077018942C3463C200B1D040 /* PathKit */,
+				077018962C3463C600B1D040 /* SQLite */,
+			);
 			productName = LogLlama;
 			productReference = AE437F1923306D4B001CD09D /* LogLlama.app */;
 			productType = "com.apple.product-type.application";
@@ -302,7 +283,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE437F3723306D4D001CD09D /* Build configuration list for PBXNativeTarget "LogLlamaTests" */;
 			buildPhases = (
-				BC2266CF6AEFECE6DE00256C /* [CP] Check Pods Manifest.lock */,
 				AE437F2723306D4D001CD09D /* Sources */,
 				AE437F2823306D4D001CD09D /* Frameworks */,
 				AE437F2923306D4D001CD09D /* Resources */,
@@ -313,6 +293,9 @@
 				AE437F2D23306D4D001CD09D /* PBXTargetDependency */,
 			);
 			name = LogLlamaTests;
+			packageProductDependencies = (
+				077018982C3464BB00B1D040 /* SwiftHamcrest */,
+			);
 			productName = LogLlamaTests;
 			productReference = AE437F2B23306D4D001CD09D /* LogLlamaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -323,8 +306,9 @@
 		AE437F1123306D4B001CD09D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "Lost Bear Labs";
 				TargetAttributes = {
 					AE437F1823306D4B001CD09D = {
@@ -345,6 +329,11 @@
 				Base,
 			);
 			mainGroup = AE437F1023306D4B001CD09D;
+			packageReferences = (
+				072CD0442C345FFE0055DB4F /* XCRemoteSwiftPackageReference "SwiftHamcrest" */,
+				072CD0472C3460320055DB4F /* XCRemoteSwiftPackageReference "PathKit" */,
+				072CD04A2C3460580055DB4F /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+			);
 			productRefGroup = AE437F1A23306D4B001CD09D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -374,53 +363,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8EA71674DD7E40963E97AD62 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LogLlama-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BC2266CF6AEFECE6DE00256C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LogLlamaTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AE437F1523306D4B001CD09D /* Sources */ = {
@@ -503,10 +445,71 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0770188E2C34620300B1D040 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LogLlama;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2019-2024 Eric R. Johnson";
+				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
+				PRODUCT_NAME = LogLlama;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0770188F2C34620300B1D040 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LogLlama;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2019-2024 Eric R. Johnson";
+				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
+				PRODUCT_NAME = LogLlama;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		077018902C34620300B1D040 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_NAME = LogLlamaTests;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LogLlama.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LogLlama";
+			};
+			name = Debug;
+		};
+		077018912C34620300B1D040 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_NAME = LogLlamaTests;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LogLlama.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LogLlama";
+			};
+			name = Release;
+		};
 		AE437F3223306D4D001CD09D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -538,10 +541,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6E3JQU6925;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -556,6 +561,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -570,6 +578,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -601,10 +610,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6E3JQU6925;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -613,106 +624,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-			};
-			name = Release;
-		};
-		AE437F3523306D4D001CD09D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BFDC74A70866051196F344D /* Pods-LogLlama.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 0;
-				INFOPLIST_FILE = LogLlama/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lostbearlabs.logllama;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		AE437F3623306D4D001CD09D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0538BDF5FF7A300DDACA00D /* Pods-LogLlama.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 0;
-				INFOPLIST_FILE = LogLlama/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lostbearlabs.logllama;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		AE437F3823306D4D001CD09D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2CB7C88549244CA7D8D0696B /* Pods-LogLlamaTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks\n",
-				);
-				INFOPLIST_FILE = LogLlamaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lostbearlabs.LogLlamaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LogLlama.app/Contents/MacOS/LogLlama";
-			};
-			name = Debug;
-		};
-		AE437F3923306D4D001CD09D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BADD9AF7AE997E5590DEE11 /* Pods-LogLlamaTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
-					"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks\n",
-				);
-				INFOPLIST_FILE = LogLlamaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lostbearlabs.LogLlamaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LogLlama.app/Contents/MacOS/LogLlama";
 			};
 			name = Release;
 		};
@@ -731,8 +651,8 @@
 		AE437F3423306D4D001CD09D /* Build configuration list for PBXNativeTarget "LogLlama" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AE437F3523306D4D001CD09D /* Debug */,
-				AE437F3623306D4D001CD09D /* Release */,
+				0770188E2C34620300B1D040 /* Debug */,
+				0770188F2C34620300B1D040 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -740,13 +660,58 @@
 		AE437F3723306D4D001CD09D /* Build configuration list for PBXNativeTarget "LogLlamaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AE437F3823306D4D001CD09D /* Debug */,
-				AE437F3923306D4D001CD09D /* Release */,
+				077018902C34620300B1D040 /* Debug */,
+				077018912C34620300B1D040 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		072CD0442C345FFE0055DB4F /* XCRemoteSwiftPackageReference "SwiftHamcrest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nschum/SwiftHamcrest.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.4;
+			};
+		};
+		072CD0472C3460320055DB4F /* XCRemoteSwiftPackageReference "PathKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kylef/PathKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+		072CD04A2C3460580055DB4F /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		077018942C3463C200B1D040 /* PathKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 072CD0472C3460320055DB4F /* XCRemoteSwiftPackageReference "PathKit" */;
+			productName = PathKit;
+		};
+		077018962C3463C600B1D040 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 072CD04A2C3460580055DB4F /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+		077018982C3464BB00B1D040 /* SwiftHamcrest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 072CD0442C345FFE0055DB4F /* XCRemoteSwiftPackageReference "SwiftHamcrest" */;
+			productName = SwiftHamcrest;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE437F1123306D4B001CD09D /* Project object */;
 }
