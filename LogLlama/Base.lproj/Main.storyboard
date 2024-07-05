@@ -574,20 +574,9 @@ Gw
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="Reference" identifier="" id="pck-63-ERf">
-                                        <view key="view" id="ZAi-wE-wzv">
+                                        <view key="view" identifier="referenceView" id="ZAi-wE-wzv">
                                             <rect key="frame" x="10" y="33" width="446" height="270"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbd-9V-y3m">
-                                                    <rect key="frame" x="-3" y="-3" width="452" height="270"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="6aF-E0-gQa">
-                                                        <font key="font" size="13" name="Courier"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </subviews>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
@@ -595,7 +584,7 @@ Gw
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="referenceCell" destination="6aF-E0-gQa" id="3CS-Tk-of0"/>
+                        <outlet property="referenceView" destination="ZAi-wE-wzv" id="O1O-FJ-NRB"/>
                         <outlet property="tableView" destination="Y5C-sl-PwT" id="agR-m8-hMG"/>
                         <outlet property="textCell" destination="F6Y-kg-71g" id="Vkk-Hs-6dh"/>
                     </connections>

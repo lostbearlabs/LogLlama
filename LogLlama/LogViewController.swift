@@ -9,11 +9,13 @@ class LogViewController: NSViewController {
         static let TextCell = "TextCellID"
     }
     
-    @IBOutlet weak var referenceCell: NSTextFieldCell!
     @IBOutlet weak var textCell: NSTextFieldCell!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var referenceView : NSView!
+    
     var lines: [String] = []
-
+    var referenceTextView : NSTextView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,9 +26,52 @@ class LogViewController: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onScriptProcessingUpdate(_:)), name: .ScriptProcessingUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
         
-        self.referenceCell.stringValue = ScriptParser.getReferenceText()
+        self.setupReferenceText()
     }
+    
+    private func setupReferenceText() {
+        let referenceText = ScriptParser.getReferenceText()
+        
+        // Create an NSTextField to hold the reference text
+        let textView = NSTextView()
+        textView.string = referenceText
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.translatesAutoresizingMaskIntoConstraints = true
+        
+        // Set up the text view to have no intrinsic size restriction
+        textView.minSize = NSSize(width: 0.0, height: 0.0)
+        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        textView.isVerticallyResizable = true
+        textView.isHorizontallyResizable = true
+        textView.autoresizingMask = [.width, .height] // Make sure it resizes horizontally with the scroll view
+        
+        // Create an NSScrollView
+        let scrollView = NSScrollView()
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = true
+        scrollView.autohidesScrollers = true
+        
+        // Embed the text view in the scroll view
+        scrollView.documentView = textView
+                
+        // Add the scroll view to the view controller's view
+        self.referenceView.addSubview(scrollView)
+        
+        // Set up Auto Layout constraints to make the scroll view fill the parent view
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: self.referenceView!.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.referenceView!.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.referenceView!.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.referenceView!.bottomAnchor)
+        ])
 
+        // We'll need this later if the font changes
+        self.referenceTextView = textView
+
+    }
+    
     @objc private func onFontSizeUpdated(_ notification: Notification) {
         if let update = notification.object as? FontSizeUpdate
         {
@@ -35,7 +80,7 @@ class LogViewController: NSViewController {
                 self.textCell?.font = newFont
                 self.tableView.rowHeight = CGFloat(update.size + 4)
                 self.tableView.noteNumberOfRowsChanged()
-                self.referenceCell?.font = newFont
+                self.referenceTextView?.font = newFont
             }
         }
     }
@@ -53,18 +98,18 @@ class LogViewController: NSViewController {
             self.tableView.scrollRowToVisible(tableView.numberOfRows-1)
         }
     }
-
+    
     @IBAction func onDoubleClick(_ sender: Any) {
-           let viewController = self.storyboard?.instantiateController(withIdentifier: "LogDetail") as! LineDetailViewController
-
-           let text = self.getSelectedText();
-           if( text.count > 0 ) {
-               viewController.setText(text: text)
-               viewController.setFont(font: self.textCell!.font!)
-               self.presentAsModalWindow(viewController)
-           }
-       }
-
+        let viewController = self.storyboard?.instantiateController(withIdentifier: "LogDetail") as! LineDetailViewController
+        
+        let text = self.getSelectedText();
+        if( text.count > 0 ) {
+            viewController.setText(text: text)
+            viewController.setFont(font: self.textCell!.font!)
+            self.presentAsModalWindow(viewController)
+        }
+    }
+    
     func getSelectedText() -> String {
         var text = ""
         for (_,idx) in (tableView?.selectedRowIndexes.enumerated())! {
@@ -73,10 +118,10 @@ class LogViewController: NSViewController {
             }
             text = text + self.lines[idx]
         }
-
+        
         return text
     }
-
+    
 }
 
 extension LogViewController: NSTableViewDataSource {
@@ -85,7 +130,7 @@ extension LogViewController: NSTableViewDataSource {
         lines.count
     }
     
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {       
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         lines[row]
     }
     
