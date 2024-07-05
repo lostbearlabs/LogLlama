@@ -8,7 +8,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var fontSize = 14
     var logFileToAnalyze : String?
-    let documentState = DocumentState()
 
     @IBOutlet weak var mnuUndo: NSMenuItem!
 
@@ -34,18 +33,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationCenter.default.post(name: .RunClicked, object: nil)
         }
 
-        self.documentState.onApplicationLoaded()
+        DocumentState.INSTANCE.onApplicationLoaded()
         self.updateWindowTitle()
+    
     }
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-        if( self.documentState.canDiscardText(action: "exit")) {
+        if( DocumentState.INSTANCE.canDiscardText(action: "exit")) {
             return NSApplication.TerminateReply.terminateNow;
         }
         return NSApplication.TerminateReply.terminateCancel;
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+    }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+          return true
     }
 
     @IBAction func openFile(_ sender: Any) {
@@ -67,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let path = result!.path
                 NotificationCenter.default.post(name: .OpenScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
-                self.documentState.onFileOpened(file: path)
+                DocumentState.INSTANCE.onFileOpened(file: path)
                 self.updateWindowTitle()
             }
         } else {
@@ -78,29 +82,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-        if( self.documentState.isApplicationLoaded() ) {
-            if( self.documentState.canDiscardText(action: "load file")) {
+        if( DocumentState.INSTANCE.isApplicationLoaded() ) {
+            if( DocumentState.INSTANCE.canDiscardText(action: "load file")) {
                 // the user has clicked the open-recent menu to open a script
                 NotificationCenter.default.post(name: .OpenScriptFile, object: filename)
-                self.documentState.onFileOpened(file: filename)
+                DocumentState.INSTANCE.onFileOpened(file: filename)
                 self.updateWindowTitle()
             }
         } else {
             // the user has opened a log file via finder; we'll construct a script to process it later once
             // we are loading
             self.logFileToAnalyze = filename
-            self.documentState.onApplicationLoaded()
-            self.documentState.onTextChanged()
+            DocumentState.INSTANCE.onApplicationLoaded()
+            DocumentState.INSTANCE.onTextChanged()
             self.updateWindowTitle()
         }
         return true
     }
 
     @IBAction func newFile(_ sender: Any) {
-        if( self.documentState.canDiscardText(action: "create a new file") ) {
+        if( DocumentState.INSTANCE.canDiscardText(action: "create a new file") ) {
             NotificationCenter.default.post(name: .NewScriptFile, object: nil)
             NotificationCenter.default.post(name: .LogLinesUpdated, object: nil)
-            self.documentState.onNewFile()
+            DocumentState.INSTANCE.onNewFile()
             self.updateWindowTitle()
         }
     }
@@ -109,11 +113,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func saveFile(_ sender: Any) {
-        if( !self.documentState.isFileLoaded() ) {
+        if( !DocumentState.INSTANCE.isFileLoaded() ) {
             self.saveFileAs(sender)
         } else {
-            NotificationCenter.default.post(name: .SaveScriptFile, object: self.documentState.getCurrentFile())
-            self.documentState.onFileSaved()
+            NotificationCenter.default.post(name: .SaveScriptFile, object: DocumentState.INSTANCE.getCurrentFile())
+            DocumentState.INSTANCE.onFileSaved()
             self.updateWindowTitle()
         }
     }
@@ -134,7 +138,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let path = result!.path
                 NotificationCenter.default.post(name: .SaveScriptFile, object: path)
                 NSDocumentController.shared.noteNewRecentDocumentURL(URL(fileURLWithPath: path))
-                self.documentState.onFileSaved(file: path)
+                DocumentState.INSTANCE.onFileSaved(file: path)
                 self.updateWindowTitle()
             }
         }
@@ -142,7 +146,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     
     @objc private func onTextChanged(_ notification: Notification) {
-        self.documentState.onTextChanged()
+        DocumentState.INSTANCE.onTextChanged()
         self.updateWindowTitle()
     }
     
@@ -185,7 +189,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func updateWindowTitle() {
-        let title = self.documentState.getWindowTitle()
+        let title = DocumentState.INSTANCE.getWindowTitle()
         NSApplication.shared.windows.first!.title = title
     }
     

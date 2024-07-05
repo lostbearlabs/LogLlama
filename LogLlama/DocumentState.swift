@@ -5,6 +5,9 @@ import AppKit
  Holds the AppDelegate's state with regard to whether the script file has been loaded/saved/modified.
  */
 class DocumentState {
+    
+    static let INSTANCE = DocumentState()
+    
     var currentFile : String?
     var textChanged = false
     var applicationLoaded = false
