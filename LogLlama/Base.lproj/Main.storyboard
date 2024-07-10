@@ -49,7 +49,7 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="File" id="dMs-cI-mzQ">
+                            <menuItem title="File" identifier="mnuFile" id="dMs-cI-mzQ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
@@ -90,7 +90,7 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Edit" id="5QF-Oa-p0T">
+                            <menuItem title="Edit" identifier="mnuEdit" id="5QF-Oa-p0T">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Edit" id="W48-6f-4Dl">
                                     <items>
@@ -171,12 +171,12 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Script" autoenablesItems="NO" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Execute" keyEquivalent="r" id="snW-S8-Cw5">
+                                        <menuItem title="Execute" keyEquivalent="r" identifier="ScriptExecute" id="snW-S8-Cw5">
                                             <connections>
                                                 <action selector="onRunClicked:" target="Voe-Tx-rLC" id="ez8-kB-jKQ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Undo" keyEquivalent="u" id="pY5-tN-MWd">
+                                        <menuItem title="Undo" keyEquivalent="u" identifier="ScriptUndo" id="pY5-tN-MWd">
                                             <connections>
                                                 <action selector="onClickUndo:" target="Voe-Tx-rLC" id="FGR-SV-J7I"/>
                                             </connections>
@@ -224,11 +224,14 @@ DQ
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="4yk-a6-zes"/>
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LogLlama" customModuleProvider="target">
                     <connections>
+                        <outlet property="mnuEdit" destination="5QF-Oa-p0T" id="lc4-bU-1MD"/>
+                        <outlet property="mnuExecute" destination="snW-S8-Cw5" id="g5w-93-cfG"/>
+                        <outlet property="mnuFile" destination="dMs-cI-mzQ" id="BWm-xf-23O"/>
                         <outlet property="mnuUndo" destination="pY5-tN-MWd" id="DcI-ps-W0Z"/>
                     </connections>
                 </customObject>
@@ -375,7 +378,7 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="e32-Ia-EM3">
+                            <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" id="e32-Ia-EM3">
                                 <rect key="frame" x="20" y="4" width="301" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="xTt-PF-9hM">

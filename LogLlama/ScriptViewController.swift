@@ -23,10 +23,25 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         NotificationCenter.default.addObserver(self, selector: #selector(onUndoClicked(_:)), name: .UndoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onShouldAnalyzeLogFile(_:)), name: .AnalyzeLogFile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onRunStarted(_:)), name: .RunStarted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onRunFinished(_:)), name: .RunFinished, object: nil)
 
         self.scriptText.delegate = self
     }
 
+    @IBAction func onRunStarted(_ sender: Any) {
+        enableUI(enabled: false)
+    }
+    
+    @IBAction func onRunFinished(_ sender: Any) {
+        enableUI(enabled: true)
+    }
+
+    func enableUI(enabled: Bool) {
+        self.scriptText.isEditable = enabled
+    }
+
+    
     @objc private func onFontSizeUpdated(_ notification: Notification) {
         if let update = notification.object as? FontSizeUpdate
         {
@@ -125,6 +140,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     
     func scriptStarted() {
         DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .RunStarted, object:nil)
             NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
         }
     }
@@ -148,6 +164,8 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             }
             self.undoResults.append(update)
             self.sendUndoState()
+            
+            NotificationCenter.default.post(name: .RunFinished, object:nil)
         }
     }
 

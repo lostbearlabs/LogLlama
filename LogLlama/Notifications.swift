@@ -16,4 +16,7 @@ extension Notification.Name {
     static let CanUndoUpdated = Notification.Name("CanUndoUpdated")    // payload Bool
     static let UndoClicked = Notification.Name("UndoClicked")    // payload null
     static let ShowLineDetailClicked = Notification.Name("ShowLineDetailClicked")    // payload null
+    static let RunStarted = Notification.Name("RunStarted") // payload null
+    static let RunFinished = Notification.Name("RunFinished") // payload null
+
 }

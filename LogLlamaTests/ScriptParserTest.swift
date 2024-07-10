@@ -215,6 +215,21 @@ class ScriptParserTest: XCTestCase {
         assertThat(cmd.limit, equalTo(1234))
     }
 
+    func test_parse_sleep_recognizesIt() {
+        let sut = givenScriptParser()
+        let script = "sleep 1234"
+        let (result, commands) = sut.parse(script: script)
+
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        assertThat(commands[0], instanceOf(LimitCommand.self))
+
+        let cmd = commands[0] as! SleepCommand
+        _ = cmd.validate()
+        assertThat(cmd.seconds, equalTo(1234))
+    }
+
+
 
     func test_parse_sql_recognizesIt() {
          let sut = givenScriptParser()

@@ -26,5 +26,6 @@ class WindowController: NSWindowController, NSWindowDelegate {
         
         return false
     }
+    
 
 }

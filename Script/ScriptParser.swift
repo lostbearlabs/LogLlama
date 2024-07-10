@@ -39,6 +39,7 @@ class ScriptParser {
         ("@", 2, {tokens, callback in return AddFieldCommand(callback: callback, fieldToAdd: tokens[1], fieldToMatch: tokens[2])}),
         ("/f", 1, {tokens, callback in return DivideByFieldCommand(callback: callback, field: tokens[1])}),
         ("replace", 2, {tokens, callback in return ReplaceCommand(callback: callback, oldText: tokens[1], newText: tokens[2])}),
+        ("sleep", 1, { tokens, callback in return SleepCommand(callback: callback, seconds: Int(tokens[1]) ?? 10 )}),
 
     ]
     

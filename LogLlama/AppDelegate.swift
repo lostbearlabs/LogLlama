@@ -8,8 +8,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var fontSize = 14
     var logFileToAnalyze : String?
+    var wasUndoEnabled: Bool = true
 
     @IBOutlet weak var mnuUndo: NSMenuItem!
+    @IBOutlet weak var mnuExecute: NSMenuItem!
+    @IBOutlet weak var mnuEdit: NSMenuItem!
+    @IBOutlet weak var mnuFile: NSMenuItem!
 
     @IBAction func onClickUndo(_ sender: Any) {
         NotificationCenter.default.post(name: .UndoClicked, object: nil)
@@ -18,12 +22,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func onCanUndoUpdated(_ notification: Notification) {
         let enabled = notification.object as! Bool
         self.mnuUndo.isEnabled = enabled
+        wasUndoEnabled = enabled
     }
 
+    @IBAction func onRunStarted(_ sender: Any) {
+        print("run started")
+        enableUI(enabled: false)
+        NSCursor.operationNotAllowed.push()
+    }
+    
+    @IBAction func onRunFinished(_ sender: Any) {
+        print("run finished")
+        enableUI(enabled: true)
+        NSCursor.operationNotAllowed.pop()
+    }
+
+    func enableUI(enabled: Bool) {
+        self.mnuUndo.isEnabled = enabled && wasUndoEnabled
+        self.mnuExecute.isEnabled = enabled
+        self.mnuEdit.isEnabled = enabled
+        self.mnuFile.isEnabled = enabled
+    }
+    
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTextChanged(_:)), name: .ScriptTextChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onCanUndoUpdated(_:)), name: .CanUndoUpdated, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(onRunStarted(_:)), name: .RunStarted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onRunFinished(_:)), name: .RunFinished, object: nil)
         
         self.loadFontSize()
         self.sendFontSizeUpdate()
