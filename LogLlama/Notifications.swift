@@ -18,5 +18,6 @@ extension Notification.Name {
     static let ShowLineDetailClicked = Notification.Name("ShowLineDetailClicked")    // payload null
     static let RunStarted = Notification.Name("RunStarted") // payload null
     static let RunFinished = Notification.Name("RunFinished") // payload null
+    static let PopulateDemoText = Notification.Name("PopulateDemoText") // payload null
 
 }

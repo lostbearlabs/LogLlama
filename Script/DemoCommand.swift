@@ -30,9 +30,25 @@ class DemoCommand : ScriptCommand {
     
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Generating demo data")
+
+        let numRaces = 3
         
+        for i in 1...numRaces {
+            runRace(raceNum: i, logLines: &logLines, runState: &runState)
+        }
+        
+        self.callback.scriptUpdate(text: "... generated \(self.linesAdded) log lines")
+        return true
+
+    }
+
+    func runRace(raceNum: Int, logLines: inout [LogLine], runState: inout RunState) {
+
         let numCars = 10
         let numLaps = 5
+
+        self.log(text: "*** Race \(raceNum) ***", logLines: &logLines)
+        
         var cars = Array(1...numCars)
         var state : [Int:State] = [:]
         var lap : [Int:Int] = [:]
@@ -45,25 +61,23 @@ class DemoCommand : ScriptCommand {
             let car = cars.randomElement()!
             
             if( state[car] == State.READY) {
-                self.log(text: "car \(car) STARTED", logLines: &logLines)
+                self.log(text: "race=\(raceNum), car=\(car), event=STARTED", logLines: &logLines)
                 state[car] = State.RACING
                 lap[car] = 1
             } else if (Int.random(in: 1...100) < 10) {
-                self.log(text: "car \(car) CRASHED", logLines: &logLines)
+                self.log(text: "race=\(raceNum), car=\(car), event=CRASHED", logLines: &logLines)
                 cars.removeAll(where: {$0 == car})
                 state[car] = State.CRASHED
             } else if ( lap[car] == numLaps ) {
-                self.log(text: "car \(car) FINISHED", logLines: &logLines)
+                self.log(text: "race=\(raceNum), car=\(car), event=FINISHED", logLines: &logLines)
                 cars.removeAll(where: {$0 == car})
                 state[car] = State.DONE
             } else {
                 lap[car] = lap[car]! + 1
-                self.log(text: "car \(car) LAP \(lap[car]!)", logLines: &logLines)
+                self.log(text: "race=\(raceNum), car=\(car), event=LAP, lapNum=\(lap[car]!)", logLines: &logLines)
             }
         }
         
-        self.callback.scriptUpdate(text: "... generated \(self.linesAdded) log lines")
-        return true
     }
     
     func log(text : String, logLines: inout [LogLine]) {

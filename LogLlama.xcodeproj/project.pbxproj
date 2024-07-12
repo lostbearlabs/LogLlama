@@ -11,6 +11,7 @@
 		077018952C3463C200B1D040 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 077018942C3463C200B1D040 /* PathKit */; };
 		077018972C3463C600B1D040 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 077018962C3463C600B1D040 /* SQLite */; };
 		077018992C3464BB00B1D040 /* SwiftHamcrest in Frameworks */ = {isa = PBXBuildFile; productRef = 077018982C3464BB00B1D040 /* SwiftHamcrest */; };
+		07AE3CE92C41CD5F00E2F172 /* DemoScriptText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */; };
 		34A5F77824703DD1A8A7C457 /* AddFieldCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */; };
 		34A5FBCA0D4F56C680E00F25 /* ChopCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */; };
 		34A5FC7E9F66A71A34E86EEC /* CommandTestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCommand.swift; sourceTree = "<group>"; };
+		07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScriptText.swift; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
 		34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChopCommandTest.swift; sourceTree = "<group>"; };
 		34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTestContext.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				AE368DBF252BC59A0000B333 /* FilterSectionCommand.swift */,
 				AE368DC5252D00630000B333 /* ReplaceCommand.swift */,
 				070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */,
+				07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */,
 				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
 				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
+				07AE3CE92C41CD5F00E2F172 /* DemoScriptText.swift in Sources */,
 				AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */,
 				AE368DA5252B7B270000B333 /* LimitCommand.swift in Sources */,
 				AE368DB4252BC5150000B333 /* SortByFieldsCommand.swift in Sources */,

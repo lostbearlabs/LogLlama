@@ -58,6 +58,11 @@
                                                 <action selector="newFile:" target="Voe-Tx-rLC" id="yN3-Th-TB7"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="New with demo" keyEquivalent="N" identifier="mnuNewWithDemo" id="I7i-rj-isw">
+                                            <connections>
+                                                <action selector="newFileWithDemo:" target="Voe-Tx-rLC" id="eg9-R2-bAD"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
                                                 <action selector="openFile:" target="Voe-Tx-rLC" id="r2N-Nd-EVM"/>

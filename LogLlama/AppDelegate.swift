@@ -136,7 +136,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.updateWindowTitle()
         }
     }
-    
+
+    @IBAction func newFileWithDemo(_ sender: Any) {
+        if( DocumentState.INSTANCE.canDiscardText(action: "create a new file") ) {
+            NotificationCenter.default.post(name: .NewScriptFile, object: nil)
+            NotificationCenter.default.post(name: .LogLinesUpdated, object: nil)
+            DocumentState.INSTANCE.onNewFile()
+            self.updateWindowTitle()
+            
+            DocumentState.INSTANCE.onTextChanged()
+            NotificationCenter.default.post(name: .PopulateDemoText, object: nil)
+        }
+    }
+
     @IBAction func closeFile(_ sender: Any) {
     }
     

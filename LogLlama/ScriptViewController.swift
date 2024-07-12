@@ -25,7 +25,8 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         NotificationCenter.default.addObserver(self, selector: #selector(onShouldAnalyzeLogFile(_:)), name: .AnalyzeLogFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunStarted(_:)), name: .RunStarted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunFinished(_:)), name: .RunFinished, object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(onPopulateDemoText(_:)), name: .PopulateDemoText, object: nil)
+        
         self.scriptText.delegate = self
     }
 
@@ -188,4 +189,9 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         print("undoResults.count=\(undoResults.count), undo enabled=\(enabled)")
         NotificationCenter.default.post(name: .CanUndoUpdated, object: enabled)
     }
+    
+    @objc private func onPopulateDemoText(_ notification: Notification) {
+        self.scriptText.string = demoScriptText
+    }
+
 }
