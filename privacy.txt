@@ -1,0 +1,1 @@
+The LogLlama application does not collect or report any data.  It runs entirely on your own machine, reading and writing files that you specify.

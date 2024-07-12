@@ -466,6 +466,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LogLlama/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LogLlama;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2019-2024 Eric R. Johnson";
@@ -492,6 +493,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6E3JQU6925;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LogLlama/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LogLlama;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2019-2024 Eric R. Johnson";
