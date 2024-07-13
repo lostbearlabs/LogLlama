@@ -5,7 +5,7 @@ import Cocoa
  */
 class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback {
     
-
+    
     @IBOutlet var scriptText: NSTextView!
     var running = false
     var lastResults : [LogLine] = []
@@ -26,10 +26,11 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         NotificationCenter.default.addObserver(self, selector: #selector(onRunStarted(_:)), name: .RunStarted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunFinished(_:)), name: .RunFinished, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPopulateDemoText(_:)), name: .PopulateDemoText, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onLoadLogFile(_:)), name: .LoadLogFile, object: nil)
         
         self.scriptText.delegate = self
     }
-
+    
     @IBAction func onRunStarted(_ sender: Any) {
         enableUI(enabled: false)
     }
@@ -37,11 +38,11 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     @IBAction func onRunFinished(_ sender: Any) {
         enableUI(enabled: true)
     }
-
+    
     func enableUI(enabled: Bool) {
         self.scriptText.isEditable = enabled
     }
-
+    
     
     @objc private func onFontSizeUpdated(_ notification: Notification) {
         if let update = notification.object as? FontSizeUpdate
@@ -52,7 +53,13 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             }
         }
     }
-
+    
+    @objc private func onLoadLogFile(_ notification: Notification) {
+        if let path = notification.object as? String {
+            self.runScript(script: "< \(path)")
+        }
+    }
+    
     @objc private func onFileLoaded(_ notification: Notification) {
         if let path = notification.object as? String
         {
@@ -63,14 +70,14 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
                 self.scriptText.string = data as String
                 
                 NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
-
+                
                 self.undoResults.removeAll()
                 self.sendUndoState()
-
+                
             } catch {}
         }
     }
-
+    
     @objc private func onShouldAnalyzeLogFile(_ notification: Notification) {
         if let path = notification.object as? String
         {
@@ -79,7 +86,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             NotificationCenter.default.post(name: .ScriptTextChanged, object: nil)
         }
     }
-
+    
     
     @objc private func onSaveFile(_ notification: Notification) {
         if let path = notification.object as? String
@@ -88,7 +95,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
                 let data = self.scriptText.string
                 let url = URL( fileURLWithPath: path)
                 try data.write(to: url, atomically: true, encoding:
-                    String.Encoding.utf8 )
+                                String.Encoding.utf8 )
             } catch {
                 print("Unexpected error saving file: \(error).")
             }
@@ -98,7 +105,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     func textDidChange(_ notification: Notification) {
         NotificationCenter.default.post(name: .ScriptTextChanged, object: nil)
     }
-
+    
     @objc private func onNewFile(_ notification: Notification) {
         self.scriptText.string = ""
         NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
@@ -107,13 +114,16 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     }
     
     @objc private func onRunClicked(_ notification: Notification) {
+        let (script, selection) = self.getTextToRun();
+        if( !selection ) {
+            self.lastResults = []
+        }
+        self.runScript(script: script)
+    }
+    
+    private func runScript(script: String) {
         if( !running ) {
             running = true
-            
-            let (script, selection) = self.getTextToRun();
-            if( !selection ) {
-                self.lastResults = []
-            }
             
             let dispatchQueue = DispatchQueue(label: "ScriptEngine", qos: .background)
             dispatchQueue.async{
@@ -158,8 +168,8 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             let update = LogLinesUpdate(lines: logLines)
             NotificationCenter.default.post(name: .LogLinesUpdated, object: update)
             self.running = false
-
-
+            
+            
             while self.undoResults.count > self.maxUndo {
                 self.undoResults.remove(at: 0)
             }
@@ -169,12 +179,12 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             NotificationCenter.default.post(name: .RunFinished, object:nil)
         }
     }
-
+    
     @objc private func onUndoClicked(_ notification: Notification) {
         if let _ = self.undoResults.popLast() {
             if let update = self.undoResults.last {
                 NotificationCenter.default.post(name: .LogLinesUpdated, object: update)
-
+                
                 self.lastResults.removeAll()
                 for line in update.lines {
                     self.lastResults.append(line)
@@ -183,7 +193,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         }
         self.sendUndoState()
     }
-
+    
     func sendUndoState() {
         let enabled = self.undoResults.count > 0
         print("undoResults.count=\(undoResults.count), undo enabled=\(enabled)")
@@ -193,5 +203,5 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     @objc private func onPopulateDemoText(_ notification: Notification) {
         self.scriptText.string = demoScriptText
     }
-
+    
 }

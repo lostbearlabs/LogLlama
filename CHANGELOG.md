@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Pending
+- Change File Load/Save command text so it's clear they refer to the script
+- Add new `File ... Load Log` menu command, to allow file loading when `<` won't work because full disk access is not enabled.
+
 ## [1.4.0] - 2024-07-13
 - Tune up build so it compiles and runs again. Switch from CocoaPods to Swift Package Manager.
 - Add "New with demo"

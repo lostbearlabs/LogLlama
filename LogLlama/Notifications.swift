@@ -19,5 +19,6 @@ extension Notification.Name {
     static let RunStarted = Notification.Name("RunStarted") // payload null
     static let RunFinished = Notification.Name("RunFinished") // payload null
     static let PopulateDemoText = Notification.Name("PopulateDemoText") // payload null
+    static let LoadLogFile = Notification.Name("LoadLogFile")     // payload = log file path (String)
 
 }

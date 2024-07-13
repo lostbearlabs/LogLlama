@@ -237,5 +237,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.default.post(name: .ShowLineDetailClicked, object: nil)
     }
 
+    @IBAction func onLoadLog(_ sender: Any) {
+        let dialog = NSOpenPanel();
+        
+        dialog.title                   = "Choose a log file";
+        dialog.showsResizeIndicator    = true;
+        dialog.showsHiddenFiles        = false;
+        dialog.canChooseDirectories    = true;
+        dialog.canCreateDirectories    = false;
+        dialog.allowsMultipleSelection = false;
+        dialog.allowedFileTypes        = nil; // allow any file types
+        
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            let result = dialog.url // Pathname of the file
+            
+            if (result != nil) {
+                let path = result!.path
+                NotificationCenter.default.post(name: .LoadLogFile, object: path)
+            }
+        } else {
+            // User clicked on "Cancel"
+            return
+        }
+        
+    }
+
 }
 
