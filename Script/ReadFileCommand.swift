@@ -1,5 +1,6 @@
 import Foundation
 import PathKit
+import Cocoa
 
 /**
  Inputs log lines one or more log files as specified by glob pattern.
@@ -14,7 +15,7 @@ class ReadFileCommand : ScriptCommand {
     init(callback: ScriptCallback, pattern: String) {
         self.callback = callback
         self.pattern = pattern
-
+        
         do {
             // parse the regex for efficient use later
             let nameValuePattern="(\\w+)=(\\w+)"
@@ -28,27 +29,69 @@ class ReadFileCommand : ScriptCommand {
         self.files = Path.glob(pattern)
         if self.files.count == 0 {
             self.callback.scriptUpdate(text: "no file(s) found that look like: \(self.pattern)")
+            self.checkFullDiskAccess()
             return false
         }
         return true
     }
+    
+    func checkFullDiskAccess() {
+        let fileManager = FileManager.default
+        let protectedPath = "/Library"
+        var isDirectory: ObjCBool = false
 
+        let readable = fileManager.fileExists(atPath: protectedPath, isDirectory: &isDirectory)
+        if (readable) {
+            print("full disk access does appear to be enabled")
+        } else {
+            DispatchQueue.main.async {
+                self.showFullDiskAccessAlert()
+            }
+        }
+    }
+    
+    func showFullDiskAccessAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Full Disk Access Required"
+        alert.informativeText = """
+            This application requires Full Disk Access to read log files using the < command.
+            Please enable Full Disk Access in the System Preferences.
+            If you do not want to enable Full Disk Access, you can still load logs using the "File ... Load Log" menu command.
+            
+            1. Open System Settings.
+            2. Go to Privacy & Security.
+            3. Select the Full Disk Access item.
+            4. Add LogLlama to the list (if not already present) and enable it.
+            5. Save your script and restart LogLlama
+            """
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Open System Preferences")
+        alert.addButton(withTitle: "Cancel")
+        
+        let response = alert.runModal()
+        if response == .alertFirstButtonReturn {
+            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles") {
+                NSWorkspace.shared.open(url)
+            }
+        }
+    }
+    
     func changesData() -> Bool {
         true
     }
-
+    
     
     func run(logLines : inout [LogLine], runState : inout RunState) -> Bool {
         let sortedPaths = self.sortFilesByCreationDate()
-
+        
         for file in sortedPaths {
             self.callback.scriptUpdate(text: "Reading file \(file.string)")
-
+            
             do {
                 let data = try String(contentsOfFile: file.string, encoding: .utf8)
                 let ar = data.components(separatedBy: .newlines)
                 self.callback.scriptUpdate(text: "... processing \(ar.count) lines")
-
+                
                 var numIncluded = 0
                 var numExcluded = 0
                 var numRead = 0
@@ -83,7 +126,7 @@ class ReadFileCommand : ScriptCommand {
         self.callback.scriptUpdate(text: "... field names: \(self.fieldNames.sorted())")
         return true
     }
-
+    
     func findNameValueFields(logLine:LogLine) {
         if( self.nameValueRegex != nil ) {
             let text = logLine.text
@@ -91,50 +134,50 @@ class ReadFileCommand : ScriptCommand {
             for match in matches {
                 let nameRange = Range(match.range(at: 1), in: text)!
                 let name = String(text[nameRange])
-
+                
                 let valRange = Range(match.range(at: 2), in: text)!
                 let val = String(text[valRange])
-
+                
                 logLine.namedFieldValues[name] = val
                 self.fieldNames.insert(name)
             }
         }
     }
-
+    
     func lineWanted(line : String, runState: RunState) -> Bool {
-
+        
         for regex in runState.filterRequired {
             if !self.doesMatch(line: line, regex: regex) {
                 return false
             }
         }
-
+        
         for regex in runState.filterExcluded {
             if self.doesMatch(line: line, regex: regex) {
                 return false
             }
         }
-
+        
         return true
     }
-
+    
     func doesMatch(line: String, regex: NSRegularExpression) -> Bool {
         let results = regex.matches(in: line,
                                     range: NSRange(line.startIndex..., in: line))
-
+        
         return results.count > 0
     }
-
+    
     func sortFilesByCreationDate() -> [Path] {
         return self.files.sorted(by: compareCreationDate)
     }
-
+    
     func compareCreationDate(x: Path, y:Path) -> Bool {
         let dX = getCreationDate(path: x)
         let dY = getCreationDate(path: y)
         return dX.compare(dY) == ComparisonResult.orderedAscending
     }
-
+    
     func getCreationDate(path: Path) -> Date {
         do {
             let attrs = try FileManager.default.attributesOfItem(atPath: path.string) as NSDictionary
@@ -143,5 +186,5 @@ class ReadFileCommand : ScriptCommand {
             return Date()
         }
     }
-
+    
 }
