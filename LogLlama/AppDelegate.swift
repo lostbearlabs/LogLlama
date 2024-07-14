@@ -223,7 +223,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func onHelpClicked(_ sender: Any) {
-        if let url = URL(string: "https://github.com/lostbearlabs/LogLlama") {
+        if let url = URL(string: "https://www.lostbearlabs.com/LogLlama") {
             NSWorkspace.shared.open(url)
         }
     }

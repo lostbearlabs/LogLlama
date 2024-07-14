@@ -224,7 +224,7 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="LogLlama Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="LogLlama Documentation" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="onHelpClicked:" target="Voe-Tx-rLC" id="kQc-Py-Ug3"/>
                                             </connections>

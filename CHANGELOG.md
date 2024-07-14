@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Change File Load/Save command text so it's clear they refer to the script
 - Add new `File ... Load Log` menu command, to allow file loading when `<` won't work because full disk access is not enabled.
 - When a file can't be read with <, check for full disk access and display a warning if not enabled.
+- Repoint help menu to GitHub pages documentation site
 
 ## [1.4.0] - 2024-07-13
 - Tune up build so it compiles and runs again. Switch from CocoaPods to Swift Package Manager.
