@@ -20,4 +20,4 @@ or you can [build it yourself from source code](https://github.com/lostbearlabs/
 - [Working with Sections](./working_with_sections.md)
 - [SQL Queries](./sql_queries.md)
 - [LlamaScript Command Reference](./llamascript_command_reference.md)
-
+- [Tips & Tricks](./tips_and_tricks.md)
