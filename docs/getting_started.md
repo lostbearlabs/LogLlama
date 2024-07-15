@@ -1,29 +1,52 @@
 # Getting Started
 
-TODO -- THIS PAGE IS STILL UNDER CONSTRUCTION
+## Working with scripts
 
-## Example
-
-Here is a sample script.  It reads the log of an automobile race and performs some filtering and hilighting.
+In LogLlama, you load and work with log data using scripts.  Here's an example:
 
 ```
-< /tmp/race.txt
+# Read log file
+< ~/Desktop/sample.log
 
-: yellow
-~ LAP=2
-
+# Hilight the word "Example" in green
 : lightgreen
-= STARTED
-
-: lightblue
-+ FINISHED
-
-: red
-+ CRASHED
+~ Example
 ```
 
-Here is what the screen looks like after running this script:
+You can type scripts into the script panel in the top left of the LlogLlama window like this:
 
-![Example1](./images/example1.png)
+![LlogLlama window](./images/getting_started_1.png)
+
+You can load and save scripts as text files using the following menu commands:
+
+- `File ... New Script`
+- `File ... New Script with demo`
+- `File ... Open Script`
+- `File ... Recent Scripts`
+
+![File menu](./images/getting_started_2.png)
+
+
+## Loading Log Data
+
+The usual way to load data is using the script command `<`, for example:
+
+```
+< ~/Desktop/sample.log
+```
+
+Because LogLlama is a sandboxed application, your script can only load files from disk this way if you grant full disk access.  
+In your System Settings, navigate to "Privacy and Security ... Full Disk Access" and make sure LogLlama is present and enabled.
+
+If you do not want to grant full disk access to LogLlama, you can log log data manually using the menu command `File ... Load log...`
+
+## Demo Log Data
+
+Many of the examples in this documentation use randomly generated log data.  You can generate random log lines using the `demo` command:
+
+```
+# Generate random sample data
+demo
+```
 
 
