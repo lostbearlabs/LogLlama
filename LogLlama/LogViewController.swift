@@ -13,6 +13,7 @@ class LogViewController: NSViewController {
     
     @IBOutlet weak var textCell: NSTextFieldCell!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tableColumn: NSTableColumn!
     @IBOutlet weak var referenceView : NSView!
     
     var lines: [String] = []
@@ -24,6 +25,7 @@ class LogViewController: NSViewController {
         self.tableView.delegate = self as? NSTableViewDelegate
         self.tableView.dataSource = self
         self.tableView.columnAutoresizingStyle = NSTableView.ColumnAutoresizingStyle.firstColumnOnlyAutoresizingStyle
+        self.tableView.sizeLastColumnToFit()
         
         NotificationCenter.default.addObserver(self, selector: #selector(onScriptProcessingUpdate(_:)), name: .ScriptProcessingUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
@@ -136,7 +138,6 @@ extension LogViewController: NSTableViewDataSource {
     }
     
     func tableView(_: NSTableView, shouldEdit: NSTableColumn?, row: Int) -> Bool {
-        // TODO: this is not being honored/checked and I don't know why.
         false
     }
 }

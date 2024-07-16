@@ -556,7 +556,7 @@ Gw
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn identifier="TextCellID" editable="NO" width="409" minWidth="40" maxWidth="10000" id="kMA-vv-fxf">
+                                                                    <tableColumn identifier="TextCellID" editable="NO" width="437" minWidth="40" maxWidth="10000" id="kMA-vv-fxf">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -599,6 +599,7 @@ Gw
                     </view>
                     <connections>
                         <outlet property="referenceView" destination="ZAi-wE-wzv" id="O1O-FJ-NRB"/>
+                        <outlet property="tableColumn" destination="kMA-vv-fxf" id="c1c-UO-gf4"/>
                         <outlet property="tableView" destination="Y5C-sl-PwT" id="agR-m8-hMG"/>
                         <outlet property="textCell" destination="F6Y-kg-71g" id="Vkk-Hs-6dh"/>
                     </connections>
