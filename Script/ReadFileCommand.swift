@@ -8,7 +8,7 @@ import Cocoa
 class ReadFileCommand : ScriptCommand {
     var callback : ScriptCallback
     var pattern : String
-    var files : [Path] = []
+    var files : [URL] = []
     var fieldNames = Set<String>()
     var nameValueRegex:NSRegularExpression?
     
@@ -26,53 +26,56 @@ class ReadFileCommand : ScriptCommand {
     }
     
     func validate() -> Bool {
-        self.files = Path.glob(pattern)
+        self.files = Path.glob(self.pattern).map { URL(fileURLWithPath: $0.string)}
+        let fileManager = FileManager.default
+        if self.files.count==0 || !self.files.allSatisfy({ fileManager.isReadableFile(atPath: $0.path)}) {
+            self.files.removeAll()
+            
+            let dispatchGroup = DispatchGroup()
+            dispatchGroup.enter()
+                
+            DispatchQueue.main.async {
+                self.showFileChooserDialog(initialPath: self.pattern, dispatchGroup: dispatchGroup)
+            }
+
+            dispatchGroup.wait()
+            self.callback.scriptUpdate(text: "\(self.files.count) files selected by user")
+        }
+        
         if self.files.count == 0 {
             self.callback.scriptUpdate(text: "no file(s) found that look like: \(self.pattern)")
-            self.checkFullDiskAccess()
             return false
         }
         return true
     }
-    
-    func checkFullDiskAccess() {
-        let fileManager = FileManager.default
-        let protectedPath = "/Library"
-        var isDirectory: ObjCBool = false
 
-        let readable = fileManager.fileExists(atPath: protectedPath, isDirectory: &isDirectory)
-        if (readable) {
-            print("full disk access does appear to be enabled")
-        } else {
-            DispatchQueue.main.async {
-                self.showFullDiskAccessAlert()
-            }
-        }
-    }
-    
-    func showFullDiskAccessAlert() {
-        let alert = NSAlert()
-        alert.messageText = "Full Disk Access Required"
-        alert.informativeText = """
-            This application requires Full Disk Access to read log files using the < command.
-            Please enable Full Disk Access in the System Preferences.
-            If you do not want to enable Full Disk Access, you can still load logs using the "File ... Load Log" menu command.
-            
-            1. Open System Settings.
-            2. Go to Privacy & Security.
-            3. Select the Full Disk Access item.
-            4. Add LogLlama to the list (if not already present) and enable it.
-            5. Save your script and restart LogLlama
-            """
-        alert.alertStyle = .warning
-        alert.addButton(withTitle: "Open System Preferences")
-        alert.addButton(withTitle: "Cancel")
+    func showFileChooserDialog(initialPath: String, dispatchGroup: DispatchGroup) {
+        let openPanel = NSOpenPanel()
         
-        let response = alert.runModal()
-        if response == .alertFirstButtonReturn {
-            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles") {
-                NSWorkspace.shared.open(url)
+        // Configure the open panel
+        openPanel.title = "Please select file(s) so LogLlama can access them."
+        openPanel.showsResizeIndicator = true
+        openPanel.showsHiddenFiles = false
+        openPanel.canChooseDirectories = true
+        openPanel.canChooseFiles = true
+        openPanel.allowsMultipleSelection = true
+        
+        // Set the initial path
+        if let initialDirectoryURL = URL(string: initialPath) {
+            openPanel.directoryURL = initialDirectoryURL
+        }
+
+        // Display the open panel
+        openPanel.begin { (result) in
+            if result == .OK && !openPanel.urls.isEmpty {
+                for url in openPanel.urls {
+                    self.callback.scriptUpdate(text: "Selected file: \(url)")
+                    self.files.append(url)
+                }
+            } else {
+                self.callback.scriptUpdate(text: "User canceled the selection.")
             }
+            dispatchGroup.leave()
         }
     }
     
@@ -80,15 +83,41 @@ class ReadFileCommand : ScriptCommand {
         true
     }
     
+    func isFileReadable(file: Path) -> Bool {
+        if( !FileManager.default.isReadableFile(atPath: file.string)) {
+            self.callback.scriptUpdate(text: "Not a readable file: \(file.string)")
+            return false
+        }
+        
+        guard let fileHandle = FileHandle(forReadingAtPath: file.string) else {
+            print("Unable to open file at path \(file.string)")
+               return false
+           }
+           
+           defer {
+               fileHandle.closeFile()
+           }
+
+        return true
+    }
     
+    func readFileContents(file: URL) -> String? {
+        do {
+            let data = try String(contentsOfFile: file.path, encoding: .utf8)
+            return data
+        } catch {
+            self.callback.scriptUpdate(text: "... error reading file: \(error)")
+            return nil
+        }
+    }
+
     func run(logLines : inout [LogLine], runState : inout RunState) -> Bool {
         let sortedPaths = self.sortFilesByCreationDate()
         
         for file in sortedPaths {
-            self.callback.scriptUpdate(text: "Reading file \(file.string)")
+            self.callback.scriptUpdate(text: "Reading file \(file.path)")
             
-            do {
-                let data = try String(contentsOfFile: file.string, encoding: .utf8)
+            if let data = readFileContents(file: file) {
                 let ar = data.components(separatedBy: .newlines)
                 self.callback.scriptUpdate(text: "... processing \(ar.count) lines")
                 
@@ -118,8 +147,7 @@ class ReadFileCommand : ScriptCommand {
                     }
                 }
                 self.callback.scriptUpdate(text: "... read \(ar.count) lines, kept \(numIncluded), discarded \(numExcluded)")
-            } catch {
-                self.callback.scriptUpdate(text: "... error reading file: \(error)")
+            } else {
                 return false
             }
         }
@@ -168,19 +196,19 @@ class ReadFileCommand : ScriptCommand {
         return results.count > 0
     }
     
-    func sortFilesByCreationDate() -> [Path] {
+    func sortFilesByCreationDate() -> [URL] {
         return self.files.sorted(by: compareCreationDate)
     }
     
-    func compareCreationDate(x: Path, y:Path) -> Bool {
+    func compareCreationDate(x: URL, y:URL) -> Bool {
         let dX = getCreationDate(path: x)
         let dY = getCreationDate(path: y)
         return dX.compare(dY) == ComparisonResult.orderedAscending
     }
     
-    func getCreationDate(path: Path) -> Date {
+    func getCreationDate(path: URL) -> Date {
         do {
-            let attrs = try FileManager.default.attributesOfItem(atPath: path.string) as NSDictionary
+            let attrs = try FileManager.default.attributesOfItem(atPath: path.path) as NSDictionary
             return attrs.fileCreationDate() ?? Date()
         } catch {
             return Date()

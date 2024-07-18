@@ -3,8 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## Pending Release
+## [1.4.2] 2024-07-18
 - Fix script output view so that full available width is used.
+- Change ReadFile (script command `<`) so that if target file is not readable in sandbox, then a chooser is launched so the user can select it.
 
 ## [1.4.1] 2024-07-14
 - Change File Load/Save command text so it's clear they refer to the script
