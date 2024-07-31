@@ -39,6 +39,11 @@ demo
 ~ car=1, event=CRASHED
 /= car=1, event=CRASHED
 
+# Example 4: show how many laps each car completed
+clear
+demo
+kv (?<key>\\w+)=(?<value>\\w+)
+sql select car, coalesce( max(lapNum), 0) from log where race=1 group by car
 
 """
 

@@ -4,15 +4,33 @@
 
 LogLlama can convert log lines with field/value pairs to a SQL table, allowing you to perform any legal SQLite query against the data.
 
-Any log text matching the regular expression `(\w+)=(\w+)` is automatically treated as a field/value pair.  Field names discovered this way are listed in the output from the `<` command that reads the log file.
 
-In addition, you can create your own field value pairs by using named groups in your pattern maching expressions.  Here is an example with the canned demo data:
+## Extracting Key/Value Pairs
+
+You can use the script command `kv` to extract key/value pairs.
+
+```
+clear
+demo
+kv (?<key>\w+)=(?<value>\w+)
+```
+
+The regular expresssion must have exactly two named groups with the names `key` and `value`.
+
+
+## Extracting Individual Fields
+
+You can also extract fields by using named groups in your pattern maching expressions.  Here is an example with the canned demo data:
 
 ```
 clear
 demo
 ~ car=(?<num>\d+), event=STARTED
 ```
+
+The group name will be used as the field name, and the matching text as the field value.
+
+## Viewing Fields
 
 If you double click on a log line with fields in it, the field values will be displayed.  This is a useful check that you are capturing the values you intend:
 
@@ -27,7 +45,7 @@ The SQL table that receives the data is named `log`.
 An example SQL query for the demo data is:
 
 ```
-sql select min(num), max(num),avg(num) from log where num is not null
+sql select min(num), max(num), avg(num) from log where num is not null
 ```
 
 When you run the SQL query, the output is listed in the script log on the bottom left.

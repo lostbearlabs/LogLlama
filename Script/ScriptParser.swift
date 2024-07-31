@@ -5,7 +5,7 @@ import Foundation
  */
 class ScriptParser {
     var callback : ScriptCallback
-
+    
     // These are commands that take "the rest of the line" as their argument
     var rest_recognizers : [(String, (String,  ScriptCallback) -> ScriptCommand)] = [
         ("<", { rest, callback in return ReadFileCommand(callback: callback, pattern: rest)}),
@@ -13,6 +13,7 @@ class ScriptParser {
         ("+", { rest, callback in return FilterLineCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Add)}),
         ("-", { rest, callback in return FilterLineCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)}),
         ("~", { rest, callback in return FilterLineCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Highlight)}),
+        ("kv", { rest, callback in return ParseFieldsCommand(callback: callback, pattern: rest)}),
         ("require", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Required)}),
         ("exclude", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Excluded)}),
         ("clearFilters", { rest, callback in return LoadFilterCommand(callback: callback, pattern: rest, loadFilterType: LoadFilterCommand.LoadFilterType.Clear)}),
@@ -23,7 +24,7 @@ class ScriptParser {
         ("/-", { rest, callback in return FilterSectionCommand(callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)}),
         ("sort", {rest, callback in return SortByFieldsCommand(callback: callback, fieldsString: rest)}),
     ]
-
+    
     // These are commands that take individual tokenized elements from the line as their argument(s)
     var token_recognizers : [(String, Int, ([String], ScriptCallback) -> ScriptCommand)] = [
         ("demo", 0, { tokens, callback in return DemoCommand(callback: callback, text: nil)}),
@@ -41,7 +42,7 @@ class ScriptParser {
         ("/f", 1, {tokens, callback in return DivideByFieldCommand(callback: callback, field: tokens[1])}),
         ("replace", 2, {tokens, callback in return ReplaceCommand(callback: callback, oldText: tokens[1], newText: tokens[2])}),
         ("sleep", 1, { tokens, callback in return SleepCommand(callback: callback, seconds: Int(tokens[1]) ?? 10 )}),
-
+        
     ]
     
     init(callback : ScriptCallback) {
@@ -64,7 +65,7 @@ class ScriptParser {
         limit N             -- truncate files with > N lines
         replace a b         -- when importing lines, replace any occurence of a with b
         sort field1 field2  -- sort lines according to field list, with text comparison as the last condition
-
+        
         *** FILTERING/HILIGHTING LOG LINES ***
         : color             -- hilight following matches with (color)
         = regex             -- hide all lines not matching regex
@@ -74,25 +75,26 @@ class ScriptParser {
         ==                  -- hide all lines not already hilighted
         today               -- hide all lines that don't contain today's date
         dateFormat          -- set the date format for subsequent "today" and "requireToday" lines
-
+        
         *** REMOVING LOG LINES ***
         chop                -- remove all hidden lines
         clear               -- remove ALL lines
-
+        
         *** ADJUSTING LOG LINES ***
         truncate N          -- truncate lines with > N characters
         @ field1 field2     -- populate lines that have field2 but not field1 with the value from another line that has field1 and the same value of field2
-
+        
         *** ANALYSIS ***
         d N                 -- identify lines duplicated more than N times
+        kv regex            -- parse lines for key/value pairs.  Regex must specify named groups "key" and "value".
         sql ...             -- run specified SQL command against extracted fields
-
+        
         *** SECTIONS ***
         /r regex            -- mark lines that match regex as section headers
         /f field            -- mark lines where the value of field changes as section headers
         /= regex            -- hide any sections that don't have a line matching regex
         /- regex            -- hide any sections that do have a line matching reges
-
+        
         """
     }
     
@@ -100,15 +102,15 @@ class ScriptParser {
         var commands : [ScriptCommand] = []
         
         let ar = script.split(separator: "\n")
-
+        
         for line in ar {
             let trimmedLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
-
+            
             // ignore comments
             if( trimmedLine.starts(with: "#") || trimmedLine=="" ) {
                 continue;
             }
-
+            
             // split lines into tokens
             let tokens = line.split(separator: " ").map( { String($0) } )
             var rest = ""
@@ -119,16 +121,16 @@ class ScriptParser {
                     rest = String(trimmedLine[start...])
                 }
             }
-
+            
             var cmd : ScriptCommand? = nil
-
+            
             // any matching directives that take the rest of the line as their argument?
             for r in self.rest_recognizers {
                 if tokens[0]==r.0 {
                     cmd = r.1(rest, self.callback)
                 }
             }
-
+            
             // any matching directives that take space-separated arguments?
             for r in self.token_recognizers {
                 if tokens[0]==r.0 {
@@ -139,7 +141,7 @@ class ScriptParser {
                     }
                 }
             }
-
+            
             if cmd != nil {
                 commands.append(cmd!)
             } else {
@@ -150,5 +152,5 @@ class ScriptParser {
         
         return (true, commands)
     }
-
+    
 }

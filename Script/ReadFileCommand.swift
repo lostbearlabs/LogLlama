@@ -9,7 +9,6 @@ class ReadFileCommand : ScriptCommand {
     var callback : ScriptCallback
     var pattern : String
     var files : [URL] = []
-    var fieldNames = Set<String>()
     var nameValueRegex:NSRegularExpression?
     
     init(callback: ScriptCallback, pattern: String) {
@@ -33,11 +32,11 @@ class ReadFileCommand : ScriptCommand {
             
             let dispatchGroup = DispatchGroup()
             dispatchGroup.enter()
-                
+            
             DispatchQueue.main.async {
                 self.showFileChooserDialog(initialPath: self.pattern, dispatchGroup: dispatchGroup)
             }
-
+            
             dispatchGroup.wait()
             self.callback.scriptUpdate(text: "\(self.files.count) files selected by user")
         }
@@ -48,7 +47,7 @@ class ReadFileCommand : ScriptCommand {
         }
         return true
     }
-
+    
     func showFileChooserDialog(initialPath: String, dispatchGroup: DispatchGroup) {
         let openPanel = NSOpenPanel()
         
@@ -64,7 +63,7 @@ class ReadFileCommand : ScriptCommand {
         if let initialDirectoryURL = URL(string: initialPath) {
             openPanel.directoryURL = initialDirectoryURL
         }
-
+        
         // Display the open panel
         openPanel.begin { (result) in
             if result == .OK && !openPanel.urls.isEmpty {
@@ -91,13 +90,13 @@ class ReadFileCommand : ScriptCommand {
         
         guard let fileHandle = FileHandle(forReadingAtPath: file.string) else {
             print("Unable to open file at path \(file.string)")
-               return false
-           }
-           
-           defer {
-               fileHandle.closeFile()
-           }
-
+            return false
+        }
+        
+        defer {
+            fileHandle.closeFile()
+        }
+        
         return true
     }
     
@@ -110,7 +109,7 @@ class ReadFileCommand : ScriptCommand {
             return nil
         }
     }
-
+    
     func run(logLines : inout [LogLine], runState : inout RunState) -> Bool {
         let sortedPaths = self.sortFilesByCreationDate()
         
@@ -132,7 +131,6 @@ class ReadFileCommand : ScriptCommand {
                         }
                         let logLine = LogLine(text: line, lineNumber: numRead)
                         logLines.append( logLine )
-                        self.findNameValueFields(logLine: logLine)
                         numIncluded += 1
                     } else {
                         numExcluded += 1
@@ -151,25 +149,7 @@ class ReadFileCommand : ScriptCommand {
                 return false
             }
         }
-        self.callback.scriptUpdate(text: "... field names: \(self.fieldNames.sorted())")
         return true
-    }
-    
-    func findNameValueFields(logLine:LogLine) {
-        if( self.nameValueRegex != nil ) {
-            let text = logLine.text
-            let matches : [NSTextCheckingResult] = self.nameValueRegex!.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-            for match in matches {
-                let nameRange = Range(match.range(at: 1), in: text)!
-                let name = String(text[nameRange])
-                
-                let valRange = Range(match.range(at: 2), in: text)!
-                let val = String(text[valRange])
-                
-                logLine.namedFieldValues[name] = val
-                self.fieldNames.insert(name)
-            }
-        }
     }
     
     func lineWanted(line : String, runState: RunState) -> Bool {

@@ -4,7 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Forthcoming
-- add `demoN` command to allow generation of larger sample data sets
+- Add `kv` command to allow key/value matching.
+- Remove automatic key/value matching on load.
+- Add `demoN` command to allow generation of larger sample data sets
 
 ## [1.4.2] 2024-07-18
 - Fix script output view so that full available width is used.
