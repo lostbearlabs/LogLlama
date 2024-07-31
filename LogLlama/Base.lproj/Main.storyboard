@@ -187,6 +187,11 @@ DQ
                                                 <action selector="onRunClicked:" target="Voe-Tx-rLC" id="ez8-kB-jKQ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Clear and Execute" keyEquivalent="R" identifier="ScriptClearAndExecute" id="6AE-qB-7fH">
+                                            <connections>
+                                                <action selector="onClearAndRunClicked:" target="Voe-Tx-rLC" id="lxD-KH-hax"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Undo" keyEquivalent="u" identifier="ScriptUndo" id="pY5-tN-MWd">
                                             <connections>
                                                 <action selector="onClickUndo:" target="Voe-Tx-rLC" id="FGR-SV-J7I"/>
@@ -556,7 +561,7 @@ Gw
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn identifier="TextCellID" editable="NO" width="437" minWidth="40" maxWidth="10000" id="kMA-vv-fxf">
+                                                                    <tableColumn identifier="TextCellID" editable="NO" width="408" minWidth="40" maxWidth="10000" id="kMA-vv-fxf">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>

@@ -5,26 +5,26 @@ import Cocoa
  */
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     var fontSize = 14
     var logFileToAnalyze : String?
     var wasUndoEnabled: Bool = true
-
+    
     @IBOutlet weak var mnuUndo: NSMenuItem!
     @IBOutlet weak var mnuExecute: NSMenuItem!
     @IBOutlet weak var mnuEdit: NSMenuItem!
     @IBOutlet weak var mnuFile: NSMenuItem!
-
+    
     @IBAction func onClickUndo(_ sender: Any) {
         NotificationCenter.default.post(name: .UndoClicked, object: nil)
     }
-
+    
     @objc private func onCanUndoUpdated(_ notification: Notification) {
         let enabled = notification.object as! Bool
         self.mnuUndo.isEnabled = enabled
         wasUndoEnabled = enabled
     }
-
+    
     @IBAction func onRunStarted(_ sender: Any) {
         print("run started")
         enableUI(enabled: false)
@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         enableUI(enabled: true)
         NSCursor.operationNotAllowed.pop()
     }
-
+    
     func enableUI(enabled: Bool) {
         self.mnuUndo.isEnabled = enabled && wasUndoEnabled
         self.mnuExecute.isEnabled = enabled
@@ -49,7 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTextChanged(_:)), name: .ScriptTextChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onCanUndoUpdated(_:)), name: .CanUndoUpdated, object: nil)
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(onRunStarted(_:)), name: .RunStarted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunFinished(_:)), name: .RunFinished, object: nil)
         
@@ -60,26 +60,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationCenter.default.post(name: .AnalyzeLogFile, object: self.logFileToAnalyze)
             NotificationCenter.default.post(name: .RunClicked, object: nil)
         }
-
+        
         DocumentState.INSTANCE.onApplicationLoaded()
         self.updateWindowTitle()
-    
+        
     }
-
+    
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         if( DocumentState.INSTANCE.canDiscardText(action: "exit")) {
             return NSApplication.TerminateReply.terminateNow;
         }
         return NSApplication.TerminateReply.terminateCancel;
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-          return true
+        return true
     }
-
+    
     @IBAction func openFile(_ sender: Any) {
         
         let dialog = NSOpenPanel();
@@ -127,7 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         return true
     }
-
+    
     @IBAction func newFile(_ sender: Any) {
         if( DocumentState.INSTANCE.canDiscardText(action: "create a new file") ) {
             NotificationCenter.default.post(name: .NewScriptFile, object: nil)
@@ -136,7 +136,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.updateWindowTitle()
         }
     }
-
+    
     @IBAction func newFileWithDemo(_ sender: Any) {
         if( DocumentState.INSTANCE.canDiscardText(action: "create a new file") ) {
             NotificationCenter.default.post(name: .NewScriptFile, object: nil)
@@ -148,7 +148,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationCenter.default.post(name: .PopulateDemoText, object: nil)
         }
     }
-
+    
     @IBAction func closeFile(_ sender: Any) {
     }
     
@@ -183,17 +183,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
-
+    
     
     @objc private func onTextChanged(_ notification: Notification) {
         DocumentState.INSTANCE.onTextChanged()
         self.updateWindowTitle()
     }
     
-
+    
     @IBAction func onRunClicked(_ sender: Any) {
         NotificationCenter.default.post(name: .RunClicked, object: nil)
     }
+    
+    @IBAction func onClearAndRunClicked(_ sender: Any) {
+        NotificationCenter.default.post(name: .ClearAndRunClicked, object: nil)
+    }
+    
     
     func sendFontSizeUpdate() {
         NotificationCenter.default.post(name: .FontSizeUpdated, object: FontSizeUpdate(size: self.fontSize))
@@ -227,7 +232,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSWorkspace.shared.open(url)
         }
     }
-
+    
     private func updateWindowTitle() {
         let title = DocumentState.INSTANCE.getWindowTitle()
         NSApplication.shared.windows.first!.title = title
@@ -236,7 +241,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func onShowLineDetailClicked(_ sender: Any) {
         NotificationCenter.default.post(name: .ShowLineDetailClicked, object: nil)
     }
-
+    
     @IBAction func onLoadLog(_ sender: Any) {
         let dialog = NSOpenPanel();
         
@@ -261,6 +266,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
     }
-
+    
 }
 

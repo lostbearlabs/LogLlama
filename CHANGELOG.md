@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Forthcoming
+- Add thousands separator to line counts when processing log files.
+- Add separate clear-and-execute menu command, remove hidden logic to clear when running full script.
+- Only show field section of log details view if fields actually present.
+
 ## [1.4.3] 2024-07/31
 - Add `kv` command to allow key/value matching.
 - Remove automatic key/value matching on load.

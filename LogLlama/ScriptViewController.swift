@@ -20,6 +20,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         NotificationCenter.default.addObserver(self, selector: #selector(onSaveFile(_:)), name: .SaveScriptFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onNewFile(_:)), name: .NewScriptFile, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRunClicked(_:)), name: .RunClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onClearAndRunClicked(_:)), name: .ClearAndRunClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onUndoClicked(_:)), name: .UndoClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onFontSizeUpdated(_:)), name: .FontSizeUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onShouldAnalyzeLogFile(_:)), name: .AnalyzeLogFile, object: nil)
@@ -114,12 +115,16 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     }
     
     @objc private func onRunClicked(_ notification: Notification) {
-        let (script, selection) = self.getTextToRun();
-        if( !selection ) {
-            self.lastResults = []
-        }
+        let (script, _) = self.getTextToRun();
         self.runScript(script: script)
     }
+    
+    @objc private func onClearAndRunClicked(_ notification: Notification) {
+        let (script, _) = self.getTextToRun();
+        self.lastResults = []
+        self.runScript(script: script)
+    }
+    
     
     private func runScript(script: String) {
         if( !running ) {
