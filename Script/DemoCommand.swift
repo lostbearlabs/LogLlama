@@ -7,20 +7,34 @@ class DemoCommand : ScriptCommand {
     var callback : ScriptCallback
     var logDate = Date()
     var linesAdded = 0
-
-    init(callback: ScriptCallback) {
+    var text  : String? = nil
+    var numRaces = 3
+    
+    init(callback: ScriptCallback, text: String?) {
         self.callback = callback
+        self.text = text
     }
-
+    
     func validate() -> Bool {
-        true
+        if( text != nil ) {
+            let n = Int(text!)
+            if( n != nil ) {
+                self.numRaces = n!
+            } else {
+                self.callback.scriptUpdate(text: "Not an integer: \(self.text!)")
+                return false
+            }
+            
+        }
+        
+        return true
     }
-
+    
     func changesData() -> Bool {
         true
     }
-
-
+    
+    
     enum State {
         case READY
         case RACING
@@ -29,9 +43,7 @@ class DemoCommand : ScriptCommand {
     }
     
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
-        self.callback.scriptUpdate(text: "Generating demo data")
-
-        let numRaces = 3
+        self.callback.scriptUpdate(text: "Generating demo data for \(numRaces) races")
         
         for i in 1...numRaces {
             runRace(raceNum: i, logLines: &logLines, runState: &runState)
@@ -39,14 +51,14 @@ class DemoCommand : ScriptCommand {
         
         self.callback.scriptUpdate(text: "... generated \(self.linesAdded) log lines")
         return true
-
+        
     }
-
+    
     func runRace(raceNum: Int, logLines: inout [LogLine], runState: inout RunState) {
-
+        
         let numCars = 10
         let numLaps = 5
-
+        
         self.log(text: "*** Race \(raceNum) ***", logLines: &logLines)
         
         var cars = Array(1...numCars)

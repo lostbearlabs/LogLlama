@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Forthcoming
+- add `demoN` command to allow generation of larger sample data sets
+
 ## [1.4.2] 2024-07-18
 - Fix script output view so that full available width is used.
 - Change ReadFile (script command `<`) so that if target file is not readable in sandbox, then a chooser is launched so the user can select it.

@@ -36,9 +36,30 @@ class ScriptParserTest: XCTestCase {
         
         assertThat(result, equalTo(true))
         assertThat(commands.count, equalTo(1))
-        assertThat(commands[0], instanceOf(DemoCommand.self))
+        if let demo = commands[0] as? DemoCommand {
+            assertThat(demo.numRaces, equalTo(3))
+        } else {
+            assert(false)
+        }
     }
 
+    func test_parse_demoN_recognizesIt() {
+        let n = 11
+        let sut = givenScriptParser()
+        let script = "demoN \(n)"
+        let (result, commands) = sut.parse(script: script)
+        
+        assertThat(result, equalTo(true))
+        assertThat(commands.count, equalTo(1))
+        if let demo = commands[0] as? DemoCommand {
+            assertThat(demo.validate(), equalTo(true))
+            assertThat(demo.numRaces, equalTo(n))
+        } else {
+            assert(false)
+        }
+    }
+
+    
     func test_parse_detectDuplicatesWithWrongNumberArguments_failsIt() {
         let sut = givenScriptParser()
         let script = "dd"
@@ -222,7 +243,7 @@ class ScriptParserTest: XCTestCase {
 
         assertThat(result, equalTo(true))
         assertThat(commands.count, equalTo(1))
-        assertThat(commands[0], instanceOf(LimitCommand.self))
+        assertThat(commands[0], instanceOf(SleepCommand.self))
 
         let cmd = commands[0] as! SleepCommand
         _ = cmd.validate()

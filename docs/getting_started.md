@@ -47,11 +47,19 @@ specified file already selected;  just confirm the selection and your file will 
 
 ## Demo Log Data
 
-Many of the examples in this documentation use randomly generated log data.  You can generate random log lines using the `demo` command:
+Many of the examples in this documentation use randomly generated log data.  
+
+You can generate random log lines using the `demo` command:
 
 ```
-# Generate random sample data
+# Generate random sample data for 3 car races
 demo
 ```
 
+You can control the amount of data generated using the `demoN` command:
+
+```
+# Generate random sample data for 3500 car races
+demoN 3500
+```
 

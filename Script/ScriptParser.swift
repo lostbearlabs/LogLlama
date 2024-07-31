@@ -26,7 +26,8 @@ class ScriptParser {
 
     // These are commands that take individual tokenized elements from the line as their argument(s)
     var token_recognizers : [(String, Int, ([String], ScriptCallback) -> ScriptCommand)] = [
-        ("demo", 0, { tokens, callback in return DemoCommand(callback: callback)}),
+        ("demo", 0, { tokens, callback in return DemoCommand(callback: callback, text: nil)}),
+        ("demoN", 1, { tokens, callback in return DemoCommand(callback: callback, text: tokens[1])}),
         (":", 1, { tokens, callback in return ColorCommand(callback: callback, text: tokens[1])}),
         ("==", 0, { tokens, callback in return RequireHilightCommand(callback: callback)}),
         ("today", 0, { tokens, callback in return TodayCommand(callback: callback)}),
@@ -58,7 +59,8 @@ class ScriptParser {
         requireToday        -- when loading lines, filter out any that don't contain the current date
         clearFilters        -- clear any line loading filters
         < file name/pattern -- load log lines from matching files in order created
-        demo                -- generate sample log lines programmatically
+        demo                -- generate sample log lines for 3 races programmatically
+        demoN N             -- generate sample log lines for N races programmatically
         limit N             -- truncate files with > N lines
         replace a b         -- when importing lines, replace any occurence of a with b
         sort field1 field2  -- sort lines according to field list, with text comparison as the last condition
