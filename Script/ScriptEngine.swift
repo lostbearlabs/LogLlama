@@ -15,7 +15,7 @@ class ScriptEngine {
     func setInitialLines( lines : [LogLine] ) {
         self.initialLines = lines;
     }
-
+    
     func setRunState( runState : RunState ) {
         self.runState = runState
     }
@@ -47,14 +47,14 @@ class ScriptEngine {
         var logLines = self.initialLines;
         var anyChanges = false
         for cmd in commands {
-
+            
             // If this is a command that changes the log lines on screen, then clear our
             // SQL data;  it will need to be rebuilt for the next query
             if cmd.changesData() {
                 anyChanges = true
                 self.runState.fieldDataSql = nil
             }
-
+            
             let start = DispatchTime.now()
             
             if( !cmd.run(logLines: &logLines, runState: &self.runState)) {
@@ -75,9 +75,9 @@ class ScriptEngine {
                 n += 1
             }
         }
-
+        
         if( anyChanges ) {
-            self.callback.scriptUpdate(text: "Found \(n) lines to display")
+            self.callback.scriptUpdate(text: "Found \(withCommas(n)) lines to display")
         }
         self.callback.scriptDone(logLines: logLines)
     }

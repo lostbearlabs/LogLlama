@@ -38,7 +38,7 @@ class ReadFileCommand : ScriptCommand {
             }
             
             dispatchGroup.wait()
-            self.callback.scriptUpdate(text: "\(self.files.count) files selected by user")
+            self.callback.scriptUpdate(text: "\(self.files.count) file(s) selected by user")
         }
         
         if self.files.count == 0 {
@@ -113,12 +113,16 @@ class ReadFileCommand : ScriptCommand {
     func run(logLines : inout [LogLine], runState : inout RunState) -> Bool {
         let sortedPaths = self.sortFilesByCreationDate()
         
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
         for file in sortedPaths {
             self.callback.scriptUpdate(text: "Reading file \(file.path)")
             
             if let data = readFileContents(file: file) {
                 let ar = data.components(separatedBy: .newlines)
-                self.callback.scriptUpdate(text: "... processing \(ar.count) lines")
+                
+                self.callback.scriptUpdate(text: "... processing \(withCommas(ar.count)) lines")
                 
                 var numIncluded = 0
                 var numExcluded = 0
@@ -137,14 +141,14 @@ class ReadFileCommand : ScriptCommand {
                     }
                     numRead += 1
                     if( runState.limit>0 && numRead >= runState.limit) {
-                        self.callback.scriptUpdate(text: "... reached file limit of  \(runState.limit) lines")
+                        self.callback.scriptUpdate(text: "... reached file limit of  \(withCommas(runState.limit)) lines")
                         break
                     }
                     if( numRead%10000 == 0) {
-                        self.callback.scriptUpdate(text: "... \(numRead)")
+                        self.callback.scriptUpdate(text: "... \(withCommas(numRead))")
                     }
                 }
-                self.callback.scriptUpdate(text: "... read \(ar.count) lines, kept \(numIncluded), discarded \(numExcluded)")
+                self.callback.scriptUpdate(text: "... read \(withCommas(ar.count)) lines, kept \(withCommas(numIncluded)), discarded \(withCommas(numExcluded))")
             } else {
                 return false
             }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		070F560E2C3DDA6E000FE3CD /* SleepCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */; };
+		0718E0C72C5AE8F300DB08F3 /* ScriptUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */; };
 		077018952C3463C200B1D040 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 077018942C3463C200B1D040 /* PathKit */; };
 		077018972C3463C600B1D040 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 077018962C3463C600B1D040 /* SQLite */; };
 		077018992C3464BB00B1D040 /* SwiftHamcrest in Frameworks */ = {isa = PBXBuildFile; productRef = 077018982C3464BB00B1D040 /* SwiftHamcrest */; };
@@ -74,6 +75,7 @@
 
 /* Begin PBXFileReference section */
 		070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCommand.swift; sourceTree = "<group>"; };
+		0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptUtil.swift; sourceTree = "<group>"; };
 		07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScriptText.swift; sourceTree = "<group>"; };
 		07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFieldsCommand.swift; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */,
 				07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */,
 				07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */,
+				0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */,
 				AE9A333F234D27F6001107C8 /* RequireHilightCommand.swift in Sources */,
 				34A5FFF3AAE569B21AA65444 /* ClearCommand.swift in Sources */,
+				0718E0C72C5AE8F300DB08F3 /* ScriptUtil.swift in Sources */,
 				AEEED562234D425B00D75D6D /* LineDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
