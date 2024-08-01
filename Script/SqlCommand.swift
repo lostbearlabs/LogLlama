@@ -68,6 +68,10 @@ class SqlCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "sql"
+    }
+
 }
 
 

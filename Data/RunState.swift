@@ -12,5 +12,17 @@ class RunState {
     var fieldDataSql : FieldDataSql?
     var limit = 0
     var replace : [String:String] = [:]
+    
+    func clone() -> RunState {
+        let copy = RunState()
+        copy.color = self.color
+        copy.filterRequired = self.filterRequired
+        copy.filterExcluded = self.filterExcluded
+        copy.dateFormat = self.dateFormat
+        copy.fieldDataSql = self.fieldDataSql
+        copy.limit = self.limit
+        copy.replace = self.replace
+        return copy
+    }
 }
 

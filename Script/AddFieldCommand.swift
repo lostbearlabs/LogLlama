@@ -59,4 +59,8 @@ class AddFieldCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "@"
+    }
+
 }

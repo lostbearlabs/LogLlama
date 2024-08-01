@@ -25,5 +25,9 @@ class ClearCommand : ScriptCommand {
         self.callback.scriptUpdate(text: "Cleared all lines")
         return true
     }
+    
+    func description() -> String {
+        return "clear"
+    }
 
 }

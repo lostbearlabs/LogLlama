@@ -27,26 +27,29 @@ class ScriptEngine {
         let (rc, commands) = parser.parse(script: script)
         if( !rc ) {
             self.callback.scriptUpdate(text: "PARSING FAILED")
-            self.callback.scriptDone(logLines: [])
+            self.callback.scriptDone(logLines: [], op: nil)
             return
         }
         
         if commands.count==0 {
             self.callback.scriptUpdate(text: "NO COMMANDS IN SCRIPT")
-            self.callback.scriptDone(logLines: [])
+            self.callback.scriptDone(logLines: [], op: nil)
             return
         }
         
         for cmd in commands {
             if( !cmd.validate()) {
-                self.callback.scriptDone(logLines: [])
+                self.callback.scriptDone(logLines: [], op: nil)
                 return
             }
         }
         
         var logLines = self.initialLines;
         var anyChanges = false
+        var firstCmd = commands[0].description()
+        var lastCmd = ""
         for cmd in commands {
+            lastCmd = cmd.description()
             
             // If this is a command that changes the log lines on screen, then clear our
             // SQL data;  it will need to be rebuilt for the next query
@@ -58,7 +61,7 @@ class ScriptEngine {
             let start = DispatchTime.now()
             
             if( !cmd.run(logLines: &logLines, runState: &self.runState)) {
-                self.callback.scriptDone(logLines: logLines)
+                self.callback.scriptDone(logLines: logLines, op: nil)
                 return
             }
             
@@ -79,7 +82,9 @@ class ScriptEngine {
         if( anyChanges ) {
             self.callback.scriptUpdate(text: "Found \(withCommas(n)) lines to display")
         }
-        self.callback.scriptDone(logLines: logLines)
+        
+        let op = commands.count==1 ? firstCmd : "\(firstCmd) .. \(lastCmd)"
+        self.callback.scriptDone(logLines: logLines, op: op)
     }
     
 }

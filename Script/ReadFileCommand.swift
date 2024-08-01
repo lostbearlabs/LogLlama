@@ -199,4 +199,9 @@ class ReadFileCommand : ScriptCommand {
         }
     }
     
+    func description() -> String {
+        return "<"
+    }
+
+    
 }

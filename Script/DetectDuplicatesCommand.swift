@@ -53,5 +53,9 @@ class DetectDuplicatesCommand : ScriptCommand {
         return true
     }
     
+    func description() -> String {
+        return "dd"
+    }
+
     
 }

@@ -113,5 +113,18 @@ class FilterLineCommand : ScriptCommand {
         return true
     }
     
+    func description() -> String {
+        switch self.filterType {
+        case .Required:
+            return "="
+        case .Add:
+            return "+"
+        case .Remove:
+            return "-"
+        case .Highlight:
+            return "~"
+        }
+    }
+    
     
 }

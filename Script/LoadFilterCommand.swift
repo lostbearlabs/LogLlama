@@ -81,6 +81,11 @@ class LoadFilterCommand: ScriptCommand {
             return false
           }
     }
+    
+    func description() -> String {
+        return "\(self.loadFilterType)"
+    }
+
 
 }
 

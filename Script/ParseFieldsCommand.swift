@@ -77,4 +77,8 @@ class ParseFieldsCommand : ScriptCommand {
         }
     }
     
+    func description() -> String {
+        return "kv"
+    }
+
 }

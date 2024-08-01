@@ -54,4 +54,8 @@ class SortByFieldsCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "sort"
+    }
+
 }

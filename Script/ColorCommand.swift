@@ -36,6 +36,10 @@ class ColorCommand: ScriptCommand {
         return true
     }
     
+    func description() -> String {
+        return ": \(self.text)"
+    }
+
     
     
     let allColors = [

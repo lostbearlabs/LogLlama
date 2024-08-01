@@ -42,4 +42,8 @@ class DivideByRegexCommand: ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "/r"
+    }
+
 }

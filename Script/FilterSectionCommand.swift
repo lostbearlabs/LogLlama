@@ -91,5 +91,10 @@ class FilterSectionCommand: ScriptCommand {
         }
 
     }
+    
+    func description() -> String {
+        return "/="
+    }
+
 
 }

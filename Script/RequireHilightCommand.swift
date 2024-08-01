@@ -31,5 +31,8 @@ class RequireHilightCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "=="
+    }
 
 }

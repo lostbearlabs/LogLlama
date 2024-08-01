@@ -24,5 +24,9 @@ class SleepCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "sleep"
+    }
+
 
 }

@@ -20,9 +20,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc private func onCanUndoUpdated(_ notification: Notification) {
-        let enabled = notification.object as! Bool
-        self.mnuUndo.isEnabled = enabled
-        wasUndoEnabled = enabled
+        let update = notification.object as! UndoUpdate
+        self.mnuUndo.isEnabled = update.enabled
+        self.mnuUndo.title = (update.op==nil) ? "Undo" : "Undo \(update.op!)"
+        wasUndoEnabled = update.enabled
     }
     
     @IBAction func onRunStarted(_ sender: Any) {

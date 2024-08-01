@@ -28,5 +28,9 @@ class ChopCommand : ScriptCommand {
         return true
     }
     
+    func description() -> String {
+        return "chop"
+    }
+    
     
 }

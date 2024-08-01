@@ -26,4 +26,8 @@ class DateFormatCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "dateFormat"
+    }
+
 }

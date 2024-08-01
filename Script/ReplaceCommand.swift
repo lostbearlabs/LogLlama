@@ -27,5 +27,9 @@ class ReplaceCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "replace"
+    }
+
 
 }

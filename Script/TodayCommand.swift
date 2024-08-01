@@ -32,5 +32,10 @@ class TodayCommand : FilterLineCommand {
             return false
           }
     }
+    
+    override func description() -> String {
+        return "today"
+    }
+
 
 }

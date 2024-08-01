@@ -32,5 +32,9 @@ class TruncateCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "truncate"
+    }
+
 
 }

@@ -9,8 +9,9 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     @IBOutlet var scriptText: NSTextView!
     var running = false
     var lastResults : [LogLine] = []
-    let maxUndo = 5
-    var undoResults : [LogLinesUpdate] = []
+    var curUndoLines = 0
+    let maxUndoLines = 10_000_000
+    var undoResults : [UndoState] = []
     var runState = RunState()
     
     override func viewDidLoad() {
@@ -73,6 +74,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
                 NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
                 
                 self.undoResults.removeAll()
+                self.curUndoLines = 0
                 self.sendUndoState()
                 
             } catch {}
@@ -111,6 +113,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         self.scriptText.string = ""
         NotificationCenter.default.post(name: .ScriptProcessingUpdate, object: ScriptProcessingUpdate(clear: true))
         self.undoResults.removeAll()
+        self.curUndoLines = 0
         self.sendUndoState()
     }
     
@@ -167,18 +170,24 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         }
     }
     
-    func scriptDone(logLines: [LogLine]) {
+    func scriptDone(logLines: [LogLine], op: String?) {
         DispatchQueue.main.async {
             self.lastResults = logLines
             let update = LogLinesUpdate(lines: logLines)
+            let runState = self.runState.clone()
+            let undoState = UndoState(op: op, lines: logLines, runState: runState)
             NotificationCenter.default.post(name: .LogLinesUpdated, object: update)
             self.running = false
             
             
-            while self.undoResults.count > self.maxUndo {
-                self.undoResults.remove(at: 0)
+            while self.curUndoLines > self.maxUndoLines {
+                let dropped = self.undoResults.remove(at: 0)
+                self.curUndoLines -= dropped.lines.count
             }
-            self.undoResults.append(update)
+            
+            self.undoResults.append(undoState)
+            self.curUndoLines += undoState.lines.count
+            
             self.sendUndoState()
             
             NotificationCenter.default.post(name: .RunFinished, object:nil)
@@ -186,14 +195,21 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     }
     
     @objc private func onUndoClicked(_ notification: Notification) {
-        if let _ = self.undoResults.popLast() {
-            if let update = self.undoResults.last {
-                NotificationCenter.default.post(name: .LogLinesUpdated, object: update)
+        if let dropped = self.undoResults.popLast() {
+            self.curUndoLines -= dropped.lines.count
+            
+            if let undoState = self.undoResults.last {
+                NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: undoState.lines))
                 
                 self.lastResults.removeAll()
-                for line in update.lines {
+                for line in undoState.lines {
                     self.lastResults.append(line)
                 }
+                
+                self.runState = undoState.runState
+            } else {
+                NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: []))
+                self.lastResults.removeAll()
             }
         }
         self.sendUndoState()
@@ -201,8 +217,11 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     
     func sendUndoState() {
         let enabled = self.undoResults.count > 0
-        print("undoResults.count=\(undoResults.count), undo enabled=\(enabled)")
-        NotificationCenter.default.post(name: .CanUndoUpdated, object: enabled)
+        let op = self.undoResults.last?.op ?? nil
+        let update = UndoUpdate(enabled: enabled, op: op)
+        
+        print("undoResults.count=\(undoResults.count), undo enabled=\(enabled), op=\(op ?? "?"), curUndoLines=\(self.curUndoLines)")
+        NotificationCenter.default.post(name: .CanUndoUpdated, object: update)
     }
     
     @objc private func onPopulateDemoText(_ notification: Notification) {

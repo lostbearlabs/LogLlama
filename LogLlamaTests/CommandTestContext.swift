@@ -17,7 +17,7 @@ class CommandTestContext : ScriptCallback {
     func scriptUpdate(text: String) {
     }
 
-    func scriptDone(logLines: [LogLine]) {
+    func scriptDone(logLines: [LogLine], op: String?) {
     }
 
 }

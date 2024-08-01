@@ -24,5 +24,9 @@ class LimitCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "limit"
+    }
+
 
 }

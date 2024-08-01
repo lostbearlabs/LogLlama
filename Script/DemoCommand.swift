@@ -105,4 +105,9 @@ class DemoCommand : ScriptCommand {
         self.linesAdded = self.linesAdded + 1
     }
     
+    func description() -> String {
+        return "demo"
+    }
+
+    
 }

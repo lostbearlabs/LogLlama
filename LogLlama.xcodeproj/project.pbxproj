@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		070F560E2C3DDA6E000FE3CD /* SleepCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */; };
 		0718E0C72C5AE8F300DB08F3 /* ScriptUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */; };
+		0718E0C92C5BCC2500DB08F3 /* UndoUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */; };
+		0718E0CB2C5BCC9500DB08F3 /* UndoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */; };
 		077018952C3463C200B1D040 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 077018942C3463C200B1D040 /* PathKit */; };
 		077018972C3463C600B1D040 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 077018962C3463C600B1D040 /* SQLite */; };
 		077018992C3464BB00B1D040 /* SwiftHamcrest in Frameworks */ = {isa = PBXBuildFile; productRef = 077018982C3464BB00B1D040 /* SwiftHamcrest */; };
@@ -76,6 +78,8 @@
 /* Begin PBXFileReference section */
 		070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCommand.swift; sourceTree = "<group>"; };
 		0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptUtil.swift; sourceTree = "<group>"; };
+		0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoUpdate.swift; sourceTree = "<group>"; };
+		0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoState.swift; sourceTree = "<group>"; };
 		07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScriptText.swift; sourceTree = "<group>"; };
 		07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFieldsCommand.swift; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */,
 				AE6D8CA323C78BD300CF67D8 /* FieldDataMap.swift */,
 				AE6D8CA523C78FC800CF67D8 /* FieldDataSql.swift */,
+				0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */,
+				0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -388,11 +394,13 @@
 				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
 				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
 				07AE3CE92C41CD5F00E2F172 /* DemoScriptText.swift in Sources */,
+				0718E0CB2C5BCC9500DB08F3 /* UndoState.swift in Sources */,
 				AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */,
 				AE368DA5252B7B270000B333 /* LimitCommand.swift in Sources */,
 				AE368DB4252BC5150000B333 /* SortByFieldsCommand.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
 				AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */,
+				0718E0C92C5BCC2500DB08F3 /* UndoUpdate.swift in Sources */,
 				AED76E0C233AC16D00E58243 /* DemoCommand.swift in Sources */,
 				AEDE11CB23346632006FF1A8 /* FilterLineCommand.swift in Sources */,
 				070F560E2C3DDA6E000FE3CD /* SleepCommand.swift in Sources */,

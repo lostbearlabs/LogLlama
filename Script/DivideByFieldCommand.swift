@@ -38,4 +38,8 @@ class DivideByFieldCommand : ScriptCommand {
         return true
     }
 
+    func description() -> String {
+        return "/f"
+    }
+
 }
