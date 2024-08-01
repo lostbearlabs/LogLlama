@@ -477,7 +477,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 6E3JQU6925;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -489,7 +489,7 @@
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lostbearlabs.logllama;
 				PRODUCT_NAME = LogLlama;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -505,7 +505,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6E3JQU6925;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -516,7 +516,7 @@
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lostbearlabs.logllama;
 				PRODUCT_NAME = LogLlama;
 				PROVISIONING_PROFILE_SPECIFIER = "";
