@@ -4,6 +4,8 @@ import AppKit
 /**
  Applies a regular expression to LogLines, coloring and filtering them depending whether they match.
  
+ If the regex has named groups, then the values of those groups will be set as fields on the matched lines.
+ 
  This command implements all 4 of our filtering operations.
  */
 class FilterLineCommand : ScriptCommand {
@@ -18,7 +20,7 @@ class FilterLineCommand : ScriptCommand {
     var callback : ScriptCallback
     var filterType : FilterType
     var pattern : String
-    var regex : NSRegularExpression?
+    var regex : RegexWithGroups?
     var groupNames : [String]?
     
     init(callback: ScriptCallback, pattern: String, filterType : FilterType) {
@@ -30,15 +32,8 @@ class FilterLineCommand : ScriptCommand {
     func validate() -> Bool {
         do {
             // parse the regex for efficient use later
-            try self.regex = NSRegularExpression(pattern: self.pattern, options: [])
-            
-            // analyze the regex for named groups -- there's nothing built into NSRegularExpression to get group names
-            let nameRegex = try NSRegularExpression(pattern: "\\(\\?\\<(\\w+)\\>", options: [])
-            let nameMatches : [NSTextCheckingResult] = nameRegex.matches(in: self.pattern, options: [], range: NSMakeRange(0, self.pattern.count))
-            self.groupNames = nameMatches.map { (textMatch : NSTextCheckingResult) -> String in
-                let range = Range(textMatch.range(at: 1), in: self.pattern)!
-                return String(self.pattern[range])
-            }
+            try self.regex = RegexWithGroups(pattern: self.pattern)
+            self.groupNames = self.regex!.groupNames()
             
             return true
         } catch {
@@ -62,33 +57,31 @@ class FilterLineCommand : ScriptCommand {
         DispatchQueue.concurrentPerform(iterations: logLines.count) { (index) in
             
             let line = logLines[index]
-            let results = regex!.matches(in: line.text,
-                                         range: NSRange(line.text.startIndex..., in: line.text))
+            let results = regex!.ranges(text: line.text)
             
-            var match = false
+            // hilight any matching parts of the line
             if results.count > 0 {
-                match = true
                 n += 1
                 
                 let _ = results.map {
                     let match = $0
+                    let nsRange = line.text.toNSRange(from: match)
                     
                     // add hilite color to display text
-                    line.attributed.addAttribute(.backgroundColor, value: runState.color, range: match.range)
-                    
-                    // save named fields for use by later queries
-                    let _ = self.groupNames!.map { (groupName : String) -> String in
-                        let groupRange:NSRange = match.range(withName: groupName)
-                        if groupRange.location != NSNotFound {
-                            let range = Range(groupRange, in: line.text)!
-                            let value = String(line.text[range])
-                            line.namedFieldValues[groupName] = value
-                        }
-                        return ""
-                    }
+                    line.attributed.addAttribute(.backgroundColor, value: runState.color, range: nsRange)
                 }
             }
             
+            var keys = [String:String]()
+            let captures = regex!.captures(text: line.text)
+            for capture in captures {
+                for key in capture.keys {
+                    line.namedFieldValues[key] = capture[key]
+                    keys[key] = key
+                }
+            }
+            
+            let match = !results.isEmpty
             switch( self.filterType ) {
                 
             case .Required:
@@ -127,4 +120,12 @@ class FilterLineCommand : ScriptCommand {
     }
     
     
+}
+
+extension String {
+    func toNSRange(from range: Range<String.Index>) -> NSRange {
+        let location = range.lowerBound.utf16Offset(in: self)
+        let length = range.upperBound.utf16Offset(in: self) - location
+        return NSRange(location: location, length: length)
+    }
 }

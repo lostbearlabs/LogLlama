@@ -11,6 +11,8 @@
 		0718E0C72C5AE8F300DB08F3 /* ScriptUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */; };
 		0718E0C92C5BCC2500DB08F3 /* UndoUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */; };
 		0718E0CB2C5BCC9500DB08F3 /* UndoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */; };
+		0718E0CD2C63BDAE00DB08F3 /* RegexWithGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0CC2C63BDAE00DB08F3 /* RegexWithGroups.swift */; };
+		0718E0CF2C63BDE000DB08F3 /* RegexWithGroupsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0CE2C63BDE000DB08F3 /* RegexWithGroupsTest.swift */; };
 		077018952C3463C200B1D040 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 077018942C3463C200B1D040 /* PathKit */; };
 		077018972C3463C600B1D040 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 077018962C3463C600B1D040 /* SQLite */; };
 		077018992C3464BB00B1D040 /* SwiftHamcrest in Frameworks */ = {isa = PBXBuildFile; productRef = 077018982C3464BB00B1D040 /* SwiftHamcrest */; };
@@ -80,6 +82,8 @@
 		0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptUtil.swift; sourceTree = "<group>"; };
 		0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoUpdate.swift; sourceTree = "<group>"; };
 		0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoState.swift; sourceTree = "<group>"; };
+		0718E0CC2C63BDAE00DB08F3 /* RegexWithGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexWithGroups.swift; sourceTree = "<group>"; };
+		0718E0CE2C63BDE000DB08F3 /* RegexWithGroupsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexWithGroupsTest.swift; sourceTree = "<group>"; };
 		07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScriptText.swift; sourceTree = "<group>"; };
 		07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFieldsCommand.swift; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 				34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */,
 				34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */,
 				34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */,
+				0718E0CE2C63BDE000DB08F3 /* RegexWithGroupsTest.swift */,
 			);
 			path = LogLlamaTests;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 				07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */,
 				07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */,
 				0718E0C62C5AE8F300DB08F3 /* ScriptUtil.swift */,
+				0718E0CC2C63BDAE00DB08F3 /* RegexWithGroups.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 				AE6D8CA423C78BD300CF67D8 /* FieldDataMap.swift in Sources */,
 				AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */,
 				AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */,
+				0718E0CD2C63BDAE00DB08F3 /* RegexWithGroups.swift in Sources */,
 				AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */,
 				AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */,
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
@@ -444,6 +451,7 @@
 				34A5FBCA0D4F56C680E00F25 /* ChopCommandTest.swift in Sources */,
 				34A5FC7E9F66A71A34E86EEC /* CommandTestContext.swift in Sources */,
 				34A5F77824703DD1A8A7C457 /* AddFieldCommandTest.swift in Sources */,
+				0718E0CF2C63BDE000DB08F3 /* RegexWithGroupsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,7 +635,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -691,7 +699,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

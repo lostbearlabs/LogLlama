@@ -8,8 +8,7 @@ class ParseFieldsCommand : ScriptCommand {
     
     var callback : ScriptCallback
     var pattern : String
-    var regex : NSRegularExpression?
-    var groupNames : [String]?
+    var regex : RegexWithGroups?
     
     init(callback: ScriptCallback, pattern: String) {
         self.callback = callback
@@ -19,17 +18,10 @@ class ParseFieldsCommand : ScriptCommand {
     func validate() -> Bool {
         do {
             // parse the regex for efficient use later
-            try self.regex = NSRegularExpression(pattern: self.pattern, options: [])
+            try self.regex = RegexWithGroups(pattern: self.pattern)
+            let groupNames = self.regex!.groupNames()
             
-            // analyze the regex for named groups -- there's nothing built into NSRegularExpression to get group names
-            let nameRegex = try NSRegularExpression(pattern: "\\(\\?\\<(\\w+)\\>", options: [])
-            let nameMatches : [NSTextCheckingResult] = nameRegex.matches(in: self.pattern, options: [], range: NSMakeRange(0, self.pattern.count))
-            self.groupNames = nameMatches.map { (textMatch : NSTextCheckingResult) -> String in
-                let range = Range(textMatch.range(at: 1), in: self.pattern)!
-                return String(self.pattern[range])
-            }
-            
-            if( groupNames==nil || groupNames?.count != 2 || groupNames?[0] != "key" || groupNames?[1] != "value") {
+            if( groupNames.count != 2 || groupNames[0] != "key" || groupNames[1] != "value") {
                 self.callback.scriptUpdate(text: "regular expression does not have groups 'key' and 'value': \(self.pattern)")
                 return false
             }
@@ -48,8 +40,7 @@ class ParseFieldsCommand : ScriptCommand {
     
     func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
         
-        self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
-        self.callback.scriptUpdate(text: "... field names: \(self.groupNames!.sorted())")
+        self.callback.scriptUpdate(text: "Applying key/value expression: \(self.pattern)")
         
         DispatchQueue.concurrentPerform(iterations: logLines.count) { (index) in
             let line = logLines[index]
@@ -64,15 +55,13 @@ class ParseFieldsCommand : ScriptCommand {
     func findNameValueFields(logLine:LogLine) {
         if( self.regex != nil ) {
             let text = logLine.text
-            let matches : [NSTextCheckingResult] = self.regex!.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-            for match in matches {
-                let nameRange = Range(match.range(at: 1), in: text)!
-                let name = String(text[nameRange])
-                
-                let valRange = Range(match.range(at: 2), in: text)!
-                let val = String(text[valRange])
-                
-                logLine.namedFieldValues[name] = val
+            let captures = self.regex!.captures(text: text)
+            for capture in captures {
+                let key = capture["key"]
+                let value = capture["value"]
+                if let key, let value {
+                    logLine.namedFieldValues[key] = value
+                }
             }
         }
     }

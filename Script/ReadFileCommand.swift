@@ -9,19 +9,10 @@ class ReadFileCommand : ScriptCommand {
     var callback : ScriptCallback
     var pattern : String
     var files : [URL] = []
-    var nameValueRegex:NSRegularExpression?
     
     init(callback: ScriptCallback, pattern: String) {
         self.callback = callback
-        self.pattern = pattern
-        
-        do {
-            // parse the regex for efficient use later
-            let nameValuePattern="(\\w+)=(\\w+)"
-            try self.nameValueRegex = NSRegularExpression(pattern: nameValuePattern, options: [])
-        } catch {
-            print("ERROR IN CANNED REGEX \(error)")
-        }
+        self.pattern = pattern        
     }
     
     func validate() -> Bool {
@@ -159,25 +150,18 @@ class ReadFileCommand : ScriptCommand {
     func lineWanted(line : String, runState: RunState) -> Bool {
         
         for regex in runState.filterRequired {
-            if !self.doesMatch(line: line, regex: regex) {
+            if !regex.hasMatch(text: line) {
                 return false
             }
         }
         
         for regex in runState.filterExcluded {
-            if self.doesMatch(line: line, regex: regex) {
+            if regex.hasMatch(text: line) {
                 return false
             }
         }
         
         return true
-    }
-    
-    func doesMatch(line: String, regex: NSRegularExpression) -> Bool {
-        let results = regex.matches(in: line,
-                                    range: NSRange(line.startIndex..., in: line))
-        
-        return results.count > 0
     }
     
     func sortFilesByCreationDate() -> [URL] {
@@ -202,6 +186,6 @@ class ReadFileCommand : ScriptCommand {
     func description() -> String {
         return "<"
     }
-
+    
     
 }

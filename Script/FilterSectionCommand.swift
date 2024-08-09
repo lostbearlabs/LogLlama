@@ -6,40 +6,40 @@ import Foundation
 class FilterSectionCommand: ScriptCommand {
     var callback: ScriptCallback
     var pattern: String
-    var regex: NSRegularExpression?
+    var regex: RegexWithGroups?
     var filterType: FilterLineCommand.FilterType
     var numHidden = 0
     var numVisible = 0
-
+    
     init(callback: ScriptCallback, pattern: String, filterType: FilterLineCommand.FilterType) {
         self.callback = callback
         self.pattern = pattern
         self.filterType = filterType
     }
-
+    
     func validate() -> Bool {
         do {
             // parse the regex for efficient use later
-            try self.regex = NSRegularExpression(pattern: self.pattern, options: [])
+            try self.regex = RegexWithGroups(pattern: self.pattern)
             return true
         } catch {
             self.callback.scriptUpdate(text: "invalid regular expression: \(self.pattern)")
             return false
         }
     }
-
+    
     func changesData() -> Bool {
         true
     }
-
-
+    
+    
     func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
-
+        
         var section: [LogLine] = []
         numHidden = 0
         numVisible = 0
-
+        
         for line in logLines {
             if (!section.isEmpty && line.beginSection) {
                 self.processSection(section: section);
@@ -48,11 +48,11 @@ class FilterSectionCommand: ScriptCommand {
             section.append(line)
         }
         self.processSection(section: section)
-
+        
         self.callback.scriptUpdate(text: "... \(self.numHidden) section(s) hidden, \(self.numVisible) remain visible")
         return true
     }
-
+    
     func processSection(section: [LogLine]) {
         if( !section.isEmpty) {
             if (self.keepVisible(section: section)) {
@@ -67,18 +67,16 @@ class FilterSectionCommand: ScriptCommand {
             }
         }
     }
-
+    
     func keepVisible(section: [LogLine]) -> Bool {
-
+        
         var match = false
         for line in section {
-            let results = regex!.matches(in: line.text,
-                    range: NSRange(line.text.startIndex..., in: line.text))
-            if results.count > 0 {
+            if (regex!.hasMatch(text: line.text)) {
                 match = true
             }
         }
-
+        
         switch (self.filterType) {
         case .Required:
             return match
@@ -89,12 +87,12 @@ class FilterSectionCommand: ScriptCommand {
         case .Highlight:
             return true
         }
-
+        
     }
     
     func description() -> String {
         return "/="
     }
-
-
+    
+    
 }

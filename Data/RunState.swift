@@ -6,8 +6,8 @@ import AppKit
  */
 class RunState {
     var color = NSColor.green
-    var filterRequired : [NSRegularExpression] = []
-    var filterExcluded : [NSRegularExpression] = []
+    var filterRequired : [RegexWithGroups] = []
+    var filterExcluded : [RegexWithGroups] = []
     var dateFormat = "MM\\.dd\\.yy"
     var fieldDataSql : FieldDataSql?
     var limit = 0
