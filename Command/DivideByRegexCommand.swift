@@ -27,16 +27,15 @@ class DivideByRegexCommand: ScriptCommand {
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    var numFound = 0
-    for line in logLines {
-      if regex!.hasMatch(text: line.text) {
-        numFound += 1
-        line.setBeginSection(color: runState.color)
-      }
+    if let regex {
+      let numFound = logLines.divideByRegex(regex: regex, color: runState.color)
+      self.callback.scriptUpdate(
+        text: "Found \(numFound) section boundaries where lines match regex \(self.pattern)")
+      return true
+    } else {
+      self.callback.scriptUpdate(text: "regex not defined")
+      return false
     }
-    self.callback.scriptUpdate(
-      text: "Found \(numFound) section boundaries where lines match regex \(self.pattern)")
-    return true
   }
 
   func description() -> String {

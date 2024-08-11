@@ -19,49 +19,13 @@ class AddFieldCommand: ScriptCommand {
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    var map: [String: String] = [:]
+    let n = logLines.addField(fieldToAdd: self.fieldToAdd, fieldToMatch: self.fieldToMatch)
 
-    for line in logLines {
-      if line.namedFieldValues.keys.contains(self.fieldToAdd)
-        && line.namedFieldValues.keys.contains(self.fieldToMatch)
-      {
-        let key = line.namedFieldValues[self.fieldToMatch]!
-        let val = line.namedFieldValues[self.fieldToAdd]!
-        map.updateValue(val, forKey: key)
-      }
-    }
     self.callback.scriptUpdate(
-      text: "Found \(map.count) mappings from \(self.fieldToMatch) to \(self.fieldToAdd)")
+      text:
+        "Propagated known values from \(self.fieldToMatch) to missing \(self.fieldToAdd) on \(n) lines"
+    )
 
-    var numUpdated = 0
-    var numSkipped = 0
-    var numTotal = 0
-    for line in logLines {
-      if !line.namedFieldValues.keys.contains(self.fieldToAdd)
-        && line.namedFieldValues.keys.contains(self.fieldToMatch)
-      {
-        numTotal += 1
-        let key = self.fieldToAdd
-        let match = line.namedFieldValues[self.fieldToMatch]!
-        if map.keys.contains(match) {
-          let val = map[match]!
-          line.namedFieldValues.updateValue(val, forKey: key)
-          numUpdated += 1
-        } else {
-          numSkipped += 1
-        }
-      }
-    }
-
-    if numTotal == 0 {
-      self.callback.scriptUpdate(
-        text: "Found 0 lines that have \(self.fieldToMatch) but not \(self.fieldToAdd)")
-    } else {
-      self.callback.scriptUpdate(
-        text:
-          "Updated \(numUpdated) lines that have \(self.fieldToMatch) but not \(self.fieldToAdd), skipped \(numSkipped)"
-      )
-    }
     return true
   }
 

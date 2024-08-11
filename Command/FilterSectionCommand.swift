@@ -5,11 +5,11 @@ class FilterSectionCommand: ScriptCommand {
   var callback: ScriptCallback
   var pattern: String
   var regex: RegexWithGroups?
-  var filterType: FilterLineCommand.FilterType
+  var filterType: FilterType
   var numHidden = 0
   var numVisible = 0
 
-  init(callback: ScriptCallback, pattern: String, filterType: FilterLineCommand.FilterType) {
+  init(callback: ScriptCallback, pattern: String, filterType: FilterType) {
     self.callback = callback
     self.pattern = pattern
     self.filterType = filterType
@@ -33,57 +33,22 @@ class FilterSectionCommand: ScriptCommand {
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
     self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
 
-    var section: [LogLine] = []
-    numHidden = 0
-    numVisible = 0
+    if let regex = self.regex {
+      var numHidden = 0
+      var numVisible = 0
 
-    for line in logLines {
-      if !section.isEmpty && line.beginSection {
-        self.processSection(section: section)
-        section.removeAll()
-      }
-      section.append(line)
-    }
-    self.processSection(section: section)
+      logLines.filterSection(
+        regex: regex, numVisible: &numVisible, numHidden: &numHidden, filterType: filterType)
 
-    self.callback.scriptUpdate(
-      text: "... \(self.numHidden) section(s) hidden, \(self.numVisible) remain visible")
-    return true
-  }
+      self.callback.scriptUpdate(
+        text: "... \(self.numHidden) section(s) hidden, \(self.numVisible) remain visible")
 
-  func processSection(section: [LogLine]) {
-    if !section.isEmpty {
-      if self.keepVisible(section: section) {
-        if section[0].visible {
-          self.numVisible += 1
-        }
-      } else {
-        for ln in section {
-          ln.visible = false
-        }
-        self.numHidden += 1
-      }
-    }
-  }
-
-  func keepVisible(section: [LogLine]) -> Bool {
-
-    var match = false
-    for line in section {
-      if regex!.hasMatch(text: line.text) {
-        match = true
-      }
-    }
-
-    switch self.filterType {
-    case .Required:
-      return match
-    case .Remove:
-      return !match
-    case .Add:
       return true
-    case .Highlight:
-      return true
+
+    } else {
+      self.callback.scriptUpdate(
+        text: "... regex not defined")
+      return false
     }
 
   }

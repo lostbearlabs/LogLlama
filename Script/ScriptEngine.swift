@@ -44,7 +44,7 @@ class ScriptEngine {
 
     var logLines = self.initialLines
     var anyChanges = false
-    var firstCmd = commands[0].description()
+    let firstCmd = commands[0].description()
     var lastCmd = ""
     for cmd in commands {
       lastCmd = cmd.description()

@@ -3,16 +3,12 @@ import Foundation
 /// Consolidates data from named groups in log lines.
 class FieldDataMap {
 
-  /**
-     A list of the field data from each line.
-     */
+  /// A list of the field data from each line.
   var data: [[String: String]] = []
 
-  /**
-     A dictionary of fields.
-     Key is the field name, forced to lower case.
-     Value is whether a non-integer value was every seen for that field.
-     */
+  /// A dictionary of fields.
+  /// Key is the field name, forced to lower case.
+  /// Value is whether a non-integer value was every seen for that field.
   var fields: [String: Bool] = [:]
 
   var TEXT: String = "text"

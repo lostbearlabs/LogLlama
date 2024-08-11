@@ -18,13 +18,7 @@ class RequireHilightCommand: ScriptCommand {
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
     self.callback.scriptUpdate(text: "Hiding non-hilighed lines")
-    var n = 0
-    for line in logLines {
-      if line.visible && !line.matched {
-        line.visible = false
-        n += 1
-      }
-    }
+    let n = logLines.hideNotHilighted()
     self.callback.scriptUpdate(text: "... hid \(n) non-hilighted lines")
     return true
   }

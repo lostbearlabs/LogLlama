@@ -60,7 +60,9 @@ If one field is always derived from another, for example if the same `UserID` is
 @ UserID ComputerID
 ```
 
-This is useful when performing queries on logs with inconsistent formatting.
+This is useful when performing queries on logs with inconsistently populated fields.  You can use the `@` command to ensure that every line has the fields you intend to query upon before you make your query.
+
+This command assumes that the mapping from `ComputerID -> UserID` is consistent.  If the mapping is not consistent, then the command's behavior is not well defined.
 
 
 ## Other uses for fields

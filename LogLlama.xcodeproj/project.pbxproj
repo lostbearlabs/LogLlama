@@ -15,6 +15,9 @@
 		0718E0CF2C63BDE000DB08F3 /* RegexWithGroupsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0718E0CE2C63BDE000DB08F3 /* RegexWithGroupsTest.swift */; };
 		073E35052C67FB7A00A9154A /* LogLineArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E35042C67FB7A00A9154A /* LogLineArray.swift */; };
 		073E350B2C69199D00A9154A /* LogLineArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E350A2C69199D00A9154A /* LogLineArrayTest.swift */; };
+		076C90B62C693DAE005B5572 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E350C2C69390700A9154A /* FilterType.swift */; };
+		076C90B82C69450E005B5572 /* AtomicCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C90B72C69450E005B5572 /* AtomicCounter.swift */; };
+		076C90BA2C6ABEF3005B5572 /* AtomicMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076C90B92C6ABEF3005B5572 /* AtomicMap.swift */; };
 		077018952C3463C200B1D040 /* PathKit in Frameworks */ = {isa = PBXBuildFile; productRef = 077018942C3463C200B1D040 /* PathKit */; };
 		077018972C3463C600B1D040 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 077018962C3463C600B1D040 /* SQLite */; };
 		077018992C3464BB00B1D040 /* SwiftHamcrest in Frameworks */ = {isa = PBXBuildFile; productRef = 077018982C3464BB00B1D040 /* SwiftHamcrest */; };
@@ -88,6 +91,9 @@
 		0718E0CE2C63BDE000DB08F3 /* RegexWithGroupsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexWithGroupsTest.swift; sourceTree = "<group>"; };
 		073E35042C67FB7A00A9154A /* LogLineArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLineArray.swift; sourceTree = "<group>"; };
 		073E350A2C69199D00A9154A /* LogLineArrayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLineArrayTest.swift; sourceTree = "<group>"; };
+		073E350C2C69390700A9154A /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
+		076C90B72C69450E005B5572 /* AtomicCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicCounter.swift; sourceTree = "<group>"; };
+		076C90B92C6ABEF3005B5572 /* AtomicMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicMap.swift; sourceTree = "<group>"; };
 		07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScriptText.swift; sourceTree = "<group>"; };
 		07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFieldsCommand.swift; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
@@ -198,27 +204,27 @@
 		073E35092C69194900A9154A /* Command */ = {
 			isa = PBXGroup;
 			children = (
+				AE368DAF252BC4470000B333 /* AddFieldCommand.swift */,
 				AE79EE2B233A779A00799BB7 /* ChopCommand.swift */,
 				34A5F0786846702DCD3CB79C /* ClearCommand.swift */,
 				AEED0F5B23357ADA00DC53D6 /* ColorCommand.swift */,
 				AE41B50123A40E7A004B47BE /* DateFormatCommand.swift */,
 				AED76E0B233AC16D00E58243 /* DemoCommand.swift */,
 				AE32EBE5233970B800AAF41F /* DetectDuplicatesCommand.swift */,
-				AEDE11CA23346632006FF1A8 /* FilterLineCommand.swift */,
-				AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */,
-				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
-				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
-				AE956B45234F89F30041ADBA /* TodayCommand.swift */,
-				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
-				AE368DA4252B7B270000B333 /* LimitCommand.swift */,
-				AE368DAF252BC4470000B333 /* AddFieldCommand.swift */,
-				AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */,
 				AE368DB7252BC5510000B333 /* DivideByFieldCommand.swift */,
 				AE368DBB252BC56B0000B333 /* DivideByRegexCommand.swift */,
+				AEDE11CA23346632006FF1A8 /* FilterLineCommand.swift */,
 				AE368DBF252BC59A0000B333 /* FilterSectionCommand.swift */,
-				AE368DC5252D00630000B333 /* ReplaceCommand.swift */,
-				070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */,
+				AE368DA4252B7B270000B333 /* LimitCommand.swift */,
+				AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */,
 				07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */,
+				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
+				AE368DC5252D00630000B333 /* ReplaceCommand.swift */,
+				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
+				070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */,
+				AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */,
+				AE956B45234F89F30041ADBA /* TodayCommand.swift */,
+				AEE53010234D206F00BF3824 /* TruncateCommand.swift */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -245,6 +251,9 @@
 				0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */,
 				0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */,
 				073E35042C67FB7A00A9154A /* LogLineArray.swift */,
+				073E350C2C69390700A9154A /* FilterType.swift */,
+				076C90B72C69450E005B5572 /* AtomicCounter.swift */,
+				076C90B92C6ABEF3005B5572 /* AtomicMap.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -431,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				076C90B62C693DAE005B5572 /* FilterType.swift in Sources */,
 				AE368DBC252BC56B0000B333 /* DivideByRegexCommand.swift in Sources */,
 				AE437F4123315F32001CD09D /* Notifications.swift in Sources */,
 				AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */,
@@ -443,6 +453,7 @@
 				AE368DA5252B7B270000B333 /* LimitCommand.swift in Sources */,
 				AE368DB4252BC5150000B333 /* SortByFieldsCommand.swift in Sources */,
 				AE37EB902332C8D40027E390 /* LogLinesUpdate.swift in Sources */,
+				076C90BA2C6ABEF3005B5572 /* AtomicMap.swift in Sources */,
 				073E35052C67FB7A00A9154A /* LogLineArray.swift in Sources */,
 				AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */,
 				0718E0C92C5BCC2500DB08F3 /* UndoUpdate.swift in Sources */,
@@ -458,6 +469,7 @@
 				AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */,
 				AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */,
 				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,
+				076C90B82C69450E005B5572 /* AtomicCounter.swift in Sources */,
 				AE956B46234F89F30041ADBA /* TodayCommand.swift in Sources */,
 				AEDE11C9233428F6006FF1A8 /* LogLine.swift in Sources */,
 				AE368DB8252BC5510000B333 /* DivideByFieldCommand.swift in Sources */,

@@ -40,28 +40,15 @@ class ParseFieldsCommand: ScriptCommand {
 
     self.callback.scriptUpdate(text: "Applying key/value expression: \(self.pattern)")
 
-    DispatchQueue.concurrentPerform(iterations: logLines.count) { (index) in
-      let line = logLines[index]
-      findNameValueFields(logLine: line)
+    if let regex {
+      logLines.parseFields(regex: regex)
+      self.callback.scriptUpdate(text: "... \(logLines.count) line(s) processed")
+      return true
+    } else {
+      self.callback.scriptUpdate(text: "... regex not set")
+      return false
     }
 
-    self.callback.scriptUpdate(text: "... \(logLines.count) line(s) processed")
-
-    return true
-  }
-
-  func findNameValueFields(logLine: LogLine) {
-    if self.regex != nil {
-      let text = logLine.text
-      let captures = self.regex!.captures(text: text)
-      for capture in captures {
-        let key = capture["key"]
-        let value = capture["value"]
-        if let key, let value {
-          logLine.namedFieldValues[key] = value
-        }
-      }
-    }
   }
 
   func description() -> String {

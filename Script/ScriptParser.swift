@@ -11,28 +11,28 @@ class ScriptParser {
       "=",
       { rest, callback in
         return FilterLineCommand(
-          callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Required)
+          callback: callback, pattern: rest, filterType: FilterType.required)
       }
     ),
     (
       "+",
       { rest, callback in
         return FilterLineCommand(
-          callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Add)
+          callback: callback, pattern: rest, filterType: FilterType.add)
       }
     ),
     (
       "-",
       { rest, callback in
         return FilterLineCommand(
-          callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)
+          callback: callback, pattern: rest, filterType: FilterType.remove)
       }
     ),
     (
       "~",
       { rest, callback in
         return FilterLineCommand(
-          callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Highlight)
+          callback: callback, pattern: rest, filterType: FilterType.highlight)
       }
     ),
     ("kv", { rest, callback in return ParseFieldsCommand(callback: callback, pattern: rest) }),
@@ -73,14 +73,14 @@ class ScriptParser {
       "/=",
       { rest, callback in
         return FilterSectionCommand(
-          callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Required)
+          callback: callback, pattern: rest, filterType: FilterType.required)
       }
     ),
     (
       "/-",
       { rest, callback in
         return FilterSectionCommand(
-          callback: callback, pattern: rest, filterType: FilterLineCommand.FilterType.Remove)
+          callback: callback, pattern: rest, filterType: FilterType.remove)
       }
     ),
     (

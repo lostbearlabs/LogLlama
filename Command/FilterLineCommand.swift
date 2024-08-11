@@ -8,13 +8,6 @@ import Foundation
 /// This command implements all 4 of our filtering operations.
 class FilterLineCommand: ScriptCommand {
 
-  enum FilterType {
-    case Required
-    case Add
-    case Remove
-    case Highlight
-  }
-
   var callback: ScriptCallback
   var filterType: FilterType
   var pattern: String
@@ -49,68 +42,25 @@ class FilterLineCommand: ScriptCommand {
     self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
     self.callback.scriptUpdate(text: "... field names: \(self.groupNames!.sorted())")
 
-    var n = 0
-    DispatchQueue.concurrentPerform(iterations: logLines.count) { (index) in
-
-      let line = logLines[index]
-      let results = regex!.ranges(text: line.text)
-
-      // hilight any matching parts of the line
-      if results.count > 0 {
-        n += 1
-
-        let _ = results.map {
-          let match = $0
-          let nsRange = line.text.toNSRange(from: match)
-
-          // add hilite color to display text
-          line.attributed.addAttribute(.backgroundColor, value: runState.color, range: nsRange)
-        }
-      }
-
-      var keys = [String: String]()
-      let captures = regex!.captures(text: line.text)
-      for capture in captures {
-        for key in capture.keys {
-          line.namedFieldValues[key] = capture[key]
-          keys[key] = key
-        }
-      }
-
-      let match = !results.isEmpty
-      switch self.filterType {
-
-      case .Required:
-        line.visible = line.visible && match
-        line.matched = line.matched || match
-      case .Add:
-        line.visible = line.visible || match
-        line.matched = line.matched || match
-      case .Remove:
-        if !line.beginSection {  // it's confusing if we hide section headers
-          line.visible = line.visible && !match
-          line.matched = line.matched && !match
-        }
-      case .Highlight:
-        line.matched = line.matched || match
-      }
-
+    if let regex {
+      let n = logLines.applyFilter(regex: regex, filterType: filterType, color: runState.color)
+      self.callback.scriptUpdate(text: "... \(n) line(s) matched")
+      return true
+    } else {
+      self.callback.scriptUpdate(text: "... regex not defined")
+      return false
     }
-
-    self.callback.scriptUpdate(text: "... \(n) line(s) matched")
-
-    return true
   }
 
   func description() -> String {
     switch self.filterType {
-    case .Required:
+    case .required:
       return "="
-    case .Add:
+    case .add:
       return "+"
-    case .Remove:
+    case .remove:
       return "-"
-    case .Highlight:
+    case .highlight:
       return "~"
     }
   }

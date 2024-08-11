@@ -21,10 +21,8 @@ class RegexWithGroups {
     return text.wholeMatch(of: regex) != nil
   }
 
-  /**
-     If the regex matches the text, returns all the named captures in the match.
-     (Unnamed captures are ignored.)
-     */
+  /// If the regex matches the text, returns all the named captures in the match.
+  /// (Unnamed captures are ignored.)
   func captures(text: String) -> [[String: String]] {
     var captures = [[String: String]]()
     let matches = text.matches(of: regex)
@@ -47,9 +45,7 @@ class RegexWithGroups {
     return captures
   }
 
-  /**
-     If the regex matches the text, returns all the matching ranges
-     */
+  /// If the regex matches the text, returns all the matching ranges
   func ranges(text: String) -> [Range<String.Index>] {
     var ranges = [Range<String.Index>]()
     let matches = text.matches(of: regex)
@@ -67,9 +63,7 @@ class RegexWithGroups {
 
   }
 
-  /**
-     Gets all the group names defined in the regex.
-     */
+  /// Gets all the group names defined in the regex.
   func groupNames() -> [String] {
     var names = [String]()
     do {
@@ -86,7 +80,7 @@ class RegexWithGroups {
         }
       }
     } catch {
-      //
+      // hoop
     }
     return names
   }

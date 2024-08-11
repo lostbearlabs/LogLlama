@@ -5,7 +5,7 @@ class TodayCommand: FilterLineCommand {
   init(callback: ScriptCallback) {
     super.init(
       callback: callback, pattern: "date-format-replaced-at-runtime-with-current-date",
-      filterType: FilterType.Required)
+      filterType: FilterType.required)
   }
 
   override func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {

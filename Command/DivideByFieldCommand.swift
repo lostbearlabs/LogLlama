@@ -17,22 +17,11 @@ class DivideByFieldCommand: ScriptCommand {
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    var prev: String? = nil
-
-    var numLines = 0
-    var numSections = 0
-    for line in logLines {
-      numLines += 1
-      let val = line.namedFieldValues[self.field]
-      if val != prev {
-        numSections += 1
-        line.setBeginSection(color: runState.color)
-      }
-      prev = val
-    }
+    let numSections = logLines.divideByField(field: self.field, color: runState.color)
 
     self.callback.scriptUpdate(
       text: "Found \(numSections) section boundaries where value of \(self.field) changes")
+
     return true
   }
 
