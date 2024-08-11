@@ -1,12 +1,10 @@
 import Foundation
 
-/**
- Sent from the AppDelegate and processed by all the view controllers.
- */
+/// Sent from the AppDelegate and processed by all the view controllers.
 class FontSizeUpdate {
-    var size : Int
-    
-    init(size: Int) {
-        self.size = size
-    }
+  var size: Int
+
+  init(size: Int) {
+    self.size = size
+  }
 }
