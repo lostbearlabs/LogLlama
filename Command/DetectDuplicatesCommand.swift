@@ -18,15 +18,15 @@ class DetectDuplicatesCommand : ScriptCommand {
     func validate() -> Bool {
         true
     }
-
+    
     func changesData() -> Bool {
         false
     }
-
     
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         var counts : [String: Int] = [:]
-
+        
         self.callback.scriptUpdate(text: "Looking for lines that occur more that \(self.threshold) times")
         
         for line in logLines {
@@ -43,7 +43,7 @@ class DetectDuplicatesCommand : ScriptCommand {
             if count > self.threshold {
                 self.callback.scriptUpdate(text: "... found \(count) lines like: \(text)")
                 let newLine = LogLine(text: "[\(count) LINES LIKE THIS] \(text)", lineNumber: 0)
-                logLines.insert(newLine, at:0)
+                logLines.lines.insert(newLine, at:0)
                 repeated.append(text)
             }
         }
@@ -56,6 +56,6 @@ class DetectDuplicatesCommand : ScriptCommand {
     func description() -> String {
         return "dd"
     }
-
+    
     
 }

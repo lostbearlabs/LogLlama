@@ -5,20 +5,20 @@ import Foundation
  */
 class RequireHilightCommand : ScriptCommand {
     var callback : ScriptCallback
-
-      init(callback: ScriptCallback) {
-          self.callback = callback
-      }
-
+    
+    init(callback: ScriptCallback) {
+        self.callback = callback
+    }
+    
     func validate() -> Bool {
         true
     }
-
+    
     func changesData() -> Bool {
         true
     }
-
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Hiding non-hilighed lines")
         var n = 0
         for line in logLines {
@@ -30,9 +30,9 @@ class RequireHilightCommand : ScriptCommand {
         self.callback.scriptUpdate(text: "... hid \(n) non-hilighted lines")
         return true
     }
-
+    
     func description() -> String {
         return "=="
     }
-
+    
 }

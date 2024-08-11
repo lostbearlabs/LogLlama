@@ -16,12 +16,12 @@ class SqlCommand : ScriptCommand {
     func validate() -> Bool {
         true
     }
-
+    
     func changesData() -> Bool {
         false
     }
     
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Running SQL")
         self.callback.scriptUpdate(text: "... \(self.sql)")
         
@@ -34,7 +34,7 @@ class SqlCommand : ScriptCommand {
                 }
             }
             self.callback.scriptUpdate(text: "... consolidated data from log lines")
-
+            
             do {
                 // convert to SQL
                 self.callback.scriptUpdate(text: "... adding data to SQL")
@@ -47,7 +47,7 @@ class SqlCommand : ScriptCommand {
         } else {
             self.callback.scriptUpdate(text: "... found current data in SQL")
         }
-
+        
         do {
             // perform query
             for row in try runState.fieldDataSql!.db.prepare(self.sql) {
@@ -64,14 +64,14 @@ class SqlCommand : ScriptCommand {
         } catch {
             self.callback.scriptUpdate(text: "SQL ERROR: \(error).")
         }
-
+        
         return true
     }
-
+    
     func description() -> String {
         return "sql"
     }
-
+    
 }
 
 

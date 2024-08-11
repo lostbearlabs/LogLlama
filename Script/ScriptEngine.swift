@@ -5,14 +5,14 @@ import Foundation
  */
 class ScriptEngine {
     var callback : ScriptCallback
-    var initialLines : [LogLine] = []
+    var initialLines : LogLineArray = LogLineArray()
     var runState = RunState()
     
     init(callback : ScriptCallback) {
         self.callback = callback
     }
     
-    func setInitialLines( lines : [LogLine] ) {
+    func setInitialLines( lines : LogLineArray ) {
         self.initialLines = lines;
     }
     
@@ -27,19 +27,19 @@ class ScriptEngine {
         let (rc, commands) = parser.parse(script: script)
         if( !rc ) {
             self.callback.scriptUpdate(text: "PARSING FAILED")
-            self.callback.scriptDone(logLines: [], op: nil)
+            self.callback.scriptDone(logLines: LogLineArray(), op: nil)
             return
         }
         
         if commands.count==0 {
             self.callback.scriptUpdate(text: "NO COMMANDS IN SCRIPT")
-            self.callback.scriptDone(logLines: [], op: nil)
+            self.callback.scriptDone(logLines: LogLineArray(), op: nil)
             return
         }
         
         for cmd in commands {
             if( !cmd.validate()) {
-                self.callback.scriptDone(logLines: [], op: nil)
+                self.callback.scriptDone(logLines: LogLineArray(), op: nil)
                 return
             }
         }

@@ -8,7 +8,7 @@ class ColorCommand: ScriptCommand {
     var text : String
     var color : NSColor?
     var callback : ScriptCallback
-
+    
     init(callback: ScriptCallback, text: String) {
         self.callback = callback
         self.text = text
@@ -23,15 +23,15 @@ class ColorCommand: ScriptCommand {
         self.color = NSColor(hexString: hex!)
         return true
     }
-
+    
     func changesData() -> Bool {
         false
     }
-
     
-    func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
+    
+    func run(logLines: inout LogLineArray, runState : inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Filter color is now: \(self.text)")
-
+        
         runState.color = color!
         return true
     }
@@ -39,7 +39,7 @@ class ColorCommand: ScriptCommand {
     func description() -> String {
         return ": \(self.text)"
     }
-
+    
     
     
     let allColors = [

@@ -4,24 +4,24 @@
 class DivideByFieldCommand : ScriptCommand {
     var callback : ScriptCallback
     var field : String
-
+    
     init(callback: ScriptCallback, field: String) {
         self.callback = callback
         self.field = field
     }
-
+    
     func validate() -> Bool {
         true
     }
-
+    
     func changesData() -> Bool {
         true
     }
-
-
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    
+    
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         var prev : String? = nil
-
+        
         var numLines = 0
         var numSections = 0
         for line in logLines {
@@ -33,13 +33,13 @@ class DivideByFieldCommand : ScriptCommand {
             }
             prev = val
         }
-
+        
         self.callback.scriptUpdate(text: "Found \(numSections) section boundaries where value of \(self.field) changes")
         return true
     }
-
+    
     func description() -> String {
         return "/f"
     }
-
+    
 }

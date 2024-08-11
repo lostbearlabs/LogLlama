@@ -101,7 +101,7 @@ class ReadFileCommand : ScriptCommand {
         }
     }
     
-    func run(logLines : inout [LogLine], runState : inout RunState) -> Bool {
+    func run(logLines : inout LogLineArray, runState : inout RunState) -> Bool {
         let sortedPaths = self.sortFilesByCreationDate()
         
         let numberFormatter = NumberFormatter()

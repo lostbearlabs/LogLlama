@@ -47,7 +47,7 @@ class FilterLineCommand : ScriptCommand {
     }
     
     
-    func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
+    func run(logLines: inout LogLineArray, runState : inout RunState) -> Bool {
         
         self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
         self.callback.scriptUpdate(text: "... field names: \(self.groupNames!.sorted())")

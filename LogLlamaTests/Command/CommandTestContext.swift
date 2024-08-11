@@ -2,7 +2,7 @@ import Foundation
 @testable import LogLlama
 
 class CommandTestContext : ScriptCallback {
-    var lines : [LogLine] = []
+    var lines : LogLineArray = LogLineArray()
     var runState : RunState = RunState()
 
     func addLines(numLines: Int) {
@@ -17,7 +17,7 @@ class CommandTestContext : ScriptCallback {
     func scriptUpdate(text: String) {
     }
 
-    func scriptDone(logLines: [LogLine], op: String?) {
+    func scriptDone(logLines: LogLineArray, op: String?) {
     }
 
 }

@@ -8,7 +8,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     
     @IBOutlet var scriptText: NSTextView!
     var running = false
-    var lastResults : [LogLine] = []
+    var lastResults : LogLineArray = LogLineArray()
     var curUndoLines = 0
     let maxUndoLines = 10_000_000
     var undoResults : [UndoState] = []
@@ -124,7 +124,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
     
     @objc private func onClearAndRunClicked(_ notification: Notification) {
         let (script, _) = self.getTextToRun();
-        self.lastResults = []
+        self.lastResults = LogLineArray()
         self.runScript(script: script)
     }
     
@@ -170,7 +170,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
         }
     }
     
-    func scriptDone(logLines: [LogLine], op: String?) {
+    func scriptDone(logLines: LogLineArray, op: String?) {
         DispatchQueue.main.async {
             self.lastResults = logLines
             let update = LogLinesUpdate(lines: logLines)
@@ -182,7 +182,7 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             
             while self.curUndoLines > self.maxUndoLines {
                 let dropped = self.undoResults.remove(at: 0)
-                self.curUndoLines -= dropped.lines.count
+                self.curUndoLines -= dropped.count
             }
             
             self.undoResults.append(undoState)
@@ -201,15 +201,15 @@ class ScriptViewController: NSViewController, NSTextViewDelegate, ScriptCallback
             if let undoState = self.undoResults.last {
                 NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: undoState.lines))
                 
-                self.lastResults.removeAll()
+                self.lastResults.clear()
                 for line in undoState.lines {
                     self.lastResults.append(line)
                 }
                 
                 self.runState = undoState.runState
             } else {
-                NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: []))
-                self.lastResults.removeAll()
+                NotificationCenter.default.post(name: .LogLinesUpdated, object: LogLinesUpdate(lines: LogLineArray()))
+                self.lastResults.clear()
             }
         }
         self.sendUndoState()

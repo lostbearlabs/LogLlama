@@ -1,18 +1,21 @@
 import Foundation
 
 class UndoState {
-    var lines : [LogLine]
+    var lines : LogLineArray
     var op : String?
     var runState : RunState
     
-    init(op: String?, lines: [LogLine], runState: RunState) {
+    init(op: String?, lines: LogLineArray, runState: RunState) {
         self.op = op
-        self.lines = []
-        for line in lines {
-            // clone each line so that the original owner (the ScriptView) can continue to update its state
-            // without affecting the display or undo data
-            self.lines.append(line.clone())
-        }
+        
+        // clone each line so that the original owner (the ScriptView) can continue to update its state
+        // without affecting the display or undo data
+        self.lines = lines.clone()
+        
         self.runState = runState
+    }
+    
+    var count : Int {
+        get { return lines.count }
     }
 }

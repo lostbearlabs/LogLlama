@@ -8,7 +8,7 @@ class TodayCommand : FilterLineCommand {
         super.init(callback: callback, pattern: "date-format-replaced-at-runtime-with-current-date", filterType: FilterType.Required)
     }
     
-    override func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    override func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         
         // We have to set this up now, not at validation time, so it gets the most recent dateFormat value
         if( !self.setupToday(runState: runState)) {

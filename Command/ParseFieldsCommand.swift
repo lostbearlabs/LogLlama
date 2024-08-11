@@ -38,7 +38,7 @@ class ParseFieldsCommand : ScriptCommand {
     }
     
     
-    func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
+    func run(logLines: inout LogLineArray, runState : inout RunState) -> Bool {
         
         self.callback.scriptUpdate(text: "Applying key/value expression: \(self.pattern)")
         
@@ -69,5 +69,5 @@ class ParseFieldsCommand : ScriptCommand {
     func description() -> String {
         return "kv"
     }
-
+    
 }

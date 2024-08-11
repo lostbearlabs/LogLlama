@@ -41,7 +41,7 @@ class LoadFilterCommand: ScriptCommand {
     }
     
     
-    func run(logLines: inout [LogLine], runState : inout RunState) -> Bool {
+    func run(logLines: inout LogLineArray, runState : inout RunState) -> Bool {
         switch( self.loadFilterType ) {
             
         case .Required:

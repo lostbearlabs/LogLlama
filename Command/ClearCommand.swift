@@ -6,22 +6,22 @@ import Foundation
  */
 class ClearCommand : ScriptCommand {
     var callback : ScriptCallback
-
+    
     init(callback: ScriptCallback) {
         self.callback = callback
     }
-
+    
     func validate() -> Bool {
         true
     }
-
+    
     func changesData() -> Bool {
         true
     }
-
-
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
-        logLines.removeAll()
+    
+    
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
+        logLines.clear()
         self.callback.scriptUpdate(text: "Cleared all lines")
         return true
     }
@@ -29,5 +29,5 @@ class ClearCommand : ScriptCommand {
     func description() -> String {
         return "clear"
     }
-
+    
 }

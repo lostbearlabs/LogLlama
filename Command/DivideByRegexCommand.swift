@@ -28,7 +28,7 @@ class DivideByRegexCommand: ScriptCommand {
         true
     }
     
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         var numFound = 0
         for line in logLines {
             if (regex!.hasMatch(text: line.text)) {

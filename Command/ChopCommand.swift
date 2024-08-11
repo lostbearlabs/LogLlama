@@ -6,23 +6,23 @@ import Foundation
  */
 class ChopCommand : ScriptCommand {
     var callback : ScriptCallback
-
-      init(callback: ScriptCallback) {
-          self.callback = callback
-      }
-
+    
+    init(callback: ScriptCallback) {
+        self.callback = callback
+    }
+    
     func validate() -> Bool {
         true
     }
-
+    
     func changesData() -> Bool {
         true
     }
-
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Removing hidden lines")
         let initialCount = logLines.count
-        logLines.removeAll( where: {!$0.visible})
+        logLines.chop()
         let removedCount = initialCount - logLines.count
         self.callback.scriptUpdate(text: "... removed \(removedCount) hidden lines")
         return true

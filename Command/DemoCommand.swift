@@ -42,7 +42,7 @@ class DemoCommand : ScriptCommand {
         case CRASHED
     }
     
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Generating demo data for \(numRaces) races")
         
         for i in 1...numRaces {
@@ -54,7 +54,7 @@ class DemoCommand : ScriptCommand {
         
     }
     
-    func runRace(raceNum: Int, logLines: inout [LogLine], runState: inout RunState) {
+    func runRace(raceNum: Int, logLines: inout LogLineArray, runState: inout RunState) {
         
         let numCars = 10
         let numLaps = 5
@@ -92,7 +92,7 @@ class DemoCommand : ScriptCommand {
         
     }
     
-    func log(text : String, logLines: inout [LogLine]) {
+    func log(text : String, logLines: inout LogLineArray) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateString = dateFormatter.string(from: self.logDate)
@@ -108,6 +108,6 @@ class DemoCommand : ScriptCommand {
     func description() -> String {
         return "demo"
     }
-
+    
     
 }

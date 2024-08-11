@@ -33,7 +33,7 @@ class FilterSectionCommand: ScriptCommand {
     }
     
     
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool {
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
         self.callback.scriptUpdate(text: "Applying regular expression: \(self.pattern)")
         
         var section: [LogLine] = []

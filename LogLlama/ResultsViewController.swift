@@ -10,7 +10,7 @@ class ResultsViewController: NSViewController {
     @IBOutlet weak var textColumn: NSTableColumn!
     @IBOutlet weak var searchField: NSSearchField!
     
-    var logLines : [LogLine] = []
+    var logLines : LogLineArray = LogLineArray()
     var longestLineLength = 1
     
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ class ResultsViewController: NSViewController {
     
     @objc private func onLogLinesUpdated(_ notification: Notification) {
         
-        self.logLines = []
+        self.logLines = LogLineArray()
         
         if let update = notification.object as? LogLinesUpdate
         {

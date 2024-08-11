@@ -5,7 +5,7 @@ import Foundation
  */
 protocol ScriptCommand {
     func validate() -> Bool;
-    func run(logLines: inout [LogLine], runState: inout RunState) -> Bool;
+    func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool;
     func changesData() -> Bool;
     func description() -> String;
 }
