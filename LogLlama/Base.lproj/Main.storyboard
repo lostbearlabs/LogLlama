@@ -529,10 +529,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="1377" y="471"/>
         </scene>
-        <!--Filter View Controller-->
+        <!--Output View Controller-->
         <scene sceneID="OvU-ZW-Tlx">
             <objects>
-                <viewController title="Filter View Controller" id="PHy-GI-FLh" customClass="LogViewController" customModule="LogLlama" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Output View Controller" id="PHy-GI-FLh" customClass="OutputViewContoller" customModule="LogLlama" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Ibp-CF-ky6">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -542,8 +542,8 @@ Gw
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
-                                    <tabViewItem label="Log" identifier="" id="6mK-bk-b0N">
-                                        <view key="view" id="rye-uU-a2w">
+                                    <tabViewItem label="Output" identifier="" id="6mK-bk-b0N">
+                                        <view key="view" identifier="outputView" id="rye-uU-a2w">
                                             <rect key="frame" x="10" y="33" width="446" height="270"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>

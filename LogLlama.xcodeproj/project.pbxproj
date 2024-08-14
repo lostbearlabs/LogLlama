@@ -44,7 +44,7 @@
 		AE437F2123306D4C001CD09D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2023306D4C001CD09D /* Assets.xcassets */; };
 		AE437F2423306D4C001CD09D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE437F2223306D4C001CD09D /* Main.storyboard */; };
 		AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3C233150B1001CD09D /* ScriptViewController.swift */; };
-		AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* LogViewController.swift */; };
+		AE437F3F23315E25001CD09D /* OutputViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F3E23315E25001CD09D /* OutputViewContoller.swift */; };
 		AE437F4123315F32001CD09D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE437F4023315F32001CD09D /* Notifications.swift */; };
 		AE4D63BA2358AE5E0001CD97 /* LoadFilterCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */; };
 		AE62F03C23453AB2002EDC76 /* DocumentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE62F03B23453AB2002EDC76 /* DocumentState.swift */; };
@@ -124,7 +124,7 @@
 		AE437F2B23306D4D001CD09D /* LogLlamaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogLlamaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE437F3123306D4D001CD09D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE437F3C233150B1001CD09D /* ScriptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptViewController.swift; sourceTree = "<group>"; };
-		AE437F3E23315E25001CD09D /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		AE437F3E23315E25001CD09D /* OutputViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputViewContoller.swift; sourceTree = "<group>"; };
 		AE437F4023315F32001CD09D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		AE4D63B92358AE5E0001CD97 /* LoadFilterCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFilterCommand.swift; sourceTree = "<group>"; };
 		AE62F03B23453AB2002EDC76 /* DocumentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentState.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 				AE437F2523306D4C001CD09D /* Info.plist */,
 				AE437F2623306D4C001CD09D /* LogLlama.entitlements */,
 				AE437F3C233150B1001CD09D /* ScriptViewController.swift */,
-				AE437F3E23315E25001CD09D /* LogViewController.swift */,
+				AE437F3E23315E25001CD09D /* OutputViewContoller.swift */,
 				AE37EB932332C9880027E390 /* ResultsViewController.swift */,
 				AEA753B2233A9B77000C70FB /* WindowController.swift */,
 				AE62F03B23453AB2002EDC76 /* DocumentState.swift */,
@@ -466,7 +466,7 @@
 				07AF5A6E2C5AB97A006E413F /* ParseFieldsCommand.swift in Sources */,
 				AE37EB942332C9880027E390 /* ResultsViewController.swift in Sources */,
 				AE41B50223A40E7B004B47BE /* DateFormatCommand.swift in Sources */,
-				AE437F3F23315E25001CD09D /* LogViewController.swift in Sources */,
+				AE437F3F23315E25001CD09D /* OutputViewContoller.swift in Sources */,
 				AEDE11C323341917006FF1A8 /* ScriptCommand.swift in Sources */,
 				AEAF601023331704002B1684 /* ScriptEngine.swift in Sources */,
 				076C90B82C69450E005B5572 /* AtomicCounter.swift in Sources */,
