@@ -10,6 +10,10 @@ class ScriptEngine {
     self.callback = callback
   }
 
+  func log(_ st: String) {
+    self.callback.scriptUpdate(text: st)
+  }
+
   func setInitialLines(lines: LogLineArray) {
     self.initialLines = lines
   }
@@ -24,30 +28,23 @@ class ScriptEngine {
     let parser = ScriptParser(callback: self.callback)
     let (rc, commands) = parser.parse(script: script)
     if !rc {
-      self.callback.scriptUpdate(text: "PARSING FAILED")
+      log("PARSING FAILED")
       self.callback.scriptDone(logLines: LogLineArray(), op: nil)
       return
     }
 
     if commands.count == 0 {
-      self.callback.scriptUpdate(text: "NO COMMANDS IN SCRIPT")
+      log("NO COMMANDS IN SCRIPT")
       self.callback.scriptDone(logLines: LogLineArray(), op: nil)
       return
     }
 
-    for cmd in commands {
-      if !cmd.validate() {
-        self.callback.scriptDone(logLines: LogLineArray(), op: nil)
-        return
-      }
-    }
-
     var logLines = self.initialLines
     var anyChanges = false
-    let firstCmd = commands[0].description()
+    let firstCmd = commands[0].undoText()
     var lastCmd = ""
     for cmd in commands {
-      lastCmd = cmd.description()
+      lastCmd = cmd.undoText()
 
       // If this is a command that changes the log lines on screen, then clear our
       // SQL data;  it will need to be rebuilt for the next query
@@ -67,7 +64,7 @@ class ScriptEngine {
       let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
       let timeInterval = round(1_000 * Double(nanoTime) / 1_000_000_000) / 1000
 
-      self.callback.scriptUpdate(text: "... (\(timeInterval) seconds)")
+      log("... (\(timeInterval) seconds)")
     }
 
     var n = 0
@@ -78,7 +75,7 @@ class ScriptEngine {
     }
 
     if anyChanges {
-      self.callback.scriptUpdate(text: "Found \(withCommas(n)) lines to display")
+      log("Found \(withCommas(n)) lines to display")
     }
 
     let op = commands.count == 1 ? firstCmd : "\(firstCmd) .. \(lastCmd)"

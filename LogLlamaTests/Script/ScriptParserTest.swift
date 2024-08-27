@@ -47,7 +47,7 @@ class ScriptParserTest: XCTestCase {
   func test_parse_demoN_recognizesIt() {
     let n = 11
     let sut = givenScriptParser()
-    let script = "demoN \(n)"
+    let script = "demo \(n)"
     let (result, commands) = sut.parse(script: script)
 
     assertThat(result, equalTo(true))
@@ -153,15 +153,17 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(RequireHilightCommand.self))
   }
 
-  func test_parse_today_recognizesIt() {
-    let sut = givenScriptParser()
-    let script = "today"
-    let (result, commands) = sut.parse(script: script)
-
-    assertThat(result, equalTo(true))
-    assertThat(commands.count, equalTo(1))
-    assertThat(commands[0], instanceOf(TodayCommand.self))
-  }
+    func test_parse_today_recognizesIt() {
+      let sut = givenScriptParser()
+      let script = "today"
+      let (result, commands) = sut.parse(script: script)
+  
+      assertThat(result, equalTo(true))
+      assertThat(commands.count, equalTo(1))
+      assertThat(commands[0], instanceOf(FilterLineCommand.self))
+      let cmd = commands[0] as! FilterLineCommand
+      assertThat(cmd.filterType, equalTo(FilterType.today))
+    }
 
   func test_parse_loadFilterRequired_recognizesIt() {
     let sut = givenScriptParser()
@@ -173,7 +175,6 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(LoadFilterCommand.self))
 
     let cmd = commands[0] as! LoadFilterCommand
-    _ = cmd.validate()
     assertThat(cmd.loadFilterType, equalTo(LoadFilterCommand.LoadFilterType.Required))
     assertThat(cmd.pattern, equalTo("FNORD FJORD"))
   }
@@ -188,7 +189,6 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(LoadFilterCommand.self))
 
     let cmd = commands[0] as! LoadFilterCommand
-    _ = cmd.validate()
     assertThat(cmd.loadFilterType, equalTo(LoadFilterCommand.LoadFilterType.Excluded))
     assertThat(cmd.pattern, equalTo("FNORD FJORD"))
   }
@@ -203,7 +203,6 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(LoadFilterCommand.self))
 
     let cmd = commands[0] as! LoadFilterCommand
-    _ = cmd.validate()
     assertThat(cmd.loadFilterType, equalTo(LoadFilterCommand.LoadFilterType.Clear))
   }
 
@@ -217,7 +216,6 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(LoadFilterCommand.self))
 
     let cmd = commands[0] as! LoadFilterCommand
-    _ = cmd.validate()
     assertThat(cmd.loadFilterType, equalTo(LoadFilterCommand.LoadFilterType.RequireToday))
   }
 
@@ -245,7 +243,6 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(SleepCommand.self))
 
     let cmd = commands[0] as! SleepCommand
-    _ = cmd.validate()
     assertThat(cmd.seconds, equalTo(1234))
   }
 
@@ -287,7 +284,6 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(ReplaceCommand.self))
 
     let cmd = commands[0] as! ReplaceCommand
-    _ = cmd.validate()
     assertThat(cmd.oldText, equalTo("fnord"))
     assertThat(cmd.newText, equalTo("apple"))
   }
@@ -302,7 +298,6 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(AddFieldCommand.self))
 
     let cmd = commands[0] as! AddFieldCommand
-    _ = cmd.validate()
     assertThat(cmd.fieldToAdd, equalTo("a"))
     assertThat(cmd.fieldToMatch, equalTo("b"))
   }
@@ -366,15 +361,9 @@ class ScriptParserTest: XCTestCase {
   func test_parse_kv_missingGroup_notValid() {
     let sut = givenScriptParser()
     let script = "kv (?<key2>\\w+)=(?<value>\\w+)"
-    let (result, commands) = sut.parse(script: script)
+    let (result, _) = sut.parse(script: script)
 
-    assertThat(result, equalTo(true))
-    assertThat(commands.count, equalTo(1))
-    assertThat(commands[0], instanceOf(ParseFieldsCommand.self))
-
-    let cmd = commands[0] as! ParseFieldsCommand
-    let valid = cmd.validate()
-    assertThat(valid, equalTo(false))
+    assertThat(result, equalTo(false))
   }
 
   func givenScriptParser() -> ScriptParser {

@@ -3,25 +3,39 @@ import Foundation
 /// This command lets you analyze the tags from all (visible) lines by putting them into an in-memory database and then running
 /// arbitrary SQL against them.
 class SqlCommand: ScriptCommand {
-  var callback: ScriptCallback
-  var sql: String
+  var callback: ScriptCallback?
+  var sql: String = ""
 
-  init(callback: ScriptCallback, sql: String) {
-    self.callback = callback
-    self.sql = sql
+  required init() {
+  }
+
+  func log(_ st: String) {
+    self.callback!.scriptUpdate(text: st)
   }
 
   func validate() -> Bool {
     true
   }
 
+  func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
+    self.callback = callback
+    if let sql=line.rest(), line.done(){
+      self.sql = sql
+      return true
+    } else {
+      log("expected 1 argument, sql statement")
+      return false
+    }
+  }
+
+  
   func changesData() -> Bool {
     false
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    self.callback.scriptUpdate(text: "Running SQL")
-    self.callback.scriptUpdate(text: "... \(self.sql)")
+    log("Running SQL")
+    log("... \(self.sql)")
 
     if runState.fieldDataSql == nil {
       // consolidate named fields from lines
@@ -31,19 +45,19 @@ class SqlCommand: ScriptCommand {
           fieldMap.addData(line: line)
         }
       }
-      self.callback.scriptUpdate(text: "... consolidated data from log lines")
+      log("... consolidated data from log lines")
 
       do {
         // convert to SQL
-        self.callback.scriptUpdate(text: "... adding data to SQL")
+        log("... adding data to SQL")
         runState.fieldDataSql = try FieldDataSql(data: fieldMap)
-        self.callback.scriptUpdate(text: "... done added data to SQL")
+        log("... done added data to SQL")
       } catch {
-        self.callback.scriptUpdate(text: "SQL ERROR: \(error).")
+        log("SQL ERROR: \(error).")
         return false
       }
     } else {
-      self.callback.scriptUpdate(text: "... found current data in SQL")
+      log("... found current data in SQL")
     }
 
     do {
@@ -57,17 +71,28 @@ class SqlCommand: ScriptCommand {
             ar.append("null")
           }
         }
-        self.callback.scriptUpdate(text: "... | \(ar)")
+        log("... | \(ar)")
       }
     } catch {
-      self.callback.scriptUpdate(text: "SQL ERROR: \(error).")
+      log("SQL ERROR: \(error).")
     }
 
     return true
   }
 
-  func description() -> String {
-    return "sql"
+  func undoText() -> String {
+    return "\(SqlCommand.description[0].op)"
+  }
+
+  static var description: [ScriptCommandDescription] {
+    return [
+      ScriptCommandDescription(
+        category: .analysis,
+        op: "sql",
+        args: "...",
+        description: "run specified SQL command against extracted fields"
+      )
+    ]
   }
 
 }

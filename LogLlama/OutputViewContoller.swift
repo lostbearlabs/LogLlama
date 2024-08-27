@@ -36,7 +36,8 @@ class OutputViewContoller: NSViewController {
   }
 
   private func setupReferenceText() {
-    let referenceText = ScriptParser.getReferenceText()
+    let parser = ScriptParser(callback: nil)
+    let referenceText = parser.getReferenceText()
 
     // Create an NSTextField to hold the reference text
     let textView = NSTextView()

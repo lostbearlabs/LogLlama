@@ -7,8 +7,8 @@ class AddFieldCommandTest: XCTestCase {
   func test_run_linkingFieldExists_copiesDependentField() {
     // arrange
     let ctx = CommandTestContext()
-    let sut = AddFieldCommand(
-      callback: ctx, fieldToAdd: "dependentField", fieldToMatch: "linkField")
+    let sut = AddFieldCommand()
+    let _ = sut.setup(callback: ctx, line: ScriptLine(line: "@ dependentField linkField"))
     ctx.addLines(numLines: 2)
     ctx.lines[0].namedFieldValues.updateValue("linkValue", forKey: "linkField")
     ctx.lines[1].namedFieldValues.updateValue("linkValue", forKey: "linkField")

@@ -7,7 +7,8 @@ class ChopCommandTest: XCTestCase {
   func test_run_twoLines_removesHiddenOne() {
     // arrange
     let ctx = CommandTestContext()
-    let sut = ChopCommand(callback: ctx)
+    let sut = ChopCommand()
+    let _ = sut.setup(callback: ctx, line: ScriptLine(line: ""))
     ctx.addLines(numLines: 3)
     // hide line #1
     ctx.lines[1].visible = false

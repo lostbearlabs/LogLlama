@@ -4,17 +4,39 @@ import PathKit
 
 /// Inputs log lines one or more log files as specified by glob pattern.
 class ReadFileCommand: ScriptCommand {
-  var callback: ScriptCallback
-  var pattern: String
+  var callback: ScriptCallback?
+  var pattern: String = ""
   var files: [URL] = []
 
-  init(callback: ScriptCallback, pattern: String) {
-    self.callback = callback
-    self.pattern = pattern
+  required init() {
+  }
+  
+  func log(_ st: String) {
+    self.callback!.scriptUpdate(text: st)
   }
 
-  func validate() -> Bool {
+  func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
+    self.callback = callback
+    if let pattern=line.rest(), line.done(){
+      self.pattern = pattern
+      return true
+    } else {
+      log("expected 1 argument, file name pattern")
+      return false
+    }
+  }
+
+  func changesData() -> Bool {
+    true
+  }
+
+  /// Populate self.files based on the file wildcard in in self.pattern.
+  func listFiles() -> Bool {
+    // Glob the pattern.
     self.files = Path.glob(self.pattern).map { URL(fileURLWithPath: $0.string) }
+    
+    // Unless the current process has already seen these files, the sandbox is going to
+    // require that the user select them.
     let fileManager = FileManager.default
     if self.files.count == 0
       || !self.files.allSatisfy({ fileManager.isReadableFile(atPath: $0.path) })
@@ -29,16 +51,16 @@ class ReadFileCommand: ScriptCommand {
       }
 
       dispatchGroup.wait()
-      self.callback.scriptUpdate(text: "\(self.files.count) file(s) selected by user")
+      log("\(self.files.count) file(s) selected by user")
+      if self.files.count == 0 {
+        log("no files selected")
+        return false
+      }
     }
 
-    if self.files.count == 0 {
-      self.callback.scriptUpdate(text: "no file(s) found that look like: \(self.pattern)")
-      return false
-    }
     return true
   }
-
+  
   func showFileChooserDialog(initialPath: String, dispatchGroup: DispatchGroup) {
     let openPanel = NSOpenPanel()
 
@@ -59,23 +81,20 @@ class ReadFileCommand: ScriptCommand {
     openPanel.begin { (result) in
       if result == .OK && !openPanel.urls.isEmpty {
         for url in openPanel.urls {
-          self.callback.scriptUpdate(text: "Selected file: \(url)")
+          self.log("Selected file: \(url)")
           self.files.append(url)
         }
       } else {
-        self.callback.scriptUpdate(text: "User canceled the selection.")
+        self.log("User canceled the selection.")
       }
       dispatchGroup.leave()
     }
   }
 
-  func changesData() -> Bool {
-    true
-  }
 
   func isFileReadable(file: Path) -> Bool {
     if !FileManager.default.isReadableFile(atPath: file.string) {
-      self.callback.scriptUpdate(text: "Not a readable file: \(file.string)")
+      log("Not a readable file: \(file.string)")
       return false
     }
 
@@ -96,24 +115,30 @@ class ReadFileCommand: ScriptCommand {
       let data = try String(contentsOfFile: file.path, encoding: .utf8)
       return data
     } catch {
-      self.callback.scriptUpdate(text: "... error reading file: \(error)")
+      log("... error reading file: \(error)")
       return nil
     }
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
+    
+    if !listFiles() {
+      return false
+    }
+    
     let sortedPaths = self.sortFilesByCreationDate()
+    let baseIndex = logLines.count
 
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .decimal
 
     for file in sortedPaths {
-      self.callback.scriptUpdate(text: "Reading file \(file.path)")
+      log("Reading file \(file.path)")
 
       if let data = readFileContents(file: file) {
         let ar = data.components(separatedBy: .newlines)
 
-        self.callback.scriptUpdate(text: "... processing \(withCommas(ar.count)) lines")
+        log("... processing \(withCommas(ar.count)) lines")
 
         var numIncluded = 0
         var numExcluded = 0
@@ -124,7 +149,13 @@ class ReadFileCommand: ScriptCommand {
             for it in runState.replace {
               line = line.replacingOccurrences(of: it.key, with: it.value)
             }
-            let logLine = LogLine(text: line, lineNumber: numRead)
+            
+            // When loading single files, just use the line number from the file as the log line number.
+            // When loading multiple files, increment from the end of each file so that line numbers are
+            // unique and the original load order is preserved if sorting without fields.
+            let lineNumber = baseIndex + numRead
+            
+            let logLine = LogLine(text: line, lineNumber: lineNumber)
             logLines.append(logLine)
             numIncluded += 1
           } else {
@@ -132,17 +163,14 @@ class ReadFileCommand: ScriptCommand {
           }
           numRead += 1
           if runState.limit > 0 && numRead >= runState.limit {
-            self.callback.scriptUpdate(
-              text: "... reached file limit of  \(withCommas(runState.limit)) lines")
+            log("... reached file limit of  \(withCommas(runState.limit)) lines")
             break
           }
           if numRead % 10000 == 0 {
-            self.callback.scriptUpdate(text: "... \(withCommas(numRead))")
+            log("... \(withCommas(numRead))")
           }
         }
-        self.callback.scriptUpdate(
-          text:
-            "... read \(withCommas(ar.count)) lines, kept \(withCommas(numIncluded)), discarded \(withCommas(numExcluded))"
+        log("... read \(withCommas(ar.count)) lines, kept \(withCommas(numIncluded)), discarded \(withCommas(numExcluded))"
         )
       } else {
         return false
@@ -187,8 +215,19 @@ class ReadFileCommand: ScriptCommand {
     }
   }
 
-  func description() -> String {
-    return "<"
+  func undoText() -> String {
+    return ReadFileCommand.description[0].op
+  }
+
+  static var description: [ScriptCommandDescription] {
+    return [
+      ScriptCommandDescription(
+        category: .adding,
+        op: "<",
+        args: "file name/pattern",
+        description: "load log lines from matching files in order created"
+      )
+    ]
   }
 
 }

@@ -2,15 +2,17 @@ import Foundation
 
 /// Generates the demo log file used in examples.
 class DemoCommand: ScriptCommand {
-  var callback: ScriptCallback
+  var callback: ScriptCallback?
   var logDate = Date()
   var linesAdded = 0
   var text: String? = nil
   var numRaces = 3
 
-  init(callback: ScriptCallback, text: String?) {
-    self.callback = callback
-    self.text = text
+  required init() {
+  }
+  
+  func log(_ st: String) {
+    self.callback!.scriptUpdate(text: st)
   }
 
   func validate() -> Bool {
@@ -19,7 +21,7 @@ class DemoCommand: ScriptCommand {
       if n != nil {
         self.numRaces = n!
       } else {
-        self.callback.scriptUpdate(text: "Not an integer: \(self.text!)")
+        log("Not an integer: \(self.text!)")
         return false
       }
 
@@ -28,6 +30,21 @@ class DemoCommand: ScriptCommand {
     return true
   }
 
+  func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
+    self.callback = callback
+    if let n=line.popInt() {
+      self.numRaces = n
+    }
+    
+    if !line.done(){
+      log("expected 0 or 1 arguments, num races")
+      return false
+    }
+    
+    return true
+  }
+
+  
   func changesData() -> Bool {
     true
   }
@@ -40,13 +57,13 @@ class DemoCommand: ScriptCommand {
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    self.callback.scriptUpdate(text: "Generating demo data for \(numRaces) races")
+    log("Generating demo data for \(numRaces) races")
 
     for i in 1...numRaces {
       runRace(raceNum: i, logLines: &logLines, runState: &runState)
     }
 
-    self.callback.scriptUpdate(text: "... generated \(self.linesAdded) log lines")
+    log("... generated \(self.linesAdded) log lines")
     return true
 
   }
@@ -103,8 +120,19 @@ class DemoCommand: ScriptCommand {
     self.linesAdded = self.linesAdded + 1
   }
 
-  func description() -> String {
-    return "demo"
+  func undoText() -> String {
+    return "\(DemoCommand.description[0].op)"
+  }
+
+  static var description: [ScriptCommandDescription] {
+    return [
+      ScriptCommandDescription(
+        category: .adding,
+        op: "demo",
+        args: "[N]",
+        description: "generate sample log lines for N (default 3) races programmatically"
+      ),
+    ]
   }
 
 }

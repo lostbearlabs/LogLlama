@@ -3,38 +3,69 @@ import Foundation
 
 /// Sets the color to be used for the next filtering commands.
 class ColorCommand: ScriptCommand {
-  var text: String
+  var text: String = ""
   var color: NSColor?
-  var callback: ScriptCallback
+  var callback: ScriptCallback?
 
-  init(callback: ScriptCallback, text: String) {
-    self.callback = callback
-    self.text = text
+  required init() {
+  }
+  
+  func log(_ st: String) {
+    self.callback!.scriptUpdate(text: st)
   }
 
   func validate() -> Bool {
     let hex = allColors[self.text]
     if hex == nil {
-      self.callback.scriptUpdate(text: "UNKNOWN COLOR: \(self.text)")
+      log("UNKNOWN COLOR: \(self.text)")
       return false
     }
     self.color = NSColor(hexString: hex!)
     return true
   }
+  
+  func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
+    self.callback = callback
+    if let text=line.pop(), line.done(){
+      self.text = text
+      let hex = allColors[self.text]
+      if hex == nil {
+        log("UNKNOWN COLOR: \(text)")
+        return false
+      }
+      self.color = NSColor(hexString: hex!)
+      return true
+    } else {
+      log("expected 1 argument, color")
+      return false
+    }
+  }
+
 
   func changesData() -> Bool {
     false
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    self.callback.scriptUpdate(text: "Filter color is now: \(self.text)")
+    log("Filter color is now: \(self.text)")
 
     runState.color = color!
     return true
   }
 
-  func description() -> String {
+  func undoText() -> String {
     return ": \(self.text)"
+  }
+
+  static var description: [ScriptCommandDescription] {
+    return [
+      ScriptCommandDescription(
+        category: .filter,
+        op: ":",
+        args: " color",
+        description: "hilight following matches with (color)"
+      )
+    ]
   }
 
   let allColors = [

@@ -2,24 +2,38 @@ import Foundation
 
 class TruncateCommand: ScriptCommand {
 
-  var maxLength: Int
-  var callback: ScriptCallback
+  var maxLength: Int = 0
+  var callback: ScriptCallback?
 
-  init(callback: ScriptCallback, maxLength: Int) {
-    self.callback = callback
-    self.maxLength = maxLength
+  required init() {
+  }
+
+  func log(_ st: String) {
+    self.callback!.scriptUpdate(text: st)
   }
 
   func validate() -> Bool {
     return true
   }
 
+  func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
+    self.callback = callback
+    if let maxLength=line.popInt(), line.done(){
+      self.maxLength = maxLength
+      return true
+    } else {
+      log("expected 1 integer argument, max line length")
+      return false
+    }
+  }
+
+  
   func changesData() -> Bool {
     true
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    self.callback.scriptUpdate(text: "Truncating lines to \(self.maxLength) characters")
+    log("Truncating lines to \(self.maxLength) characters")
 
     var n = 0
     for line in logLines {
@@ -28,12 +42,23 @@ class TruncateCommand: ScriptCommand {
       }
     }
 
-    self.callback.scriptUpdate(text: "... truncated \(n) of \(logLines.count) lines")
+    log("... truncated \(n) of \(logLines.count) lines")
     return true
   }
 
-  func description() -> String {
-    return "truncate"
+  func undoText() -> String {
+    return "\(TruncateCommand.description[0].op)"
+  }
+
+  static var description: [ScriptCommandDescription] {
+    return [
+      ScriptCommandDescription(
+        category: .adjusting,
+        op: "truncate",
+        args: "N",
+        description: "truncate lines with > N characters"
+      )
+    ]
   }
 
 }

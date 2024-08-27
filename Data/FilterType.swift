@@ -5,6 +5,7 @@ enum FilterType {
   case add
   case remove
   case highlight
+  case today
 }
 
 let filter: FilterType = .remove

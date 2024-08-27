@@ -110,6 +110,9 @@ class LogLineArray: Sequence {
     // update visibility for the line
     switch filterType {
 
+    case .today:
+      line.visible = line.visible && match
+      line.matched = line.matched || match
     case .required:
       line.visible = line.visible && match
       line.matched = line.matched || match
@@ -279,6 +282,8 @@ class LogLineArray: Sequence {
     }
 
     switch filterType {
+    case .today:
+      return match
     case .required:
       return match
     case .remove:
