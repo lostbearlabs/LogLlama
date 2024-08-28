@@ -127,7 +127,6 @@ class ReadFileCommand: ScriptCommand {
     }
     
     let sortedPaths = self.sortFilesByCreationDate()
-    let baseIndex = logLines.count
 
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .decimal
@@ -153,7 +152,7 @@ class ReadFileCommand: ScriptCommand {
             // When loading single files, just use the line number from the file as the log line number.
             // When loading multiple files, increment from the end of each file so that line numbers are
             // unique and the original load order is preserved if sorting without fields.
-            let lineNumber = baseIndex + numRead
+            let lineNumber = logLines.count + 1
             
             let logLine = LogLine(text: line, lineNumber: lineNumber)
             logLines.append(logLine)

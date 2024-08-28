@@ -5,7 +5,10 @@ class ResultsViewController: NSViewController {
 
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var textCell: NSTextFieldCell!
+  @IBOutlet weak var lineNumberCell: NSTextFieldCell!
   @IBOutlet weak var textColumn: NSTableColumn!
+  @IBOutlet weak var lineNumberColumn: NSTableColumn!
+
   @IBOutlet weak var searchField: NSSearchField!
 
   var logLines: LogLineArray = LogLineArray()
@@ -178,7 +181,11 @@ extension ResultsViewController: NSTableViewDataSource {
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int)
     -> Any?
   {
-    logLines[row].getAttributedString()
+    if tableColumn == lineNumberColumn {
+      String(logLines[row].lineNumber)
+    } else {
+      logLines[row].getAttributedString()
+    }
   }
 
   func tableView(_: NSTableView, shouldEdit: NSTableColumn?, row: Int) -> Bool {

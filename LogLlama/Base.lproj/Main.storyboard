@@ -420,7 +420,18 @@ Gw
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="407" minWidth="40" maxWidth="10000" id="GfU-Bb-gNE">
+                                                <tableColumn width="48" minWidth="10" maxWidth="3.4028234663852886e+38" id="lEF-TM-3Qh">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" allowsUndo="NO" alignment="left" title="Text Cell" id="RyR-s2-Efd">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </tableColumn>
+                                                <tableColumn editable="NO" width="361" minWidth="40" maxWidth="10000" id="GfU-Bb-gNE">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -441,7 +452,7 @@ Gw
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="iwk-LJ-Z0o">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <rect key="frame" x="1" y="253" width="448" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Mms-dd-BiX">
@@ -474,10 +485,12 @@ Gw
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="lineNumberCell" destination="RyR-s2-Efd" id="bZq-Gf-YR4"/>
+                        <outlet property="lineNumberColumn" destination="lEF-TM-3Qh" id="A43-c4-lcV"/>
                         <outlet property="searchField" destination="e32-Ia-EM3" id="Nxg-d9-yig"/>
                         <outlet property="tableView" destination="pmy-4G-VIA" id="pKm-Lf-UGH"/>
                         <outlet property="textCell" destination="RC1-mk-6SB" id="G0n-IV-FsI"/>
-                        <outlet property="textColumn" destination="GfU-Bb-gNE" id="4gU-Qz-VP4"/>
+                        <outlet property="textColumn" destination="GfU-Bb-gNE" id="t9f-ij-vcH"/>
                     </connections>
                 </viewController>
                 <customObject id="l0E-cZ-LFi" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

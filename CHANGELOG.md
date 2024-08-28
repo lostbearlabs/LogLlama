@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [1.4.5] Forthcoming
 - Rename the "Log" tab to "Output", to reduce confusion with actual log lines.
+- Add line number to the results view
 
 ## [1.4.4] 2024-08-01
 - Add thousands separator to line counts when processing log files.
