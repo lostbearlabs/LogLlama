@@ -7,7 +7,7 @@ class DateFormatCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
@@ -23,7 +23,7 @@ class DateFormatCommand: ScriptCommand {
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let text=line.pop(), line.done(){
+    if let text = line.pop(), line.done() {
       self.text = text
       return true
     } else {
@@ -32,7 +32,6 @@ class DateFormatCommand: ScriptCommand {
     }
   }
 
-  
   func changesData() -> Bool {
     false
   }

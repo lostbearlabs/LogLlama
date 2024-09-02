@@ -7,34 +7,34 @@ import Foundation
 ///
 /// This command implements all 4 of our filtering operations.
 class FilterLineCommand: ScriptCommand {
-  
+
   var callback: ScriptCallback?
   var filterType: FilterType = FilterType.highlight
   var pattern: String = ""
   var regex: RegexWithGroups?
   var groupNames: [String]?
-  
+
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
-  
+
   func validate() -> Bool {
-    
+
     do {
       // parse the regex for efficient use later
       try self.regex = RegexWithGroups(pattern: self.pattern)
       self.groupNames = self.regex!.groupNames()
-      
+
       return true
     } catch {
       log("invalid regular expression: \(self.pattern)")
       return false
     }
   }
-  
+
   func getFilterType(line: ScriptLine) -> FilterType? {
     switch line.op() {
     case "=":
@@ -51,11 +51,11 @@ class FilterLineCommand: ScriptCommand {
       return nil
     }
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    
-    if let filterType=getFilterType(line: line){
+
+    if let filterType = getFilterType(line: line) {
       self.filterType = filterType
       if filterType == .today {
         return setupToday(callback: callback, line: line)
@@ -67,7 +67,7 @@ class FilterLineCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func setupToday(callback: ScriptCallback, line: ScriptLine) -> Bool {
     if line.done() {
       // We'll set the pattern at runtime instead of setup so we get the latest
@@ -79,9 +79,9 @@ class FilterLineCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func setupFilter(callback: ScriptCallback, line: ScriptLine) -> Bool {
-    if let pattern=line.rest(), line.done() {
+    if let pattern = line.rest(), line.done() {
       self.pattern = pattern
       do {
         try regex = RegexWithGroups(pattern: pattern)
@@ -96,25 +96,25 @@ class FilterLineCommand: ScriptCommand {
       return false
     }
   }
-  
-  
+
   func changesData() -> Bool {
     true
   }
-  
+
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    
+
     if filterType == .today {
       if !setupToday(runState: runState) {
         return false
       }
     }
-    
+
     log("Applying regular expression: \(self.pattern)")
     log("... field names: \(self.groupNames!.sorted())")
-    
+
     if let regex {
-      let n = logLines.applyFilter(regex: regex, filterType: filterType, color: runState.color)
+      let n = logLines.applyFilter(
+        regexFromFilter: regex, filterType: filterType, color: runState.color)
       log("... \(n) line(s) matched")
       return true
     } else {
@@ -122,13 +122,13 @@ class FilterLineCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func setupToday(runState: RunState) -> Bool {
     let now = Date()
     let formatter = DateFormatter()
     formatter.dateFormat = runState.dateFormat
     self.pattern = formatter.string(from: now)
-    
+
     do {
       try self.regex = RegexWithGroups(pattern: self.pattern)
       return true
@@ -137,7 +137,7 @@ class FilterLineCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func undoText() -> String {
     switch filterType {
     case .required:
@@ -152,7 +152,7 @@ class FilterLineCommand: ScriptCommand {
       return "today"
     }
   }
-  
+
   static var description: [ScriptCommandDescription] {
     return [
       ScriptCommandDescription(
@@ -187,7 +187,7 @@ class FilterLineCommand: ScriptCommand {
       ),
     ]
   }
-  
+
 }
 
 extension String {

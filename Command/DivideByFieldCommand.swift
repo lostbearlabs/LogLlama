@@ -5,7 +5,7 @@ class DivideByFieldCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
@@ -16,7 +16,7 @@ class DivideByFieldCommand: ScriptCommand {
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let field=line.pop(), line.done(){
+    if let field = line.pop(), line.done() {
       self.field = field
       return true
     } else {
@@ -24,7 +24,7 @@ class DivideByFieldCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func changesData() -> Bool {
     true
   }

@@ -7,21 +7,21 @@ class ClearCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if line.done(){
+    if line.done() {
       return true
     } else {
       log("expected 0 arguments")
       return false
     }
   }
-  
+
   func changesData() -> Bool {
     true
   }

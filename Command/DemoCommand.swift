@@ -10,7 +10,7 @@ class DemoCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
@@ -32,19 +32,18 @@ class DemoCommand: ScriptCommand {
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let n=line.popInt() {
+    if let n = line.popInt() {
       self.numRaces = n
     }
-    
-    if !line.done(){
+
+    if !line.done() {
       log("expected 0 or 1 arguments, num races")
       return false
     }
-    
+
     return true
   }
 
-  
   func changesData() -> Bool {
     true
   }
@@ -112,7 +111,7 @@ class DemoCommand: ScriptCommand {
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     let dateString = dateFormatter.string(from: self.logDate)
 
-    logLines.append(LogLine(text: "[\(dateString)] \(text)", lineNumber: logLines.count+1))
+    logLines.append(LogLine(text: "[\(dateString)] \(text)", lineNumber: logLines.count + 1))
 
     let seconds = Int.random(in: 30...90)
     self.logDate = Calendar.current.date(byAdding: .second, value: seconds, to: logDate)!
@@ -131,7 +130,7 @@ class DemoCommand: ScriptCommand {
         op: "demo",
         args: "[N]",
         description: "generate sample log lines for N (default 3) races programmatically"
-      ),
+      )
     ]
   }
 

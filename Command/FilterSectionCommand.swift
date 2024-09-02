@@ -11,11 +11,11 @@ class FilterSectionCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
-  
+
   func validate() -> Bool {
     do {
       // parse the regex for efficient use later
@@ -37,10 +37,10 @@ class FilterSectionCommand: ScriptCommand {
       return nil
     }
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let filterType=getOp(line: line), let pattern=line.rest(), line.done(){
+    if let filterType = getOp(line: line), let pattern = line.rest(), line.done() {
       self.pattern = pattern
       self.filterType = filterType
       do {
@@ -56,7 +56,6 @@ class FilterSectionCommand: ScriptCommand {
       return false
     }
   }
-
 
   func changesData() -> Bool {
     true

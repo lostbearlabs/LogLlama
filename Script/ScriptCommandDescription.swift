@@ -8,9 +8,9 @@ enum ScriptCommandCategory: String {
   case filter = "*** FILTERING/HILIGHTING LOG LINES ***"
   case sections = "*** SECTIONS ***"
   case misc = "*** MISC ***"
-  
+
   static func < (lhs: ScriptCommandCategory, rhs: ScriptCommandCategory) -> Bool {
-         return lhs.rawValue < rhs.rawValue
+    return lhs.rawValue < rhs.rawValue
   }
 }
 

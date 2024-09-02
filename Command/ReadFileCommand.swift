@@ -10,14 +10,14 @@ class ReadFileCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let pattern=line.rest(), line.done(){
+    if let pattern = line.rest(), line.done() {
       self.pattern = pattern
       return true
     } else {
@@ -34,7 +34,7 @@ class ReadFileCommand: ScriptCommand {
   func listFiles() -> Bool {
     // Glob the pattern.
     self.files = Path.glob(self.pattern).map { URL(fileURLWithPath: $0.string) }
-    
+
     // Unless the current process has already seen these files, the sandbox is going to
     // require that the user select them.
     let fileManager = FileManager.default
@@ -60,7 +60,7 @@ class ReadFileCommand: ScriptCommand {
 
     return true
   }
-  
+
   func showFileChooserDialog(initialPath: String, dispatchGroup: DispatchGroup) {
     let openPanel = NSOpenPanel()
 
@@ -91,7 +91,6 @@ class ReadFileCommand: ScriptCommand {
     }
   }
 
-
   func isFileReadable(file: Path) -> Bool {
     if !FileManager.default.isReadableFile(atPath: file.string) {
       log("Not a readable file: \(file.string)")
@@ -121,11 +120,11 @@ class ReadFileCommand: ScriptCommand {
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
-    
+
     if !listFiles() {
       return false
     }
-    
+
     let sortedPaths = self.sortFilesByCreationDate()
 
     let numberFormatter = NumberFormatter()
@@ -148,12 +147,12 @@ class ReadFileCommand: ScriptCommand {
             for it in runState.replace {
               line = line.replacingOccurrences(of: it.key, with: it.value)
             }
-            
+
             // When loading single files, just use the line number from the file as the log line number.
             // When loading multiple files, increment from the end of each file so that line numbers are
             // unique and the original load order is preserved if sorting without fields.
             let lineNumber = logLines.count + 1
-            
+
             let logLine = LogLine(text: line, lineNumber: lineNumber)
             logLines.append(logLine)
             numIncluded += 1
@@ -169,7 +168,8 @@ class ReadFileCommand: ScriptCommand {
             log("... \(withCommas(numRead))")
           }
         }
-        log("... read \(withCommas(ar.count)) lines, kept \(withCommas(numIncluded)), discarded \(withCommas(numExcluded))"
+        log(
+          "... read \(withCommas(ar.count)) lines, kept \(withCommas(numIncluded)), discarded \(withCommas(numExcluded))"
         )
       } else {
         return false

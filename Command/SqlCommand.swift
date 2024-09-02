@@ -19,7 +19,7 @@ class SqlCommand: ScriptCommand {
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let sql=line.rest(), line.done(){
+    if let sql = line.rest(), line.done() {
       self.sql = sql
       return true
     } else {
@@ -28,7 +28,6 @@ class SqlCommand: ScriptCommand {
     }
   }
 
-  
   func changesData() -> Bool {
     false
   }

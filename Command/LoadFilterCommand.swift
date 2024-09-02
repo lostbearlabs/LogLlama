@@ -3,31 +3,31 @@ import Foundation
 
 /// Creates or clears filters to apply when loading lines
 class LoadFilterCommand: ScriptCommand {
-  
+
   enum LoadFilterType {
     case Required
     case Excluded
     case Clear
     case RequireToday
   }
-  
+
   var callback: ScriptCallback?
   var loadFilterType: LoadFilterType = LoadFilterType.Clear
   var pattern: String = ""
   var regex: RegexWithGroups?
-  
+
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
-    
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
     if let op = getOp(line: line) {
       self.loadFilterType = op
-      if( op == LoadFilterType.Clear || op == LoadFilterType.RequireToday ) {
+      if op == LoadFilterType.Clear || op == LoadFilterType.RequireToday {
         if line.done() {
           return true
         } else {
@@ -35,7 +35,7 @@ class LoadFilterCommand: ScriptCommand {
           return false
         }
       } else {
-        if let pattern=line.rest(), line.done(){
+        if let pattern = line.rest(), line.done() {
           self.pattern = pattern
           do {
             // parse the regex for efficient use later
@@ -55,14 +55,14 @@ class LoadFilterCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func changesData() -> Bool {
     false
   }
-  
+
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
     switch self.loadFilterType {
-      
+
     case .Required:
       runState.filterRequired.append(self.regex!)
       log("Added filter: Lines loaded must match: \(self.pattern)")
@@ -80,16 +80,16 @@ class LoadFilterCommand: ScriptCommand {
       runState.filterExcluded.removeAll()
       return true
     }
-    
+
   }
-  
+
   func setupToday(runState: RunState) -> Bool {
     let now = Date()
     let formatter = DateFormatter()
     formatter.dateFormat = runState.dateFormat
     let pattern = formatter.string(from: now)
     self.pattern = pattern
-    
+
     do {
       try self.regex = RegexWithGroups(pattern: self.pattern)
       runState.filterRequired.append(self.regex!)
@@ -100,7 +100,7 @@ class LoadFilterCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func description() -> String {
     switch loadFilterType {
     case .Required:
@@ -113,7 +113,7 @@ class LoadFilterCommand: ScriptCommand {
       return "RequireToday"
     }
   }
-  
+
   func getOp(line: ScriptLine) -> LoadFilterType? {
     switch line.op() {
     case "require":
@@ -128,13 +128,11 @@ class LoadFilterCommand: ScriptCommand {
       return nil
     }
   }
-  
-  
-  
+
   func undoText() -> String {
     return SleepCommand.description[0].op
   }
-  
+
   static var description: [ScriptCommandDescription] {
     return [
       ScriptCommandDescription(
@@ -161,8 +159,8 @@ class LoadFilterCommand: ScriptCommand {
         args: "",
         description: "clear any line loading filters"
       ),
-      
+
     ]
   }
-  
+
 }

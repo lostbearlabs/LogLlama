@@ -6,14 +6,14 @@ class AddFieldCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let arg1=line.pop(), let arg2=line.pop(), line.done(){
+    if let arg1 = line.pop(), let arg2 = line.pop(), line.done() {
       self.fieldToAdd = arg1
       self.fieldToMatch = arg2
       return true
@@ -23,7 +23,6 @@ class AddFieldCommand: ScriptCommand {
     }
   }
 
-  
   func changesData() -> Bool {
     true
   }
@@ -32,7 +31,7 @@ class AddFieldCommand: ScriptCommand {
     let n = logLines.addField(fieldToAdd: self.fieldToAdd, fieldToMatch: self.fieldToMatch)
 
     log(
-        "Propagated known values from \(self.fieldToMatch) to missing \(self.fieldToAdd) on \(n) lines"
+      "Propagated known values from \(self.fieldToMatch) to missing \(self.fieldToAdd) on \(n) lines"
     )
 
     return true

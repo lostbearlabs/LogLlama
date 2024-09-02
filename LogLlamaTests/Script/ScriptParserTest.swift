@@ -153,17 +153,17 @@ class ScriptParserTest: XCTestCase {
     assertThat(commands[0], instanceOf(RequireHilightCommand.self))
   }
 
-    func test_parse_today_recognizesIt() {
-      let sut = givenScriptParser()
-      let script = "today"
-      let (result, commands) = sut.parse(script: script)
-  
-      assertThat(result, equalTo(true))
-      assertThat(commands.count, equalTo(1))
-      assertThat(commands[0], instanceOf(FilterLineCommand.self))
-      let cmd = commands[0] as! FilterLineCommand
-      assertThat(cmd.filterType, equalTo(FilterType.today))
-    }
+  func test_parse_today_recognizesIt() {
+    let sut = givenScriptParser()
+    let script = "today"
+    let (result, commands) = sut.parse(script: script)
+
+    assertThat(result, equalTo(true))
+    assertThat(commands.count, equalTo(1))
+    assertThat(commands[0], instanceOf(FilterLineCommand.self))
+    let cmd = commands[0] as! FilterLineCommand
+    assertThat(cmd.filterType, equalTo(FilterType.today))
+  }
 
   func test_parse_loadFilterRequired_recognizesIt() {
     let sut = givenScriptParser()
@@ -364,6 +364,16 @@ class ScriptParserTest: XCTestCase {
     let (result, _) = sut.parse(script: script)
 
     assertThat(result, equalTo(false))
+  }
+
+  func test_parse_sed_recognizesIt() {
+    let sut = givenScriptParser()
+    let script = "sed +"
+    let (result, commands) = sut.parse(script: script)
+
+    assertThat(result, equalTo(true))
+    assertThat(commands.count, equalTo(1))
+    assertThat(commands[0], instanceOf(SedCommand.self))
   }
 
   func givenScriptParser() -> ScriptParser {

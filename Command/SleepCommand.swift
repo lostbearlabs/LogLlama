@@ -11,10 +11,10 @@ class SleepCommand: ScriptCommand {
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let seconds=line.popInt(), line.done(){
+    if let seconds = line.popInt(), line.done() {
       self.seconds = seconds
       return true
     } else {
@@ -22,7 +22,6 @@ class SleepCommand: ScriptCommand {
       return false
     }
   }
-
 
   func changesData() -> Bool {
     false

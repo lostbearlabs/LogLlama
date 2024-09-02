@@ -8,7 +8,7 @@ class DivideByRegexCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
@@ -23,10 +23,10 @@ class DivideByRegexCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let pattern=line.rest(), line.done(){
+    if let pattern = line.rest(), line.done() {
       self.pattern = pattern
       do {
         try regex = RegexWithGroups(pattern: pattern)
@@ -40,7 +40,6 @@ class DivideByRegexCommand: ScriptCommand {
       return false
     }
   }
-
 
   func changesData() -> Bool {
     true

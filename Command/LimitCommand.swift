@@ -7,7 +7,7 @@ class LimitCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
@@ -15,10 +15,10 @@ class LimitCommand: ScriptCommand {
   func validate() -> Bool {
     return true
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let limit=line.popInt(), line.done(){
+    if let limit = line.popInt(), line.done() {
       self.limit = limit
       return true
     } else {
@@ -26,7 +26,6 @@ class LimitCommand: ScriptCommand {
       return false
     }
   }
-
 
   func changesData() -> Bool {
     false

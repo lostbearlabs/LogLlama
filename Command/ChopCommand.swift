@@ -4,7 +4,7 @@ import Foundation
 /// to be restored by a "+" filter or analyzed by other commands.
 class ChopCommand: ScriptCommand {
   var callback: ScriptCallback?
-  
+
   required init() {
   }
 
@@ -14,7 +14,7 @@ class ChopCommand: ScriptCommand {
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if line.done(){
+    if line.done() {
       return true
     } else {
       log("expected 0 arguments")

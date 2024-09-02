@@ -18,7 +18,7 @@ class TruncateCommand: ScriptCommand {
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let maxLength=line.popInt(), line.done(){
+    if let maxLength = line.popInt(), line.done() {
       self.maxLength = maxLength
       return true
     } else {
@@ -27,7 +27,6 @@ class TruncateCommand: ScriptCommand {
     }
   }
 
-  
   func changesData() -> Bool {
     true
   }

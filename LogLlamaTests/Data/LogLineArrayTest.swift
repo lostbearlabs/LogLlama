@@ -46,7 +46,42 @@ class LogLineArrayTest: XCTestCase {
     let ar = givenData(numLines: 3)
     let regex = try RegexWithGroups(pattern: "line=2,")
 
-    let n = ar.applyFilter(regex: regex, filterType: .required, color: NSColor.black)
+    let n = ar.applyFilter(regexFromFilter: regex, filterType: .required, color: NSColor.black)
+
+    assertThat(n, equalTo(1))
+
+    assertThat(ar[0].visible, equalTo(false))
+    assertThat(ar[1].visible, equalTo(false))
+    assertThat(ar[2].visible, equalTo(true))
+  }
+
+  func test_applyFilter_withLineRangeAddress_matches() throws {
+    let ar = givenData(numLines: 10)
+    let address = SedAddress(range: (6, 8))
+
+    // Start with all hidden.
+    for line in ar.lines {
+      line.visible = false
+    }
+
+    // Unhide lines in range
+    let n = ar.applyFilter(
+      regexFromFilter: nil, filterType: .add, color: NSColor.black, address: address)
+
+    assertThat(n, equalTo(3))
+
+    for line in ar.lines {
+      let expectedMatch = (line.lineNumber >= 6 && line.lineNumber <= 8)
+      assertThat(line.visible, equalTo(expectedMatch))
+    }
+  }
+
+  func test_applyFilter_withPatternAddress_matches() throws {
+    let ar = givenData(numLines: 3)
+    let address = SedAddress(regex: try RegexWithGroups(pattern: "line=2"))
+
+    let n = ar.applyFilter(
+      regexFromFilter: nil, filterType: .required, color: NSColor.black, address: address)
 
     assertThat(n, equalTo(1))
 
@@ -59,7 +94,7 @@ class LogLineArrayTest: XCTestCase {
     let ar = givenData(numLines: 3)
     let regex = try RegexWithGroups(pattern: "line=(?<lineNum>\\d+)")
 
-    let n = ar.applyFilter(regex: regex, filterType: .required, color: NSColor.black)
+    let n = ar.applyFilter(regexFromFilter: regex, filterType: .required, color: NSColor.black)
 
     assertThat(n, equalTo(3))
 

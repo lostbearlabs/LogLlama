@@ -26,6 +26,10 @@
 		0799751B2C7390DD004938C7 /* ScriptLineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0799751A2C7390DD004938C7 /* ScriptLineTest.swift */; };
 		07AE3CE92C41CD5F00E2F172 /* DemoScriptText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */; };
 		07AF5A6E2C5AB97A006E413F /* ParseFieldsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */; };
+		07B701022C80B77B002ED6B4 /* SedAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B701012C80B77B002ED6B4 /* SedAddress.swift */; };
+		07B701042C80B94C002ED6B4 /* SedCommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B701032C80B94C002ED6B4 /* SedCommandType.swift */; };
+		07B701062C83DC0D002ED6B4 /* SedCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B701052C83DC0D002ED6B4 /* SedCommand.swift */; };
+		07B701082C84A870002ED6B4 /* SedCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B701072C84A870002ED6B4 /* SedCommandTest.swift */; };
 		34A5F77824703DD1A8A7C457 /* AddFieldCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */; };
 		34A5FBCA0D4F56C680E00F25 /* ChopCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */; };
 		34A5FC7E9F66A71A34E86EEC /* CommandTestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */; };
@@ -101,6 +105,10 @@
 		0799751A2C7390DD004938C7 /* ScriptLineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptLineTest.swift; sourceTree = "<group>"; };
 		07AE3CE82C41CD5F00E2F172 /* DemoScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScriptText.swift; sourceTree = "<group>"; };
 		07AF5A6D2C5AB97A006E413F /* ParseFieldsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFieldsCommand.swift; sourceTree = "<group>"; };
+		07B701012C80B77B002ED6B4 /* SedAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SedAddress.swift; sourceTree = "<group>"; };
+		07B701032C80B94C002ED6B4 /* SedCommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SedCommandType.swift; sourceTree = "<group>"; };
+		07B701052C83DC0D002ED6B4 /* SedCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SedCommand.swift; sourceTree = "<group>"; };
+		07B701072C84A870002ED6B4 /* SedCommandTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SedCommandTest.swift; sourceTree = "<group>"; };
 		34A5F0786846702DCD3CB79C /* ClearCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearCommand.swift; sourceTree = "<group>"; };
 		34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChopCommandTest.swift; sourceTree = "<group>"; };
 		34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTestContext.swift; sourceTree = "<group>"; };
@@ -199,9 +207,10 @@
 		073E35082C69192F00A9154A /* Command */ = {
 			isa = PBXGroup;
 			children = (
+				34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */,
 				34A5F72EF9C0C55B19A20E77 /* ChopCommandTest.swift */,
 				34A5FA45EDABF831D4FE7787 /* CommandTestContext.swift */,
-				34A5FF385DC60B1CA031D912 /* AddFieldCommandTest.swift */,
+				07B701072C84A870002ED6B4 /* SedCommandTest.swift */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -226,6 +235,7 @@
 				AEDE11C42334196F006FF1A8 /* ReadFileCommand.swift */,
 				AE368DC5252D00630000B333 /* ReplaceCommand.swift */,
 				AE9A333E234D27F6001107C8 /* RequireHilightCommand.swift */,
+				07B701052C83DC0D002ED6B4 /* SedCommand.swift */,
 				070F560D2C3DDA6E000FE3CD /* SleepCommand.swift */,
 				AE368DB3252BC5150000B333 /* SortByFieldsCommand.swift */,
 				AE6D8CA123C7886600CF67D8 /* SqlCommand.swift */,
@@ -328,6 +338,8 @@
 				0718E0CC2C63BDAE00DB08F3 /* RegexWithGroups.swift */,
 				076C90BB2C6E481A005B5572 /* ScriptCommandDescription.swift */,
 				079975182C73901C004938C7 /* ScriptLine.swift */,
+				07B701012C80B77B002ED6B4 /* SedAddress.swift */,
+				07B701032C80B94C002ED6B4 /* SedCommandType.swift */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -451,10 +463,12 @@
 				AE437F4123315F32001CD09D /* Notifications.swift in Sources */,
 				AEA753B3233A9B77000C70FB /* WindowController.swift in Sources */,
 				AE79EE2C233A779A00799BB7 /* ChopCommand.swift in Sources */,
+				07B701022C80B77B002ED6B4 /* SedAddress.swift in Sources */,
 				AEAF600E233316B7002B1684 /* ScriptCallback.swift in Sources */,
 				AE32EBE6233970B800AAF41F /* DetectDuplicatesCommand.swift in Sources */,
 				07AE3CE92C41CD5F00E2F172 /* DemoScriptText.swift in Sources */,
 				076C90BC2C6E481A005B5572 /* ScriptCommandDescription.swift in Sources */,
+				07B701042C80B94C002ED6B4 /* SedCommandType.swift in Sources */,
 				0718E0CB2C5BCC9500DB08F3 /* UndoState.swift in Sources */,
 				AEE53011234D206F00BF3824 /* TruncateCommand.swift in Sources */,
 				AE368DA5252B7B270000B333 /* LimitCommand.swift in Sources */,
@@ -484,6 +498,7 @@
 				AEDE11C52334196F006FF1A8 /* ReadFileCommand.swift in Sources */,
 				AEED0F5C23357ADA00DC53D6 /* ColorCommand.swift in Sources */,
 				0718E0CD2C63BDAE00DB08F3 /* RegexWithGroups.swift in Sources */,
+				07B701062C83DC0D002ED6B4 /* SedCommand.swift in Sources */,
 				AEED0F5E23357CAF00DC53D6 /* RunState.swift in Sources */,
 				AE37EB922332C9350027E390 /* ScriptProcessingUpdate.swift in Sources */,
 				AE437F3D233150B1001CD09D /* ScriptViewController.swift in Sources */,
@@ -507,6 +522,7 @@
 				AEE7D2B723428F680086E544 /* ScriptCallbackStub.swift in Sources */,
 				AEE7D2B523428F210086E544 /* ScriptParserTest.swift in Sources */,
 				073E350B2C69199D00A9154A /* LogLineArrayTest.swift in Sources */,
+				07B701082C84A870002ED6B4 /* SedCommandTest.swift in Sources */,
 				34A5FBCA0D4F56C680E00F25 /* ChopCommandTest.swift in Sources */,
 				0799751B2C7390DD004938C7 /* ScriptLineTest.swift in Sources */,
 				34A5FC7E9F66A71A34E86EEC /* CommandTestContext.swift in Sources */,

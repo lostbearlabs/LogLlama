@@ -14,10 +14,10 @@ class RequireHilightCommand: ScriptCommand {
   func validate() -> Bool {
     true
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if line.done(){
+    if line.done() {
       return true
     } else {
       log("expected 0 arguments")

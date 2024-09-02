@@ -16,10 +16,10 @@ class SortByFieldsCommand: ScriptCommand {
   func validate() -> Bool {
     true
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let fieldsString=line.rest(), line.done(){
+    if let fieldsString = line.rest(), line.done() {
       self.fields = fieldsString.split(separator: " ").map({ String($0) })
       return true
     } else {
@@ -27,7 +27,6 @@ class SortByFieldsCommand: ScriptCommand {
       return false
     }
   }
-
 
   func changesData() -> Bool {
     true

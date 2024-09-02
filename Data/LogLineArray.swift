@@ -73,37 +73,59 @@ class LogLineArray: Sequence {
   }
 
   /// Implementation for FilterLineCommand
-  func applyFilter(regex: RegexWithGroups, filterType: FilterType, color: NSColor) -> Int {
+  func applyFilter(
+    regexFromFilter: RegexWithGroups?, filterType: FilterType, color: NSColor,
+    address: SedAddress? = nil
+  ) -> Int {
     let n = forEachLine({ line in
-      return self.applyFilterToLine(line: line, regex: regex, filterType: filterType, color: color)
+      return self.applyFilterToLine(
+        line: line, regexFromFilter: regexFromFilter, filterType: filterType, color: color,
+        address: address)
     })
     return n
   }
 
   private func applyFilterToLine(
-    line: LogLine, regex: RegexWithGroups, filterType: FilterType, color: NSColor
+    line: LogLine, regexFromFilter: RegexWithGroups?, filterType: FilterType, color: NSColor,
+    address: SedAddress?
   ) -> Bool {
-    let results = regex.ranges(text: line.text)
-    let match = !results.isEmpty
 
-    // hilight any matching parts of the line
-    if match {
-      let _ = results.map {
-        let match = $0
-        let nsRange = line.text.toNSRange(from: match)
+    var match: Bool = false
+    if let regex = address?.regex ?? regexFromFilter {
+      // We got a regex, either from a FilterCommand or from a sed address with a pattern.  Either
+      // way, check for a match and also process any fields defined in the pattern.
 
-        // add hilite color to display text
-        line.attributed.addAttribute(.backgroundColor, value: color, range: nsRange)
+      let results = regex.ranges(text: line.text)
+      match = !results.isEmpty
+
+      // hilight any matching parts of the line
+      if match {
+        let _ = results.map {
+          let match = $0
+          let nsRange = line.text.toNSRange(from: match)
+
+          // add hilite color to display text
+          line.attributed.addAttribute(.backgroundColor, value: color, range: nsRange)
+        }
       }
-    }
 
-    // set field values based on any named capture groups in the regex
-    var keys = [String: String]()
-    let captures = regex.captures(text: line.text)
-    for capture in captures {
-      for key in capture.keys {
-        line.namedFieldValues[key] = capture[key]
-        keys[key] = key
+      // set field values based on any named capture groups in the regex
+      var keys = [String: String]()
+      let captures = regex.captures(text: line.text)
+      for capture in captures {
+        for key in capture.keys {
+          line.namedFieldValues[key] = capture[key]
+          keys[key] = key
+        }
+      }
+
+    } else {
+      // We did not get a regex ... we are filtering for a sed address with a line range instead of
+      // a pattern.
+      if let address {
+        match = address.lineRangeMatches(line: line)
+      } else {
+        match = true
       }
     }
 

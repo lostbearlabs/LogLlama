@@ -9,7 +9,7 @@ class ColorCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
@@ -23,10 +23,10 @@ class ColorCommand: ScriptCommand {
     self.color = NSColor(hexString: hex!)
     return true
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let text=line.pop(), line.done(){
+    if let text = line.pop(), line.done() {
       self.text = text
       let hex = allColors[self.text]
       if hex == nil {
@@ -40,7 +40,6 @@ class ColorCommand: ScriptCommand {
       return false
     }
   }
-
 
   func changesData() -> Bool {
     false

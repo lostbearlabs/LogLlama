@@ -15,7 +15,7 @@ class ReplaceCommand: ScriptCommand {
 
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let oldText=line.pop(), let newText=line.pop(), line.done(){
+    if let oldText = line.pop(), let newText = line.pop(), line.done() {
       self.oldText = oldText
       self.newText = newText
       return true
@@ -24,7 +24,7 @@ class ReplaceCommand: ScriptCommand {
       return false
     }
   }
-  
+
   func changesData() -> Bool {
     false
   }

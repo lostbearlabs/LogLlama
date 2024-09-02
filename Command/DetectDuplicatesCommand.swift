@@ -10,7 +10,7 @@ class DetectDuplicatesCommand: ScriptCommand {
 
   required init() {
   }
-  
+
   func log(_ st: String) {
     self.callback!.scriptUpdate(text: st)
   }
@@ -18,10 +18,10 @@ class DetectDuplicatesCommand: ScriptCommand {
   func validate() -> Bool {
     true
   }
-  
+
   func setup(callback: ScriptCallback, line: ScriptLine) -> Bool {
     self.callback = callback
-    if let text=line.pop(), line.done(){
+    if let text = line.pop(), line.done() {
       if let threshold = Int(text) {
         self.threshold = threshold
         return true
@@ -33,7 +33,6 @@ class DetectDuplicatesCommand: ScriptCommand {
       return false
     }
   }
-
 
   func changesData() -> Bool {
     false
