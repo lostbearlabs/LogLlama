@@ -62,4 +62,20 @@ class SedCommandTest: XCTestCase {
     assertThat(sut.address?.regex?.pattern, equalTo("abc"))
   }
 
+  func test_setup_parseReplaceArgs() {
+    // arrange
+    let ctx = CommandTestContext()
+    let sut = SedCommand()
+
+    // act
+    let rc = sut.setup(callback: ctx, line: ScriptLine(line: "sed s/abc/def/g"))
+
+    // assert
+    assertThat(rc, equalTo(true))
+    assertThat(sut.action, equalTo(.replace))
+    assertThat(sut.replacePattern?.pattern, equalTo("abc"))
+    assertThat(sut.replaceText, equalTo("def"))
+    assertThat(sut.replaceGlobal, equalTo(true))
+  }
+
 }

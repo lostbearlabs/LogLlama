@@ -363,4 +363,55 @@ class LogLineArray: Sequence {
     }
   }
 
+  func replace(regex: RegexWithGroups, text: String, global: Bool, address: SedAddress?) -> Int {
+
+    do {
+      // This is not ideal ... there's no way to use a swift Regex to replace characters in an
+      // NSAttributedString, so we'll have to fall back to an old NSRegularExpression.
+      let nsRegex = try NSRegularExpression(pattern: regex.pattern, options: [])
+      let n = forEachLine({ line in
+        return self.replaceInLine(
+          line: line, regex: regex, text: text, global: global, address: address, nsRegex: nsRegex)
+      })
+      return n
+    } catch {
+      return 0
+    }
+
+  }
+
+  private func replaceInLine(
+    line: LogLine, regex: RegexWithGroups, text: String, global: Bool, address: SedAddress?,
+    nsRegex: NSRegularExpression
+  ) -> Bool {
+    if let address {
+      if !address.lineRangeMatches(line: line) {
+        return false
+      }
+    }
+
+    // Do replacement in the plain text
+    let maxReplacements = if global { 999999 } else { 1 }
+    let newText = line.text.replacing(regex.regex, with: text, maxReplacements: maxReplacements)
+    if newText == line.text {
+      return false
+    }
+    line.text = newText
+
+    // Also do replacement in the attributed text
+    let fullRange = NSRange(location: 0, length: line.attributed.length)
+    var matches = nsRegex.matches(in: line.attributed.string, options: [], range: fullRange)
+    if !matches.isEmpty && !global {
+      matches = [matches.first!]
+    }
+
+    // Iterate over matches in reverse to avoid range shifting issues
+    for match in matches.reversed() {
+      // Replace the match in the attributed string
+      line.attributed.replaceCharacters(in: match.range, with: text)
+    }
+
+    return true
+  }
+
 }

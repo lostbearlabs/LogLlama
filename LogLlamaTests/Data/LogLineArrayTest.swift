@@ -205,6 +205,54 @@ class LogLineArrayTest: XCTestCase {
     assertThat(ar[2].lineNumber, equalTo(0))
   }
 
+  func test_replace_happyPath() throws {
+    let ar = givenData(numLines: 1)
+    ar[0].text = "abc def ghi jkl"
+    ar[0].attributed = NSMutableAttributedString(string: ar[0].text)
+    let regex = try RegexWithGroups(pattern: "def")
+
+    let n = ar.replace(regex: regex, text: "xyz", global: true, address: nil)
+    assertThat(n, equalTo(1))
+    assertThat(ar[0].text, equalTo("abc xyz ghi jkl"))
+    assertThat(ar[0].attributed.string, equalTo("abc xyz ghi jkl"))
+  }
+
+  func test_replace_honorsAddress() throws {
+    let ar = givenData(numLines: 3)
+    let regex = try RegexWithGroups(pattern: "\\w+=\\d+")
+    let address = SedAddress(range: (1, 1))
+
+    let n = ar.replace(regex: regex, text: "zzz", global: true, address: address)
+    assertThat(n, equalTo(1))
+    assertThat(ar[1].text, equalTo("zzz, zzz, zzz"))
+    assertThat(ar[1].attributed.string, equalTo("zzz, zzz, zzz"))
+  }
+
+  func test_replace_notGlobal_replacesOne() throws {
+    let ar = givenData(numLines: 1)
+    ar[0].text = "abc abc abc"
+    ar[0].attributed = NSMutableAttributedString(string: ar[0].text)
+    let regex = try RegexWithGroups(pattern: "abc")
+
+    let n = ar.replace(regex: regex, text: "xyz", global: false, address: nil)
+    assertThat(n, equalTo(1))
+    assertThat(ar[0].text, equalTo("xyz abc abc"))
+    assertThat(ar[0].attributed.string, equalTo("xyz abc abc"))
+  }
+
+  func test_replace_global_replacesAll() throws {
+    let ar = givenData(numLines: 1)
+    ar[0].text = "abc abc abc"
+    ar[0].attributed = NSMutableAttributedString(string: ar[0].text)
+
+    let regex = try RegexWithGroups(pattern: "abc")
+
+    let n = ar.replace(regex: regex, text: "xyz", global: true, address: nil)
+    assertThat(n, equalTo(1))
+    assertThat(ar[0].text, equalTo("xyz xyz xyz"))
+    assertThat(ar[0].attributed.string, equalTo("xyz xyz xyz"))
+  }
+
   func givenData(numLines: Int) -> LogLineArray {
     let ar = LogLineArray()
     for i in 0..<numLines {

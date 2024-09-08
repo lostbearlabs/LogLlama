@@ -256,19 +256,19 @@
 		AE1E4A74233E9A0400E75745 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				AEDE11C8233428F6006FF1A8 /* LogLine.swift */,
-				AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */,
-				AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */,
-				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
-				AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */,
-				AE6D8CA323C78BD300CF67D8 /* FieldDataMap.swift */,
-				AE6D8CA523C78FC800CF67D8 /* FieldDataSql.swift */,
-				0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */,
-				0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */,
-				073E35042C67FB7A00A9154A /* LogLineArray.swift */,
-				073E350C2C69390700A9154A /* FilterType.swift */,
 				076C90B72C69450E005B5572 /* AtomicCounter.swift */,
 				076C90B92C6ABEF3005B5572 /* AtomicMap.swift */,
+				AE6D8CA323C78BD300CF67D8 /* FieldDataMap.swift */,
+				AE6D8CA523C78FC800CF67D8 /* FieldDataSql.swift */,
+				073E350C2C69390700A9154A /* FilterType.swift */,
+				AE3A3A5C23351AA10035A811 /* FontSizeUpdate.swift */,
+				AEDE11C8233428F6006FF1A8 /* LogLine.swift */,
+				073E35042C67FB7A00A9154A /* LogLineArray.swift */,
+				AE37EB8F2332C8D40027E390 /* LogLinesUpdate.swift */,
+				AEED0F5D23357CAF00DC53D6 /* RunState.swift */,
+				AE37EB912332C9350027E390 /* ScriptProcessingUpdate.swift */,
+				0718E0CA2C5BCC9500DB08F3 /* UndoState.swift */,
+				0718E0C82C5BCC2500DB08F3 /* UndoUpdate.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";

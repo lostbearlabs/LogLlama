@@ -78,7 +78,7 @@ class ScriptLine {
     return found
   }
 
-  func popRegex() -> String? {
+  func popDelimitedString() -> String? {
     guard let firstChar = remaining.first else {
       return nil  // Return nil if the string is empty
     }
@@ -115,6 +115,57 @@ class ScriptLine {
     remaining.removeSubrange(range)
     remaining = remaining.trimmingCharacters(in: .whitespaces)
     return found
+  }
+
+  func popDelimitedStringArray(numElements: Int) -> [String]? {
+    guard let firstChar = remaining.first else {
+      return nil  // Return nil if the string is empty
+    }
+
+    var index = remaining.startIndex
+    var foundIndex: String.Index?
+    var isEscaped = false
+    var found = ""
+    var result: [String] = []
+
+    while index < remaining.endIndex {
+      let currentChar = remaining[index]
+
+      if isEscaped {
+        isEscaped = false
+        found.append(String(currentChar))
+      } else if currentChar == "\\" {
+        isEscaped = true
+      } else if currentChar == firstChar && index != remaining.startIndex {
+        // Accumulate the result so far
+        result.append(found)
+        found = ""
+
+        // Break when we've accumulated enough
+        if result.count == numElements {
+          foundIndex = index
+          break
+        }
+
+      } else if index != remaining.startIndex {
+        found.append(String(currentChar))
+      }
+
+      // advance index safely
+      remaining.formIndex(after: &index)
+    }
+
+    // remove all the stuff we took
+    guard let endIndex = foundIndex else {
+      return nil  // Return nil if no matching delimiter is found
+    }
+    let range = remaining.startIndex..<remaining.index(after: endIndex)
+    remaining.removeSubrange(range)
+
+    // remove any prefix whitespace
+    remaining = remaining.trimmingCharacters(in: .whitespaces)
+
+    return result
   }
 
 }

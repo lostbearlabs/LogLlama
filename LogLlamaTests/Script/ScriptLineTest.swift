@@ -96,30 +96,59 @@ class ScriptLineTest: XCTestCase {
     assertThat(line.done(), equalTo(true))
   }
 
-  func test_popRegex_happyPath() {
+  func test_popDelimitedString_happyPath() {
     let line = ScriptLine(line: "sed /foo\\/bar/ +")
-    let found = line.popRegex()
+    let found = line.popDelimitedString()
     assertThat(found, equalTo("foo/bar"))
     assertThat(line.rest(), equalTo("+"))
   }
 
-  func test_popRegex_happyPathAlternateDelimiter() {
+  func test_popDelimitedString_happyPathAlternateDelimiter() {
     let line = ScriptLine(line: "sed |foo\\/bar| +")
-    let found = line.popRegex()
+    let found = line.popDelimitedString()
     assertThat(found, equalTo("foo/bar"))
     assertThat(line.rest(), equalTo("+"))
   }
 
-  func test_popRegex_escapedBackslash() {
+  func test_popDelimitedString_escapedBackslash() {
     let line = ScriptLine(line: "sed /a\\\\b/")
-    let found = line.popRegex()
+    let found = line.popDelimitedString()
     assertThat(found, equalTo("a\\b"))
     assertThat(line.done(), equalTo(true))
   }
 
-  func test_popRegex_unmatchedDelimeter_returnsNil() {
+  func test_popDelimitedString_unmatchedDelimeter_returnsNil() {
     let line = ScriptLine(line: "sed /foooo +")
-    let found = line.popRegex()
+    let found = line.popDelimitedString()
+    assertThat(found, equalTo(nil))
+  }
+
+  func test_popDelimitedStringArray_happyPath() {
+    let line = ScriptLine(line: "sed /abc/def/ghi/")
+    let found = line.popDelimitedStringArray(numElements: 3)
+    assertThat(found!, contains("abc", "def", "ghi"))
+    assertThat(line.done(), equalTo(true))
+  }
+
+  func test_popDelimitedStringArray_moreCharacters_goIntoRest() {
+    let line = ScriptLine(line: "sed /abc/def/ghi")
+    let found = line.popDelimitedStringArray(numElements: 2)
+    assertThat(found!, contains("abc", "def"))
+    assertThat(line.done(), equalTo(false))
+    assertThat(line.rest(), equalTo("ghi"))
+  }
+
+  func test_popDelimitedStringArray_moreCharactersAfterSpace_goIntoRestWithoutSpace() {
+    let line = ScriptLine(line: "sed /abc/def/ ghi")
+    let found = line.popDelimitedStringArray(numElements: 2)
+    assertThat(found!, contains("abc", "def"))
+    assertThat(line.done(), equalTo(false))
+    assertThat(line.rest(), equalTo("ghi"))
+  }
+
+  func test_popDelimitedStringArray_notEnoughTerminators_returnsNil() {
+    let line = ScriptLine(line: "sed /abc/def/ghi")
+    let found = line.popDelimitedStringArray(numElements: 3)
     assertThat(found, equalTo(nil))
   }
 

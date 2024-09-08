@@ -6,6 +6,10 @@ class SedCommand: ScriptCommand {
   var address: SedAddress?
   var action: SedCommandType?
 
+  var replacePattern: RegexWithGroups?
+  var replaceText: String?
+  var replaceGlobal: Bool = false
+
   required init() {
   }
 
@@ -29,7 +33,7 @@ class SedCommand: ScriptCommand {
     } else if let num = line.pop(regex: /\d+/) {
       let a = Int(num)!
       self.address = SedAddress(range: (a, a))
-    } else if let pattern = line.popRegex() {
+    } else if let pattern = line.popDelimitedString() {
       do {
         var regex: RegexWithGroups
         try regex = RegexWithGroups(pattern: pattern)
@@ -55,13 +59,43 @@ class SedCommand: ScriptCommand {
       return false
     }
 
-    // NOTE: some sed commands may have other parameters;  parse those here
+    if action == .replace {
+      if !parseReplaceArgs(line: line) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  func parseReplaceArgs(line: ScriptLine) -> Bool {
+    if let args = line.popDelimitedStringArray(numElements: 2) {
+
+      do {
+        try self.replacePattern = RegexWithGroups(pattern: args[0])
+      } catch {
+        log("invalid regular expression: \(args[0])")
+        return false
+      }
+
+      self.replaceText = args[1]
+
+    } else {
+      log("replace requires 2 delimited arguments /regex/text/")
+      return false
+    }
+
+    if let rest = line.rest() {
+      if rest.contains(/g/) {
+        self.replaceGlobal = true
+      }
+    }
 
     return true
   }
 
   func changesData() -> Bool {
-    false
+    true
   }
 
   func run(logLines: inout LogLineArray, runState: inout RunState) -> Bool {
@@ -79,6 +113,10 @@ class SedCommand: ScriptCommand {
       log("unhiding lines that match address")
       n = logLines.applyFilter(
         regexFromFilter: nil, filterType: .add, color: runState.color, address: address)
+    case .replace:
+      log("doing replace in lines that match address")
+      n = logLines.replace(
+        regex: replacePattern!, text: replaceText!, global: replaceGlobal, address: address)
     }
     log("updated \(n) lines")
     return true
@@ -91,7 +129,7 @@ class SedCommand: ScriptCommand {
   static var description: [ScriptCommandDescription] {
     return [
       ScriptCommandDescription(
-        category: .adding,
+        category: .misc,
         op: "sed",
         args: "COMMAND",
         description: "run sed command"
