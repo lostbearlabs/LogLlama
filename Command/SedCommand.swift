@@ -9,6 +9,7 @@ class SedCommand: ScriptCommand {
   var replacePattern: RegexWithGroups?
   var replaceText: String?
   var replaceGlobal: Bool = false
+  var newText: String?
 
   required init() {
   }
@@ -65,6 +66,21 @@ class SedCommand: ScriptCommand {
       }
     }
 
+    if action == .append || action == .insert || action == .change {
+      if !parseNewText(line: line) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  func parseNewText(line: ScriptLine) -> Bool {
+    newText = line.rest()
+    if newText == nil || newText!.isEmpty {
+      log("text required")
+      return false
+    }
     return true
   }
 
@@ -117,6 +133,14 @@ class SedCommand: ScriptCommand {
       log("doing replace in lines that match address")
       n = logLines.replace(
         regex: replacePattern!, text: replaceText!, global: replaceGlobal, address: address)
+    case .change:
+      n = logLines.change(address: address, replacementText: newText!, color: runState.color)
+    case .append:
+      n = logLines.insertAfter(address: address, text: newText!, color: runState.color)
+    case .insert:
+      n = logLines.insertBefore(address: address, text: newText!, color: runState.color)
+    case .delete:
+      n = logLines.delete(address: address)
     }
     log("updated \(n) lines")
     return true

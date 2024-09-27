@@ -1,4 +1,5 @@
 import Cocoa
+import UniformTypeIdentifiers
 
 /// The app delegate -- this class launches the application and handles top-level menu commands.
 @NSApplicationMain
@@ -92,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     dialog.canChooseDirectories = true
     dialog.canCreateDirectories = true
     dialog.allowsMultipleSelection = false
-    dialog.allowedFileTypes = ["txt"]
+    dialog.allowedContentTypes = [UTType.plainText]
 
     if dialog.runModal() == NSApplication.ModalResponse.OK {
       let result = dialog.url  // Pathname of the file
@@ -172,7 +173,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     dialog.showsResizeIndicator = true
     dialog.showsHiddenFiles = false
     dialog.canCreateDirectories = true
-    dialog.allowedFileTypes = ["txt"]
+    dialog.allowedContentTypes = [UTType.plainText]
 
     if dialog.runModal() == NSApplication.ModalResponse.OK {
       let result = dialog.url  // Pathname of the file
@@ -252,7 +253,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     dialog.canChooseDirectories = true
     dialog.canCreateDirectories = false
     dialog.allowsMultipleSelection = false
-    dialog.allowedFileTypes = nil  // allow any file types
+    dialog.allowedContentTypes = []  // allow any file types
 
     if dialog.runModal() == NSApplication.ModalResponse.OK {
       let result = dialog.url  // Pathname of the file

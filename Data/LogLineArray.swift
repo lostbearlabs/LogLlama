@@ -41,6 +41,7 @@ class LogLineArray: Sequence {
   /// Implementation for ChopCommand.
   func chop() {
     lines.removeAll(where: { !$0.visible })
+    renumber()
   }
 
   /// Applies the provided operation to each log line.
@@ -186,6 +187,8 @@ class LogLineArray: Sequence {
     }
   }
 
+  /// Implementation for DivideByFieldCommand
+  /// - Returns the number of section boundaries found
   func divideByField(field: String, color: NSColor) -> Int {
 
     // Process adjacent lines concurrently.
@@ -363,6 +366,7 @@ class LogLineArray: Sequence {
     }
   }
 
+  /// Implementation for `sed s`
   func replace(regex: RegexWithGroups, text: String, global: Bool, address: SedAddress?) -> Int {
 
     do {
@@ -412,6 +416,91 @@ class LogLineArray: Sequence {
     }
 
     return true
+  }
+
+  /// Implementation for `sed c`
+  /// - Returns the number of lines changed
+  func change(address: SedAddress?, replacementText: String, color: NSColor) -> Int {
+    return forEachLine({ line in
+      if address == nil || address!.matches(line: line) {
+        line.text = replacementText
+        line.attributed = NSMutableAttributedString(
+          string: replacementText, attributes: [.backgroundColor: color])
+        return true
+      }
+      return false
+    })
+  }
+
+  /// Implementation for `sed d`
+  ///  - Returns the number of lines deleted
+  func delete(address: SedAddress?) -> Int {
+    let nOrig = lines.count
+    lines.removeAll(where: { line in (address == nil || address!.matches(line: line)) })
+    renumber()
+    let nDeleted = nOrig - lines.count
+    return nDeleted
+  }
+
+  /// Implementation for `sed i`
+  /// - Returns the number of lines added
+  func insertBefore(address: SedAddress?, text: String, color: NSColor) -> Int {
+
+    var index = 0
+    var added = 0
+    while index < lines.count {
+      let line = lines[index]
+
+      if address == nil || address!.matches(line: line) {
+        let newLine = LogLine(text: text, lineNumber: index)
+        newLine.attributed = NSMutableAttributedString(
+          string: text, attributes: [.backgroundColor: color])
+        lines.insert(newLine, at: index)
+
+        index += 1
+        added += 1
+      }
+
+      index += 1
+    }
+    renumber()
+    return added
+  }
+
+  /// Implementation for `sed a`
+  /// - Returns the number of lines added
+  func insertAfter(address: SedAddress?, text: String, color: NSColor) -> Int {
+
+    var index = 0
+    var added = 0
+    while index < lines.count {
+      let line = lines[index]
+
+      if address == nil || address!.matches(line: line) {
+        index += 1
+
+        let newLine = LogLine(text: text, lineNumber: index)
+        newLine.attributed = NSMutableAttributedString(
+          string: text, attributes: [.backgroundColor: color])
+        lines.insert(newLine, at: index)
+
+        added += 1
+      }
+
+      index += 1
+    }
+    renumber()
+    return added
+  }
+
+  // Renumber lines starting from 1.
+  // This is done whenever we perform an operation that adds or removes lines, for example "sed i", "sed a", "sed d", or "chop"
+  private func renumber() {
+    var n = 1
+    for line in lines {
+      line.lineNumber = n
+      n += 1
+    }
   }
 
 }

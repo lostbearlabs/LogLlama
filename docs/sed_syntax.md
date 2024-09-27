@@ -42,11 +42,14 @@ The following commands are implemented:
 
 | Command      | Description |
 | ------------ | ----------- |
-| `+`          | Un-hide any matching lines |
-| `-`          | Hide any matching lines |
-| `~`          | Hilight matches in any matching lines |
+| `+`          | Un-hide any matching lines. |
+| `-`          | Hide any matching lines. |
+| `~`          | Hilight matches in any matching lines. |
 | `s/regex/text/[g]` | replace `regex` with `text`. |
-
+| `d`          | Delete any matching lines, and renumber lines. |
+| `a text`     | Append text as new lines after any matching lines, and renumber lines. |
+| `i text`     | Insert text as new lines before any matching lines, and renumber lines. |
+| `c text`     | Change the text of any matching lines to the given text. |
 
 The filtering and hilighting commands (`+`, `-`, and `~`) work the same way as their regular counterparts, but the 
 sed-style addressing option gives new flexibility for hiding and unhiding lines.  For example, if you have identified
@@ -61,5 +64,5 @@ are supported.  References in the replacement text are not supported either.
 * Only the commands listed above are supported.  `sed` has many other capabilities that are not (yet?) implemented in LogLlama
 * Some commands are LogLlama-specific.  For example, hiding and unhiding lines are new concepts in LogLlama that don't apply in regular `sed`.
 * A space is allowed between the command and any arguments.
-* Command arguments can have any delimeter, just as a regex address can.
+* The regex-and-text argument to the `s` command can have any delimeter, just as a regex address can.
 

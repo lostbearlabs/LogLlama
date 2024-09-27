@@ -9,8 +9,8 @@ class FieldDataSql {
 
   init(data: FieldDataMap) throws {
     self.db = try Connection(":memory:")
-    var stringCols: [String: Expression<String?>] = [:]
-    var intCols: [String: Expression<Int64?>] = [:]
+    var stringCols: [String: SQLite.Expression<String?>] = [:]
+    var intCols: [String: SQLite.Expression<Int64?>] = [:]
 
     // create table with all known columns
     self.log = Table(TABLE)
@@ -22,11 +22,11 @@ class FieldDataSql {
         for it in data.fields {
           let areAllValuesIntegers = it.value
           if areAllValuesIntegers {
-            let col = Expression<Int64?>(it.key)
+            let col = SQLite.Expression<Int64?>(it.key)
             t.column(col)
             intCols[it.key] = col
           } else {
-            let col = Expression<String?>(it.key)
+            let col = SQLite.Expression<String?>(it.key)
             t.column(col)
             stringCols[it.key] = col
           }

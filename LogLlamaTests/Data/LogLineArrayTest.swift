@@ -18,9 +18,9 @@ class LogLineArrayTest: XCTestCase {
     ar.chop()
 
     assertThat(ar.count, equalTo(3))
-    assertThat(ar[0].lineNumber, equalTo(0))
+    assertThat(ar[0].lineNumber, equalTo(1))
     assertThat(ar[1].lineNumber, equalTo(2))
-    assertThat(ar[2].lineNumber, equalTo(4))
+    assertThat(ar[2].lineNumber, equalTo(3))
   }
 
   func test_clear_removesAllLines() {
@@ -251,6 +251,56 @@ class LogLineArrayTest: XCTestCase {
     assertThat(n, equalTo(1))
     assertThat(ar[0].text, equalTo("xyz xyz xyz"))
     assertThat(ar[0].attributed.string, equalTo("xyz xyz xyz"))
+  }
+
+  func test_change_changesText() throws {
+    let ar = givenData(numLines: 2)
+    let address = SedAddress(range: (1, 1))
+    let text = "banana"
+    let n = ar.change(address: address, replacementText: text, color: NSColor.black)
+
+    assertThat(n, equalTo(1))
+
+    assertThat(ar[1].text, equalTo(text))
+    assertThat(ar[1].attributed.string, equalTo(text))
+
+    assertThat(ar[0].text, not(equalTo(text)))
+  }
+
+  func test_delete_removesLines() throws {
+    let ar = givenData(numLines: 3)
+    let address = SedAddress(range: (0, 1))
+    let n = ar.delete(address: address)
+
+    assertThat(n, equalTo(2))
+
+    assertThat(ar.count, equalTo(1))
+    assertThat(ar[0].text, containsString("line=2"))
+    assertThat(ar[0].lineNumber, equalTo(1))
+  }
+
+  func test_insertBefore_addsLines() throws {
+    let ar = givenData(numLines: 3)
+    let address = SedAddress(range: (1, 1))
+    let text = "banana"
+    let n = ar.insertBefore(address: address, text: text, color: NSColor.black)
+
+    assertThat(n, equalTo(1))
+
+    assertThat(ar.count, equalTo(4))
+    assertThat(ar[1].text, equalTo(text))
+  }
+
+  func test_insertAfter_addsLines() throws {
+    let ar = givenData(numLines: 3)
+    let address = SedAddress(range: (1, 1))
+    let text = "banana"
+    let n = ar.insertAfter(address: address, text: text, color: NSColor.black)
+
+    assertThat(n, equalTo(1))
+
+    assertThat(ar.count, equalTo(4))
+    assertThat(ar[2].text, equalTo(text))
   }
 
   func givenData(numLines: Int) -> LogLineArray {

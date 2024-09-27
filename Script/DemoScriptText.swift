@@ -45,4 +45,17 @@ var demoScriptText = """
   kv (?<key>\\w+)=(?<value>\\w+)
   sql select car, coalesce( max(lapNum), 0) from log where race=1 group by car
 
+  # Example 5: demonstrate sed syntax
+  clear
+  demo
+  : lavender
+  sed 1 i IT ALL STARTS HERE
+  sed 2 a IT HAS REALLY STARTED NOW
+  : orange
+  sed s/car/boat/g
+  sed 6,9 c (these were lines 6-9)
+  sed /boat=9/ d
+  : pink  
+  sed /race=2/ ~
+
   """
