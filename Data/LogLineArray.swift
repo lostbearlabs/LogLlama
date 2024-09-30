@@ -128,6 +128,13 @@ class LogLineArray: Sequence {
       } else {
         match = true
       }
+
+      if match {
+        // hilite entire display text
+        let fullRange = NSRange(location: 0, length: line.attributed.length)
+        line.attributed.addAttribute(.backgroundColor, value: color, range: fullRange)
+
+      }
     }
 
     // update visibility for the line
